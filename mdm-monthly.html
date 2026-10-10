@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>मासिक मध्याह्न भोजन (MDM) पंजिका - deshimaster.in | देशी मास्टर</title>
+  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा परिषद हेतु मासिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका, कन्वर्जन कास्ट, फल एवं अतिरिक्त पोषण गणना।">
+  <meta name="robots" content="index, follow">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Noto Sans Devanagari -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Summary Cards */
+    .summary-card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 11.5px; }
+    .summary-card.ps { background: #eff6ff; border-top: 3.5px solid #2563eb; }
+    .summary-card.ups { background: #f5f3ff; border-top: 3.5px solid #7c3aed; }
+    .summary-card.tot { background: #fefce8; border-top: 3.5px solid #ca8a04; }
+    .summary-card h4 { margin: 0 0 6px 0; font-size: 12.5px; font-weight: bold; display: flex; justify-content: space-between; }
+    .summary-card table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .summary-card td { padding: 2px 3px; }
+    .summary-card td.val { font-weight: bold; text-align: right; }
+
+    /* Table Styles */
+    table.mdm-table { width: 100%; min-width: 900px; border-collapse: collapse; text-align: center; font-size: 11.5px; }
+    table.mdm-table th, table.mdm-table td { border: 1px solid #cbd5e1; padding: 5px 2px; white-space: nowrap; }
+    .th-banner { background: #1e3a8a; color: white; font-size: 12px; font-weight: bold; padding: 6px; text-transform: uppercase; }
+    .th-ps { background: #1d4ed8; color: white; }
+    .th-ups { background: #6d28d9; color: white; }
+    .th-sub { background: #3b82f6; color: white; font-size: 10.5px; }
+    .th-sub-ups { background: #8b5cf6; color: white; font-size: 10.5px; }
+
+    input.att-in { width: 52px; height: 34px; text-align: center; border: 1.5px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13.5px; }
+    input.att-in:focus { outline: 2px solid #166534; background: #f0fdf4; }
+
+    /* संडे की हल्की शेडिंग */
+    .sunday-row { background: #f1f5f9 !important; }
+    .sunday-row input { background: transparent !important; cursor: not-allowed; border-color: transparent !important; }
+    .row-footer { background: #f1f5f9; font-weight: bold; }
+
+    .print-header { display: none; text-align: center; margin-bottom: 4px; }
+    .print-header h2 { margin: 0; font-size: 15px; text-transform: uppercase; font-weight: 800; color: #000; }
+    .print-header p { margin: 2px 0 0 0; font-size: 11px; font-weight: bold; color: #111; }
+    .print-sign-row { display: none; }
+    .print-watermark-row { display: none; }
+
+    /* =========================================================
+       100% A4 PORTRAIT सिंगल पेज प्रिंट इंजन
+       ========================================================= */
+    @page {
+      size: portrait;
+      margin: 4.5mm 6mm !important;
+    }
+
+    @media print {
+      html, body {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .container-print-target {
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        border: none !important;
+        page-break-after: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      .no-print, header, footer, .seo-guide { display: none !important; }
+      .print-header { display: block !important; }
+      .print-header h2 { font-size: 13px !important; margin: 0 !important; }
+      .print-header p { font-size: 9.8px !important; margin: 1px 0 3px 0 !important; }
+
+      .summary-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 5px !important;
+        margin-bottom: 4px !important;
+      }
+
+      .summary-card {
+        padding: 3px 5px !important;
+        border: 1px solid #000 !important;
+        border-top-width: 2.5px !important;
+        border-radius: 0 !important;
+      }
+      .summary-card h4 { font-size: 9.5px !important; margin: 0 0 2px 0 !important; font-weight: bold !important; }
+      .summary-card table { font-size: 8.5px !important; }
+      .summary-card td { padding: 0.5px 2px !important; }
+
+      .table-responsive-box {
+        overflow: visible !important;
+        border: none !important;
+        margin-bottom: 0 !important;
+        width: 100% !important;
+      }
+
+      table.mdm-table {
+        width: 100% !important;
+        min-width: 100% !important;
+        border: 1.5px solid #000 !important;
+        font-size: 9.5px !important;
+        border-collapse: collapse !important;
+      }
+
+      table.mdm-table tr {
+        height: 5.6mm !important;
+      }
+
+      table.mdm-table th, table.mdm-table td {
+        border: 1px solid #000 !important;
+        padding: 0 1.5px !important;
+        color: #000 !important;
+        vertical-align: middle !important;
+        line-height: 1.1 !important;
+      }
+
+      table.mdm-table th {
+        background: #e2e8f0 !important;
+        color: #000 !important;
+        font-weight: 800 !important;
+        font-size: 9.2px !important;
+        height: 6.2mm !important;
+      }
+
+      .th-banner { font-size: 9.8px !important; height: 5mm !important; }
+      .th-sub, .th-sub-ups { font-size: 8.6px !important; }
+
+      input.att-in {
+        border: none !important;
+        background: transparent !important;
+        font-size: 10px !important;
+        font-weight: bold !important;
+        color: #000 !important;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 0 !important;
+        text-align: center !important;
+      }
+
+      .sunday-row { background: #e2e8f0 !important; }
+
+      .print-sign-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+        margin-top: 26px !important;
+        padding: 0 25px !important;
+        page-break-inside: avoid !important;
+      }
+
+      .print-sign-col {
+        text-align: center !important;
+        font-size: 11px !important;
+        font-weight: bold !important;
+        border-top: 1.2px dashed #000 !important;
+        width: 220px !important;
+        padding-top: 4px !important;
+      }
+
+      /* सूक्ष्म प्रिंट वॉटरमार्क - टॉगल योग्य */
+      .print-watermark-row {
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px;
+        margin-top: 4px;
+        padding-right: 2px;
+        opacity: 0.65;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- Header / Navigation Bar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm no-print">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="bg-emerald-600 text-white font-extrabold text-base px-2.5 py-1.5 rounded-lg shadow-sm">
+          DM
+        </div>
+        <div>
+          <span class="block font-bold text-lg text-slate-900 leading-tight">deshimaster.in</span>
+          <span class="block text-[10px] text-slate-500 uppercase tracking-wider font-semibold">देशी मास्टर - शिक्षक डिजिटल साथी</span>
+        </div>
+      </a>
+      <nav class="flex items-center gap-5 text-sm font-medium text-slate-600">
+        <a href="index.html" class="hover:text-emerald-600 transition">← होम पोर्टल</a>
+        <a href="mdm-daily.html" class="hover:text-emerald-600 transition">दैनिक MDM</a>
+        <a href="about.html" class="hidden sm:inline hover:text-emerald-600 transition">हमारे बारे में</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-3 sm:px-4 py-6 flex-grow w-full">
+
+    <div class="container-print-target bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm mb-6">
+      
+      <!-- Screen Top Bar -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 pb-3 mb-4 gap-2 no-print">
+        <div>
+          <h1 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <span>📅</span> मासिक MDM पंजिका (Monthly Register)
+          </h1>
+          <p class="text-xs text-slate-500 mt-0.5">मासिक खाद्यान्न उपभोग, परिवर्तन लागत व फल-पोषण संकलन पंजिका</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg">
+          <span>💾</span> डेटा स्वतः सुरक्षित हो रहा है
+        </div>
+      </div>
+
+      <!-- विद्यालय विवरण -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 no-print">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">सत्र / वर्ष:</label>
+          <select id="selYear" onchange="onDateSelectionChange()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-semibold bg-white focus:ring-2 focus:ring-emerald-500"></select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">माह:</label>
+          <select id="selMonth" onchange="onDateSelectionChange()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-semibold bg-white focus:ring-2 focus:ring-emerald-500">
+            <option value="0">जनवरी (January)</option>
+            <option value="1">फ़रवरी (February)</option>
+            <option value="2">मार्च (March)</option>
+            <option value="3">अप्रैल (April)</option>
+            <option value="4">मई (May)</option>
+            <option value="5">जून (June)</option>
+            <option value="6">जुलाई (July)</option>
+            <option value="7">अगस्त (August)</option>
+            <option value="8">सितंबर (September)</option>
+            <option value="9">अक्टूबर (October)</option>
+            <option value="10">नवंबर (November)</option>
+            <option value="11">दिसंबर (December)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">विद्यालय का नाम:</label>
+          <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCap(this); updateHeader(); saveSchoolDetails();" class="w-full p-2 border border-slate-300 rounded-lg text-xs uppercase bg-white focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">विकास खंड (Block):</label>
+          <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCap(this); updateHeader(); saveSchoolDetails();" class="w-full p-2 border border-slate-300 rounded-lg text-xs uppercase bg-white focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">जनपद (District):</label>
+          <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCap(this); updateHeader(); saveSchoolDetails();" class="w-full p-2 border border-slate-300 rounded-lg text-xs uppercase bg-white focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">यू-डायस कोड:</label>
+          <input type="tel" maxlength="11" id="inUdise" placeholder="11 अंकों का कोड" oninput="filterNum(this); updateHeader(); saveSchoolDetails();" class="w-full p-2 border border-slate-300 rounded-lg text-xs bg-white focus:ring-2 focus:ring-emerald-500">
+        </div>
+      </div>
+
+      <!-- दरें बॉक्स एवं छुपी हुई मुद्रण सेटिंग्स -->
+      <div class="flex flex-wrap gap-4 items-center justify-between bg-emerald-50 p-3 rounded-xl border border-emerald-200 mb-4 text-xs font-semibold text-emerald-900 no-print">
+        <div class="flex flex-wrap gap-4 items-center">
+          <span class="font-bold flex items-center gap-1">⚙️ दरें (प्रति छात्र):</span>
+          <div class="flex items-center gap-1">
+            <label>प्राथमिक: </label>
+            <input type="number" step="0.01" id="ratePs" value="6.78" oninput="recalc(); saveSchoolDetails();" class="w-16 h-8 text-center font-bold border border-emerald-400 rounded bg-white"> ₹
+          </div>
+          <div class="flex items-center gap-1">
+            <label>उच्च प्राथ.: </label>
+            <input type="number" step="0.01" id="rateUps" value="10.17" oninput="recalc(); saveSchoolDetails();" class="w-16 h-8 text-center font-bold border border-emerald-400 rounded bg-white"> ₹
+          </div>
+          <div class="flex items-center gap-1">
+            <label>सोमवार फल: </label>
+            <input type="number" step="0.01" id="rateFruit" value="4.00" oninput="recalc(); saveSchoolDetails();" class="w-16 h-8 text-center font-bold border border-emerald-400 rounded bg-white"> ₹
+          </div>
+          <div class="flex items-center gap-1">
+            <label>गुरुवार पोषण: </label>
+            <input type="number" step="0.01" id="rateNutri" value="5.00" oninput="recalc(); saveSchoolDetails();" class="w-16 h-8 text-center font-bold border border-emerald-400 rounded bg-white"> ₹
+          </div>
+        </div>
+
+        <!-- छुपी हुई मुद्रण सेटिंग्स -->
+        <details class="text-[11px] text-slate-500 cursor-pointer">
+          <summary class="select-none font-medium hover:text-slate-800 focus:outline-none">मुद्रण सेटिंग्स</summary>
+          <div class="pt-1.5 flex items-center gap-1.5">
+            <input 
+              type="checkbox" 
+              id="chkWatermark" 
+              checked 
+              onchange="toggleWatermark()" 
+              class="w-3.5 h-3.5 rounded text-slate-600 accent-slate-600 cursor-pointer"
+            >
+            <label for="chkWatermark" class="cursor-pointer select-none text-slate-600">
+              पृष्ठ पाद में पोर्टल संदर्भ शामिल रखें
+            </label>
+          </div>
+        </details>
+      </div>
+
+      <!-- स्तर चयन टैब एवं एक्शन बटन्स -->
+      <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 mb-4 no-print">
+        <div class="flex flex-wrap gap-2">
+          <button class="px-3.5 py-2 border-2 border-slate-800 bg-slate-900 text-white font-bold text-xs rounded-lg transition" id="btnComp" onclick="setLevel('comp')">🏫 कंपोजिट (1-8)</button>
+          <button class="px-3.5 py-2 border-2 border-slate-800 bg-white text-slate-800 font-bold text-xs rounded-lg transition" id="btnPs" onclick="setLevel('ps')">🎒 प्राथमिक (1-5)</button>
+          <button class="px-3.5 py-2 border-2 border-slate-800 bg-white text-slate-800 font-bold text-xs rounded-lg transition" id="btnUps" onclick="setLevel('ups')">🏛️ उच्च प्राथ. (6-8)</button>
+        </div>
+        <div class="flex items-center gap-2 justify-end">
+          <button class="px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs rounded-lg transition" type="button" onclick="resetCurrentMonthData()">
+            ↺ माह डेटा साफ़ करें
+          </button>
+          <button class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-lg transition shadow-sm flex items-center gap-1.5" type="button" onclick="printMdmRegister()">
+            <span>🖨️</span> A4 पोर्ट्रेट प्रिंट (1 Page)
+          </button>
+        </div>
+      </div>
+
+      <!-- मासिक समरी कार्ड्स -->
+      <div class="summary-grid grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+        <div class="summary-card ps" id="sc_ps">
+          <h4 style="color:#1d4ed8;">★ प्राथमिक (1-5) <span>100g/छात्र</span></h4>
+          <table>
+            <tr><td>गेहूं कुल:</td><td class="val" id="sm_ps_w"></td></tr>
+            <tr><td>चावल कुल:</td><td class="val" id="sm_ps_r"></td></tr>
+            <tr><td>फल लाभार्थी (सोमवार):</td><td class="val" id="sm_ps_f"></td></tr>
+            <tr><td id="lbl_ps_fruit">फल धनराशि (@₹4):</td><td class="val" id="sm_ps_fc"></td></tr>
+            <tr class="winter-summary-row" style="display:none; color:#b45309;">
+              <td>अतिरिक्त पोषण लाभार्थी (गुरुवार):</td><td class="val" id="sm_ps_n"></td>
+            </tr>
+            <tr class="winter-summary-row" style="display:none; color:#b45309;">
+              <td id="lbl_ps_nutri">अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_ps_nc"></td>
+            </tr>
+            <tr><td>कुल परिवर्तन लागत (PS):</td><td class="val" style="color:#b91c1c; font-size:11.5px;" id="sm_ps_c"></td></tr>
+          </table>
+        </div>
+
+        <div class="summary-card ups" id="sc_ups">
+          <h4 style="color:#6d28d9;">★ उच्च प्राथ. (6-8) <span>150g/छात्र</span></h4>
+          <table>
+            <tr><td>गेहूं कुल:</td><td class="val" id="sm_ups_w"></td></tr>
+            <tr><td>चावल कुल:</td><td class="val" id="sm_ups_r"></td></tr>
+            <tr><td>फल लाभार्थी (सोमवार):</td><td class="val" id="sm_ups_f"></td></tr>
+            <tr><td id="lbl_ups_fruit">फल धनराशि (@₹4):</td><td class="val" id="sm_ups_fc"></td></tr>
+            <tr class="winter-summary-row" style="display:none; color:#b45309;">
+              <td>अतिरिक्त पोषण लाभार्थी (गुरुवार):</td><td class="val" id="sm_ups_n"></td>
+            </tr>
+            <tr class="winter-summary-row" style="display:none; color:#b45309;">
+              <td id="lbl_ups_nutri">अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_ups_nc"></td>
+            </tr>
+            <tr><td>कुल परिवर्तन लागत (UPS):</td><td class="val" style="color:#b91c1c; font-size:11.5px;" id="sm_ups_c"></td></tr>
+          </table>
+        </div>
+
+        <div class="summary-card tot" id="sc_tot">
+          <h4 style="color:#854d0e;">★ विद्यालय कुल योग (1-8)</h4>
+          <table>
+            <tr><td>कुल गेहूं:</td><td class="val" id="sm_tot_w"></td></tr>
+            <tr><td>कुल चावल:</td><td class="val" id="sm_tot_r"></td></tr>
+            <tr><td>कुल फल लाभार्थी:</td><td class="val" id="sm_tot_f"></td></tr>
+            <tr><td id="lbl_tot_fruit">कुल फल धनराशि (@₹4):</td><td class="val" id="sm_tot_fc"></td></tr>
+            <tr class="winter-summary-row" style="display:none; color:#b45309;">
+              <td>कुल अतिरिक्त पोषण लाभार्थी:</td><td class="val" id="sm_tot_n"></td>
+            </tr>
+            <tr class="winter-summary-row" style="display:none; color:#b45309;">
+              <td id="lbl_tot_nutri">कुल अतिरिक्त पोषण धनराशि (@₹5):</td><td class="val" id="sm_tot_nc"></td>
+            </tr>
+            <tr><td>विद्यालय कुल लागत:</td><td class="val" style="color:#b91c1c; font-size:12px;" id="sm_tot_c"></td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- प्रिंट हेडर -->
+      <div class="print-header">
+        <h2 id="prTitle">मासिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका</h2>
+        <p id="prSub"></p>
+      </div>
+
+      <!-- मासिक तालिका -->
+      <div class="table-responsive-box overflow-x-auto border border-slate-300 rounded-xl mb-4 bg-white">
+        <table class="mdm-table">
+          <thead>
+            <tr class="no-print"><th colspan="14" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th></tr>
+            <tr>
+              <th rowspan="2" style="width:70px; background:#0f172a; color:white;">दिनांक</th>
+              <th rowspan="2" style="width:65px; background:#0f172a; color:white;">दिन</th>
+              <th colspan="6" class="th-ps ps-col">प्राथमिक स्तर (कक्षा 1 से 5)</th>
+              <th colspan="6" class="th-ups ups-col">उच्च प्राथमिक स्तर (कक्षा 6 से 8)</th>
+            </tr>
+            <tr>
+              <th class="th-sub ps-col">छात्र</th><th class="th-sub ps-col">संचयी</th><th class="th-sub ps-col">गेहूं (kg)</th><th class="th-sub ps-col">चावल (kg)</th><th class="th-sub ps-col">फल</th><th class="th-sub ps-col">लागत (₹)</th>
+              <th class="th-sub-ups ups-col">छात्र</th><th class="th-sub-ups ups-col">संचयी</th><th class="th-sub-ups ups-col">गेहूं (kg)</th><th class="th-sub-ups ups-col">चावल (kg)</th><th class="th-sub-ups ups-col">फल</th><th class="th-sub-ups ups-col">लागत (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="mdmBody"></tbody>
+          <tfoot>
+            <tr class="row-footer">
+              <td colspan="2">मासिक कुल योग</td>
+              <td id="ft_ps_att" class="ps-col"></td><td id="ft_ps_cumu" class="ps-col">-</td><td id="ft_ps_w" class="ps-col" style="color:#9a3412;"></td><td id="ft_ps_r" class="ps-col" style="color:#166534;"></td><td id="ft_ps_f" class="ps-col" style="color:#d97706;"></td><td id="ft_ps_c" class="ps-col" style="color:#1e3a8a;"></td>
+              <td id="ft_ups_att" class="ups-col"></td><td id="ft_ups_cumu" class="ups-col">-</td><td id="ft_ups_w" class="ups-col" style="color:#9a3412;"></td><td id="ft_ups_r" class="ups-col" style="color:#166534;"></td><td id="ft_ups_f" class="ups-col" style="color:#d97706;"></td><td id="ft_ups_c" class="ups-col" style="color:#1e3a8a;"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- हस्ताक्षर ब्लॉक -->
+      <div class="print-sign-row">
+        <div class="print-sign-col">हस्ताक्षर एमडीएम प्रभारी</div>
+        <div class="print-sign-col">हस्ताक्षर प्रधानाध्यापक / मु०अ०</div>
+      </div>
+
+      <!-- हल्की स्याही वाला सूक्ष्म वॉटरमार्क -->
+      <div id="printWatermark" class="print-watermark-row">
+        <span style="font-size: 6.5px; font-weight: 800; border: 0.8px solid #94a3b8; color: #64748b; padding: 0 2px; border-radius: 2px; line-height: 1;">DM</span>
+        <span style="font-size: 7px; font-weight: 600; color: #64748b; letter-spacing: 0.3px; font-family: monospace;">deshimaster.in</span>
+      </div>
+
+    </div>
+
+    <!-- AdSense SEO Friendly Content Section (no-print: 1200+ Words Detailed Academic Guide) -->
+    <div class="seo-guide bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm no-print">
+      <h3>उत्तर प्रदेश बेसिक शिक्षा: PM POSHAN (मध्यान्ह भोजन) मासिक उपभोग पंजिका, परिवर्तन लागत लेखांकन एवं विधिक ऑडिट संधारण विस्तृत मार्गदर्शिका</h3>
+      <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के नियंत्रणाधीन संचालित समस्त परिषदीय प्राथमिक, उच्च प्राथमिक एवं संविलियन (कम्पोजिट) विद्यालयों में प्रधानमंत्री पोषण शक्ति निर्माण (PM POSHAN योजना - पूर्ववर्ती मध्याह्न भोजन योजना) के वित्तीय एवं भौतिक अभिलेखों का मासिक संधारण विद्यालयी प्रशासन की सबसे महत्वपूर्ण विधिक जवाबदेही है। प्रत्येक माह के अंत में आहरण-वितरण अधिकारी (DDO), खंड शिक्षा अधिकारी (BEO) तथा जिला बेसिक शिक्षा अधिकारी (BSA) कार्यालय को प्रेषित किए जाने वाले मासिक उपभोग प्रमाण पत्र (Monthly Consumption Certificate - MPR) का सीधा आधार यह मासिक एमडीएम पंजिका ही होती है[cite: 6] [evidence: 11, 12, 13, 14]।</p>
+      <p>विद्यालय स्तर पर खाद्यान्न (गेहूं व चावल) के प्रारंभिक अवशेष (Opening Balance), मासिक उठान (Allotment Received), वास्तविक छात्र उपस्थिति के सापेक्ष कुल उपभोग (Total Consumption) तथा अंतिम अवशेष (Closing Balance) का किलोग्राम और ग्राम स्तर पर मिलान करना अनिवार्य होता है[cite: 6]। इसके अतिरिक्त, परिवर्तन लागत (Conversion Cost), रसोइया-सह-सहायक मानदेय, साप्ताहिक फल वितरण तथा शीतकालीन अनुपूरक पोषण की धनराशि का उपभोग विद्यालय प्रबंध समिति (SMC) के बैंक खाते की पासबुक से शत-प्रतिशत मेल खाना चाहिए[cite: 6]। प्रस्तुत मार्गदर्शिका में मासिक एमडीएम पंजिका के समस्त तकनीकी, वित्तीय एवं प्रशासनिक नियमों का 1,200 से अधिक शब्दों में संपूर्ण विश्लेषण प्रस्तुत किया गया है[cite: 6] [evidence: 11, 12, 13]।</p>
+
+      <h4>1. मासिक खाद्यान्न उपभोग के विधिक मानक एवं दिनवार चक्र (Foodgrain Norms & Day-wise Distribution)</h4>
+      <p>भारत सरकार के शिक्षा मंत्रालय एवं मध्यान्ह भोजन प्राधिकरण, उत्तर प्रदेश द्वारा प्राथमिक एवं उच्च प्राथमिक स्तर हेतु प्रति छात्र दैनिक खाद्यान्न की मात्रा निर्धारित की गई है[cite: 6]:</p>
+      <table class="seo-table">
+        <thead>
+          <tr>
+            <th>वर्ग / स्तर</th>
+            <th>दैनिक खाद्यान्न प्रति छात्र</th>
+            <th>गेहूं दिवस (सोमवार व गुरुवार)</th>
+            <th>चावल दिवस (मंगलवार, बुधवार, शुक्रवार, शनिवार)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>प्राथमिक स्तर (कक्षा 1 से 5)</strong></td>
+            <td>100 ग्राम प्रति छात्र[cite: 6]</td>
+            <td>रोटी / गेहूं का आटा: 100 ग्राम[cite: 6]</td>
+            <td>चावल / तहरी / खिचड़ी: 100 ग्राम[cite: 6]</td>
+          </tr>
+          <tr>
+            <td><strong>उच्च प्राथमिक स्तर (कक्षा 6 से 8)</strong></td>
+            <td>150 ग्राम प्रति छात्र[cite: 6]</td>
+            <td>रोटी / गेहूं का आटा: 150 ग्राम[cite: 6]</td>
+            <td>चावल / तहरी / खिचड़ी: 150 ग्राम[cite: 6]</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>गेहूं व चावल के परिकलन का नियम:</strong></p>
+      <ul>
+        <li><strong>गेहूं उपभोग दिवस:</strong> निर्धारित मेन्यू के अनुसार प्रत्येक सप्ताह में सोमवार तथा गुरुवार को गेहूं की रोटी पकाई जाती है[cite: 6]। अतः इन दोनों दिनों में उपस्थित प्राथमिक छात्रों की संख्या को 0.1 किग्रा तथा उच्च प्राथमिक छात्रों की संख्या को 0.15 किग्रा से गुणा करके गेहूं का उपभोग दर्ज किया जाता है[cite: 6]।</li>
+        <li><strong>चावल उपभोग दिवस:</strong> मंगलवार, बुधवार, शुक्रवार तथा शनिवार को चावल, सब्जीयुक्त दाल अथवा तहरी का प्रावधान है[cite: 6]। इन चार दिवसों में प्राथमिक उपस्थिति को 0.1 किग्रा तथा उच्च प्राथमिक उपस्थिति को 0.15 किग्रा से गुणा करके चावल का दैनिक उपभोग निकाला जाता है[cite: 6]।</li>
+        <li><strong>रविवार एवं सार्वजनिक अवकाश:</strong> रविवार को नियमित साप्ताहिक अवकाश रहता है, अतः उस दिन छात्र उपस्थिति शून्य तथा खाद्यान्न व लागत उपभोग शून्य दर्ज किया जाता है[cite: 6]। माह के अन्य राजपत्रित अवकाशों पर भी शून्य उपभोग दर्शाया जाता है[cite: 6] [evidence: 14]।</li>
+      </ul>
+
+      <h4>2. परिवर्तन लागत (Conversion Cost) की संरचना एवं मासिक संचयी व्यय</h4>
+      <p>खाद्यान्न के अतिरिक्त भोजन तैयार करने हेतु आवश्यक सामग्री जैसे दाल, तेल, मसाले, मौसमी हरी सब्जियां, सोयाबीन बड़ी तथा ईंधन के क्रय हेतु शासन द्वारा छात्र संख्या के अनुपात में परिवर्तन लागत (कन्वर्जन कॉस्ट) सीधे विद्यालय प्रबंध समिति (SMC) के बैंक खाते में प्रेषित की जाती है[cite: 6]:</p>
+      <ul>
+        <li><strong>वर्तमान परिवर्तन लागत दरें:</strong> समय-समय पर मुद्रास्फीति के दृष्टिगत दरों में संशोधन किया जाता है[cite: 6]। हमारे टूल में प्राथमिक स्तर हेतु मानक दर ₹6.78 प्रति छात्र तथा उच्च प्राथमिक स्तर हेतु ₹10.17 प्रति छात्र इनबिल्ट है, जिसे आवश्यकतानुसार परिवर्तित भी किया जा सकता है[cite: 6]।</li>
+        <li><strong>दैनिक लागत सूत्र:</strong> <code>दैनिक लागत = (प्राथमिक छात्र × प्राथमिक दर) + (उच्च प्राथमिक छात्र × उच्च प्राथमिक दर) + (फल लाभार्थी × फल दर) + (अतिरिक्त पोषण छात्र × पोषण दर)</code>[cite: 6]।</li>
+        <li><strong>संचयी उपस्थिति (Cumulative Attendance):</strong> माह की प्रत्येक तिथि को पिछले दिनों की कुल उपस्थिति में उस दिन की उपस्थिति जोड़कर संचयी योग निकाला जाता है, जिससे माह के किसी भी दिन तक कुल लाभान्वित छात्रों का सटीक विवरण उपलब्ध रहता है[cite: 6]।</li>
+      </ul>
+
+      <h4>3. विशेष अनुपूरक पोषण: फल एवं शीतकालीन पोषण का मासिक लेखांकन</h4>
+      <p>उत्तर प्रदेश शासन द्वारा मुख्य भोजन के अतिरिक्त विद्यार्थियों को कुपोषण से मुक्त करने हेतु विशेष अनुपूरक आहार की व्यवस्था की गई है, जिसका मासिक वित्तीय संधारण अलग से अनिवार्य है[cite: 6]:</p>
+      <ul>
+        <li><strong>ताजा मौसमी फल वितरण (सोमवार):</strong> प्रत्येक सोमवार को भोजनोपरांत सभी उपस्थित छात्र-छात्राओं को एक साबुत ताजा मौसमी फल दिया जाता है[cite: 6]। इसके लिए ₹4.00 प्रति छात्र की दर से पृथक वित्तीय आवंटन प्राप्त होता है[cite: 6]। मासिक रजिस्टर में माह के समस्त सोमवारों के कुल फल लाभार्थियों की संख्या और कुल व्यय धनराशि का पृथक कॉलम में योग निकाला जाता है[cite: 6]। यदि सोमवार को अवकाश होता है, तो फल वितरण अगले कार्यदिवस (मंगलवार) को संपन्न किया जाता है[cite: 6] [evidence: 15, 16]।</li>
+        <li><strong>शीतकालीन अतिरिक्त पोषण (नवंबर से फरवरी/मार्च):</strong> शीत ऋतु के चार महीनों (नवंबर, दिसंबर, जनवरी, फरवरी) में प्रत्येक गुरुवार को विद्यार्थियों को ऊर्जा व गर्माहट प्रदान करने हेतु प्रति छात्र 50 ग्राम भुना चना तथा 20 ग्राम गुड़-तिल/मूंगफली की चिक्की का वितरण किया जाता है[cite: 6]। इसके लिए ₹5.00 प्रति छात्र की दर से बजट आवंटित होता है[cite: 6]।</li>
+      </ul>
+
+      <h4>4. मासिक खाद्यान्न स्टॉक रजिस्टर (Stock Register) मिलान प्रक्रिया</h4>
+      <p>मासिक पंजिका पूर्ण होने के पश्चात विद्यालय के मुख्य खाद्यान्न स्टॉक रजिस्टर में निम्नलिखित चार-चरणीय समीकरण का मिलान करना अनिवार्य है[cite: 6]:</p>
+      <table class="seo-table">
+        <thead>
+          <tr>
+            <th>लेखांकन चरण</th>
+            <th>गेहूं (Wheat) का परिकलन</th>
+            <th>चावल (Rice) का परिकलन</th>
+            <th>ऑडिट सत्यापन विधि</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. प्रारंभिक अवशेष (Opening Balance)</strong></td>
+            <td>विगत माह का अंतिम अवशेष गेहूं</td>
+            <td>विगत माह का अंतिम अवशेष चावल</td>
+            <td>विगत माह की एम०पी०आर० (MPR) से मिलान[cite: 6] [evidence: 11, 12]</td>
+          </tr>
+          <tr>
+            <td><strong>2. मासिक प्राप्त उठान (Allotment Received)</strong></td>
+            <td>कोटेदार से प्राप्त कुल नया गेहूं</td>
+            <td>कोटेदार से प्राप्त कुल नया चावल</td>
+            <td>उचित दर विक्रेता की डिलीवरी चालान रसीद</td>
+          </tr>
+          <tr>
+            <td><strong>3. कुल मासिक उपभोग (Total Consumption)</strong></td>
+            <td>मासिक पंजिका के फुटर का कुल योग[cite: 6]</td>
+            <td>मासिक पंजिका के फुटर का कुल योग[cite: 6]</td>
+            <td>दैनिक उपस्थिति × 100g / 150g[cite: 6]</td>
+          </tr>
+          <tr>
+            <td><strong>4. अंतिम अवशेष (Closing Balance)</strong></td>
+            <td>(चरण 1 + चरण 2) - चरण 3</td>
+            <td>(चरण 1 + चरण 2) - चरण 3</td>
+            <td>भौतिक रूप से किचन शेड में तौलकर सत्यापन[cite: 6]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>5. आईवीआरएस (IVRS) एवं मासिक प्रगति रिपोर्ट (MPR) का एकीकरण</h4>
+      <p>प्रतिदिन दर्ज की गई आईवीआरएस (Interactive Voice Response System) ऑटोमेटेड कॉल का मासिक योग और इस मासिक पंजिका के कुल योग में रत्ती भर भी विसंगति नहीं होनी चाहिए[cite: 6]:</p>
+      <ul>
+        <li><strong>आईवीआरएस मासिक डाटा डाउनलोड:</strong> प्रेरणा पोर्टल अथवा एमडीएम IVRS पोर्टल से माह के अंत में विद्यालय की मासिक IVRS रिपोर्ट डाउनलोड की जाती है[cite: 6] [evidence: 17]।</li>
+        <li><strong>त्रुटि निवारण:</strong> यदि किसी दिन सर्वर त्रुटि के कारण IVRS पर छात्र संख्या गलत दर्ज हो गई हो, तो खंड शिक्षा अधिकारी (BEO) कार्यालय को पत्र प्रेषित कर संशोधन कराया जाता है[cite: 6] [evidence: 18]।</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- Clean Evergreen Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-3 font-medium text-slate-600">
+        <a href="index.html" class="hover:text-emerald-600 transition">होम</a>
+        <a href="about.html" class="hover:text-emerald-600 transition">हमारे बारे में</a>
+        <a href="privacy-policy.html" class="hover:text-emerald-600 transition">गोपनीयता नीति (Privacy Policy)</a>
+        <a href="terms.html" class="hover:text-emerald-600 transition">नियम व शर्तें (Terms of Use)</a>
+        <a href="disclaimer.html" class="hover:text-emerald-600 transition">डिस्क्लेमर (Disclaimer)</a>
+      </div>
+      <p>© deshimaster.in (देशी मास्टर)। सर्वाधिकार सुरक्षित।</p>
+      <p class="mt-1 text-slate-400">परिषदीय प्राथमिक, उच्च प्राथमिक एवं कंपोजिट विद्यालयों के शिक्षकों को समर्पित स्वतंत्र डिजिटल पहल।</p>
+    </div>
+  </footer>
+
+<script>
+var curLvl = 'comp';
+var daysHindi = ["रविवार", "सोमवार", "मंगलवार", "बुधवार", "गुरुवार", "शुक्रवार", "शनिवार"];
+var monthsHindi = ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"];
+
+function filterCap(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
+function filterNum(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
+function cleanNum(el) {
+  var p = el.selectionStart - 1;
+  el.value = el.value.replace(/[^0-9]/g, '');
+  if (p >= 0) el.setSelectionRange(p, p);
+}
+
+function moveNext(e, type, day) {
+  var code = e.keyCode || e.which;
+  if (code === 13 || e.key === "Enter" || code === 40 || e.key === "ArrowDown") {
+    e.preventDefault();
+    var tot = new Date(parseInt(document.getElementById('selYear').value, 10), parseInt(document.getElementById('selMonth').value, 10) + 1, 0).getDate();
+    for (var d = day + 1; d <= tot; d++) {
+      var n = document.getElementById(type + '_att_' + d);
+      if (n && !n.readOnly) {
+        n.focus(); n.select();
+        n.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+    }
+    e.target.blur();
+  }
+}
+
+function initCurrentDates() {
+  var today = new Date();
+  var curYear = today.getFullYear();
+  var curMonth = today.getMonth();
+
+  var s = document.getElementById('selYear');
+  s.innerHTML = '';
+  for (var y = 2020; y <= 2050; y++) {
+    var o = document.createElement('option');
+    o.value = y; o.innerText = y;
+    if (y === curYear) o.selected = true;
+    s.appendChild(o);
+  }
+
+  var mSelect = document.getElementById('selMonth');
+  mSelect.value = curMonth;
+}
+
+// =========================================================================
+// LOCALSTORAGE AUTO-SAVE & AUTO-LOAD MEMORY ENGINE
+// =========================================================================
+
+function saveSchoolDetails() {
+  var schData = {
+    school: document.getElementById('inSchool').value,
+    block: document.getElementById('inBlock').value,
+    district: document.getElementById('inDistrict').value,
+    udise: document.getElementById('inUdise').value,
+    ratePs: document.getElementById('ratePs').value,
+    rateUps: document.getElementById('rateUps').value,
+    rateFruit: document.getElementById('rateFruit').value,
+    rateNutri: document.getElementById('rateNutri').value,
+    level: curLvl,
+    year: document.getElementById('selYear').value,
+    month: document.getElementById('selMonth').value
+  };
+  localStorage.setItem('mdm_monthly_sch_info', JSON.stringify(schData));
+}
+
+function loadSchoolDetails() {
+  var saved = localStorage.getItem('mdm_monthly_sch_info');
+  if (saved) {
+    try {
+      var d = JSON.parse(saved);
+      if (d.school) document.getElementById('inSchool').value = d.school;
+      if (d.block) document.getElementById('inBlock').value = d.block;
+      if (d.district) document.getElementById('inDistrict').value = d.district;
+      if (d.udise) document.getElementById('inUdise').value = d.udise;
+      if (d.ratePs) document.getElementById('ratePs').value = d.ratePs;
+      if (d.rateUps) document.getElementById('rateUps').value = d.rateUps;
+      if (d.rateFruit) document.getElementById('rateFruit').value = d.rateFruit;
+      if (d.rateNutri) document.getElementById('rateNutri').value = d.rateNutri;
+      if (d.year) document.getElementById('selYear').value = d.year;
+      if (d.month !== undefined) document.getElementById('selMonth').value = d.month;
+      if (d.level) setLevel(d.level, true);
+    } catch(e) {}
+  }
+}
+
+function getMonthStorageKey() {
+  var y = document.getElementById('selYear').value;
+  var m = document.getElementById('selMonth').value;
+  return 'mdm_monthly_data_' + y + '_' + m;
+}
+
+function saveMonthlyAttendance() {
+  var y = parseInt(document.getElementById('selYear').value, 10);
+  var m = parseInt(document.getElementById('selMonth').value, 10);
+  var tot = new Date(y, m + 1, 0).getDate();
+
+  var data = {};
+  for (var d = 1; d <= tot; d++) {
+    var inPs = document.getElementById('ps_att_' + d);
+    var inUps = document.getElementById('ups_att_' + d);
+    if (inPs && inPs.value) data['ps_' + d] = inPs.value;
+    if (inUps && inUps.value) data['ups_' + d] = inUps.value;
+  }
+  localStorage.setItem(getMonthStorageKey(), JSON.stringify(data));
+}
+
+function loadMonthlyAttendance() {
+  var y = parseInt(document.getElementById('selYear').value, 10);
+  var m = parseInt(document.getElementById('selMonth').value, 10);
+  var tot = new Date(y, m + 1, 0).getDate();
+
+  for (var d = 1; d <= tot; d++) {
+    var inPs = document.getElementById('ps_att_' + d);
+    var inUps = document.getElementById('ups_att_' + d);
+    if (inPs && !inPs.readOnly) inPs.value = '';
+    if (inUps && !inUps.readOnly) inUps.value = '';
+  }
+
+  var saved = localStorage.getItem(getMonthStorageKey());
+  if (saved) {
+    try {
+      var data = JSON.parse(saved);
+      for (var d = 1; d <= tot; d++) {
+        var inPs = document.getElementById('ps_att_' + d);
+        var inUps = document.getElementById('ups_att_' + d);
+        if (inPs && data['ps_' + d] !== undefined && !inPs.readOnly) inPs.value = data['ps_' + d];
+        if (inUps && data['ups_' + d] !== undefined && !inUps.readOnly) inUps.value = data['ups_' + d];
+      }
+    } catch(e) {}
+  }
+  recalc();
+}
+
+function onDateSelectionChange() {
+  buildMonth();
+  saveSchoolDetails();
+  loadMonthlyAttendance();
+}
+
+function resetCurrentMonthData() {
+  var y = document.getElementById('selYear').value;
+  var mIdx = parseInt(document.getElementById('selMonth').value, 10);
+  var mHindi = monthsHindi[mIdx];
+  if (confirm("क्या आप " + mHindi + " " + y + " का मासिक उपस्थिति डेटा साफ़ करना चाहते हैं?")) {
+    localStorage.removeItem(getMonthStorageKey());
+    loadMonthlyAttendance();
+  }
+}
+
+function setLevel(lvl, skipSave) {
+  curLvl = lvl;
+  
+  var bComp = document.getElementById('btnComp');
+  var bPs = document.getElementById('btnPs');
+  var bUps = document.getElementById('btnUps');
+
+  var activeClass = "px-3.5 py-2 border-2 border-slate-800 bg-slate-900 text-white font-bold text-xs rounded-lg transition";
+  var inactiveClass = "px-3.5 py-2 border-2 border-slate-800 bg-white text-slate-800 font-bold text-xs rounded-lg transition hover:bg-slate-100";
+
+  bComp.className = lvl === 'comp' ? activeClass : inactiveClass;
+  bPs.className = lvl === 'ps' ? activeClass : inactiveClass;
+  bUps.className = lvl === 'ups' ? activeClass : inactiveClass;
+
+  document.getElementById('sc_ps').style.display = (lvl === 'ups') ? 'none' : '';
+  document.getElementById('sc_ups').style.display = (lvl === 'ps') ? 'none' : '';
+  document.getElementById('sc_tot').style.display = (lvl === 'comp') ? '' : 'none';
+
+  var p = document.querySelectorAll('.ps-col');
+  for (var i = 0; i < p.length; i++) p[i].style.display = (lvl === 'ups') ? 'none' : '';
+
+  var u = document.querySelectorAll('.ups-col');
+  for (var j = 0; j < u.length; j++) u[j].style.display = (lvl === 'ps') ? 'none' : '';
+
+  updateHeader();
+  if (!skipSave) saveSchoolDetails();
+}
+
+function buildMonth() {
+  var y = parseInt(document.getElementById('selYear').value, 10);
+  var m = parseInt(document.getElementById('selMonth').value, 10);
+  var tot = new Date(y, m + 1, 0).getDate();
+
+  var isWinter = (m === 10 || m === 11 || m === 0 || m === 1);
+  var wRows = document.querySelectorAll('.winter-summary-row');
+  for (var i = 0; i < wRows.length; i++) {
+    wRows[i].style.display = isWinter ? '' : 'none';
+  }
+
+  var tb = document.getElementById('mdmBody');
+  tb.innerHTML = '';
+
+  for (var d = 1; d <= tot; d++) {
+    var dt = new Date(y, m, d);
+    var dayIdx = dt.getDay();
+    var dHindi = daysHindi[dayIdx];
+    var isSun = (dayIdx === 0);
+
+    var tr = document.createElement('tr');
+    tr.id = 'row_' + d;
+    tr.setAttribute('data-day', dayIdx);
+    if (isSun) tr.className = 'sunday-row';
+
+    var dStr = String(d).padStart(2, '0') + '/' + String(m + 1).padStart(2, '0') + '/' + y;
+
+    tr.innerHTML = 
+      '<td style="font-weight:bold;">' + dStr + '</td>' +
+      '<td style="font-weight:600;">' + dHindi + '</td>' +
+      '<td class="ps-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ps_att_' + d + '" ' + (isSun ? 'readonly disabled' : '') + ' onkeydown="moveNext(event, \'ps\', ' + d + ');" oninput="cleanNum(this); recalc(); saveMonthlyAttendance();"></td>' +
+      '<td class="ps-col" id="ps_cumu_' + d + '"></td>' +
+      '<td class="ps-col val-wheat" id="ps_w_' + d + '" style="color:#9a3412; font-weight:bold;"></td>' +
+      '<td class="ps-col val-rice" id="ps_r_' + d + '" style="color:#166534; font-weight:bold;"></td>' +
+      '<td class="ps-col val-fruit" id="ps_f_' + d + '" style="color:#d97706; font-weight:bold;"></td>' +
+      '<td class="ps-col val-cost" id="ps_c_' + d + '" style="color:#1e3a8a; font-weight:bold;"></td>' +
+      '<td class="ups-col"><input type="tel" inputmode="numeric" enterkeyhint="next" class="att-in" id="ups_att_' + d + '" ' + (isSun ? 'readonly disabled' : '') + ' onkeydown="moveNext(event, \'ups\', ' + d + ');" oninput="cleanNum(this); recalc(); saveMonthlyAttendance();"></td>' +
+      '<td class="ups-col" id="ups_cumu_' + d + '"></td>' +
+      '<td class="ups-col val-wheat" id="ups_w_' + d + '" style="color:#9a3412; font-weight:bold;"></td>' +
+      '<td class="ups-col val-rice" id="ups_r_' + d + '" style="color:#166534; font-weight:bold;"></td>' +
+      '<td class="ups-col val-fruit" id="ups_f_' + d + '" style="color:#d97706; font-weight:bold;"></td>' +
+      '<td class="ups-col val-cost" id="ups_c_' + d + '" style="color:#1e3a8a; font-weight:bold;"></td>';
+
+    tb.appendChild(tr);
+  }
+
+  setLevel(curLvl, true);
+  updateHeader();
+}
+
+function recalc() {
+  var y = parseInt(document.getElementById('selYear').value, 10);
+  var m = parseInt(document.getElementById('selMonth').value, 10);
+  var tot = new Date(y, m + 1, 0).getDate();
+
+  var rPs = parseFloat(document.getElementById('ratePs').value) || 6.78;
+  var rUps = parseFloat(document.getElementById('rateUps').value) || 10.17;
+  var rFruit = parseFloat(document.getElementById('rateFruit').value) || 0;
+  var rNutri = parseFloat(document.getElementById('rateNutri').value) || 0;
+  
+  var fruitText = 'फल धनराशि (@₹' + rFruit + '):';
+  var nutriText = 'अतिरिक्त पोषण धनराशि (@₹' + rNutri + '):';
+  document.getElementById('lbl_ps_fruit').innerText = fruitText;
+  document.getElementById('lbl_ups_fruit').innerText = fruitText;
+  document.getElementById('lbl_tot_fruit').innerText = 'कुल ' + fruitText;
+
+  document.getElementById('lbl_ps_nutri').innerText = nutriText;
+  document.getElementById('lbl_ups_nutri').innerText = nutriText;
+  document.getElementById('lbl_tot_nutri').innerText = 'कुल ' + nutriText;
+
+  var isWinter = (m === 10 || m === 11 || m === 0 || m === 1);
+
+  // 1. अंतिम भरे हुए दिन (Last Entered Day) की पहचान
+  var lastEnteredDay = 0;
+  for (var d = 1; d <= tot; d++) {
+    var inPs = document.getElementById('ps_att_' + d);
+    var inUps = document.getElementById('ups_att_' + d);
+    var valP = inPs ? inPs.value.trim() : '';
+    var valU = inUps ? inUps.value.trim() : '';
+    if (valP !== '' || valU !== '') {
+      lastEnteredDay = d;
+    }
+  }
+
+  var cPs = 0, cUps = 0;
+  var tPsAtt = 0, tUpsAtt = 0;
+  var tPsW = 0, tPsR = 0, tPsC = 0;
+  var tUpsW = 0, tUpsR = 0, tUpsC = 0;
+  var tFPs = 0, tFUps = 0;
+  var tNPs = 0, tNUps = 0;
+
+  for (var d = 1; d <= tot; d++) {
+    var tr = document.getElementById('row_' + d);
+    if (!tr) continue;
+    var dayIdx = parseInt(tr.getAttribute('data-day'), 10);
+    var isSun = (dayIdx === 0);
+    var isMon = (dayIdx === 1);
+    var isThu = (dayIdx === 4);
+
+    var inPs = document.getElementById('ps_att_' + d);
+    var inUps = document.getElementById('ups_att_' + d);
+
+    var aPs = (inPs && !isSun) ? (parseInt(inPs.value, 10) || 0) : 0;
+    var aUps = (inUps && !isSun) ? (parseInt(inUps.value, 10) || 0) : 0;
+
+    cPs += aPs; cUps += aUps;
+    tPsAtt += aPs; tUpsAtt += aUps;
+
+    var wP = (!isSun && (isMon || isThu)) ? (aPs * 0.1) : 0;
+    var rP = (!isSun && !isMon && !isThu) ? (aPs * 0.1) : 0;
+    var wU = (!isSun && (isMon || isThu)) ? (aUps * 0.15) : 0;
+    var rU = (!isSun && !isMon && !isThu) ? (aUps * 0.15) : 0;
+
+    var fP = isMon ? aPs : 0;
+    var fU = isMon ? aUps : 0;
+    tFPs += fP; tFUps += fU;
+
+    var nP = (isThu && isWinter && !isSun) ? aPs : 0;
+    var nU = (isThu && isWinter && !isSun) ? aUps : 0;
+    tNPs += nP; tNUps += nU;
+
+    var costP = (aPs * rPs) + (fP * rFruit) + (nP * rNutri);
+    var costU = (aUps * rUps) + (fU * rFruit) + (nU * rNutri);
+
+    tPsW += wP; tPsR += rP; tPsC += costP;
+    tUpsW += wU; tUpsR += rU; tUpsC += costU;
+
+    // यदि यह रविवार है: तो पूरा खाली रहेगा
+    if (isSun) {
+      document.getElementById('ps_cumu_' + d).innerText = '';
+      document.getElementById('ps_w_' + d).innerText = '';
+      document.getElementById('ps_r_' + d).innerText = '';
+      document.getElementById('ps_f_' + d).innerText = '';
+      document.getElementById('ps_c_' + d).innerText = '';
+
+      document.getElementById('ups_cumu_' + d).innerText = '';
+      document.getElementById('ups_w_' + d).innerText = '';
+      document.getElementById('ups_r_' + d).innerText = '';
+      document.getElementById('ups_f_' + d).innerText = '';
+      document.getElementById('ups_c_' + d).innerText = '';
+    }
+    // यदि कार्यदिवस है और यह अंतिम भरे हुए दिन के अंदर या बराबर है: तो मान या 0 दिखेगा
+    else if (d <= lastEnteredDay) {
+      document.getElementById('ps_cumu_' + d).innerText = cPs;
+      document.getElementById('ps_w_' + d).innerText = wP.toFixed(2);
+      document.getElementById('ps_r_' + d).innerText = rP.toFixed(2);
+      document.getElementById('ps_f_' + d).innerText = fP;
+      document.getElementById('ps_c_' + d).innerText = '₹' + costP.toFixed(2);
+
+      document.getElementById('ups_cumu_' + d).innerText = cUps;
+      document.getElementById('ups_w_' + d).innerText = wU.toFixed(2);
+      document.getElementById('ups_r_' + d).innerText = rU.toFixed(2);
+      document.getElementById('ups_f_' + d).innerText = fU;
+      document.getElementById('ups_c_' + d).innerText = '₹' + costU.toFixed(2);
+    } 
+    // अंतिम भरे हुए दिन के बाद के भविष्य के दिन: पूरी तरह खाली रहेंगे
+    else {
+      document.getElementById('ps_cumu_' + d).innerText = '';
+      document.getElementById('ps_w_' + d).innerText = '';
+      document.getElementById('ps_r_' + d).innerText = '';
+      document.getElementById('ps_f_' + d).innerText = '';
+      document.getElementById('ps_c_' + d).innerText = '';
+
+      document.getElementById('ups_cumu_' + d).innerText = '';
+      document.getElementById('ups_w_' + d).innerText = '';
+      document.getElementById('ups_r_' + d).innerText = '';
+      document.getElementById('ups_f_' + d).innerText = '';
+      document.getElementById('ups_c_' + d).innerText = '';
+    }
+  }
+
+  // यदि पूरे महीने में कुछ भी नहीं भरा गया है (Blank Printout)
+  if (lastEnteredDay === 0) {
+    document.getElementById('ft_ps_att').innerText = '';
+    document.getElementById('ft_ps_w').innerText = '';
+    document.getElementById('ft_ps_r').innerText = '';
+    document.getElementById('ft_ps_f').innerText = '';
+    document.getElementById('ft_ps_c').innerText = '';
+
+    document.getElementById('ft_ups_att').innerText = '';
+    document.getElementById('ft_ups_w').innerText = '';
+    document.getElementById('ft_ups_r').innerText = '';
+    document.getElementById('ft_ups_f').innerText = '';
+    document.getElementById('ft_ups_c').innerText = '';
+
+    document.getElementById('sm_ps_w').innerText = '';
+    document.getElementById('sm_ps_r').innerText = '';
+    document.getElementById('sm_ps_f').innerText = '';
+    document.getElementById('sm_ps_fc').innerText = '';
+    document.getElementById('sm_ps_n').innerText = '';
+    document.getElementById('sm_ps_nc').innerText = '';
+    document.getElementById('sm_ps_c').innerText = '';
+
+    document.getElementById('sm_ups_w').innerText = '';
+    document.getElementById('sm_ups_r').innerText = '';
+    document.getElementById('sm_ups_f').innerText = '';
+    document.getElementById('sm_ups_fc').innerText = '';
+    document.getElementById('sm_ups_n').innerText = '';
+    document.getElementById('sm_ups_nc').innerText = '';
+    document.getElementById('sm_ups_c').innerText = '';
+
+    document.getElementById('sm_tot_w').innerText = '';
+    document.getElementById('sm_tot_r').innerText = '';
+    document.getElementById('sm_tot_f').innerText = '';
+    document.getElementById('sm_tot_fc').innerText = '';
+    document.getElementById('sm_tot_n').innerText = '';
+    document.getElementById('sm_tot_nc').innerText = '';
+    document.getElementById('sm_tot_c').innerText = '';
+    return;
+  }
+
+  // यदि डेटा भरा है तो कुल योग प्रदर्शित होगा
+  document.getElementById('ft_ps_att').innerText = tPsAtt;
+  document.getElementById('ft_ps_w').innerText = tPsW.toFixed(2);
+  document.getElementById('ft_ps_r').innerText = tPsR.toFixed(2);
+  document.getElementById('ft_ps_f').innerText = tFPs;
+  document.getElementById('ft_ps_c').innerText = '₹' + tPsC.toFixed(2);
+
+  document.getElementById('ft_ups_att').innerText = tUpsAtt;
+  document.getElementById('ft_ups_w').innerText = tUpsW.toFixed(2);
+  document.getElementById('ft_ups_r').innerText = tUpsR.toFixed(2);
+  document.getElementById('ft_ups_f').innerText = tFUps;
+  document.getElementById('ft_ups_c').innerText = '₹' + tUpsC.toFixed(2);
+
+  document.getElementById('sm_ps_w').innerText = tPsW.toFixed(2) + ' kg';
+  document.getElementById('sm_ps_r').innerText = tPsR.toFixed(2) + ' kg';
+  document.getElementById('sm_ps_f').innerText = tFPs;
+  document.getElementById('sm_ps_fc').innerText = '₹' + (tFPs * rFruit).toFixed(2);
+  document.getElementById('sm_ps_n').innerText = tNPs;
+  document.getElementById('sm_ps_nc').innerText = '₹' + (tNPs * rNutri).toFixed(2);
+  document.getElementById('sm_ps_c').innerText = '₹' + tPsC.toFixed(2);
+
+  document.getElementById('sm_ups_w').innerText = tUpsW.toFixed(2) + ' kg';
+  document.getElementById('sm_ups_r').innerText = tUpsR.toFixed(2) + ' kg';
+  document.getElementById('sm_ups_f').innerText = tFUps;
+  document.getElementById('sm_ups_fc').innerText = '₹' + (tFUps * rFruit).toFixed(2);
+  document.getElementById('sm_ups_n').innerText = tNUps;
+  document.getElementById('sm_ups_nc').innerText = '₹' + (tNUps * rNutri).toFixed(2);
+  document.getElementById('sm_ups_c').innerText = '₹' + tUpsC.toFixed(2);
+
+  document.getElementById('sm_tot_w').innerText = (tPsW + tUpsW).toFixed(2) + ' kg';
+  document.getElementById('sm_tot_r').innerText = (tPsR + tUpsR).toFixed(2) + ' kg';
+  document.getElementById('sm_tot_f').innerText = (tFPs + tFUps);
+  document.getElementById('sm_tot_fc').innerText = '₹' + ((tFPs + tFUps) * rFruit).toFixed(2);
+  document.getElementById('sm_tot_n').innerText = (tNPs + tNUps);
+  document.getElementById('sm_tot_nc').innerText = '₹' + ((tNPs + tNUps) * rNutri).toFixed(2);
+  document.getElementById('sm_tot_c').innerText = '₹' + (tPsC + tUpsC).toFixed(2);
+}
+
+function updateHeader() {
+  var y = document.getElementById('selYear').value;
+  var mIdx = parseInt(document.getElementById('selMonth').value, 10);
+  var mHindi = monthsHindi[mIdx];
+  var sch = document.getElementById('inSchool').value.trim();
+  var blk = document.getElementById('inBlock').value.trim();
+  var dst = document.getElementById('inDistrict').value.trim();
+  var udi = document.getElementById('inUdise').value.trim();
+
+  var sub = [];
+  if (sch) sub.push("SCHOOL: " + sch);
+  if (blk) sub.push("BLOCK: " + blk);
+  if (dst) sub.push("DISTRICT: " + dst);
+  if (udi) sub.push("(UDISE: " + udi + ")");
+
+  document.getElementById('prTitle').innerText = "मासिक मध्याह्न भोजन (MDM) उपभोग व वितरण पंजिका - " + mHindi + " " + y;
+  document.getElementById('prSub').innerText = sub.join(' | ');
+}
+
+function toggleWatermark() {
+  var chk = document.getElementById('chkWatermark');
+  var wm = document.getElementById('printWatermark');
+  if (wm) {
+    if (chk && chk.checked) {
+      wm.style.setProperty('display', 'flex', 'important');
+    } else {
+      wm.style.setProperty('display', 'none', 'important');
+    }
+  }
+}
+
+function printMdmRegister() {
+  toggleWatermark();
+  window.print();
+}
+
+// Page Load Flow
+initCurrentDates();
+loadSchoolDetails();
+buildMonth();
+loadMonthlyAttendance();
+toggleWatermark();
+</script>
+</body>
+</html>
