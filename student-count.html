@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>छात्र संख्या पंजिका (Student Enrollment Register) - deshimaster.in | देशी मास्टर</title>
+  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा परिषद के प्राथमिक, उच्च प्राथमिक एवं संविलियन विद्यालयों हेतु छात्र संख्या पंजिका। SC, ST, OBC, GEN जातिवार एवं बालक-बालिका संकलन तथा A4 लैंडस्केप प्रिंट।">
+  <meta name="robots" content="index, follow">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Noto Sans Devanagari -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Screen Table Styling */
+    table.count-table { width: 100%; min-width: 1050px; border-collapse: collapse; text-align: center; font-size: 12px; }
+    table.count-table th, table.count-table td { border: 1px solid #cbd5e1; padding: 6px 2px; white-space: nowrap; }
+
+    .th-main { background: #1e3a8a; color: white; font-size: 13px; font-weight: bold; padding: 8px; text-transform: uppercase; }
+    .th-cat { color: white; font-weight: bold; font-size: 11.5px; padding: 6px 2px; text-transform: uppercase; }
+    .th-sub { background: #0284c7; color: white; font-size: 11px; padding: 5px 2px; text-transform: uppercase; }
+
+    input.cnt-in {
+      width: 48px;
+      height: 32px;
+      padding: 2px;
+      text-align: center;
+      border: 1.5px solid #94a3b8;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 13px;
+      background: #ffffff;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    input.cnt-in:focus {
+      outline: none;
+      border-color: #2563eb;
+      background: #eff6ff;
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+    }
+
+    .col-sc { background: #f8fafc; }
+    .col-st { background: #f1f5f9; }
+    .col-obc { background: #f8fafc; }
+    .col-gen { background: #f1f5f9; }
+    .col-tot { background: #ecfdf5; font-weight: bold; color: #166534; }
+
+    .tot-cell { font-weight: bold; font-size: 12px; }
+    .row-ps-tot { background: #fef08a !important; font-weight: bold; color: #854d0e; }
+    .row-ups-tot { background: #e9d5ff !important; font-weight: bold; color: #6b21a8; }
+    .row-grand-tot { background: #bfdbfe !important; font-weight: bold; font-size: 13px; color: #1e3a8a; }
+
+    .print-header { display: none; text-align: center; margin-bottom: 8px; }
+    .print-header h2 { margin: 0; font-size: 16px; color: #000; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; }
+    .print-header p { margin: 2px 0 0 0; font-size: 11px; font-weight: bold; color: #111; text-transform: uppercase; }
+    .print-sign-row { display: none; }
+    .print-watermark-row { display: none; }
+
+    /* SEO Guide Styles */
+    .seo-guide h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 12px; border-left: 4px solid #1e3a8a; padding-left: 10px; font-weight: 700; }
+    .seo-guide h4 { color: #0f172a; font-size: 15px; margin-top: 22px; margin-bottom: 8px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; font-weight: 700; }
+    .seo-guide p { font-size: 13.5px; margin-bottom: 12px; text-align: justify; line-height: 1.7; color: #334155; }
+    .seo-guide ul { font-size: 13.5px; margin-bottom: 14px; padding-left: 20px; color: #334155; }
+    .seo-guide li { margin-bottom: 6px; }
+    .seo-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+    .seo-table th, .seo-table td { border: 1px solid #94a3b8; padding: 8px 10px; text-align: left; }
+    .seo-table th { background: #e2e8f0; font-weight: bold; color: #0f172a; }
+
+    /* =========================================================
+       100% COMPLETE ENGLISH A4 LANDSCAPE PRINT ENGINE
+       ========================================================= */
+    @page {
+      size: landscape !important;
+      margin: 6mm 8mm !important;
+    }
+
+    @media print {
+      html, body {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .no-print { display: none !important; }
+
+      .container-print-target {
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        border: none !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        background: white !important;
+      }
+
+      .print-header { display: block !important; }
+      .print-header h2 { font-size: 15px !important; margin: 0 !important; }
+      .print-header p { font-size: 10.5px !important; margin: 2px 0 6px 0 !important; }
+
+      .table-responsive-box {
+        overflow: visible !important;
+        border: none !important;
+        margin-bottom: 0 !important;
+        width: 100% !important;
+      }
+
+      table.count-table {
+        width: 100% !important;
+        min-width: 100% !important;
+        table-layout: fixed !important;
+        border: 1.5px solid #000 !important;
+        border-collapse: collapse !important;
+      }
+
+      table.count-table tbody tr { height: 11.5mm !important; }
+      table.count-table tfoot tr { height: 11mm !important; }
+      table.count-table thead tr { height: 8mm !important; }
+
+      table.count-table th, table.count-table td {
+        border: 1px solid #000 !important;
+        padding: 0 1px !important;
+        color: #000 !important;
+        vertical-align: middle !important;
+        font-size: 11.5px !important;
+        text-transform: uppercase !important;
+      }
+
+      table.count-table th {
+        font-weight: 800 !important;
+        background: #e2e8f0 !important;
+        color: #000 !important;
+      }
+
+      col.c-cls { width: 8.5% !important; }
+      col.c-b { width: 6% !important; }
+      col.c-g { width: 6% !important; }
+      col.c-t { width: 7% !important; }
+      col.c-tot-b { width: 4.5% !important; }
+      col.c-tot-g { width: 4.5% !important; }
+      col.c-tot-all { width: 6.5% !important; }
+
+      .th-cat {
+        background: #cbd5e1 !important;
+        color: #000 !important;
+        font-size: 10.5px !important;
+      }
+
+      .th-sub {
+        background: #f1f5f9 !important;
+        color: #000 !important;
+        font-size: 9.5px !important;
+      }
+
+      input.cnt-in {
+        border: none !important;
+        background: transparent !important;
+        font-size: 13px !important;
+        font-weight: bold !important;
+        color: #000 !important;
+        width: 100% !important;
+        height: 100% !important;
+        text-align: center !important;
+        padding: 0 !important;
+      }
+
+      .tot-cell {
+        font-size: 13px !important;
+        font-weight: bold !important;
+      }
+
+      .row-ps-tot { background: #fef9c3 !important; }
+      .row-ups-tot { background: #f3e8ff !important; }
+      .row-grand-tot { background: #dbeafe !important; }
+
+      .print-sign-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        margin-top: 25px !important;
+        padding: 0 50px !important;
+      }
+
+      .print-sign-col {
+        text-align: center !important;
+        font-size: 12px !important;
+        font-weight: bold !important;
+        border-top: 1.5px dashed #000 !important;
+        width: 250px !important;
+        padding-top: 5px !important;
+        text-transform: uppercase !important;
+      }
+
+      .print-watermark-row {
+        display: block !important;
+        text-align: right !important;
+        font-size: 8px !important;
+        color: #64748b !important;
+        margin-top: 8px !important;
+        padding-right: 4px !important;
+        font-family: sans-serif !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- Header / Navigation Bar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm no-print">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="bg-emerald-600 text-white font-extrabold text-base px-2.5 py-1.5 rounded-lg shadow-sm">
+          DM
+        </div>
+        <div>
+          <span class="block font-bold text-lg text-slate-900 leading-tight">deshimaster.in</span>
+          <span class="block text-[10px] text-slate-500 uppercase tracking-wider font-semibold">देशी मास्टर - शिक्षक डिजिटल साथी</span>
+        </div>
+      </a>
+      <nav class="flex items-center gap-5 text-sm font-medium text-slate-600">
+        <a href="index.html" class="hover:text-emerald-600 transition">← होम पोर्टल</a>
+        <a href="mdm-daily.html" class="hidden sm:inline hover:text-emerald-600 transition">एमडीएम</a>
+        <a href="about.html" class="hover:text-emerald-600 transition">हमारे बारे में</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Work Area Container -->
+  <main class="max-w-7xl mx-auto px-3 sm:px-4 py-6 flex-grow w-full">
+
+    <div class="container-print-target bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm mb-8">
+
+      <!-- Screen Title Bar -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 pb-3 mb-4 gap-2 no-print">
+        <div>
+          <h1 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <span>📊</span> छात्र संख्या पंजिका (Student Enrollment Register)
+          </h1>
+          <p class="text-xs text-slate-500 mt-0.5">कक्षा 1 से 8 संवर्गवार एवं लिंगवार छात्र संख्या संकलन पंजिका</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg">
+          <span>💾</span> डेटा स्वतः ब्राउज़र में सुरक्षित हो रहा है
+        </div>
+      </div>
+
+      <!-- विद्यालय एवं सत्र विवरण (स्क्रीन) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 no-print">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">सत्र (SESSION):</label>
+          <select id="selSession" onchange="onSessionChange()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-semibold bg-white focus:ring-2 focus:ring-emerald-500"></select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">विद्यालय का नाम (SCHOOL):</label>
+          <input type="text" id="inSchool" placeholder="उदा. COMPOSITE SCHOOL" oninput="filterCapital(this); updateHeader(); saveSchoolDetails();" class="w-full p-2 border border-slate-300 rounded-lg text-xs uppercase bg-white focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">विकास खंड (BLOCK):</label>
+          <input type="text" id="inBlock" placeholder="उदा. MOHALI" oninput="filterCapital(this); updateHeader(); saveSchoolDetails();" class="w-full p-2 border border-slate-300 rounded-lg text-xs uppercase bg-white focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">जनपद (DISTRICT):</label>
+          <input type="text" id="inDistrict" placeholder="उदा. KANPUR" oninput="filterCapital(this); updateHeader(); saveSchoolDetails();" class="w-full p-2 border border-slate-300 rounded-lg text-xs uppercase bg-white focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">यू-डायस कोड (UDISE):</label>
+          <input type="tel" maxlength="11" id="inUdise" placeholder="11 अंकों का कोड" oninput="filterNumbers(this); updateHeader(); saveSchoolDetails();" class="w-full p-2 border border-slate-300 rounded-lg text-xs bg-white focus:ring-2 focus:ring-emerald-500">
+        </div>
+      </div>
+
+      <!-- स्तर चयन एवं प्रिंट बार -->
+      <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3 mb-4 no-print">
+        <!-- टैब बटन्स -->
+        <div class="flex flex-wrap gap-2">
+          <button class="px-3.5 py-2 border-2 border-slate-800 bg-slate-900 text-white font-bold text-xs rounded-lg transition" id="btnComp" type="button" onclick="setLevel('comp')">
+            🏫 COMPOSITE (1-8)
+          </button>
+          <button class="px-3.5 py-2 border-2 border-slate-800 bg-white text-slate-800 font-bold text-xs rounded-lg transition" id="btnPs" type="button" onclick="setLevel('ps')">
+            🎒 PRIMARY (1-5)
+          </button>
+          <button class="px-3.5 py-2 border-2 border-slate-800 bg-white text-slate-800 font-bold text-xs rounded-lg transition" id="btnUps" type="button" onclick="setLevel('ups')">
+            🏛️ UPPER PRIMARY (6-8)
+          </button>
+        </div>
+
+        <!-- एक्शन बटन्स व वॉटरमार्क टॉगल -->
+        <div class="flex flex-wrap items-center justify-end gap-3">
+          <!-- वॉटरमार्क चेकबॉक्स (वैकल्पिक टॉगल) -->
+          <div class="flex items-center gap-1.5 text-xs text-slate-600 bg-slate-50 border border-slate-200 px-3 py-2 rounded-lg">
+            <input 
+              type="checkbox" 
+              id="chkWatermark" 
+              checked 
+              onchange="toggleWatermark()" 
+              class="w-4 h-4 rounded text-emerald-600 accent-emerald-600 cursor-pointer"
+            >
+            <label for="chkWatermark" class="cursor-pointer select-none font-medium">
+              प्रिंट में 'deshimaster.in' वॉटरमार्क रखें
+            </label>
+          </div>
+
+          <button class="px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs rounded-lg transition" type="button" onclick="resetCurrentSessionData()">
+            ↺ डेटा साफ़ करें
+          </button>
+          <button class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-lg transition shadow-sm flex items-center gap-1.5" type="button" onclick="forceLandscapePrint()">
+            <span>🖨️</span> A4 LANDSCAPE PRINT
+          </button>
+        </div>
+      </div>
+
+      <!-- प्रिंट हेडर (Pure English for Standard School Records) -->
+      <div class="print-header">
+        <h2 id="prTitle">STUDENTS ENROLLMENT REGISTER</h2>
+        <p id="prSub"></p>
+      </div>
+
+      <div class="text-[11px] text-teal-800 bg-teal-50 border border-teal-200 px-3 py-1.5 rounded-lg mb-3 font-semibold text-center no-print">
+        👉 मोबाइल में पूरी तालिका देखने हेतु स्क्रीन को बाएँ-दाएँ (Left-Right) खिसकाएँ।
+      </div>
+
+      <!-- रिस्पॉन्सिव टेबल कंटेनर -->
+      <div class="table-responsive-box overflow-x-auto border border-slate-300 rounded-xl mb-4 bg-white">
+        <table class="count-table" id="countTable">
+          <colgroup>
+            <col class="c-cls" style="width: 8.5%;">
+            <!-- SC -->
+            <col class="c-b" style="width: 6%;">
+            <col class="c-g" style="width: 6%;">
+            <col class="c-t" style="width: 7%;">
+            <!-- ST -->
+            <col class="c-b" style="width: 6%;">
+            <col class="c-g" style="width: 6%;">
+            <col class="c-t" style="width: 7%;">
+            <!-- OBC -->
+            <col class="c-b" style="width: 6%;">
+            <col class="c-g" style="width: 6%;">
+            <col class="c-t" style="width: 7%;">
+            <!-- GEN -->
+            <col class="c-b" style="width: 6%;">
+            <col class="c-g" style="width: 6%;">
+            <col class="c-t" style="width: 7%;">
+            <!-- TOTAL -->
+            <col class="c-tot-b" style="width: 4.5%;">
+            <col class="c-tot-g" style="width: 4.5%;">
+            <col class="c-tot-all" style="width: 6.5%;">
+          </colgroup>
+          <thead>
+            <tr class="no-print">
+              <th colspan="16" class="th-main" id="tblBanner">STUDENTS ENROLLMENT REGISTER</th>
+            </tr>
+            <tr>
+              <th rowspan="2" style="background:#0f172a; color:white;">CLASS</th>
+              <th colspan="3" class="th-cat" style="background:#1d4ed8;">SCHEDULED CASTE (SC)</th>
+              <th colspan="3" class="th-cat" style="background:#7c3aed;">SCHEDULED TRIBE (ST)</th>
+              <th colspan="3" class="th-cat" style="background:#0284c7;">OTHER BACKWARD CLASS (OBC)</th>
+              <th colspan="3" class="th-cat" style="background:#475569;">GENERAL (GEN)</th>
+              <th colspan="3" class="th-cat" style="background:#15803d;">GRAND TOTAL</th>
+            </tr>
+            <tr>
+              <th class="th-sub">BOYS</th><th class="th-sub">GIRLS</th><th class="th-sub" style="background:#1e40af;">TOTAL</th>
+              <th class="th-sub">BOYS</th><th class="th-sub">GIRLS</th><th class="th-sub" style="background:#6b21a8;">TOTAL</th>
+              <th class="th-sub">BOYS</th><th class="th-sub">GIRLS</th><th class="th-sub" style="background:#0369a1;">TOTAL</th>
+              <th class="th-sub">BOYS</th><th class="th-sub">GIRLS</th><th class="th-sub" style="background:#334155;">TOTAL</th>
+              <th class="th-sub" style="background:#166534;">BOYS</th><th class="th-sub" style="background:#166534;">GIRLS</th><th class="th-sub" style="background:#14532d;">TOTAL</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+          <tfoot>
+            <!-- प्राथमिक कुल (1 से 5) -->
+            <tr class="row-ps-tot" id="rowPsTot">
+              <td style="font-weight:bold;">PRIMARY TOTAL (1-5)</td>
+              <td id="tot_ps_sc_b">0</td><td id="tot_ps_sc_g">0</td><td id="tot_ps_sc_t" class="tot-cell">0</td>
+              <td id="tot_ps_st_b">0</td><td id="tot_ps_st_g">0</td><td id="tot_ps_st_t" class="tot-cell">0</td>
+              <td id="tot_ps_obc_b">0</td><td id="tot_ps_obc_g">0</td><td id="tot_ps_obc_t" class="tot-cell">0</td>
+              <td id="tot_ps_gen_b">0</td><td id="tot_ps_gen_g">0</td><td id="tot_ps_gen_t" class="tot-cell">0</td>
+              <td id="tot_ps_all_b">0</td><td id="tot_ps_all_g">0</td><td id="tot_ps_grand" class="tot-cell" style="font-size:13.5px;">0</td>
+            </tr>
+            <!-- उच्च प्राथमिक कुल (6 से 8) -->
+            <tr class="row-ups-tot" id="rowUpsTot">
+              <td style="font-weight:bold;">UPPER PRIMARY (6-8)</td>
+              <td id="tot_ups_sc_b">0</td><td id="tot_ups_sc_g">0</td><td id="tot_ups_sc_t" class="tot-cell">0</td>
+              <td id="tot_ups_st_b">0</td><td id="tot_ups_st_g">0</td><td id="tot_ups_st_t" class="tot-cell">0</td>
+              <td id="tot_ups_obc_b">0</td><td id="tot_ups_obc_g">0</td><td id="tot_ups_obc_t" class="tot-cell">0</td>
+              <td id="tot_ups_gen_b">0</td><td id="tot_ups_gen_g">0</td><td id="tot_ups_gen_t" class="tot-cell">0</td>
+              <td id="tot_ups_all_b">0</td><td id="tot_ups_all_g">0</td><td id="tot_ups_grand" class="tot-cell" style="font-size:13.5px;">0</td>
+            </tr>
+            <!-- संपूर्ण विद्यालय महायोग (1 से 8) -->
+            <tr class="row-grand-tot" id="rowGrandTot">
+              <td style="font-weight:bold;">GRAND TOTAL (1-8)</td>
+              <td id="tot_sc_b">0</td><td id="tot_sc_g">0</td><td id="tot_sc_t" class="tot-cell">0</td>
+              <td id="tot_st_b">0</td><td id="tot_st_g">0</td><td id="tot_st_t" class="tot-cell">0</td>
+              <td id="tot_obc_b">0</td><td id="tot_obc_g">0</td><td id="tot_obc_t" class="tot-cell">0</td>
+              <td id="tot_gen_b">0</td><td id="tot_gen_g">0</td><td id="tot_gen_t" class="tot-cell">0</td>
+              <td id="tot_all_b">0</td><td id="tot_all_g">0</td><td id="tot_all_grand" class="tot-cell" style="font-size:14.5px; color:#b91c1c;">0</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- हस्ताक्षर ब्लॉक (Pure English for Official Print) -->
+      <div class="print-sign-row">
+        <div class="print-sign-col">SIGNATURE IN-CHARGE</div>
+        <div class="print-sign-col">SIGNATURE HEADMASTER / PRINCIPAL</div>
+      </div>
+
+      <!-- वैकल्पिक सूक्ष्म प्रिंट वॉटरमार्क -->
+      <div id="printWatermark" class="print-watermark-row">
+        Generated via: deshimaster.in | परिषदीय शिक्षक डिजिटल सेवा पोर्टल
+      </div>
+
+    </div>
+
+    <!-- AdSense SEO Friendly Educational Guide (1200+ Words) -->
+    <div class="seo-guide bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm no-print">
+      <h3>परिषदीय एवं संविलियन विद्यालय छात्र नामांकन पंजिका (Student Enrollment Register): नियम, वर्गीकरण एवं UDISE+ डेटा प्रबंधन गाइड</h3>
+      <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के अधीन संचालित समस्त प्राथमिक, उच्च प्राथमिक एवं संविलियन (कम्पोजिट) विद्यालयों में छात्र नामांकन पंजिका (Student Enrollment Register) विद्यालयी प्रशासन का सर्वप्रमुख वैधानिक एवं सांख्यिकीय अभिलेख है। विद्यालय में अध्ययनरत प्रत्येक छात्र-छात्रा की कक्षा-वार, जाति-वार (सामाजिक संवर्ग) तथा लिंग-वार संख्या का सटीक संकलन न केवल विद्यालय स्तर पर व्यवस्था बनाए रखने के लिए अनिवार्य है, बल्कि यह केंद्र एवं राज्य सरकार की समस्त जनकल्याणकारी योजनाओं का मूल आधार होता है।</p>
+      <p>निशुल्क एवं अनिवार्य बाल शिक्षा का अधिकार अधिनियम (RTE Act 2009), मध्याह्न भोजन योजना (MDM), प्रत्यक्ष लाभ अंतरण (DBT), समग्र शिक्षा अभियान और भारत सरकार के यू-डायस प्लस (UDISE+) पोर्टल पर वास्तविक समय में डेटा फीडिंग हेतु प्रधानाध्यापकों एवं प्रभारियों को इस छात्र संकलन तालिका की निरंतर आवश्यकता होती है[cite: 5]। प्रस्तुत मार्गदर्शिका में छात्र नामांकन वर्गीकरण, संकलन के नियम, विधिक प्रावधानों तथा शिक्षक-छात्र अनुपात (PTR) से संबंधित समस्त तकनीकी पहलुओं का विस्तृत विश्लेषण प्रस्तुत किया गया है[cite: 5]।</p>
+
+      <h4>1. छात्र नामांकन पंजिका का विधिक एवं प्रशासनिक महत्व</h4>
+      <p>विद्यालय स्तर पर छात्र संकलन केवल साधारण गणना नहीं है; यह निम्नलिखित महत्वपूर्ण प्रशासनिक प्रक्रियाओं को सीधे निर्धारित करता है[cite: 5]:</p>
+      <ul>
+        <li><strong>डीबीटी (Direct Benefit Transfer) अनुदान आवंटन:</strong> उत्तर प्रदेश शासन द्वारा प्रति छात्र यूनिफॉर्म, स्वेटर, जूता-मोजा, स्कूल बैग एवं स्टेशनरी क्रय हेतु अभिभावकों के बैंक खातों में धनराशि अंतरित की जाती है। विद्यालय पंजिका में दर्ज वास्तविक छात्र संख्या ही प्रेरणा पोर्टल और डीबीटी मॉड्यूल के सत्यापन का आधार बनती है[cite: 5]।</li>
+        <li><strong>मध्याह्न भोजन (MDM) खाद्यान्न एवं परिवर्तन लागत:</strong> प्रतिदिन उपभोग होने वाले गेहूं, चावल और परिवर्तन लागत की मासिक मांग विद्यालय की कुल छात्र संख्या एवं औसत उपस्थिति के अनुपात में ही जनरेट की जाती है[cite: 5]।</li>
+        <li><strong>निःशुल्क पाठ्यपुस्तक एवं कार्यपुस्तिका वितरण:</strong> प्रत्येक शैक्षिक सत्र के आरंभ में बेसिक शिक्षा अधिकारी (BSA) कार्यालय द्वारा पाठ्यपुस्तकों की आपूर्ति विद्यालय पंजिका के जातिवार व कक्षावार नामांकन डेटा के आधार पर की जाती है[cite: 5]।</li>
+        <li><strong>कम्पोजिट स्कूल ग्रांट (Composite School Grant):</strong> सर्व शिक्षा अभियान के अंतर्गत विद्यालयों के अनुरक्षण एवं विकास हेतु मिलने वाली वार्षिक कम्पोजिट ग्रांट सीधे विद्यालय के कुल छात्र नामांकन स्लैब (जैसे 1 से 30, 31 से 100, 101 से 250 छात्र आदि) पर निर्भर करती है[cite: 5]।</li>
+      </ul>
+
+      <h4>2. सामाजिक संवर्ग (Category-wise) एवं लैंगिक (Gender-wise) वर्गीकरण के मानक</h4>
+      <p>शासन और यू-डायस प्लस (UDISE+) प्रणाली के अंतर्गत छात्रों का वर्गीकरण अत्यंत सूक्ष्म और पारदर्शी होना आवश्यक है[cite: 5]। पंजिका में 4 प्रमुख सामाजिक श्रेणियां और 2 लैंगिक श्रेणियां निर्धारित हैं[cite: 5]:</p>
+      <ul>
+        <li><strong>अनुसूचित जाति (Scheduled Caste - SC):</strong> संविधान के अनुच्छेद 341 के अंतर्गत अधिसूचित जातियों के बालक एवं बालिकाएं[cite: 5]। इन छात्रों हेतु छात्रवृत्ति, विशेष प्रोत्साहन एवं शैक्षिक किट वितरण के अलग-अलग कोटा निर्धारित होते हैं[cite: 5]।</li>
+        <li><strong>अनुसूचित जनजाति (Scheduled Tribe - ST):</strong> संविधान के अनुच्छेद 342 के तहत अधिसूचित जनजातीय समुदाय के छात्र[cite: 5]। उत्तर प्रदेश के विशिष्ट जनपदों (जैसे सोनभद्र, लखीमपुर खीरी आदि) में इनकी सांख्यिकी विशेष रूप से संकलित की जाती है[cite: 5]।</li>
+        <li><strong>अन्य पिछड़ा वर्ग (Other Backward Class - OBC):</strong> राज्य एवं केंद्रीय सूची में शामिल सामाजिक और शैक्षणिक रूप से पिछड़े वर्गों के बालक एवं बालिकाएं[cite: 5]।</li>
+        <li><strong>सामान्य वर्ग (General - GEN):</strong> वे समस्त छात्र-छात्राएं जो उपरोक्त आरक्षित श्रेणियों (SC, ST, OBC) में सम्मिलित नहीं हैं[cite: 5]। (इसमें आर्थिक रूप से कमजोर EWS वर्ग भी सम्मिलित होता है)[cite: 5]।</li>
+        <li><strong>लैंगिक वर्गीकरण (Boys & Girls):</strong> प्रत्येक कक्षा में बालकों एवं बालिकाओं का अलग-अलग संकलन किया जाता है ताकि जेंडर पैरिटी इंडेक्स (Gender Parity Index - GPI) की सटीक गणना की जा सके और बालिका शिक्षा प्रोत्साहन योजनाओं की समीक्षा हो सके[cite: 5]।</li>
+      </ul>
+
+      <h4>3. विद्यालयी स्तर के अनुसार विभाजन (Primary, Upper Primary & Composite)</h4>
+      <p>उत्तर प्रदेश में विद्यालयों के संविलियन के पश्चात संरचना में परिवर्तन हुआ है, जिसे हमारे टूल में 3 स्तरों में विभाजित किया गया है[cite: 5]:</p>
+      <table class="seo-table">
+        <thead>
+          <tr>
+            <th>विद्यालय का प्रकार</th>
+            <th>कक्षा समूह</th>
+            <th>प्रमुख विशेषताएं व योग नियम</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>प्राथमिक विद्यालय (Primary School)</strong></td>
+            <td>कक्षा 1 से 5</td>
+            <td>इसमें कक्षा 1 से 5 तक के प्रत्येक संवर्ग का योग करके 'PRIMARY TOTAL (1-5)' निकाला जाता है[cite: 5]।</td>
+          </tr>
+          <tr>
+            <td><strong>उच्च प्राथमिक विद्यालय (Upper Primary School)</strong></td>
+            <td>कक्षा 6 से 8</td>
+            <td>इसमें कक्षा 6, 7 और 8 के संवर्गों का योग करके 'UPPER PRIMARY TOTAL (6-8)' संकलित होता है[cite: 5]।</td>
+          </tr>
+          <tr>
+            <td><strong>संविलियन विद्यालय (Composite School)</strong></td>
+            <td>कक्षा 1 से 8</td>
+            <td>प्राथमिक स्तर (1-5) और उच्च प्राथमिक स्तर (6-8) के पृथक उप-योग के साथ संपूर्ण विद्यालय का 'GRAND TOTAL (1-8)' तैयार होता है[cite: 5]।</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>4. RTE 2009 के तहत छात्र-शिक्षक अनुपात (Pupil-Teacher Ratio - PTR)</h4>
+      <p>शिक्षा का अधिकार अधिनियम, 2009 की धारा 25 और अनुसूची के अनुसार छात्र नामांकन के आधार पर ही विद्यालयों में शिक्षकों के पद स्वीकृत किए जाते हैं[cite: 5]। नामांकन पंजिका के आधार पर शिक्षक मानक इस प्रकार निर्धारित हैं[cite: 5]:</p>
+      <ul>
+        <li><strong>प्राथमिक स्तर (कक्षा 1 से 5):</strong>
+          <ul>
+            <li>60 छात्रों तक: 2 शिक्षक[cite: 5]</li>
+            <li>61 से 90 छात्रों तक: 3 शिक्षक[cite: 5]</li>
+            <li>91 से 120 छात्रों तक: 4 शिक्षक[cite: 5]</li>
+            <li>121 से 200 छात्रों तक: 5 शिक्षक[cite: 5]</li>
+            <li>150 से अधिक छात्र होने पर: 5 सहायक अध्यापक + 1 पूर्णकालिक प्रधानाध्यापक[cite: 5]</li>
+            <li>200 से अधिक छात्र होने पर छात्र-शिक्षक अनुपात 40:1 से अधिक नहीं होना चाहिए[cite: 5]।</li>
+          </ul>
+        </li>
+        <li><strong>उच्च प्राथमिक स्तर (कक्षा 6 से 8):</strong>
+          <ul>
+            <li>न्यूनतम प्रति कक्षा 1 शिक्षक (कम से कम 3 शिक्षक: विज्ञान/गणित, सामाजिक अध्ययन, और भाषा हेतु)[cite: 5]।</li>
+            <li>प्रत्येक 35 छात्रों पर न्यूनतम 1 शिक्षक (अनुपात 35:1)[cite: 5]।</li>
+            <li>100 से अधिक छात्र नामांकित होने पर: 1 पूर्णकालिक प्रधानाध्यापक तथा अंशकालिक अनुदेशक[cite: 5]।</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>5. यू-डायस प्लस (UDISE+) एवं प्रेरणा पोर्टल के साथ डेटा मिलान</h4>
+      <p>विद्यालय स्तर पर भौतिक छात्र पंजिका (Physical SR Register) और ऑनलाइन पोर्टलों के मध्य शत-प्रतिशत डेटा समानता होना अनिवार्य है[cite: 5]:</p>
+      <ul>
+        <li><strong>छात्र पेन (Student PEN - Permanent Education Number):</strong> यू-डायस प्लस पोर्टल द्वारा प्रत्येक नामांकित छात्र को एक विशिष्ट राष्ट्रीय पहचान संख्या (PEN) जारी की जाती है[cite: 5]। विद्यालयी पंजिका में प्रत्येक छात्र का PEN अंकित होना चाहिए[cite: 5]।</li>
+        <li><strong>ड्राप-आउट एवं आउट-ऑफ-स्कूल चिन्हांकन:</strong> यदि कोई छात्र लगातार अनुपस्थित रहता है या स्थानांतरण प्रमाण पत्र (TC) लेता है, तो उसे पंजिका से नियमानुसार पृथक कर शारदा पोर्टल पर अद्यतन किया जाता है[cite: 5]।</li>
+        <li><strong>स्थानीय स्टोरेज (LocalStorage) सुरक्षा:</strong> हमारे ऑनलाइन टूल में दर्ज किया गया डेटा आपके ब्राउज़र की मेमोरी में सुरक्षित रहता है, जिससे इंटरनेट न होने पर भी सत्रवार छात्र संख्या सुरक्षित रहती है[cite: 5]।</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- Clean Evergreen Footer with 100% Correct Links -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-3 font-medium text-slate-600">
+        <a href="index.html" class="hover:text-emerald-600 transition">होम</a>
+        <a href="about.html" class="hover:text-emerald-600 transition">हमारे बारे में</a>
+        <a href="privacy-policy.html" class="hover:text-emerald-600 transition">गोपनीयता नीति (Privacy Policy)</a>
+        <a href="terms.html" class="hover:text-emerald-600 transition">नियम व शर्तें (Terms of Use)</a>
+        <a href="disclaimer.html" class="hover:text-emerald-600 transition">डिस्क्लेमर (Disclaimer)</a>
+      </div>
+      <p>© deshimaster.in (देशी मास्टर)। सर्वाधिकार सुरक्षित।</p>
+      <p class="mt-1 text-slate-400">परिषदीय प्राथमिक, उच्च प्राथमिक एवं कंपोजिट विद्यालयों के शिक्षकों को समर्पित स्वतंत्र डिजिटल पहल।</p>
+    </div>
+  </footer>
+
+<script>
+var currentLevel = 'comp';
+var cats = ['sc', 'st', 'obc', 'gen'];
+
+function populateSessions() {
+  var sel = document.getElementById('selSession');
+  sel.innerHTML = '';
+  for (var y = 2024; y <= 2059; y++) {
+    var ny = String(y + 1).slice(-2);
+    var opt = document.createElement('option');
+    opt.value = y + '-' + ny;
+    opt.innerText = 'SESSION ' + y + '-' + ny;
+    if (sessMatchDefault(y)) opt.selected = true;
+    sel.appendChild(opt);
+  }
+}
+
+function sessMatchDefault(y) {
+  var currentYear = new Date().getFullYear();
+  return y === currentYear;
+}
+
+function filterCapital(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
+function filterNumbers(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
+
+function cleanInt(el) {
+  var oldPos = el.selectionStart;
+  var oldLen = el.value.length;
+  el.value = el.value.replace(/[^0-9]/g, '');
+  var newPos = Math.max(0, oldPos + (el.value.length - oldLen));
+  el.setSelectionRange(newPos, newPos);
+}
+
+function buildTable() {
+  var tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+
+  for (var c = 1; c <= 8; c++) {
+    var tr = document.createElement('tr');
+    tr.id = 'row_cls_' + c;
+
+    var html = '<td style="font-weight:bold; background:#f8fafc;">CLASS ' + c + '</td>';
+    for (var i = 0; i < cats.length; i++) {
+      var cat = cats[i];
+      html += 
+        '<td class="col-' + cat + '"><input type="tel" inputmode="numeric" class="cnt-in" id="' + cat + '_b_' + c + '" oninput="cleanInt(this); recalcAll(); saveEnrollmentData();"></td>' +
+        '<td class="col-' + cat + '"><input type="tel" inputmode="numeric" class="cnt-in" id="' + cat + '_g_' + c + '" oninput="cleanInt(this); recalcAll(); saveEnrollmentData();"></td>' +
+        '<td class="col-' + cat + ' tot-cell" id="' + cat + '_t_' + c + '">0</td>';
+    }
+
+    html += 
+      '<td class="col-tot" id="cls_b_' + c + '">0</td>' +
+      '<td class="col-tot" id="cls_g_' + c + '">0</td>' +
+      '<td class="col-tot tot-cell" id="cls_tot_' + c + '">0</td>';
+
+    tr.innerHTML = html;
+    tbody.appendChild(tr);
+  }
+}
+
+function setLevel(lvl, skipSave) {
+  currentLevel = lvl;
+  
+  var bComp = document.getElementById('btnComp');
+  var bPs = document.getElementById('btnPs');
+  var bUps = document.getElementById('btnUps');
+
+  var activeClass = "px-3.5 py-2 border-2 border-slate-800 bg-slate-900 text-white font-bold text-xs rounded-lg transition";
+  var inactiveClass = "px-3.5 py-2 border-2 border-slate-800 bg-white text-slate-800 font-bold text-xs rounded-lg transition hover:bg-slate-100";
+
+  bComp.className = lvl === 'comp' ? activeClass : inactiveClass;
+  bPs.className = lvl === 'ps' ? activeClass : inactiveClass;
+  bUps.className = lvl === 'ups' ? activeClass : inactiveClass;
+
+  for (var c = 1; c <= 8; c++) {
+    var r = document.getElementById('row_cls_' + c);
+    if (!r) continue;
+    if (lvl === 'ps') {
+      r.style.display = (c <= 5) ? '' : 'none';
+    } else if (lvl === 'ups') {
+      r.style.display = (c >= 6) ? '' : 'none';
+    } else {
+      r.style.display = '';
+    }
+  }
+
+  document.getElementById('rowPsTot').style.display = (lvl === 'ups') ? 'none' : '';
+  document.getElementById('rowUpsTot').style.display = (lvl === 'ps') ? 'none' : '';
+  document.getElementById('rowGrandTot').style.display = (lvl === 'comp') ? '' : 'none';
+
+  updateHeader();
+  if (!skipSave) saveSchoolDetails();
+}
+
+function getVal(id) {
+  var el = document.getElementById(id);
+  return el ? (parseInt(el.value, 10) || 0) : 0;
+}
+
+function recalcAll() {
+  var catTotals = {
+    sc: { b: 0, g: 0, ps_b: 0, ps_g: 0, ups_b: 0, ups_g: 0 },
+    st: { b: 0, g: 0, ps_b: 0, ps_g: 0, ups_b: 0, ups_g: 0 },
+    obc: { b: 0, g: 0, ps_b: 0, ps_g: 0, ups_b: 0, ups_g: 0 },
+    gen: { b: 0, g: 0, ps_b: 0, ps_g: 0, ups_b: 0, ups_g: 0 }
+  };
+
+  var psBoy = 0, psGirl = 0;
+  var upsBoy = 0, upsGirl = 0;
+
+  for (var c = 1; c <= 8; c++) {
+    var rowB = 0, rowG = 0;
+
+    for (var i = 0; i < cats.length; i++) {
+      var cat = cats[i];
+      var b = getVal(cat + '_b_' + c);
+      var g = getVal(cat + '_g_' + c);
+      var t = b + g;
+
+      document.getElementById(cat + '_t_' + c).innerText = t;
+
+      rowB += b;
+      rowG += g;
+
+      catTotals[cat].b += b;
+      catTotals[cat].g += g;
+
+      if (c <= 5) {
+        catTotals[cat].ps_b += b;
+        catTotals[cat].ps_g += g;
+      } else {
+        catTotals[cat].ups_b += b;
+        catTotals[cat].ups_g += g;
+      }
+    }
+
+    document.getElementById('cls_b_' + c).innerText = rowB;
+    document.getElementById('cls_g_' + c).innerText = rowG;
+    document.getElementById('cls_tot_' + c).innerText = (rowB + rowG);
+
+    if (c <= 5) { psBoy += rowB; psGirl += rowG; }
+    else { upsBoy += rowB; upsGirl += rowG; }
+  }
+
+  for (var j = 0; j < cats.length; j++) {
+    var k = cats[j];
+    document.getElementById('tot_ps_' + k + '_b').innerText = catTotals[k].ps_b;
+    document.getElementById('tot_ps_' + k + '_g').innerText = catTotals[k].ps_g;
+    document.getElementById('tot_ps_' + k + '_t').innerText = (catTotals[k].ps_b + catTotals[k].ps_g);
+
+    document.getElementById('tot_ups_' + k + '_b').innerText = catTotals[k].ups_b;
+    document.getElementById('tot_ups_' + k + '_g').innerText = catTotals[k].ups_g;
+    document.getElementById('tot_ups_' + k + '_t').innerText = (catTotals[k].ups_b + catTotals[k].ups_g);
+
+    document.getElementById('tot_' + k + '_b').innerText = catTotals[k].b;
+    document.getElementById('tot_' + k + '_g').innerText = catTotals[k].g;
+    document.getElementById('tot_' + k + '_t').innerText = (catTotals[k].b + catTotals[k].g);
+  }
+
+  document.getElementById('tot_ps_all_b').innerText = psBoy;
+  document.getElementById('tot_ps_all_g').innerText = psGirl;
+  document.getElementById('tot_ps_grand').innerText = (psBoy + psGirl);
+
+  document.getElementById('tot_ups_all_b').innerText = upsBoy;
+  document.getElementById('tot_ups_all_g').innerText = upsGirl;
+  document.getElementById('tot_ups_grand').innerText = (psBoy + psGirl);
+
+  document.getElementById('tot_all_b').innerText = (psBoy + upsBoy);
+  document.getElementById('tot_all_g').innerText = (psGirl + upsGirl);
+  document.getElementById('tot_all_grand').innerText = (psBoy + psGirl + upsBoy + upsGirl);
+}
+
+function updateHeader() {
+  var ses = document.getElementById('selSession').value;
+  var sch = document.getElementById('inSchool').value.trim();
+  var blk = document.getElementById('inBlock').value.trim();
+  var dst = document.getElementById('inDistrict').value.trim();
+  var udi = document.getElementById('inUdise').value.trim();
+
+  var banner = "STUDENTS ENROLLMENT REGISTER - SESSION " + ses;
+  var sub = [];
+  if (sch) sub.push("SCHOOL: " + sch);
+  if (blk) sub.push("BLOCK: " + blk);
+  if (dst) sub.push("DISTRICT: " + dst);
+  if (udi) sub.push("(UDISE: " + udi + ")");
+
+  document.getElementById('tblBanner').innerText = sub.length > 0 ? banner + " (" + sub.join(' | ') + ")" : banner;
+  document.getElementById('prTitle').innerText = "STUDENTS ENROLLMENT REGISTER - " + ses;
+  document.getElementById('prSub').innerText = sub.join(' | ');
+}
+
+function saveSchoolDetails() {
+  var schData = {
+    school: document.getElementById('inSchool').value,
+    block: document.getElementById('inBlock').value,
+    district: document.getElementById('inDistrict').value,
+    udise: document.getElementById('inUdise').value,
+    level: currentLevel,
+    session: document.getElementById('selSession').value
+  };
+  localStorage.setItem('enr_sch_info', JSON.stringify(schData));
+}
+
+function loadSchoolDetails() {
+  var saved = localStorage.getItem('enr_sch_info');
+  if (saved) {
+    try {
+      var d = JSON.parse(saved);
+      if (d.school) document.getElementById('inSchool').value = d.school;
+      if (d.block) document.getElementById('inBlock').value = d.block;
+      if (d.district) document.getElementById('inDistrict').value = d.district;
+      if (d.udise) document.getElementById('inUdise').value = d.udise;
+      if (d.session) document.getElementById('selSession').value = d.session;
+      if (d.level) setLevel(d.level, true);
+    } catch(e) {}
+  }
+}
+
+function getSessionKey() {
+  var ses = document.getElementById('selSession').value;
+  return 'enr_counts_' + ses.replace('-', '_');
+}
+
+function saveEnrollmentData() {
+  var data = {};
+  for (var c = 1; c <= 8; c++) {
+    for (var i = 0; i < cats.length; i++) {
+      var cat = cats[i];
+      var bVal = document.getElementById(cat + '_b_' + c).value;
+      var gVal = document.getElementById(cat + '_g_' + c).value;
+      if (bVal) data[cat + '_b_' + c] = bVal;
+      if (gVal) data[cat + '_g_' + c] = gVal;
+    }
+  }
+  localStorage.setItem(getSessionKey(), JSON.stringify(data));
+}
+
+function loadEnrollmentData() {
+  for (var c = 1; c <= 8; c++) {
+    for (var i = 0; i < cats.length; i++) {
+      var cat = cats[i];
+      document.getElementById(cat + '_b_' + c).value = '';
+      document.getElementById(cat + '_g_' + c).value = '';
+    }
+  }
+
+  var saved = localStorage.getItem(getSessionKey());
+  if (saved) {
+    try {
+      var data = JSON.parse(saved);
+      for (var key in data) {
+        var el = document.getElementById(key);
+        if (el) el.value = data[key];
+      }
+    } catch(e) {}
+  }
+  recalcAll();
+}
+
+function onSessionChange() {
+  updateHeader();
+  saveSchoolDetails();
+  loadEnrollmentData();
+}
+
+function resetCurrentSessionData() {
+  var ses = document.getElementById('selSession').value;
+  if (confirm("क्या आप सत्र " + ses + " का नामांकन डेटा साफ़ करना चाहते हैं?")) {
+    localStorage.removeItem(getSessionKey());
+    loadEnrollmentData();
+  }
+}
+
+function toggleWatermark() {
+  var chk = document.getElementById('chkWatermark');
+  var watermark = document.getElementById('printWatermark');
+  if (watermark) {
+    watermark.style.display = chk.checked ? '' : 'none';
+  }
+}
+
+function forceLandscapePrint() {
+  updateHeader();
+  toggleWatermark();
+  
+  var style = document.createElement('style');
+  style.id = 'force-landscape-style';
+  style.innerHTML = '@page { size: landscape !important; margin: 6mm 8mm !important; }';
+  document.head.appendChild(style);
+
+  window.print();
+
+  setTimeout(function() {
+    var s = document.getElementById('force-landscape-style');
+    if (s) s.remove();
+  }, 1000);
+}
+
+// Initialization
+populateSessions();
+buildTable();
+loadSchoolDetails();
+loadEnrollmentData();
+updateHeader();
+</script>
+</body>
+</html>
