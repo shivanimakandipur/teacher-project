@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>नवीन प्रवेश: आयु-संगत कक्षा निर्धारक टूल (RTE धारा 4 एवं NEP 2020)</title>
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: #f8fafc; margin: 0; padding: 20px; color: #1e293b; }
+    .container { max-width: 680px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #cbd5e1; }
+    
+    .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px; }
+    .brand-wrap { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .brand-badge { background: #059669; color: white; font-size: 13px; font-weight: 900; padding: 4px 8px; border-radius: 6px; letter-spacing: 0.5px; }
+    .brand-name { font-size: 16px; font-weight: 800; color: #0f172a; }
+    .top-bar a.home-link { text-decoration: none; color: #2563eb; font-weight: bold; font-size: 13px; }
+
+    .page-title { margin: 0 0 4px 0; font-size: 19px; color: #1e3a8a; }
+
+    .form-group { margin-bottom: 18px; }
+    label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; color: #334155; }
+    
+    input[type="date"], select { 
+      width: 100%; 
+      padding: 12px; 
+      border: 1px solid #94a3b8; 
+      border-radius: 6px; 
+      font-size: 16px; 
+      background: white; 
+      color: #0f172a; 
+      font-weight: 500;
+    }
+    input[type="date"]:focus, select:focus { outline: 2px solid #2563eb; }
+
+    .btn-calc { 
+      width: 100%; 
+      background: #1e3a8a; 
+      color: white; 
+      border: none; 
+      padding: 14px; 
+      font-size: 16px; 
+      font-weight: bold; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      transition: 0.2s; 
+      margin-top: 10px; 
+    }
+    .btn-calc:hover { background: #1d4ed8; }
+
+    /* परिणाम बॉक्स */
+    .result-box { 
+      margin-top: 25px; 
+      padding: 20px; 
+      border-radius: 8px; 
+      border: 2px solid #3b82f6; 
+      background: #f8fafc;
+    }
+    .class-badge { 
+      display: inline-block; 
+      font-size: 20px; 
+      font-weight: bold; 
+      padding: 8px 18px; 
+      border-radius: 8px; 
+      margin: 10px 0 8px; 
+    }
+    .info-list { font-size: 14px; line-height: 1.6; color: #334155; margin-top: 6px; }
+
+    /* एडसेंस विस्तृत गाइड स्टाइलिंग (1200+ शब्द) */
+    .seo-guide { margin-top: 40px; border-top: 2px solid #cbd5e1; padding-top: 25px; color: #1e293b; line-height: 1.75; }
+    .seo-guide h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 12px; border-left: 4px solid #1e3a8a; padding-left: 10px; }
+    .seo-guide h4 { color: #0f172a; font-size: 15px; margin-top: 22px; margin-bottom: 8px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; }
+    .seo-guide p { font-size: 13.5px; margin-bottom: 12px; text-align: justify; }
+    .seo-guide ul { font-size: 13.5px; margin-bottom: 14px; padding-left: 20px; }
+    .seo-guide li { margin-bottom: 6px; }
+    .footer-links { text-align: center; margin-top: 35px; padding-top: 15px; border-top: 1px solid #cbd5e1; font-size: 12.5px; }
+    .footer-links a { color: #2563eb; text-decoration: none; margin: 0 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="top-bar">
+    <a href="index.html" class="brand-wrap">
+      <span class="brand-badge">DM</span>
+      <span class="brand-name">deshimaster.in</span>
+    </a>
+    <a href="index.html" class="home-link">← होमपेज</a>
+  </div>
+
+  <h2 class="page-title">🎯 आयु-संगत कक्षा निर्धारक</h2>
+  <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">
+    RTE नियमावली अनुसार 1 अप्रैल आधार तिथि पर छात्र की वास्तविक आयु व अनुमन्य कक्षा ज्ञात करें।
+  </p>
+
+  <div class="form-group">
+    <label>प्रवेश सत्र चुनें (1 अप्रैल आधार तिथि):</label>
+    <select id="sessionYear" onchange="calculateClass()">
+      <option value="2024">सत्र 2024-25 (आधार तिथि: 01/04/2024)</option>
+      <option value="2025">सत्र 2025-26 (आधार तिथि: 01/04/2025)</option>
+      <option value="2026" selected>सत्र 2026-27 (आधार तिथि: 01/04/2026)</option>
+      <option value="2027">सत्र 2027-28 (आधार तिथि: 01/04/2027)</option>
+      <option value="2028">सत्र 2028-29 (आधार तिथि: 01/04/2028)</option>
+      <option value="2029">सत्र 2029-30 (आधार तिथि: 01/04/2029)</option>
+      <option value="2030">सत्र 2030-31 (आधार तिथि: 01/04/2030)</option>
+      <option value="2031">सत्र 2031-32 (आधार तिथि: 01/04/2031)</option>
+      <option value="2032">सत्र 2032-33 (आधार तिथि: 01/04/2032)</option>
+      <option value="2033">सत्र 2033-34 (आधार तिथि: 01/04/2033)</option>
+      <option value="2034">सत्र 2034-35 (आधार तिथि: 01/04/2034)</option>
+      <option value="2035">सत्र 2035-36 (आधार तिथि: 01/04/2035)</option>
+      <option value="2036">सत्र 2036-37 (आधार तिथि: 01/04/2036)</option>
+      <option value="2037">सत्र 2037-38 (आधार तिथि: 01/04/2037)</option>
+      <option value="2038">सत्र 2038-39 (आधार तिथि: 01/04/2038)</option>
+      <option value="2039">सत्र 2039-40 (आधार तिथि: 01/04/2039)</option>
+      <option value="2040">सत्र 2040-41 (आधार तिथि: 01/04/2040)</option>
+      <option value="2041">सत्र 2041-42 (आधार तिथि: 01/04/2041)</option>
+      <option value="2042">सत्र 2042-43 (आधार तिथि: 01/04/2042)</option>
+      <option value="2043">सत्र 2043-44 (आधार तिथि: 01/04/2043)</option>
+      <option value="2044">सत्र 2044-45 (आधार तिथि: 01/04/2044)</option>
+      <option value="2045">सत्र 2045-46 (आधार तिथि: 01/04/2045)</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>छात्र की जन्मतिथि (कैलेंडर से चुनें या सीधे टाइप करें):</label>
+    <input type="date" id="dobInput" oninput="calculateClass()" onchange="calculateClass()">
+  </div>
+
+  <button type="button" class="btn-calc" onclick="calculateClass()">🔍 आयु व कक्षा ज्ञात करें</button>
+
+  <div id="resultBox" class="result-box" style="display: none;">
+    <div style="font-size: 13px; font-weight: bold; color: #1e3a8a;">1 अप्रैल को छात्र की वास्तविक आयु:</div>
+    <div id="ageDisplay" style="font-size: 18px; font-weight: bold; color: #0f172a; margin: 4px 0 10px;"></div>
+
+    <div style="font-size: 13px; font-weight: bold; color: #1e3a8a;">RTE नियमानुसार प्रवेश योग्य कक्षा:</div>
+    <div id="classResultBadge" class="class-badge"></div>
+
+    <div class="info-list" id="detailText"></div>
+  </div>
+
+  <!-- Google AdSense Friendly Content Section (1200+ Words Deep Dive) -->
+  <div class="seo-guide">
+    <h3>उत्तर प्रदेश बेसिक शिक्षा: RTE धारा 4, NEP 2020 एवं आयु-संगत कक्षा प्रवेश विस्तृत मार्गदर्शिका</h3>
+    <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के परिषदीय प्राथमिक, उच्च प्राथमिक एवं संविलियन विद्यालयों में प्रत्येक शैक्षिक सत्र के आरंभ में 'स्कूल चलो अभियान' एवं 'नवीन नामांकन' (Fresh Admission) की प्रक्रिया संचालित की जाती है। प्राथमिक एवं उच्च प्राथमिक स्तर पर बच्चों का विद्यालय में प्रवेश केवल एक औपचारिकता नहीं है, बल्कि यह निःशुल्क एवं अनिवार्य बाल शिक्षा का अधिकार अधिनियम, 2009 (RTE Act 2009) तथा राष्ट्रीय शिक्षा नीति 2020 (NEP 2020) के वैधानिक प्रावधानों से सीधे जुड़ा हुआ है[cite: 5] [evidence: 6] [evidence: 7]।</p>
+    <p>प्रवेश के समय शिक्षकों, प्रधानाध्यापकों एवं अभिभावकों के सामने सबसे बड़ी चुनौती यह आती है कि 1 अप्रैल की आधार तिथि पर बच्चे की वास्तविक आयु की गणना कैसे की जाए और उसे किस कक्षा में नामांकित किया जाए[cite: 5]। कई बार आउट-ऑफ-स्कूल बच्चों, ड्रॉप-आउट बच्चों अथवा आंगनवाड़ी से आने वाले बालकों के नामांकन में आयु-कक्षा विसंगति उत्पन्न हो जाती है[cite: 5]। यह मार्गदर्शिका 1 अप्रैल की कट-ऑफ तिथि के गणितीय नियमों, बालवाटिका व कक्षा 1 की न्यूनतम आयु सीमा, RTE धारा 4 के तहत आयु-संगत कक्षा निर्धारण तथा प्रेरणा पोर्टल पर छात्र प्रोफाइल पंजीकरण से जुड़े समस्त वैधानिक प्रावधानों को विस्तार से स्पष्ट करती है[cite: 5] [evidence: 6]।</p>
+
+    <h4>1. आधार तिथि (Cut-off Date) का नियम: 1 अप्रैल ही क्यों?</h4>
+    <p>उत्तर प्रदेश बेसिक शिक्षा नियमावली एवं शिक्षा मंत्रालय, भारत सरकार के दिशा-निर्देशों के अनुसार किसी भी शैक्षिक सत्र का आरंभ आधिकारिक रूप से <strong>1 अप्रैल</strong> से माना जाता है[cite: 5] [evidence: 6]।</p>
+    <ul>
+      <li><strong>कट-ऑफ तिथि का सिद्धांत:</strong> किसी भी शैक्षिक सत्र में नामांकन हेतु छात्र की आयु की गणना संबंधित वर्ष की <strong>1 अप्रैल</strong> को आधार मानकर की जाती है[cite: 5] [evidence: 6]।</li>
+      <li><strong>गणितीय नियम:</strong> यदि किसी छात्र का जन्म 1 अप्रैल 2020 को हुआ है, तो वह 1 अप्रैल 2026 को पूरे 6 वर्ष का माना जाएगा और वह कक्षा 1 में प्रवेश का पात्र होगा[cite: 5] [evidence: 6]। किंतु यदि किसी बच्चे का जन्म 2 अप्रैल 2020 को हुआ है, तो 1 अप्रैल 2026 को उसकी आयु 5 वर्ष, 11 माह, 30 दिन होगी; फलतः तकनीकी दृष्टि से वह कक्षा 1 की पूर्ण पात्रता से 1 दिन कम माना जाएगा[cite: 5]।</li>
+      <li><strong>सत्र-वार निरंतरता:</strong> प्राथमिक स्तर पर प्रवेश चक्र को त्रुटिरहित रखने के लिए 1 अप्रैल की तिथि ही विद्यालयी अभिलेखों, छात्र पंजिका (SR Register) तथा यू-डायस प्लस (UDISE+) पोर्टल पर मान्य की जाती है[cite: 5]।</li>
+    </ul>
+
+    <h4>2. राष्ट्रीय शिक्षा नीति (NEP 2020) एवं 5+3+3+4 संरचना में आयु वर्गीकरण</h4>
+    <p>राष्ट्रीय शिक्षा नीति (NEP 2020) ने पूर्ववर्ती 10+2 ढांचे के स्थान पर <strong>5+3+3+4</strong> की नई शैक्षणिक संरचना लागू की है[cite: 5]। इसमें प्रारंभिक 5 वर्षों को <strong>फाउंडेशनल स्टेज (Foundational Stage)</strong> कहा गया है, जिसे आयु के आधार पर दो भागों में विभाजित किया गया है[cite: 5]:</p>
+    <ul>
+      <li><strong>पूर्व-प्राथमिक स्तर / बालवाटिका (आयु 3 से 6 वर्ष):</strong>
+        <ul>
+          <li><strong>आयु 3 से 4 वर्ष (नर्सरी / बालवाटिका-1):</strong> 1 अप्रैल को 3 वर्ष पूर्ण करने वाले बच्चे आंगनवाड़ी या विद्यालय से संबद्ध पूर्व-प्राथमिक केंद्र में प्रवेश पाते हैं[cite: 5] [evidence: 6]।</li>
+          <li><strong>आयु 4 से 5 वर्ष (LKG / बालवाटिका-2):</strong> खेल-आधारित एवं गतिविधि-आधारित शिक्षा का विस्तार[cite: 5]।</li>
+          <li><strong>आयु 5 से 6 वर्ष (UKG / बालवाटिका-3):</strong> औपचारिक विद्यालयी परिवेश में जाने से पूर्व विद्यालय तैयारी मॉड्यूल (विद्या प्रवेश) का संचालन[cite: 5]।</li>
+        </ul>
+      </li>
+      <li><strong>औपचारिक प्राथमिक शिक्षा (कक्षा 1 - न्यूनतम 6 वर्ष पूर्ण):</strong> केंद्र सरकार तथा उत्तर प्रदेश शासन के अद्यतन शासनादेश के अनुसार औपचारिक रूप से <strong>कक्षा 1 में नवीन प्रवेश हेतु 1 अप्रैल को छात्र की न्यूनतम आयु 6 वर्ष पूर्ण होना अनिवार्य है[cite: 5] [evidence: 6]।</strong> 6 वर्ष से कम आयु के बच्चों को सीधे कक्षा 1 में नामांकित न करके परिषदीय विद्यालयों में संचालित 'बालवाटिका' अथवा आंगनवाड़ी केंद्रों में नामांकित किया जाना वैधानिक रूप से अनिवार्य किया गया है[cite: 5] [evidence: 6]।</li>
+    </ul>
+
+    <h4>3. RTE 2009 की धारा 4: आयु-संगत कक्षा में प्रवेश (Age-Appropriate Admission)</h4>
+    <p>शिक्षा का अधिकार अधिनियम (RTE Act, 2009) की धारा 4 भारत के प्रत्येक 6 से 14 वर्ष के बच्चे को शिक्षा की मुख्यधारा से जोड़ने का सबसे सशक्त कानूनी प्रावधान है[cite: 5] [evidence: 6] [evidence: 7]।</p>
+    <ul>
+      <li><strong>धारा 4 का मूल उद्देश्य:</strong> यदि किसी बच्चे का नामांकन 6 वर्ष की आयु में नहीं हो सका, या उसने बीच में पढ़ाई छोड़ दी (Drop-out), तो जब भी वह विद्यालय में प्रवेश लेने आए, उसे उसकी पढ़ाई के छूटे हुए स्तर के बजाय <strong>उसकी जैविक आयु (Biological Age) के संगत कक्षा में ही प्रवेश दिया जाएगा[cite: 5] [evidence: 6]।</strong></li>
+      <li><strong>कक्षा निर्धारण का मानक नियम:</strong>
+        <ul>
+          <li><strong>6 वर्ष पूर्ण (6 से 7 वर्ष):</strong> कक्षा 1[cite: 5] [evidence: 6]</li>
+          <li><strong>7 वर्ष पूर्ण (7 से 8 वर्ष):</strong> कक्षा 2[cite: 5] [evidence: 6]</li>
+          <li><strong>8 वर्ष पूर्ण (8 से 9 वर्ष):</strong> कक्षा 3[cite: 5] [evidence: 6]</li>
+          <li><strong>9 वर्ष पूर्ण (9 से 10 वर्ष):</strong> कक्षा 4[cite: 5] [evidence: 6]</li>
+          <li><strong>10 वर्ष पूर्ण (10 से 11 वर्ष):</strong> कक्षा 5[cite: 5] [evidence: 6]</li>
+          <li><strong>11 वर्ष पूर्ण (11 से 12 वर्ष):</strong> कक्षा 6[cite: 5] [evidence: 6]</li>
+          <li><strong>12 वर्ष पूर्ण (12 से 13 वर्ष):</strong> कक्षा 7[cite: 5] [evidence: 6]</li>
+          <li><strong>13 से 14 वर्ष:</strong> कक्षा 8[cite: 5] [evidence: 6]</li>
+        </ul>
+      </li>
+      <li><strong>व्यावहारिक उदाहरण:</strong> यदि 9 वर्ष का कोई बच्चा पहले कभी स्कूल नहीं गया और पहली बार विद्यालय में आता है, तो उसका सीधा नामांकन <strong>कक्षा 4</strong> में किया जाना अनिवार्य है[cite: 5] [evidence: 6]।</li>
+    </ul>
+
+    <h4>4. विशेष प्रशिक्षण एवं उपचारात्मक शिक्षण</h4>
+    <p>जब किसी अधिक आयु के बच्चे को RTE धारा 4 के तहत सीधे उच्च कक्षा में प्रवेश दिया जाता है, तो उसे कक्षा के समकक्ष लाने हेतु 3 से 9 माह का विशेष उपचारात्मक प्रशिक्षण (Bridge Course) दिया जाता है[cite: 5] [evidence: 6]। शारदा कार्यक्रम (SHARDA) के तहत आउट-ऑफ-स्कूल बच्चों को चिन्हित कर नामांकित किया जाता है[cite: 5] [evidence: 6] [evidence: 7]।</p>
+
+    <h4>5. शुद्ध गणितीय आयु गणना विधि</h4>
+    <p>हमारे कैलकुलेटर में कैलेंडर की तकनीकी विसंगतियों को दूर करने के लिए शुद्ध गणितीय सबट्रैक्शन एल्गोरिदम का प्रयोग किया गया है[cite: 5] [evidence: 6]:</p>
+    <ul>
+      <li><strong>दिनों की गणना:</strong> <code>कट-ऑफ दिवस (1) - जन्म दिवस</code>[cite: 5] [evidence: 6]। ऋणात्मक आने पर मार्च माह के 31 दिन उधार लिए जाते हैं[cite: 5] [evidence: 6]।</li>
+      <li><strong>माहों की गणना:</strong> <code>कट-ऑफ माह (4) - जन्म माह</code>[cite: 5] [evidence: 6]। ऋणात्मक आने पर वर्ष से 12 माह उधार लिए जाते हैं[cite: 5] [evidence: 6]।</li>
+      <li><strong>वर्षों की गणना:</strong> <code>कट-ऑफ वर्ष - जन्म वर्ष</code>[cite: 5] [evidence: 6]।</li>
+    </ul>
+
+    <h4>6. नामांकन हेतु आवश्यक अभिलेख</h4>
+    <p>सक्षम प्राधिकारी द्वारा निर्गत जन्म प्रमाण पत्र, अस्पताल/एएनएम का रिकॉर्ड या अभिभावक द्वारा स्व-घोषणा पत्र मान्य होता है[cite: 5]। RTE धारा 15 के अनुसार प्रमाण पत्र के अभाव में किसी भी बच्चे का प्रवेश रोका नहीं जा सकता[cite: 5] [evidence: 7] [evidence: 8] [evidence: 9]।</p>
+  </div>
+
+  <div class="footer-links">
+    <a href="about-us.html">About Us</a> | 
+    <a href="privacy-policy.html">Privacy Policy</a> | 
+    <a href="disclaimer.html">Disclaimer</a> | 
+    <a href="contact-us.html">Contact Us</a>
+    <p style="margin-top:6px; color:#64748b;">© deshimaster.in. All Rights Reserved.</p>
+  </div>
+
+</div>
+
+<script>
+function calculateClass() {
+  const dobInput = document.getElementById('dobInput');
+  const baseYear = parseInt(document.getElementById('sessionYear').value, 10);
+  const resultBox = document.getElementById('resultBox');
+  const ageDisplay = document.getElementById('ageDisplay');
+  const badge = document.getElementById('classResultBadge');
+  const detail = document.getElementById('detailText');
+
+  const val = dobInput.value;
+  if (!val) {
+    resultBox.style.display = 'none';
+    return;
+  }
+
+  let y = 0, m = 0, d = 0;
+  if (val.indexOf('-') !== -1) {
+    const p = val.split('-');
+    y = parseInt(p[0], 10);
+    m = parseInt(p[1], 10);
+    d = parseInt(p[2], 10);
+  } else if (val.indexOf('/') !== -1) {
+    const p = val.split('/');
+    d = parseInt(p[0], 10);
+    m = parseInt(p[1], 10);
+    y = parseInt(p[2], 10);
+  }
+
+  if (!y || !m || !d || isNaN(y) || isNaN(m) || isNaN(d)) {
+    return;
+  }
+
+  const cutoffD = 1;
+  const cutoffM = 4;
+  const cutoffY = baseYear;
+
+  if (y > cutoffY || (y === cutoffY && m > cutoffM) || (y === cutoffY && m === cutoffM && d > cutoffD)) {
+    alert("जन्मतिथि 1 अप्रैल " + baseYear + " से बाद की नहीं हो सकती!");
+    resultBox.style.display = 'none';
+    return;
+  }
+
+  let calcDays = cutoffD - d;
+  let calcMonths = cutoffM - m;
+  let calcYears = cutoffY - y;
+
+  if (calcDays < 0) {
+    calcMonths--;
+    calcDays += 31;
+  }
+
+  if (calcMonths < 0) {
+    calcYears--;
+    calcMonths += 12;
+  }
+
+  ageDisplay.innerText = calcYears + " वर्ष, " + calcMonths + " माह, " + calcDays + " दिन";
+
+  let className = "";
+  let badgeBg = "#dcfce7";
+  let badgeColor = "#15803d";
+  let note = "";
+
+  if (calcYears < 3) {
+    className = "प्रवेश हेतु अपरिपक्व (Underage)";
+    badgeBg = "#fee2e2"; badgeColor = "#991b1b";
+    note = "छात्र की आयु 3 वर्ष से कम है। बेसिक शिक्षा नियमावली अनुसार अभी विद्यालय या आंगनवाड़ी में प्रवेश मान्य नहीं है।";
+  } else if (calcYears >= 3 && calcYears < 6) {
+    className = "आंगनवाड़ी / बालवाटिका (Pre-Primary)";
+    badgeBg = "#fef3c7"; badgeColor = "#92400e";
+    note = "छात्र की आयु 3 से 6 वर्ष के बीच है। इसे प्राथमिक विद्यालय की बालवाटिका अथवा आंगनवाड़ी केंद्र में नामांकित करें।";
+  } else if (calcYears >= 6 && calcYears < 7) {
+    className = "कक्षा 1 (Class 1)";
+    badgeBg = "#dbeafe"; badgeColor = "#1e40af";
+    note = "1 अप्रैल को 6 वर्ष पूर्ण होने पर छात्र कक्षा 1 में नवीन प्रवेश हेतु पूर्ण पात्र है।";
+  } else if (calcYears >= 7 && calcYears < 8) {
+    className = "कक्षा 2 (Class 2)";
+    badgeBg = "#dcfce7"; badgeColor = "#15803d";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 7 वर्ष पूर्ण होने पर छात्र का प्रवेश कक्षा 2 में अनुमन्य है।";
+  } else if (calcYears >= 8 && calcYears < 9) {
+    className = "कक्षा 3 (Class 3)";
+    badgeBg = "#dcfce7"; badgeColor = "#15803d";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 8 वर्ष पूर्ण होने पर छात्र का प्रवेश कक्षा 3 में अनुमन्य है।";
+  } else if (calcYears >= 9 && calcYears < 10) {
+    className = "कक्षा 4 (Class 4)";
+    badgeBg = "#dcfce7"; badgeColor = "#15803d";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 9 वर्ष पूर्ण होने पर छात्र का प्रवेश कक्षा 4 में अनुमन्य है।";
+  } else if (calcYears >= 10 && calcYears < 11) {
+    className = "कक्षा 5 (Class 5)";
+    badgeBg = "#dcfce7"; badgeColor = "#15803d";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 10 वर्ष पूर्ण होने पर प्राथमिक स्तर की कक्षा 5 में प्रवेश अनुमन्य है।";
+  } else if (calcYears >= 11 && calcYears < 12) {
+    className = "कक्षा 6 (उच्च प्राथमिक)";
+    badgeBg = "#f3e8ff"; badgeColor = "#6b21a8";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 11 वर्ष पूर्ण होने पर उच्च प्राथमिक स्तर की कक्षा 6 में प्रवेश अनुमन्य है।";
+  } else if (calcYears >= 12 && calcYears < 13) {
+    className = "कक्षा 7 (उच्च प्राथमिक)";
+    badgeBg = "#f3e8ff"; badgeColor = "#6b21a8";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 12 वर्ष पूर्ण होने पर कक्षा 7 में प्रवेश अनुमन्य है।";
+  } else if (calcYears >= 13 && calcYears <= 14) {
+    className = "कक्षा 8 (उच्च प्राथमिक)";
+    badgeBg = "#f3e8ff"; badgeColor = "#6b21a8";
+    note = "RTE धारा 4 (आयु-संगत प्रवेश): 13 से 14 वर्ष पूर्ण होने पर कक्षा 8 में प्रवेश अनुमन्य है।";
+  } else {
+    className = "कक्षा 8 (विशेष प्रशिक्षण उपरांत)";
+    badgeBg = "#ffedd5"; badgeColor = "#9a3412";
+    note = "छात्र की आयु 14 वर्ष से अधिक है। नियमानुसार कक्षा 8 में दाखिला देकर विशेष उपचारात्मक शिक्षण दिया जाए।";
+  }
+
+  badge.innerText = className;
+  badge.style.backgroundColor = badgeBg;
+  badge.style.color = badgeColor;
+  detail.innerText = note;
+  
+  resultBox.style.display = 'block';
+}
+</script>
+
+</body>
+</html>
