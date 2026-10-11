@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>अन्तःजनपदीय म्यूचुअल ट्रांसफर - शिक्षक पंजीकरण | deshimaster.in</title>
+  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के शिक्षकों हेतु अन्तःजनपदीय पारस्परिक स्थानांतरण (Intra-district Mutual Transfer) ऑनलाइन पंजीकरण पोर्टल।">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Inter', 'Noto Sans Devanagari', sans-serif; }</style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="bg-emerald-600 text-white font-extrabold text-base px-2.5 py-1.5 rounded-lg shadow-sm">DM</div>
+        <div>
+          <span class="block font-bold text-lg text-slate-900 leading-tight">deshimaster.in</span>
+          <span class="block text-[10px] text-slate-500 uppercase tracking-wider font-semibold">देशी मास्टर - अन्तःजनपदीय पोर्टल</span>
+        </div>
+      </a>
+      <nav class="flex items-center gap-5 text-sm font-medium text-slate-600">
+        <a href="index.html" class="hover:text-emerald-600 transition">← होम पोर्टल</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-3xl mx-auto px-4 py-8 flex-grow w-full">
+    
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div class="mb-6 border-b border-slate-100 pb-4">
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 flex items-center gap-2 mb-1">
+          <span>🏫</span> अन्तःजनपदीय (जिले के अंदर) ट्रांसफर - पंजीकरण फॉर्म
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-500">
+          अपने जनपद व ब्लॉक की सही जानकारी भरें ताकि जिले के भीतर मैचिंग प्रक्रिया सटीक हो सके।
+        </p>
+      </div>
+
+      <!-- Registration Form -->
+      <form id="intraDistrictForm" onsubmit="submitForm(event)" class="space-y-5">
+        
+        <!-- Teacher Name -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">शिक्षक का पूरा नाम (Full Name) <span class="text-red-500">*</span></label>
+          <input type="text" id="teacherName" required placeholder="उदा. शिक्षक का नाम" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+
+        <!-- Manav Sampada Code -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">मानव संपदा कोड (Manav Sampada Code) <span class="text-red-500">*</span></label>
+          <input type="text" id="manavSampada" required placeholder="उदा. UPAB1234" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+
+        <!-- Mobile Numbers Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">मुख्य मोबाइल नंबर (Primary Mobile) <span class="text-red-500">*</span></label>
+            <input type="tel" id="primaryMobile" required pattern="[0-9]{10}" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">दूसरा मोबाइल नंबर (Secondary Mobile - वैकल्पिक)</label>
+            <input type="tel" id="secondaryMobile" pattern="[0-9]{10}" maxlength="10" placeholder="वैकल्पिक नंबर" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+        </div>
+
+        <!-- Contact Preference -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">संपर्क करने का पसंदीदा माध्यम (Contact Medium) <span class="text-red-500">*</span></label>
+          <select id="contactMedium" required class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="">-- चयन करें --</option>
+            <option value="Call Only">केवल फोन कॉल (Phone Call)</option>
+            <option value="WhatsApp Only">केवल व्हाट्सएप मैसेज (WhatsApp)</option>
+            <option value="Both">फोन कॉल और व्हाट्सएप दोनों (Both)</option>
+          </select>
+        </div>
+
+        <!-- District Selection -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">कार्यरत जनपद (District) <span class="text-red-500">*</span></label>
+          <select id="district" required onchange="handleDistrictChange()" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="">-- अपना जिला चुनें --</option>
+          </select>
+        </div>
+
+        <!-- Current Block & School -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">वर्तमान ब्लॉक (Current Block) <span class="text-red-500">*</span></label>
+            <select id="currentBlock" required onchange="updateBlockDropdowns()" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+              <option value="">-- पहले जिला चुनें --</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">वर्तमान विद्यालय (Current School Name) <span class="text-red-500">*</span></label>
+            <input type="text" id="currentSchool" required placeholder="उदा. प्रा.वि. / कम्पोजिट विद्यालय..." class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+        </div>
+
+        <!-- Target Blocks (4 Priorities) -->
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
+          <h2 class="text-sm font-bold text-slate-900">जिले के भीतर इच्छित ब्लॉक (Priority 1 to 4)</h2>
+          <p class="text-[11px] text-slate-500 -mt-3">स्थानांतरण हेतु अपने पसंदीदा ब्लॉकों का चयन करें। चयनित ब्लॉक अगले विकल्पों से स्वतः हट जाएंगे।</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">1. प्रथम पसंद ब्लॉक (Priority 1) <span class="text-red-500">*</span></label>
+              <select id="p1Block" required onchange="updateBlockDropdowns()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="">-- प्रथम ब्लॉक चुनें --</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">2. द्वितीय पसंद ब्लॉक (Priority 2)</label>
+              <select id="p2Block" onchange="updateBlockDropdowns()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="">-- द्वितीय ब्लॉक चुनें --</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">3. तृतीय पसंद ब्लॉक (Priority 3)</label>
+              <select id="p3Block" onchange="updateBlockDropdowns()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="">-- तृतीय ब्लॉक चुनें --</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">4. चतुर्थ पसंद ब्लॉक (Priority 4)</label>
+              <select id="p4Block" onchange="updateBlockDropdowns()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <option value="">-- चतुर्थ ब्लॉक चुनें --</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legal Disclaimer Box -->
+        <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 space-y-2">
+          <p class="font-bold">महत्वपूर्ण सूचना एवं अस्वीकरण (Disclaimer):</p>
+          <p>
+            deshimaster.in केवल एक डिजिटल माध्यम है जो शिक्षकों को पारस्परिक स्थानांतरण हेतु आपसी संपर्क सूत्र उपलब्ध कराता है। शिक्षकों के बीच होने वाली व्यक्तिगत सहमति या विभागीय नियमों के अनुपालन के लिए यह पोर्टल उत्तरदायी नहीं होगा।
+          </p>
+          <label class="flex items-start gap-2 pt-2 font-medium cursor-pointer text-slate-900">
+            <input type="checkbox" id="disclaimerAgree" required class="mt-0.5 h-4 w-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500">
+            <span>मैंने उपर्युक्त नियमों को पढ़ लिया है और मैं इससे सहमत हूँ।</span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submitBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-md text-sm">
+          पंजीकरण सुरक्षित करें (Register Now)
+        </button>
+
+      </form>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-3 font-medium text-slate-600">
+        <a href="index.html" class="hover:text-emerald-600 transition">होम</a>
+        <a href="about.html" class="hover:text-emerald-600 transition">हमारे बारे में</a>
+        <a href="privacy-policy.html" class="hover:text-emerald-600 transition">गोपनीयता नीति</a>
+        <a href="terms.html" class="hover:text-emerald-600 transition">नियम व शर्तें</a>
+        <a href="disclaimer.html" class="hover:text-emerald-600 transition">डिस्क्लेमर</a>
+      </div>
+      <p>© deshimaster.in (देशी मास्टर)। सर्वाधिकार सुरक्षित।</p>
+    </div>
+  </footer>
+
+  <!-- Districts and Blocks Database & Dynamic Logic -->
+  <script>
+    const districtBlocks = {
+      "आगरा": ["अकोला", "अछनेरा", "एत्मादपुर", "फतेहाबाद", "फतेहपुर सीकरी", "जगनेर", "जैतपुर कलां", "खंदौली", "खेरागढ़", "पिनाहट", "सैंया", "शमसाबाद", "बरौली अहीर", "बाह", "बिचपुरी"],
+      "अलीगढ़": ["अतरौली", "बिजौली", "चंडौस", "धनीपुर", "गंगीरी", "गोंडा", "इगलास", "जवां सिकंदरपुर", "खैर", "लोधा", "टप्पल", "अकराबाद"],
+      "अंबेडकर नगर": ["अकबरपुर", "कटेहरी", "टांडा", "जहांगीरगंज", "जलालपुर", "भियांव", "भीटी", "रामनगर", "बसखारी"],
+      "अमेठी": ["अमेठी", "गौरीगंज", "जगदीशपुर", "जामो", "तिलोई", "भादर", "भेंटुआ", "मुसाफिरखाना", "संग्रामपुर", "शाहगढ़", "सिंहपुर", "बाजार शुकुल", "बहादुरपुर"],
+      "अमरोहा": ["अमरोहा", "गजरौला", "गंगेश्वरी", "जोया", "धनौरा", "हसनपुर"],
+      "औरैया": ["अजीतमल", "अछल्दा", "औरैया", "एरवाकटरा", "सहार", "बिधूना", "भाग्यनगर"],
+      "अयोध्या": ["अमानीगंज", "तारुन", "पूरा बाजार", "बीकापुर", "मसौधा", "मवई", "मया बाजार", "मिल्कीपुर", "रुदौली", "सोहावल", "हरिंगटनगंज"],
+      "आजमगढ़": ["अजमतगढ़", "अतरौलिया", "अहरौला", "कोयलसा", "जहानागंज", "तहबरपुर", "तरवां", "ठेकमा", "पल्हना", "पवई", "फूलपुर", "बिलरियागंज", "महराजगंज", "मार्टीनगंज", "मिर्ज़ापुर", "मुहम्मदपुर", "मेंहनगर", "रानी की सराय", "लालगंज", "सठियांव", "सरायमीर", "हरैया"],
+      "बदायूं": ["अंबियापुर", "आसफपुर", "इस्लामनगर", "उझानी", "उसावां", "कादरचौक", "जगत", "दहगवां", "दातागंज", "बिसौली", "म्याऊं", "वजीरगंज", "सहसवान", "समरेर", "सालारपुर"],
+      "बागपत": ["खेकड़ा", "छपरौली", "बागपत", "बड़ौत", "बिनौली", "पिलाना"],
+      "बहराइच": ["कैसरगंज", "चित्तौरा", "जरवल", "तेजवापुर", "नवाबगंज", "पयागपुर", "फखरपुर", "बलहा", "महसी", "मिहींपुरवा (मोतीपुर)", "रिसिया", "विशेश्वरगंज", "शिवपुर", "हुजूरपुर"],
+      "बलिया": ["गड़वार", "चिलकहर", "दुबहड़", "नगरा", "नवानगर", "नियर", "पंदह", "बांसडीह", "बैरिया", "बेलहरी", "बेरूआरबारी", "मनियर", "मुरली छपरा", "रसड़ा", "रेवती", "सीयर", "सोहांव"],
+      "बलरामपुर": ["उतरौला", "गैंसड़ी", "पचपेड़वा", "तुलसीपुर", "बलरामपुर", "रेहरा बाजार", "शिवपुरा", "श्रीदत्तगंज", "हरैया सतघरवा"],
+      "बांदा": ["कमासिन", "जसपुरा", "तिंदवारी", "नरैनी", "बड़ोखर खुर्द", "बबेरू", "बिसंडा", "महुआ"],
+      "बाराबंकी": ["दरियाबाद", "देवा", "निंदूरा", "पूरेडलई", "फतेहपुर", "बनीकोडर", "बंकी", "मसौली", "रामनगर", "सूरतगंज", "सिरौली गौसपुर", "सिद्धौर", "हरख", "हैदरगढ़", "त्रिवेदीगंज"],
+      "बरेली": ["आंवला", "आलमपुर जाफराबाद", "क्यारा", "बिथरी चैनपुर", "दमखोदा", "नवाबगंज", "फरीदपुर", "फतेहगंज पश्चिमी", "बहेड़ी", "भदपुरा", "भोजीपुरा", "भुता", "मीरगंज", "रामनगर", "शेरगढ़"],
+      "बस्ती": ["कप्तानगंज", "कुदरहा", "गौर", "दुबौलिया", "नगर बाजार", "परशुरामपुर", "बहादुरपुर", "बनकटी", "बस्ती सदर", "रामनगर", "रुधौली", "विक्रमजोत", "सांऊघाट", "हरैया"],
+      "बिजनौर": ["अफजलगढ़", "अल्हैपुर (धामपुर)", "आकु", "किरतपुर", "कोतवाली", "जलीलपुर", "नजीबाबाद", "नहटौर", "नूरपुर", "मोहम्मदपुर देवमल", "स्योहारा"],
+      "बुलंदशहर": ["अगौता", "अनूपशहर", "अरनिया", "ऊंचागांव", "गुलावठी", "जहांगीराबाद", "दानपुर", "डिबाई", "पहासू", "बीबीनगर", "बुलंदशहर", "भवान बहादुर नगर", "लखावटी", "शिकारपुर", "सिकंदराबाद", "स्याना"],
+      "चंदौली": ["चकिया", "चहनियां", "चंदौली (सदर)", "धानापुर", "नौगढ़", "नियामताबाद", "बरहनी", "शहाबगंज", "सकलडीहा"],
+      "चित्रकूट": ["कर्वी", "पहाड़ी", "मऊ", "मानिकपुर", "रामनगर"],
+      "देवरिया": ["गौरी बाजार", "देवरिया सदर", "देसही देवरिया", "पथरदेवा", "बरहज", "बनकटा", "भागलपुर", "भटनी", "भाटपार रानी", "भलुअनी", "महेन", "रामपुर कारखाना", "रुद्रपुर", "लार", "सलामपुर", "तरकुलवा"],
+      "एटा": ["अवागढ़", "अलीगंज", "जलेसर", "जैथरा", "निधौली कलां", "मारहरा", "सकीट", "शीतलपुर"],
+      "इटावा": ["इटावा (बढ़पुरा)", "चकरनगर", "जसवंतनगर", "ताखा", "बसरेहर", "भरथना", "महेवा", "सैफई"],
+      "फर्रुखाबाद": ["कमालगंज", "कायमगंज", "नवाबगंज", "बढ़पुर", "मोहम्मदाबाद", "राजेपुर", "शमसाबाद"],
+      "फतेहपुर": ["अमौली", "असोथर", "ऐरायां", "कस्वा", "खजुहा", "देवमई", "धाता", "बहुआ", "भिटौरा", "मलवां", "तेलियानी", "विजयीपुर", "हथगाम"],
+      "फिरोजाबाद": ["अरांव", "एका", "जसराना", "टूंडला", "नारखी", "फिरोजाबाद", "मदनपुर", "शिकोहाबाद", "हाथवंत"],
+      "गौतम बुद्ध नगर": ["जेवर", "दादरी", "बिसरख"],
+      "गाजियाबाद": ["भोजपुर", "मुरादनगर", "रजापुर", "लोनी"],
+      "गाजीपुर": ["कासिमाबाद", "करंडा", "जमानियां", "जखनिया", "देवकली", "बिरनो", "भदौरा", "भांवरकोल", "मनिहारी", "मरदह", "मुहम्मदबाद", "रेवतीपुर", "वाराचवर", "सादात", "सैदपुर", "सदर गाजीपुर"],
+      "गोंडा": ["इटियाथोक", "कटरा बाजार", "कर्नलगंज", "छपिया", "झंझरी", "तरबगंज", "नवाबगंज", "पड़री कृपाल", "परसपुर", "बभनजोत", "बेलसर", "मनकापुर", "मुजेहना", "रूपईडीह", "वजीरगंज", "हलधरमऊ"],
+      "गोरखपुर": ["उरुवा", "कैंपियरगंज", "कौड़ीराम", "खजनी", "खोराबार", "गगहा", "गोला", "चरगांवा", "जंगल कौड़िया", "ठरवा", "पिपराइच", "पिपरौली", "पाली", "बड़हलगंज", "बांसगांव", "भटहट", "बेलघाट", "ब्रह्मपुर", "सहजनवा", "सरदार नगर"],
+      "हमीरपुर": ["कुरारा", "गोहांड", "मुस्कुरा", "मौदहा", "राठ", "सरीला", "सुमेरपुर"],
+      "हापुड़": ["गढ़मुक्तेश्वर", "धौलाना", "सिम्भावली", "हापुड़"],
+      "हरदोई": ["अहिरोरी", "कछौना", "कोथावां", "टड़ियावां", "टोडरपुर", "पिहानी", "बावन", "बिलग्राम", "भरखनी", "भरावन", "माधौगंज", "मल्लावां", "शाहाबाद", "संडीला", "सांडी", "सुरसा", "हरपालपुर", "हरियावां"],
+      "हाथरस": ["सादाबाद", "सहपऊ", "सासनी", "सिकंदराराऊ", "हसायन", "हाथरस", "मुरसान"],
+      "जालौन": ["कदौरा", "कोंच", "कुठौंद", "डकोर", "नदीगांव", "पिरौना", "माधौगढ़", "महेवा", "रामपुरा"],
+      "जौनपुर": ["करंजाकला", "केराकत", "खुटहन", "जलालपुर", "डोभी", "धर्मापुर", "बक्शा", "बदलापुर", "बरसठी", "मछलीशहर", "मड़ियाहूं", "महाराजगंज", "मुंगराबादशाहपुर", "मुफ्तीगंज", "रामनगर", "रामपुर", "शाहगंज (सूइथाकलां)", "शाहगंज", "सिरकोनी", "सिकरारा", "सुजानगंज"],
+      "झांसी": ["गुरसराय", "चिरगांव", "बामौर", "बबीना", "बड़ागांव", "बंगरा", "मऊरानीपुर", "मोंठ"],
+      "कन्नौज": ["उमर्दा", "कन्नौज", "छिबरामऊ", "जलालाबाद", "तालग्राम", "तिर्वा", "सौरिख", "हसेरन"],
+      "कानपुर देहात": ["अमरौधा", "अकबरपुर", "झींझक", "डेरापुर", "मलासा", "मैथा", "रसूलाबाद", "राजपुर", "संदलपुर", "सरवनखेड़ा"],
+      "कानपुर नगर": ["ककवन", "कल्याणपुर", "घाटमपुर", "चौबेपुर", "पतारा", "बिल्हौर", "बिधनू", "भीतरगांव", "सरसौल", "शिवराजपुर"],
+      "कासगंज": ["अमापुर", "कासगंज", "गंजडुंडवारा", "पटियाली", "सहावर", "सिढ़पुरा", "सोरों"],
+      "कौशाम्बी": ["कड़ा", "चायल", "नेवादा", "पश्चिम शरीरा", "मंझनपुर", "मूरतगंज", "सिराथू", "सरसवां"],
+      "कुशीनगर": ["कप्तानगंज", "कसया", "खड्डा", "तमकुहीराज", "दुदही", "नेबुआ नौरंगिया", "पडरौना", "फाजिलनगर", "बरवापट्टी", "विशुनपुरा", "मोतीचक", "रामकोला", "सेवरही", "सुकरौली"],
+      "लखीमपुर खीरी": ["ईसानगर", "कुंभी", "गोला", "धौरहरा", "नकहा", "निघासन", "पलिया", "पसगवां", "फूलबेहड़", "बांकेगंज", "बिजुआ", "बेहजम", "मितौली", "मोहम्मदी", "रमियाबेहड़"],
+      "ललितपुर": ["जखौरा", "तालबेहट", "बार", "बिरधा", "मड़ावरा", "महरौनी"],
+      "लखनऊ": ["काकोरी", "गोसाईगंज", "चिनहट", "बक्शी का तालाब", "मलिहाबाद", "माल", "मोहनलालगंज", "सरोजनीनगर"],
+      "महाराजगंज": ["घुघली", "धानी", "नौतनवा", "निचलौल", "पनियरा", "परतावल", "फरेन्दा", "बृजमनगंज", "मिठौरा", "रतनपुर", "लक्ष्मीपुर", "सिसवा"],
+      "महोबा": ["कबरई", "चरखारी", "जैतपुर", "पनवाड़ी"],
+      "मैनपुरी": ["करहल", "किशनी", "कुरावली", "घिरोर", "जागीर", "बेवर", "बरनाहल", "मैनपुरी", "सुल्तानगंज"],
+      "मथुरा": ["गोवर्धन", "चौमुहां", "छाता", "नंदगांव", "नौहझील", "फरह", "बलदेव", "मांट", "मथुरा", "राया"],
+      "मऊ": ["कोपागंज", "घोसी", "दोहरीघाट", "परदहां", "फतेहपुर मंडाव", "बड़राव", "मुहम्मदबाद गोहना", "रतनपुरा", "रानीपुर"],
+      "मेरठ": ["जानीखुर्द", "दौराला", "परीक्षितगढ़", "खरखौदा", "मवाना", "माछरा", "मेरठ", "रजपुरा", "रोहटा", "सरधना", "सरूरपुर", "हस्तिनापुर"],
+      "मिर्ज़ापुर": ["कोन", "छानबे", "जमालपुर", "नरायनपुर", "पटेहरा कलां", "पहाड़ी", "मझवां", "मरिहान", "राजगढ़", "लालगंज", "सीखड़", "हलिया"],
+      "मुरादाबाद": ["कुंदरकी", "छजलैट", "ठाकुरद्वारा", "डिलारी", "भगतपुर टांडा", "भोजपुर", "मूंढापांडे", "मुरादाबाद"],
+      "मुजफ्फरनगर": ["चरथावल", "जानसठ", "खतौली", "पुरकाजी", "बघरा", "बुढ़ाना", "मोरना", "शाहपुर", "सदर मुजफ्फरनगर"],
+      "पीलीभीत": ["अमरिया", "बरखेड़ा", "बीसलपुर", "बिलसंडा", "मरौरी", "पूरनपुर", "ललौरीखेड़ा"],
+      "प्रतापगढ़": ["आसपुर देवसरा", "कुंडा", "कालाकांकर", "गौरा", "पट्टी", "बाबागंज", "बाबा बेलखरनाथ धाम", "बिहार", "मंगरौरा", "मंधाता", "रामपुर खास", "लक्ष्मणपुर", "लालगंज", "शिवगढ़", "सण्ढवा चंद्रिका", "सांगीपुर", "सदर प्रतापगढ़"],
+      "प्रयागराज": ["उरुवा", "करछना", "कौड़िहार", "कौंधियारा", "कोरांव", "चाका", "जसरा", "धनूपपुर", "प्रतापपुर", "फूलपुर", "बहरिया", "बहादुरपुर", "भगवतपुर", "मऊआइमा", "मांडा", "मेजा", "यमुनापार", "शंकरगढ़", "शृंग्वेरपुर धाम", "सोरांव", "सहसों", "हंडिया", "होलागढ़"],
+      "रायबरेली": ["अमावां", "ऊंचाहार", "खीरों", "गौरा", "जगतपुर", "डीह", "डलमऊ", "दीनशाह गौरा", "बछरावां", "महराजगंज", "राही", "रोहनियां", "लालगंज", "शिवगढ़", "सरेनी", "सलोन", "सतांव", "हरचंदपुर"],
+      "रामपुर": ["चमरौआ", "मिलक", "बिलासपुर", "शाहबाद", "सैदनगर", "स्वार"],
+      "सहारनपुर": ["गंगोह", "देवबंद", "नकुड़", "नागल", "नानौता", "पुवारका", "बलियाखेड़ी", "मुजफ्फराबाद", "रामपुर मनिहारन", "सरसावा", "साढौली कदीम"],
+      "संभल": ["असमोली", "गुन्नौर", "जुनावई", "पवांसा", "बहजोई", "बनियाखेड़ा", "रजपुरा", "सम्भल"],
+      "संत कबीर नगर": ["खलीलाबाद", "बघौली", "बेलहर कलां", "सांथा", "सेमरियावां", "मेंहदावल", "पौली", "हैंसर बाजार", "नाथनगर"],
+      "शाहजहांपुर": ["कांट", "कलान", "खुदागंज", "खुटार", "जलालाबाद", "जैतीपुर", "ददरौल", "निगोही", "पुवायां", "बंडा", "भावलखेड़ा", "मदनापुर", "मिर्ज़ापुर", "सिंधौली", "तिलहर"],
+      "शामली": ["उन", "कांधला", "कैराना", "थानाभवन", "शामली"],
+      "श्रावस्ती": ["इकौना", "गिलौला", "जमुनहा", "सिरसिया", "हरिहरपुर रानी"],
+      "सिद्धार्थनगर": ["उसका बाजार", "इटवा", "ककरहवा (बर्डपुर)", "खेसरहा", "खुनियांव", "जोगिया", "डुमरियागंज", "नौगढ़", "बांसी", "बढ़नी", "भनवापुर", "मिठवल", "लोटन", "शोहरतगढ़"],
+      "सीतापुर": ["ऐलिया", "कसमंडा", "खैराबाद", "गोंदलामऊ", "पिसावां", "परसेंडी", "पहला", "बिसवां", "बेहटा", "मछरेहटा", "महमूदाबाद", "महोली", "मिश्रिख", "रामपुर मथुरा", "रेउसा", "लहरपुर", "सांडी", "सिधौली", "हरगांव"],
+      "सोनभद्र": ["कोन", "घोरावल", "चतरा", "चोपन", "चोपन (नगवां)", "दुद्धी", "बभनी", "म्योरपुर", "राबर्ट्सगंज", "विंधमगंज"],
+      "सुल्तानपुर": ["अखंड नगर", "इसौली (बल्दीराय)", "कादीपुर", "कूरेभार", "कुड़वार", "जयसिंहपुर", "दोस्तपुर", "धनपतगंज", "दूबेपुर", "प्रतापपुर कमैचा", "भदैंया", "मोतिगरपुर", "लंभुआ", "सुल्तानपुर सदर"],
+      "उन्नाव": ["असोहा", "औरास", "गंज मुरादाबाद", "बिछिया", "बांगरमऊ", "बीघापुर", "मियागंज", "नवाबगंज", "पुरवा", "फतेहपुर चौरासी", "सिकंदरपुर कर्ण", "सिकंदरपुर सरोसी", "सफीपुर", "सुमेरपुर", "हसनगंज", "हिलौली"],
+      "वाराणसी": ["आराजी लाइन", "काशी विद्यापीठ", "चिरईगांव", "चोलापुर", "पिंडरा", "बड़ागांव", "सेवापुरी", "हरहुआ"]
+    };
+
+    window.onload = function() {
+      const districtSelect = document.getElementById('district');
+      Object.keys(districtBlocks).forEach(dist => {
+        let opt = document.createElement('option');
+        opt.value = dist;
+        opt.textContent = dist;
+        districtSelect.appendChild(opt);
+      });
+    };
+
+    function handleDistrictChange() {
+      const dist = document.getElementById('district').value;
+      const currentBlockSelect = document.getElementById('currentBlock');
+      currentBlockSelect.innerHTML = '<option value="">-- वर्तमान ब्लॉक चुनें --</option>';
+
+      if (dist && districtBlocks[dist]) {
+        districtBlocks[dist].forEach(blk => {
+          let opt = document.createElement('option');
+          opt.value = blk;
+          opt.textContent = blk;
+          currentBlockSelect.appendChild(opt);
+        });
+      }
+      updateBlockDropdowns();
+    }
+
+    function updateBlockDropdowns() {
+      const dist = document.getElementById('district').value;
+      const currentVal = document.getElementById('currentBlock').value;
+      const selects = ['p1Block', 'p2Block', 'p3Block', 'p4Block'];
+
+      const availableBlocks = (dist && districtBlocks[dist]) ? districtBlocks[dist] : [];
+
+      selects.forEach((id, index) => {
+        const selectElem = document.getElementById(id);
+        const selectedValue = selectElem.value;
+        selectElem.innerHTML = `<option value="">-- ${index + 1}वीं पसंद ब्लॉक चुनें --</option>`;
+
+        availableBlocks.forEach(blk => {
+          let isChosen = false;
+          selects.forEach(otherId => {
+            if (otherId !== id && document.getElementById(otherId).value === blk) {
+              isChosen = true;
+            }
+          });
+
+          if (blk !== currentVal && !isChosen) {
+            let opt = document.createElement('option');
+            opt.value = blk;
+            opt.textContent = blk;
+            if (blk === selectedValue) opt.selected = true;
+            selectElem.appendChild(opt);
+          }
+        });
+      });
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+      
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = "पंजीकरण सुरक्षित किया जा रहा है...";
+
+      // आपका नया Intra-District Web App URL
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbwM4Qx_urTOeMrBF6Q7gibrcT6W5pryAgOSkkx6mN8oxBPm2XZ1ZbT6p85VaJWI8JYIEg/exec';
+
+      const formData = {
+        teacherName: document.getElementById('teacherName').value,
+        manavSampada: document.getElementById('manavSampada').value,
+        primaryMobile: document.getElementById('primaryMobile').value,
+        secondaryMobile: document.getElementById('secondaryMobile').value,
+        contactMedium: document.getElementById('contactMedium').value,
+        district: document.getElementById('district').value,
+        currentBlock: document.getElementById('currentBlock').value,
+        currentSchool: document.getElementById('currentSchool').value,
+        p1Block: document.getElementById('p1Block').value,
+        p2Block: document.getElementById('p2Block').value,
+        p3Block: document.getElementById('p3Block').value,
+        p4Block: document.getElementById('p4Block').value,
+        paymentStatus: "Free",
+        paymentId: "Initial Launch",
+        expiryDate: "-"
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        alert("अन्तःजनपदीय पंजीकरण सफलतापूर्वक हो गया है! वर्तमान में डेटाबेस तैयार किया जा रहा है, जल्द ही पोर्टल पर मैचिंग सूची उपलब्ध होगी।");
+        document.getElementById('intraDistrictForm').reset();
+        handleDistrictChange();
+        btn.disabled = false;
+        btn.textContent = "पंजीकरण सुरक्षित करें (Register Now)";
+      })
+      .catch(error => {
+        console.error('Error!', error);
+        alert("डेटा भेजने में कुछ समस्या आई। कृपया पुनः प्रयास करें।");
+        btn.disabled = false;
+        btn.textContent = "पंजीकरण सुरक्षित करें (Register Now)";
+      });
+    }
+  </script>
+
+</body>
+</html>
