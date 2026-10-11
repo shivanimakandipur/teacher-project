@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>अन्तःजनपदीय म्यूचुअल ट्रांसफर - शिक्षक पंजीकरण | deshimaster.in</title>
-  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के शिक्षकों हेतु अन्तःजनपदीय पारस्परिक स्थानांतरण (Intra-district Mutual Transfer) ऑनलाइन पंजीकरण पोर्टल।">
+  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के प्राथमिक एवं उच्च प्राथमिक शिक्षकों हेतु अन्तःजनपदीय पारस्परिक स्थानांतरण ऑनलाइन पंजीकरण पोर्टल।">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -40,7 +40,7 @@
           <span>🏫</span> अन्तःजनपदीय (जिले के अंदर) ट्रांसफर - पंजीकरण फॉर्म
         </h1>
         <p class="text-xs sm:text-sm text-slate-500">
-          अपने जनपद व ब्लॉक की सही जानकारी भरें ताकि जिले के भीतर मैचिंग प्रक्रिया सटीक हो सके।
+          प्राथमिक एवं उच्च प्राथमिक (जूनियर) शिक्षक अपने संवर्ग एवं विषय के अनुसार सही विवरण भरें।
         </p>
       </div>
 
@@ -82,6 +82,24 @@
           </select>
         </div>
 
+        <!-- School Level & Subject (Smart Dynamic Section) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-emerald-50/50 border border-emerald-100 rounded-2xl">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-emerald-950 mb-1.5">विद्यालय स्तर (School Level) <span class="text-red-500">*</span></label>
+            <select id="schoolLevel" required onchange="handleLevelChange()" class="w-full px-4 py-2.5 border border-emerald-300 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+              <option value="">-- संवर्ग चुनें --</option>
+              <option value="Primary (1-5)">प्राथमिक स्तर (कक्षा 1 से 5)</option>
+              <option value="Upper Primary (6-8)">उच्च प्राथमिक स्तर / जूनियर (कक्षा 6 से 8)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-emerald-950 mb-1.5">शिक्षण विषय (Subject) <span class="text-red-500">*</span></label>
+            <select id="subject" required class="w-full px-4 py-2.5 border border-emerald-300 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+              <option value="">-- पहले विद्यालय स्तर चुनें --</option>
+            </select>
+          </div>
+        </div>
+
         <!-- District Selection -->
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">कार्यरत जनपद (District) <span class="text-red-500">*</span></label>
@@ -100,7 +118,7 @@
           </div>
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">वर्तमान विद्यालय (Current School Name) <span class="text-red-500">*</span></label>
-            <input type="text" id="currentSchool" required placeholder="उदा. प्रा.वि. / कम्पोजिट विद्यालय..." class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <input type="text" id="currentSchool" required placeholder="उदा. प्रा.वि. / उच्च प्रा.वि. / संविलियन..." class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
           </div>
         </div>
 
@@ -265,6 +283,41 @@
       });
     };
 
+    function handleLevelChange() {
+      const level = document.getElementById('schoolLevel').value;
+      const subSelect = document.getElementById('subject');
+      subSelect.innerHTML = '';
+
+      if (level === 'Primary (1-5)') {
+        let opt = document.createElement('option');
+        opt.value = 'सभी विषय (All Subjects)';
+        opt.textContent = 'सभी विषय (All Subjects / General)';
+        subSelect.appendChild(opt);
+      } else if (level === 'Upper Primary (6-8)') {
+        const subjects = [
+          { val: 'गणित एवं विज्ञान (Math & Science)', text: 'गणित एवं विज्ञान (Math & Science)' },
+          { val: 'भाषा (Language - Hindi/Eng/Sans)', text: 'भाषा (हिन्दी / अंग्रेजी / संस्कृत)' },
+          { val: 'सामाजिक विषय (Social Studies)', text: 'सामाजिक विषय (Social Studies)' }
+        ];
+        let defaultOpt = document.createElement('option');
+        defaultOpt.value = '';
+        defaultOpt.textContent = '-- विषय का चयन करें --';
+        subSelect.appendChild(defaultOpt);
+
+        subjects.forEach(s => {
+          let opt = document.createElement('option');
+          opt.value = s.val;
+          opt.textContent = s.text;
+          subSelect.appendChild(opt);
+        });
+      } else {
+        let opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = '-- पहले विद्यालय स्तर चुनें --';
+        subSelect.appendChild(opt);
+      }
+    }
+
     function handleDistrictChange() {
       const dist = document.getElementById('district').value;
       const currentBlockSelect = document.getElementById('currentBlock');
@@ -319,7 +372,6 @@
       btn.disabled = true;
       btn.textContent = "पंजीकरण सुरक्षित किया जा रहा है...";
 
-      // आपका नया Intra-District Web App URL
       const scriptURL = 'https://script.google.com/macros/s/AKfycbwM4Qx_urTOeMrBF6Q7gibrcT6W5pryAgOSkkx6mN8oxBPm2XZ1ZbT6p85VaJWI8JYIEg/exec';
 
       const formData = {
@@ -328,6 +380,8 @@
         primaryMobile: document.getElementById('primaryMobile').value,
         secondaryMobile: document.getElementById('secondaryMobile').value,
         contactMedium: document.getElementById('contactMedium').value,
+        schoolLevel: document.getElementById('schoolLevel').value,
+        subject: document.getElementById('subject').value,
         district: document.getElementById('district').value,
         currentBlock: document.getElementById('currentBlock').value,
         currentSchool: document.getElementById('currentSchool').value,
@@ -347,8 +401,9 @@
         body: JSON.stringify(formData)
       })
       .then(response => {
-        alert("अन्तःजनपदीय पंजीकरण सफलतापूर्वक हो गया है! वर्तमान में डेटाबेस तैयार किया जा रहा है, जल्द ही पोर्टल पर मैचिंग सूची उपलब्ध होगी।");
+        alert("अन्तःजनपदीय पंजीकरण सफलतापूर्वक हो गया है! डेटाबेस तैयार होते ही मैचिंग सूची उपलब्ध होगी।");
         document.getElementById('intraDistrictForm').reset();
+        handleLevelChange();
         handleDistrictChange();
         btn.disabled = false;
         btn.textContent = "पंजीकरण सुरक्षित करें (Register Now)";
