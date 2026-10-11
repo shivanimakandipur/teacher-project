@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>अंतर्जनपदीय म्यूचुअल ट्रांसफर - रजिस्ट्रेशन फॉर्म | deshimaster.in</title>
+  <title>अंतर्जनपदीय म्यूचुअल ट्रांसफर - शिक्षक पंजीकरण | deshimaster.in</title>
   <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के प्राथमिक एवं उच्च प्राथमिक शिक्षकों हेतु अंतर्जनपदीय पारस्परिक स्थानांतरण ऑनलाइन पंजीकरण पोर्टल।">
 
   <!-- Tailwind CSS CDN -->
@@ -56,7 +56,7 @@
         <!-- Manav Sampada Code -->
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">मानव संपदा कोड (Manav Sampada Code) <span class="text-red-500">*</span></label>
-          <input type="text" id="manavSampada" required placeholder="उदा. UPAB1234" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          <input type="text" id="manavSampada" required placeholder="उदा. 123456" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
         </div>
 
         <!-- Mobile Numbers Grid -->
@@ -82,7 +82,7 @@
           </select>
         </div>
 
-        <!-- School Level & Subject (Dynamic Cadre Selection) -->
+        <!-- School Level & Subject -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-emerald-50/50 border border-emerald-100 rounded-2xl">
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-emerald-950 mb-1.5">विद्यालय स्तर (School Level) <span class="text-red-500">*</span></label>
@@ -108,7 +108,7 @@
           </select>
         </div>
 
-        <!-- Target Districts (5 Priorities with Dynamic Filtering) -->
+        <!-- Target Districts -->
         <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
           <h2 class="text-sm font-bold text-slate-900">इच्छित जनपदों का क्रम (Target Districts - Priority 1 to 5)</h2>
           <p class="text-[11px] text-slate-500 -mt-3">स्थानांतरण हेतु अपने 5 पसंदीदा जनपदों को प्राथमिकता अनुसार चुनें।</p>
@@ -173,6 +173,34 @@
     </div>
   </main>
 
+  <!-- Success & Viral Copy Modal -->
+  <div id="successModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100">
+      <div class="text-center mb-4">
+        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold mb-2">✓</div>
+        <h3 class="text-lg font-bold text-slate-900">पंजीकरण सफलतापूर्वक हो गया!</h3>
+        <p class="text-xs text-slate-500">अपना विवरण कॉपी करके शिक्षक व्हाट्सएप ग्रुप्स में शेयर करें ताकि तुरंत म्यूचुअल साथी मिल सके।</p>
+      </div>
+
+      <!-- Preview Box -->
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-xs text-slate-700 whitespace-pre-line font-mono mb-4 leading-relaxed" id="previewText">
+      </div>
+
+      <!-- Buttons -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <button onclick="copyToClipboard()" id="copyBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition">
+          <span>📋</span> विवरण कॉपी करें (Copy)
+        </button>
+        <button onclick="shareWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition">
+          <span>💬</span> WhatsApp पर भेजें
+        </button>
+      </div>
+      <button onclick="closeModal()" class="w-full mt-3 text-slate-500 hover:text-slate-800 text-xs font-semibold py-1.5 transition">
+        बंद करें (Close)
+      </button>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12">
     <div class="max-w-3xl mx-auto px-4">
@@ -187,7 +215,7 @@
     </div>
   </footer>
 
-  <!-- Script for 75 Districts & Apps Script Integration -->
+  <!-- Script for 75 Districts & Form Submission -->
   <script>
     const upDistricts = [
       "आगरा", "अलीगढ़", "अम्बेडकर नगर", "अमेठी", "औरैया", "अयोध्या", "आजमगढ़", 
@@ -279,6 +307,8 @@
       });
     }
 
+    let shareableText = "";
+
     function submitForm(event) {
       event.preventDefault();
       
@@ -286,18 +316,34 @@
       btn.disabled = true;
       btn.textContent = "पंजीकरण सुरक्षित किया जा रहा है...";
 
-      // आपका अंतर्जनपदीय Apps Script URL
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbxLbHm0AQrk-M9uIQhvlXQTdJSiH8qys8i4W-GaPB_m5Xkqp4KDR79sEdInN7mSZn3S/exec';
+      // आपका नया Inter-District Web App URL
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbx59Kxv55VVR7XgQQ0PNstG9JWJE3mxuTn2JcgVCyTkdwzJJiW0vHQHhotePnZgr4LS/exec';
+
+      const tName = document.getElementById('teacherName').value;
+      const mCode = document.getElementById('manavSampada').value;
+      const pMobile = document.getElementById('primaryMobile').value;
+      const cMedium = document.getElementById('contactMedium').value;
+      const sLevel = document.getElementById('schoolLevel').value;
+      const sub = document.getElementById('subject').value;
+      const curDist = document.getElementById('currentDistrict').value;
+      
+      const priorities = [
+        document.getElementById('p1').value,
+        document.getElementById('p2').value,
+        document.getElementById('p3').value,
+        document.getElementById('p4').value,
+        document.getElementById('p5').value
+      ].filter(Boolean).join(', ');
 
       const formData = {
-        teacherName: document.getElementById('teacherName').value,
-        manavSampada: document.getElementById('manavSampada').value,
-        primaryMobile: document.getElementById('primaryMobile').value,
+        teacherName: tName,
+        manavSampada: mCode,
+        primaryMobile: pMobile,
         secondaryMobile: document.getElementById('secondaryMobile').value,
-        contactMedium: document.getElementById('contactMedium').value,
-        schoolLevel: document.getElementById('schoolLevel').value,
-        subject: document.getElementById('subject').value,
-        currentDistrict: document.getElementById('currentDistrict').value,
+        contactMedium: cMedium,
+        schoolLevel: sLevel,
+        subject: sub,
+        currentDistrict: curDist,
         p1: document.getElementById('p1').value,
         p2: document.getElementById('p2').value,
         p3: document.getElementById('p3').value,
@@ -314,8 +360,27 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       })
-      .then(response => {
-        alert("अंतर्जनपदीय पंजीकरण सफलतापूर्वक हो गया है! वर्तमान में डेटाबेस तैयार किया जा रहा है, जल्द ही पोर्टल पर मैचिंग सूची उपलब्ध होगी।");
+      .then(() => {
+        // प्राइवेसी व नियमों के अनुसार शेयर टेक्स्ट
+        let detailsText = `📋 *बेसिक शिक्षा परिषद - अंतर्जनपदीय म्यूचुअल ट्रांसफर*\n\n` +
+          `👤 *नाम:* ${tName}\n` +
+          `📞 *संपर्क:* ${pMobile} (${cMedium})\n` +
+          `🏫 *स्तर:* ${sLevel}\n`;
+
+        // केवल जूनियर शिक्षकों के लिए विषय जुड़ेगा
+        if (sLevel.includes('Upper Primary') || sLevel.includes('जूनियर')) {
+          detailsText += `📚 *विषय:* ${sub}\n`;
+        }
+
+        detailsText += `📍 *वर्तमान जनपद:* ${curDist}\n` +
+          `🎯 *इच्छित जनपद:* ${priorities}\n\n` +
+          `🔗 *आप भी अपना म्यूचुअल साथी खोजें व फॉर्म भरें:*\n` +
+          `👉 https://deshimaster.in`;
+
+        shareableText = detailsText;
+
+        document.getElementById('previewText').innerText = shareableText;
+        document.getElementById('successModal').classList.remove('hidden');
         document.getElementById('interDistrictForm').reset();
         handleLevelChange();
         updateDropdowns();
@@ -329,23 +394,23 @@
         btn.textContent = "पंजीकरण सुरक्षित करें (Register Now)";
       });
     }
-    // शेयरिंग टेक्स्ट तैयार करना (मानव संपदा कोड हटाया गया + प्राथमिक के लिए विषय हटाया गया)
-let detailsText = `📋 *बेसिक शिक्षा परिषद - अंतर्जनपदीय म्यूचुअल ट्रांसफर*\n\n` +
-  `👤 *नाम:* ${tName}\n` +
-  `📞 *संपर्क:* ${pMobile} (${cMedium})\n` +
-  `🏫 *स्तर:* ${sLevel}\n`;
 
-// यदि जूनियर शिक्षक है तभी विषय जुड़ेगा
-if (sLevel.includes('Upper Primary') || sLevel.includes('जूनियर')) {
-  detailsText += `📚 *विषय:* ${sub}\n`;
-}
+    function copyToClipboard() {
+      navigator.clipboard.writeText(shareableText).then(() => {
+        const cBtn = document.getElementById('copyBtn');
+        cBtn.innerHTML = '<span>✓</span> कॉपी हो गया!';
+        setTimeout(() => { cBtn.innerHTML = '<span>📋</span> विवरण कॉपी करें (Copy)'; }, 2000);
+      });
+    }
 
-detailsText += `📍 *वर्तमान जनपद:* ${curDist}\n` +
-  `🎯 *इच्छित जनपद:* ${priorities}\n\n` +
-  `🔗 *आप भी अपना म्यूचुअल साथी खोजें व फॉर्म भरें:*\n` +
-  `👉 https://deshimaster.in`;
+    function shareWhatsApp() {
+      const url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareableText);
+      window.open(url, '_blank');
+    }
 
-shareableText = detailsText;
+    function closeModal() {
+      document.getElementById('successModal').classList.add('hidden');
+    }
   </script>
 
 </body>
