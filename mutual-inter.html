@@ -329,6 +329,23 @@
         btn.textContent = "पंजीकरण सुरक्षित करें (Register Now)";
       });
     }
+    // शेयरिंग टेक्स्ट तैयार करना (मानव संपदा कोड हटाया गया + प्राथमिक के लिए विषय हटाया गया)
+let detailsText = `📋 *बेसिक शिक्षा परिषद - अंतर्जनपदीय म्यूचुअल ट्रांसफर*\n\n` +
+  `👤 *नाम:* ${tName}\n` +
+  `📞 *संपर्क:* ${pMobile} (${cMedium})\n` +
+  `🏫 *स्तर:* ${sLevel}\n`;
+
+// यदि जूनियर शिक्षक है तभी विषय जुड़ेगा
+if (sLevel.includes('Upper Primary') || sLevel.includes('जूनियर')) {
+  detailsText += `📚 *विषय:* ${sub}\n`;
+}
+
+detailsText += `📍 *वर्तमान जनपद:* ${curDist}\n` +
+  `🎯 *इच्छित जनपद:* ${priorities}\n\n` +
+  `🔗 *आप भी अपना म्यूचुअल साथी खोजें व फॉर्म भरें:*\n` +
+  `👉 https://deshimaster.in`;
+
+shareableText = detailsText;
   </script>
 
 </body>
