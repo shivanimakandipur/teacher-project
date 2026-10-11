@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>अन्तःजनपदीय म्यूचुअल ट्रांसफर - शिक्षक लॉगिन एवं नया पंजीकरण | deshimaster.in</title>
+  <title>अन्तःजनपदीय म्यूचुअल ट्रांसफर - शिक्षक लॉगिन एवं पंजीकरण | deshimaster.in</title>
   <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के प्राथमिक एवं उच्च प्राथमिक शिक्षकों हेतु अन्तःजनपदीय पारस्परिक स्थानांतरण ऑनलाइन पोर्टल।">
 
   <!-- Tailwind CSS CDN -->
@@ -34,34 +34,30 @@
   <!-- Main Content -->
   <main class="max-w-3xl mx-auto px-4 py-8 flex-grow w-full space-y-6">
     
-    <!-- STEP 1: AUTHENTICATION / LOGIN / NEW REGISTRATION PROMPT -->
-    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+    <!-- 1. LOGIN CARD (Default View) -->
+    <div id="loginCard" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
       <div class="border-b border-slate-100 pb-4 mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div class="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md mb-2">
-            <span>🔒 चरण 1</span> शिक्षक पहचान एवं सत्यापन
+            <span>🔐 शिक्षक पोर्टल</span> सुरक्षित प्रवेश
           </div>
           <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
-            लॉगिन अथवा नया पंजीकरण
+            अन्तःजनपदीय ट्रांसफर पोर्टल
           </h1>
           <p class="text-xs text-slate-500 mt-1">
-            अपने मोबाइल नंबर और मानव संपदा कोड से लॉगिन करें, या पहली बार आने पर नया रजिस्ट्रेशन करें।
+            पंजीकृत शिक्षक लॉगिन करें, अथवा पहली बार आने पर नया पंजीकरण करें।
           </p>
-        </div>
-        <!-- Quick New Registration Helper Badge -->
-        <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-3 py-2 rounded-xl text-center">
-          ✨ <b>नया शिक्षक?</b><br>सीधे नीचे नंबर भरें!
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            मोबाइल नंबर (लॉगिन आईडी) <span class="text-red-500">*</span>
+            मुख्य मोबाइल नंबर (Login ID) <span class="text-red-500">*</span>
           </label>
           <input 
             type="tel" 
-            id="authMobile" 
+            id="loginMobile" 
             required 
             inputmode="numeric"
             pattern="[0-9]{10}" 
@@ -73,11 +69,11 @@
 
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            मानव संपदा कोड (पासवर्ड) <span class="text-red-500">*</span>
+            मानव संपदा कोड (Password) <span class="text-red-500">*</span>
           </label>
           <input 
             type="text" 
-            id="authCode" 
+            id="loginCode" 
             required 
             inputmode="numeric"
             maxlength="8" 
@@ -87,33 +83,118 @@
         </div>
       </div>
 
-      <button 
-        type="button" 
-        id="verifyBtn" 
-        onclick="verifyTeacher()" 
-        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-sm text-sm flex items-center justify-center gap-2">
-        <span>🔍</span> आगे बढ़ें / सत्यापन करें (Verify & Proceed)
-      </button>
+      <!-- Action Buttons: Login & New Registration -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        <button 
+          type="button" 
+          id="loginBtn" 
+          onclick="handleTeacherLogin()" 
+          class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-sm text-sm flex items-center justify-center gap-2">
+          <span>🔓</span> लॉगिन करें (Login)
+        </button>
 
-      <div id="authStatusBox" class="mt-4 hidden p-3.5 rounded-xl text-xs font-medium border leading-relaxed"></div>
+        <button 
+          type="button" 
+          onclick="openNewRegistrationForm()" 
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-sm text-sm flex items-center justify-center gap-2">
+          <span>📝</span> न्यू रजिस्ट्रेशन (New Registration)
+        </button>
+      </div>
+
+      <div id="loginStatusBox" class="mt-4 hidden p-3.5 rounded-xl text-xs font-medium border leading-relaxed"></div>
     </div>
 
-    <!-- STEP 2: REGISTRATION / EDIT FORM -->
-    <div id="registrationCard" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm hidden space-y-6">
-      <div class="border-b border-slate-100 pb-4">
-        <div class="inline-flex items-center gap-1.5 bg-blue-100 text-blue-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md mb-2">
-          <span>📝 चरण 2</span> विवरण भरें अथवा अपडेट करें
+    <!-- 2. LOGGED-IN DASHBOARD VIEW (Shown After Successful Login) -->
+    <div id="dashboardCard" class="hidden bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div>
+          <span class="inline-block bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md mb-1">✓ सत्यापित शिक्षक</span>
+          <h2 class="text-xl font-bold text-slate-900" id="dashTeacherName">शिक्षक का नाम</h2>
+          <p class="text-xs text-slate-500" id="dashTeacherInfo">ब्लॉक: - | विद्यालय: -</p>
         </div>
-        <h2 class="text-xl font-extrabold text-slate-900" id="formHeaderTitle">
-          अन्तःजनपदीय ट्रांसफर - विवरण फ़ॉर्म
-        </h2>
-        <p class="text-xs text-slate-500 mt-1">
-          अपने कार्यरत विद्यालय, वर्तमान ब्लॉक एवं इच्छित 4 प्राथमिक ब्लॉकों का चयन करें।
-        </p>
+        <div class="flex gap-2">
+          <button onclick="enableDetailEdit()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5">
+            <span>✏️</span> चेंज डिटेल (Change Details)
+          </button>
+          <button onclick="handleLogout()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 py-2 rounded-xl transition">
+            लॉगआउट
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Info Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-xl text-xs border border-slate-200">
+        <div>
+          <span class="block text-slate-400">मानव संपदा कोड</span>
+          <span class="font-bold text-slate-800" id="dashCode">-</span>
+        </div>
+        <div>
+          <span class="block text-slate-400">मोबाइल नंबर</span>
+          <span class="font-bold text-slate-800" id="dashMobile">-</span>
+        </div>
+        <div>
+          <span class="block text-slate-400">संवर्ग / स्तर</span>
+          <span class="font-bold text-slate-800" id="dashLevel">-</span>
+        </div>
+        <div>
+          <span class="block text-slate-400">शिक्षण विषय</span>
+          <span class="font-bold text-slate-800" id="dashSubject">-</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. MAIN FORM (FOR NEW REGISTRATION / CHANGE DETAILS) -->
+    <div id="formCard" class="hidden bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 bg-blue-100 text-blue-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md mb-1" id="formBadge">
+            <span>📝</span> नया पंजीकरण फ़ॉर्म
+          </div>
+          <h2 class="text-xl font-extrabold text-slate-900" id="formMainTitle">
+            अन्तःजनपदीय ट्रांसफर - विवरण भरें
+          </h2>
+        </div>
+        <button type="button" onclick="cancelFormToLogin()" class="text-slate-400 hover:text-slate-600 text-xs font-semibold px-2 py-1 rounded-md border border-slate-200">
+          ✕ वापस जाएं
+        </button>
       </div>
 
       <form id="intraDistrictForm" onsubmit="submitForm(event)" class="space-y-5">
         
+        <!-- Registration Credentials (Mobile & Manav Sampada) -->
+        <div id="regAuthInputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              मुख्य मोबाइल नंबर (लॉगिन आईडी) <span class="text-red-500">*</span>
+            </label>
+            <input 
+              type="tel" 
+              id="formMobile" 
+              required 
+              inputmode="numeric"
+              pattern="[0-9]{10}" 
+              maxlength="10" 
+              placeholder="10 अंकों का मोबाइल नंबर" 
+              oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+              class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              मानव संपदा कोड (पासवर्ड) <span class="text-red-500">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="formCode" 
+              required 
+              inputmode="numeric"
+              maxlength="8" 
+              placeholder="उदा. 123456" 
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+              class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+        </div>
+
+        <!-- Teacher Name -->
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
             शिक्षक का पूरा नाम (Full Name - English Only) <span class="text-red-500">*</span>
@@ -204,49 +285,7 @@
           </div>
         </div>
 
-        <!-- MATCHING TEACHERS LIVE TABLE -->
-        <div id="matchingCard" class="hidden bg-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-xl border border-slate-800 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
-            <div>
-              <div class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-400 text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-1">
-                <span>🎯 लाइव मैचिंग</span> आपके ब्लॉक में आने वाले साथी
-              </div>
-              <h3 class="text-base sm:text-lg font-bold text-slate-100">
-                उपलब्ध संभावित म्यूचुअल शिक्षक: <span id="matchCountBadge" class="text-emerald-400 font-extrabold text-xl">0</span>
-              </h3>
-            </div>
-            <span class="text-[11px] text-amber-300 bg-amber-950/60 border border-amber-800/60 px-3 py-1 rounded-lg">
-              🔒 प्राइवेसी सुरक्षा: मोबाइल नंबर आंशिक सुरक्षित हैं
-            </span>
-          </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr class="bg-slate-800/80 text-slate-300 border-b border-slate-700">
-                  <th class="py-2.5 px-3 font-semibold">क्र.</th>
-                  <th class="py-2.5 px-3 font-semibold">शिक्षक का नाम</th>
-                  <th class="py-2.5 px-3 font-semibold">वर्तमान तैनाती (ब्लॉक)</th>
-                  <th class="py-2.5 px-3 font-semibold">उनकी पसंद क्रम</th>
-                  <th class="py-2.5 px-3 font-semibold">मोबाइल नंबर</th>
-                  <th class="py-2.5 px-3 font-semibold text-center">स्थिति</th>
-                </tr>
-              </thead>
-              <tbody id="matchingTableBody" class="divide-y divide-slate-800 text-slate-200"></tbody>
-            </table>
-          </div>
-
-          <div id="noMatchMsg" class="hidden text-center py-4 text-xs text-slate-400">
-            फिलहाल आपके ब्लॉक व विषय के लिए कोई शिक्षक पंजीकृत नहीं है। जैसे ही कोई साथी जुड़ेगा, सूची यहाँ दिखेगी।
-          </div>
-
-          <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700 text-[11px] text-slate-300 flex items-center justify-between">
-            <span>💡 पूरा मोबाइल नंबर देखने एवं सीधे संपर्क करने की सुविधा शीघ्र चालू होगी।</span>
-            <span class="bg-emerald-600 text-white font-bold text-[10px] px-2 py-0.5 rounded">Free Access Soon</span>
-          </div>
-        </div>
-
-        <!-- Target Blocks -->
+        <!-- Target Blocks (1 to 4) -->
         <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
           <h3 class="text-sm font-bold text-slate-900">जिले के भीतर इच्छित ब्लॉक (Priority 1 to 4)</h3>
           <p class="text-[11px] text-slate-500 -mt-3">स्थानांतरण हेतु अपने पसंदीदा ब्लॉकों का चयन करें। चयनित ब्लॉक अगले विकल्पों से स्वतः हट जाएंगे।</p>
@@ -301,6 +340,48 @@
       </form>
     </div>
 
+    <!-- 4. LIVE MATCHING TEACHERS TABLE -->
+    <div id="matchingCard" class="hidden bg-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-xl border border-slate-800 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <div class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-400 text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-1">
+            <span>🎯 लाइव मैचिंग</span> आपके ब्लॉक में आने वाले साथी
+          </div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-100">
+            उपलब्ध संभावित म्यूचुअल शिक्षक: <span id="matchCountBadge" class="text-emerald-400 font-extrabold text-xl">0</span>
+          </h3>
+        </div>
+        <span class="text-[11px] text-amber-300 bg-amber-950/60 border border-amber-800/60 px-3 py-1 rounded-lg">
+          🔒 प्राइवेसी सुरक्षा: मोबाइल नंबर आंशिक सुरक्षित हैं
+        </span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-800/80 text-slate-300 border-b border-slate-700">
+              <th class="py-2.5 px-3 font-semibold">क्र.</th>
+              <th class="py-2.5 px-3 font-semibold">शिक्षक का नाम</th>
+              <th class="py-2.5 px-3 font-semibold">वर्तमान तैनाती (ब्लॉक)</th>
+              <th class="py-2.5 px-3 font-semibold">उनकी पसंद क्रम</th>
+              <th class="py-2.5 px-3 font-semibold">मोबाइल नंबर</th>
+              <th class="py-2.5 px-3 font-semibold text-center">स्थिति</th>
+            </tr>
+          </thead>
+          <tbody id="matchingTableBody" class="divide-y divide-slate-800 text-slate-200"></tbody>
+        </table>
+      </div>
+
+      <div id="noMatchMsg" class="hidden text-center py-4 text-xs text-slate-400">
+        फिलहाल आपके ब्लॉक व विषय के लिए कोई शिक्षक पंजीकृत नहीं है। जैसे ही कोई साथी जुड़ेगा, सूची यहाँ दिखेगी।
+      </div>
+
+      <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700 text-[11px] text-slate-300 flex items-center justify-between">
+        <span>💡 पूरा मोबाइल नंबर देखने एवं सीधे संपर्क करने की सुविधा शीघ्र चालू होगी।</span>
+        <span class="bg-emerald-600 text-white font-bold text-[10px] px-2 py-0.5 rounded">Free Access Soon</span>
+      </div>
+    </div>
+
   </main>
 
   <!-- Success & Viral Copy Modal -->
@@ -342,9 +423,10 @@
     </div>
   </footer>
 
-  <!-- Complete Dynamic JavaScript -->
+  <!-- Complete Dynamic JavaScript with JSONP Support -->
   <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBmIp9UYNcHgtVa8kOQTXw_fWMqOtVBv3cYDfkPcxIbf3Plg58Yvv8Ie6un7HDyb1iaw/exec';
+    // आपका नया Google Apps Script URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzOLdqCCH3_l-9tqySInil_e1vIDjvJnKBoDnKRPFoIvzD2GhXIX6J6E-pJxe0tz3kgtg/exec';
 
     const districtBlocks = {
       "आगरा": ["अकोला", "अछनेरा", "एत्मादपुर", "फतेहाबाद", "फतेहपुर सीकरी", "जगनेर", "जैतपुर कलां", "खंदौली", "खेरागढ़", "पिनाहट", "सैंया", "शमसाबाद", "बरौली अहीर", "बाह", "बिचपुरी"],
@@ -433,92 +515,180 @@
       });
     };
 
-    let verifiedAuthData = null;
+    let currentUserData = null;
+    let isEditMode = false;
 
-    function verifyTeacher() {
-      const mobile = document.getElementById('authMobile').value.trim();
-      const code = document.getElementById('authCode').value.trim();
-      const statusBox = document.getElementById('authStatusBox');
-      const verifyBtn = document.getElementById('verifyBtn');
+    // JSONP Helper to avoid CORS issues
+    function callJSONP(url, callbackName) {
+      return new Promise((resolve, reject) => {
+        window[callbackName] = function(data) {
+          resolve(data);
+          delete window[callbackName];
+          const el = document.getElementById(callbackName);
+          if (el) el.remove();
+        };
+
+        const script = document.createElement('script');
+        script.id = callbackName;
+        script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + callbackName;
+        script.onerror = function() {
+          reject(new Error("Network error"));
+          delete window[callbackName];
+          const el = document.getElementById(callbackName);
+          if (el) el.remove();
+        };
+        document.body.appendChild(script);
+      });
+    }
+
+    // 1. LOGIN HANDLER
+    function handleTeacherLogin() {
+      const mobile = document.getElementById('loginMobile').value.trim();
+      const code = document.getElementById('loginCode').value.trim();
+      const statusBox = document.getElementById('loginStatusBox');
+      const loginBtn = document.getElementById('loginBtn');
 
       if (mobile.length !== 10) {
         alert("कृपया 10 अंकों का मान्य मोबाइल नंबर दर्ज करें।");
-        document.getElementById('authMobile').focus();
+        document.getElementById('loginMobile').focus();
         return;
       }
       if (!code) {
         alert("कृपया अपना मानव संपदा कोड दर्ज करें।");
-        document.getElementById('authCode').focus();
+        document.getElementById('loginCode').focus();
         return;
       }
 
-      verifyBtn.disabled = true;
-      verifyBtn.innerHTML = '<span>⏳</span> जाँच की जा रही है...';
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<span>⏳</span> लॉगिन जांची जा रही है...';
       statusBox.classList.add('hidden');
 
-      fetch(`${SCRIPT_URL}?mobile=${encodeURIComponent(mobile)}&code=${encodeURIComponent(code)}`)
-        .then(res => res.json())
+      const cbName = 'loginCb_' + Math.round(100000 * Math.random());
+      const requestUrl = `${SCRIPT_URL}?mobile=${encodeURIComponent(mobile)}&code=${encodeURIComponent(code)}`;
+
+      callJSONP(requestUrl, cbName)
         .then(result => {
-          verifyBtn.disabled = false;
-          verifyBtn.innerHTML = '<span>🔍</span> आगे बढ़ें / सत्यापन करें (Verify & Proceed)';
+          loginBtn.disabled = false;
+          loginBtn.innerHTML = '<span>🔓</span> लॉगिन करें (Login)';
 
           if (result.status === "error") {
             statusBox.className = "mt-4 p-3.5 rounded-xl text-xs font-medium border bg-red-50 text-red-700 border-red-200 block";
-            statusBox.innerHTML = `⚠️ <b>चेतावनी:</b> ${result.message}`;
-            document.getElementById('registrationCard').classList.add('hidden');
+            statusBox.innerHTML = `⚠️ ${result.message}`;
             return;
           }
 
-          document.getElementById('authMobile').readOnly = true;
-          document.getElementById('authCode').readOnly = true;
-          document.getElementById('authMobile').classList.add('bg-slate-200', 'cursor-not-allowed');
-          document.getElementById('authCode').classList.add('bg-slate-200', 'cursor-not-allowed');
-          verifyBtn.classList.add('hidden');
-
-          verifiedAuthData = { mobile: mobile, code: code };
-          document.getElementById('registrationCard').classList.remove('hidden');
-
           if (result.isExisting && result.data) {
-            statusBox.className = "mt-4 p-3.5 rounded-xl text-xs font-medium border bg-blue-50 text-blue-800 border-blue-200 block";
-            statusBox.innerHTML = `✓ <b>स्वागत है!</b> आपका पुराना रिकॉर्ड मिल गया है। आप अपना विवरण देख अथवा अपडेट कर सकते हैं।`;
-            document.getElementById('formHeaderTitle').innerText = "अन्तःजनपदीय ट्रांसफर - विवरण अपडेट करें";
-
-            const d = result.data;
-            document.getElementById('teacherName').value = d.teacherName || '';
-            document.getElementById('secondaryMobile').value = d.secondaryMobile || '';
-            document.getElementById('contactMedium').value = d.contactMedium || '';
-            document.getElementById('schoolLevel').value = d.schoolLevel || '';
-            
-            handleLevelChange();
-            document.getElementById('subject').value = d.subject || '';
-            document.getElementById('district').value = d.district || '';
-
-            handleDistrictChange();
-            document.getElementById('currentBlock').value = d.currentBlock || '';
-            document.getElementById('currentSchool').value = d.currentSchool || '';
-
-            updateBlockDropdowns();
-            document.getElementById('p1Block').value = d.p1Block || '';
-            document.getElementById('p2Block').value = d.p2Block || '';
-            document.getElementById('p3Block').value = d.p3Block || '';
-            document.getElementById('p4Block').value = d.p4Block || '';
-            updateBlockDropdowns();
-            loadMatches();
-
+            currentUserData = result.data;
+            showDashboard(currentUserData);
           } else {
-            // New Registration Flow
-            statusBox.className = "mt-4 p-3.5 rounded-xl text-xs font-medium border bg-emerald-50 text-emerald-800 border-emerald-200 block";
-            statusBox.innerHTML = `✓ <b>नया पंजीकरण:</b> यह मोबाइल नंबर व मानव संपदा कोड नया है। कृपया नीचे अपना पूरा विवरण भरकर रजिस्टर करें।`;
-            document.getElementById('formHeaderTitle').innerText = "अन्तःजनपदीय ट्रांसफर - नया पंजीकरण फ़ॉर्म";
+            statusBox.className = "mt-4 p-3.5 rounded-xl text-xs font-medium border bg-amber-50 text-amber-800 border-amber-200 block";
+            statusBox.innerHTML = `ℹ️ इस मोबाइल नंबर अथवा कोड से कोई पूर्व पंजीकरण नहीं मिला। कृपया <b>"न्यू रजिस्ट्रेशन"</b> बटन पर क्लिक करके नया फ़ॉर्म भरें।`;
           }
-
-          document.getElementById('registrationCard').scrollIntoView({ behavior: 'smooth' });
         })
         .catch(() => {
-          verifyBtn.disabled = false;
-          verifyBtn.innerHTML = '<span>🔍</span> आगे बढ़ें / सत्यापन करें (Verify & Proceed)';
+          loginBtn.disabled = false;
+          loginBtn.innerHTML = '<span>🔓</span> लॉगिन करें (Login)';
           alert("सर्वर से संपर्क नहीं हो सका। कृपया पुनः प्रयास करें।");
         });
+    }
+
+    // 2. DASHBOARD VIEW
+    function showDashboard(d) {
+      document.getElementById('loginCard').classList.add('hidden');
+      document.getElementById('formCard').classList.add('hidden');
+      document.getElementById('dashboardCard').classList.remove('hidden');
+
+      document.getElementById('dashTeacherName').textContent = d.teacherName || 'शिक्षक';
+      document.getElementById('dashTeacherInfo').textContent = `जनपद: ${d.district || '-'} | ब्लॉक: ${d.currentBlock || '-'} (${d.currentSchool || '-'})`;
+      document.getElementById('dashCode').textContent = d.manavSampada || '-';
+      document.getElementById('dashMobile').textContent = d.primaryMobile || '-';
+      document.getElementById('dashLevel').textContent = d.schoolLevel || '-';
+      document.getElementById('dashSubject').textContent = d.subject || '-';
+
+      loadMatchesForTeacher(d.district, d.currentBlock, d.schoolLevel, d.subject);
+    }
+
+    // 3. NEW REGISTRATION HANDLER
+    function openNewRegistrationForm() {
+      isEditMode = false;
+      currentUserData = null;
+
+      document.getElementById('loginCard').classList.add('hidden');
+      document.getElementById('dashboardCard').classList.add('hidden');
+      document.getElementById('matchingCard').classList.add('hidden');
+      document.getElementById('formCard').classList.remove('hidden');
+
+      document.getElementById('formBadge').innerHTML = `<span>✨</span> नया पंजीकरण फ़ॉर्म`;
+      document.getElementById('formMainTitle').textContent = `अन्तःजनपदीय ट्रांसफर - नया शिक्षक पंजीकरण`;
+      
+      document.getElementById('intraDistrictForm').reset();
+      document.getElementById('formMobile').value = document.getElementById('loginMobile').value.trim();
+      document.getElementById('formCode').value = document.getElementById('loginCode').value.trim();
+      document.getElementById('formMobile').readOnly = false;
+      document.getElementById('formCode').readOnly = false;
+      document.getElementById('regAuthInputs').classList.remove('hidden');
+
+      handleLevelChange();
+      document.getElementById('formCard').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 4. EDIT DETAILS HANDLER
+    function enableDetailEdit() {
+      if (!currentUserData) return;
+      isEditMode = true;
+
+      document.getElementById('dashboardCard').classList.add('hidden');
+      document.getElementById('formCard').classList.remove('hidden');
+
+      document.getElementById('formBadge').innerHTML = `<span>✏️</span> विवरण संपादन`;
+      document.getElementById('formMainTitle').textContent = `अन्तःजनपदीय ट्रांसफर - विवरण में बदलाव करें`;
+
+      document.getElementById('formMobile').value = currentUserData.primaryMobile || '';
+      document.getElementById('formCode').value = currentUserData.manavSampada || '';
+      document.getElementById('formMobile').readOnly = true;
+      document.getElementById('formCode').readOnly = true;
+
+      document.getElementById('teacherName').value = currentUserData.teacherName || '';
+      document.getElementById('secondaryMobile').value = currentUserData.secondaryMobile || '';
+      document.getElementById('contactMedium').value = currentUserData.contactMedium || '';
+      document.getElementById('schoolLevel').value = currentUserData.schoolLevel || '';
+      
+      handleLevelChange();
+      document.getElementById('subject').value = currentUserData.subject || '';
+      document.getElementById('district').value = currentUserData.district || '';
+
+      handleDistrictChange();
+      document.getElementById('currentBlock').value = currentUserData.currentBlock || '';
+      document.getElementById('currentSchool').value = currentUserData.currentSchool || '';
+
+      updateBlockDropdowns();
+      document.getElementById('p1Block').value = currentUserData.p1Block || '';
+      document.getElementById('p2Block').value = currentUserData.p2Block || '';
+      document.getElementById('p3Block').value = currentUserData.p3Block || '';
+      document.getElementById('p4Block').value = currentUserData.p4Block || '';
+      updateBlockDropdowns();
+
+      document.getElementById('formCard').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cancelFormToLogin() {
+      document.getElementById('formCard').classList.add('hidden');
+      if (currentUserData) {
+        document.getElementById('dashboardCard').classList.remove('hidden');
+      } else {
+        document.getElementById('loginCard').classList.remove('hidden');
+      }
+    }
+
+    function handleLogout() {
+      currentUserData = null;
+      isEditMode = false;
+      document.getElementById('dashboardCard').classList.add('hidden');
+      document.getElementById('matchingCard').classList.add('hidden');
+      document.getElementById('loginCard').classList.remove('hidden');
+      document.getElementById('loginMobile').value = '';
+      document.getElementById('loginCode').value = '';
+      document.getElementById('loginStatusBox').classList.add('hidden');
     }
 
     function handleLevelChange() {
@@ -608,7 +778,12 @@
       const block = document.getElementById('currentBlock').value;
       const level = document.getElementById('schoolLevel').value;
       const sub = document.getElementById('subject').value;
+      if (dist && block && level) {
+        loadMatchesForTeacher(dist, block, level, sub);
+      }
+    }
 
+    function loadMatchesForTeacher(dist, block, level, sub) {
       if (!dist || !block || !level) return;
 
       const matchCard = document.getElementById('matchingCard');
@@ -620,8 +795,10 @@
       countBadge.textContent = "खोज रहे हैं...";
       tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-slate-400">डेटा खोजा जा रहा है...</td></tr>`;
 
-      fetch(`${SCRIPT_URL}?action=getMatches&district=${encodeURIComponent(dist)}&block=${encodeURIComponent(block)}&schoolLevel=${encodeURIComponent(level)}&subject=${encodeURIComponent(sub)}`)
-        .then(res => res.json())
+      const cbName = 'matchCb_' + Math.round(100000 * Math.random());
+      const requestUrl = `${SCRIPT_URL}?action=getMatches&district=${encodeURIComponent(dist)}&block=${encodeURIComponent(block)}&schoolLevel=${encodeURIComponent(level)}&subject=${encodeURIComponent(sub || '')}`;
+
+      callJSONP(requestUrl, cbName)
         .then(data => {
           tableBody.innerHTML = '';
           if (data.status === 'success' && data.matches.length > 0) {
@@ -659,18 +836,27 @@
     function submitForm(event) {
       event.preventDefault();
 
-      if (!verifiedAuthData) {
-        alert("कृपया पहले चरण 1 में अपना सत्यापन पूर्ण करें।");
-        return;
-      }
-      
       const btn = document.getElementById('submitBtn');
       btn.disabled = true;
       btn.textContent = "विवरण सुरक्षित किया जा रहा है...";
 
+      const pMobile = document.getElementById('formMobile').value.trim();
+      const mCode = document.getElementById('formCode').value.trim();
+
+      if (pMobile.length !== 10) {
+        alert("कृपया 10 अंकों का मुख्य मोबाइल नंबर दर्ज करें।");
+        btn.disabled = false;
+        btn.textContent = "पंजीकरण सुरक्षित / अपडेट करें (Save Record)";
+        return;
+      }
+      if (!mCode) {
+        alert("कृपया मानव संपदा कोड दर्ज करें।");
+        btn.disabled = false;
+        btn.textContent = "पंजीकरण सुरक्षित / अपडेट करें (Save Record)";
+        return;
+      }
+
       const tName = document.getElementById('teacherName').value.trim();
-      const mCode = verifiedAuthData.code;
-      const pMobile = verifiedAuthData.mobile;
       const cMedium = document.getElementById('contactMedium').value;
       const sLevel = document.getElementById('schoolLevel').value;
       const sub = document.getElementById('subject').value;
@@ -733,7 +919,9 @@
         document.getElementById('successModal').classList.remove('hidden');
         btn.disabled = false;
         btn.textContent = "पंजीकरण सुरक्षित / अपडेट करें (Save Record)";
-        loadMatches();
+
+        currentUserData = formData;
+        showDashboard(currentUserData);
       })
       .catch(() => {
         alert("डेटा सुरक्षित करने में समस्या आई। कृपया पुनः प्रयास करें।");
