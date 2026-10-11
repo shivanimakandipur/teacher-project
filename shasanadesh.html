@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>उत्तर प्रदेश बेसिक शिक्षा विभाग नवीनतम शासनादेश 2026 - deshimaster.in</title>
+  <meta name="description" content="परिषदीय विद्यालयों, शिक्षकों और आंगनबाड़ी केंद्रों हेतु उत्तर प्रदेश शासन एवं बेसिक शिक्षा विभाग के नवीनतम शासनादेश, अवकाश सूची और आदेश ऑनलाइन देखें और डाउनलोड करें।">
+  <meta name="robots" content="index, follow">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Inter', 'Noto Sans Devanagari', sans-serif; }</style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="bg-emerald-600 text-white font-extrabold text-base px-2.5 py-1.5 rounded-lg shadow-sm">DM</div>
+        <div>
+          <span class="block font-bold text-lg text-slate-900 leading-tight">deshimaster.in</span>
+          <span class="block text-[10px] text-slate-500 uppercase tracking-wider font-semibold">देशी मास्टर - शासनादेश संग्रह</span>
+        </div>
+      </a>
+      <nav class="flex items-center gap-5 text-sm font-medium text-slate-600">
+        <a href="index.html" class="hover:text-emerald-600 transition">← होम पोर्टल</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
+    
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-6">
+      <h1 class="text-2xl font-extrabold text-slate-900 flex items-center gap-2 mb-2">
+        <span>📖</span> महत्वपूर्ण शासनादेश (Government Orders)
+      </h1>
+      <p class="text-xs sm:text-sm text-slate-500 mb-6">
+        उत्तर प्रदेश बेसिक शिक्षा विभाग के नवीनतम आदेश, निर्देश व पत्र। नीचे सूची दी गई है, आप चाहें तो सीधे स्क्रॉल करके देख सकते हैं या सर्च कर सकते हैं।
+      </p>
+
+      <!-- Search Bar -->
+      <div class="relative">
+        <input 
+          type="text" 
+          id="searchOrder" 
+          onkeyup="filterOrders()" 
+          placeholder="यहाँ टाइप करें (उदा. अवकाश, MDM, तिथि भोजन)..."
+          class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl text-xs sm:text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+        <span class="absolute left-3.5 top-3.5 text-slate-400 text-sm">🔍</span>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-xs sm:text-sm text-left">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+              <th class="p-3.5 sm:p-4 w-32">दिनांक (Date)</th>
+              <th class="p-3.5 sm:p-4">शासनादेश का विषय / विवरण (Subject)</th>
+              <th class="p-3.5 sm:p-4 text-center w-40">कार्रवाई (Action)</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody" class="divide-y divide-slate-200 text-slate-700">
+            <tr><td colspan="3" class="p-6 text-center text-slate-400">शासनादेश लोड हो रहे हैं...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-3 font-medium text-slate-600">
+        <a href="index.html" class="hover:text-emerald-600 transition">होम</a>
+        <a href="about.html" class="hover:text-emerald-600 transition">हमारे बारे में</a>
+        <a href="privacy-policy.html" class="hover:text-emerald-600 transition">गोपनीयता नीति</a>
+        <a href="terms.html" class="hover:text-emerald-600 transition">नियम व शर्तें</a>
+        <a href="disclaimer.html" class="hover:text-emerald-600 transition">डिस्क्लेमर</a>
+      </div>
+      <p>© deshimaster.in (देशी मास्टर)। सर्वाधिकार सुरक्षित।</p>
+    </div>
+  </footer>
+
+  <!-- Script to load JSON data properly -->
+  <script>
+    let allOrders = [];
+
+    // JSON फाइल को सुरक्षित तरीके से लोड करना
+    fetch('orders.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        allOrders = data;
+        displayTable(allOrders);
+      })
+      .catch(error => {
+        console.error('Error loading orders:', error);
+        document.getElementById('tableBody').innerHTML = `<tr><td colspan="3" class="p-6 text-center text-red-500 font-medium">शासनादेश लोड करने में समस्या आई। कृपया सुनिश्चित करें कि orders.json फाइल सही जगह पर है।</td></tr>`;
+      });
+
+    function displayTable(orders) {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+      
+      if(!orders || orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-slate-500">कोई शासनादेश उपलब्ध नहीं है।</td></tr>`;
+        return;
+      }
+
+      orders.forEach(order => {
+        let tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 transition";
+        tr.innerHTML = `
+          <td class="p-3.5 sm:p-4 font-medium whitespace-nowrap text-slate-600">${order.date}</td>
+          <td class="p-3.5 sm:p-4 font-semibold text-slate-900">${order.subject}</td>
+          <td class="p-3.5 sm:p-4 text-center whitespace-nowrap">
+            <div class="flex items-center justify-center gap-2">
+              <a href="${order.driveLink}" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition shadow-sm inline-flex items-center gap-1">👁️ देखें</a>
+              <a href="${order.driveLink}" target="_blank" download class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition shadow-sm inline-flex items-center gap-1">📥 डाउनलोड</a>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterOrders() {
+      let input = document.getElementById('searchOrder').value.toLowerCase();
+      let filtered = allOrders.filter(order => order.subject.toLowerCase().includes(input));
+      displayTable(filtered);
+    }
+  </script>
+
+</body>
+</html>
