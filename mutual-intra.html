@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>अन्तःजनपदीय म्यूचुअल ट्रांसफर - शिक्षक लॉगिन एवं पंजीकरण | deshimaster.in</title>
+  <title>अन्तःजनपदीय म्यूचुअल ट्रांसफर - शिक्षक लॉगिन एवं नया पंजीकरण | deshimaster.in</title>
   <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के प्राथमिक एवं उच्च प्राथमिक शिक्षकों हेतु अन्तःजनपदीय पारस्परिक स्थानांतरण ऑनलाइन पोर्टल।">
 
   <!-- Tailwind CSS CDN -->
@@ -34,24 +34,30 @@
   <!-- Main Content -->
   <main class="max-w-3xl mx-auto px-4 py-8 flex-grow w-full space-y-6">
     
-    <!-- STEP 1: AUTHENTICATION / LOGIN -->
+    <!-- STEP 1: AUTHENTICATION / LOGIN / NEW REGISTRATION PROMPT -->
     <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
-      <div class="border-b border-slate-100 pb-4 mb-5">
-        <div class="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md mb-2">
-          <span>🔒 चरण 1</span> शिक्षक पहचान एवं सत्यापन
+      <div class="border-b border-slate-100 pb-4 mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md mb-2">
+            <span>🔒 चरण 1</span> शिक्षक पहचान एवं सत्यापन
+          </div>
+          <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            लॉगिन अथवा नया पंजीकरण
+          </h1>
+          <p class="text-xs text-slate-500 mt-1">
+            अपने मोबाइल नंबर और मानव संपदा कोड से लॉगिन करें, या पहली बार आने पर नया रजिस्ट्रेशन करें।
+          </p>
         </div>
-        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
-          लॉगिन / नया शिक्षक पंजीकरण
-        </h1>
-        <p class="text-xs text-slate-500 mt-1">
-          डेटा की प्रामाणिकता हेतु अपना मुख्य मोबाइल नंबर एवं मानव संपदा कोड दर्ज करके आगे बढ़ें।
-        </p>
+        <!-- Quick New Registration Helper Badge -->
+        <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-3 py-2 rounded-xl text-center">
+          ✨ <b>नया शिक्षक?</b><br>सीधे नीचे नंबर भरें!
+        </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            लॉगिन आईडी (मुख्य मोबाइल नंबर) <span class="text-red-500">*</span>
+            मोबाइल नंबर (लॉगिन आईडी) <span class="text-red-500">*</span>
           </label>
           <input 
             type="tel" 
@@ -67,7 +73,7 @@
 
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            पासवर्ड (मानव संपदा कोड) <span class="text-red-500">*</span>
+            मानव संपदा कोड (पासवर्ड) <span class="text-red-500">*</span>
           </label>
           <input 
             type="text" 
@@ -86,7 +92,7 @@
         id="verifyBtn" 
         onclick="verifyTeacher()" 
         class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-sm text-sm flex items-center justify-center gap-2">
-        <span>🔍</span> सत्यापित करें एवं फ़ॉर्म खोलें (Verify & Proceed)
+        <span>🔍</span> आगे बढ़ें / सत्यापन करें (Verify & Proceed)
       </button>
 
       <div id="authStatusBox" class="mt-4 hidden p-3.5 rounded-xl text-xs font-medium border leading-relaxed"></div>
@@ -447,14 +453,14 @@
       }
 
       verifyBtn.disabled = true;
-      verifyBtn.innerHTML = '<span>⏳</span> पहचान जांची जा रही है...';
+      verifyBtn.innerHTML = '<span>⏳</span> जाँच की जा रही है...';
       statusBox.classList.add('hidden');
 
       fetch(`${SCRIPT_URL}?mobile=${encodeURIComponent(mobile)}&code=${encodeURIComponent(code)}`)
         .then(res => res.json())
         .then(result => {
           verifyBtn.disabled = false;
-          verifyBtn.innerHTML = '<span>🔍</span> सत्यापित करें एवं फ़ॉर्म खोलें (Verify & Proceed)';
+          verifyBtn.innerHTML = '<span>🔍</span> आगे बढ़ें / सत्यापन करें (Verify & Proceed)';
 
           if (result.status === "error") {
             statusBox.className = "mt-4 p-3.5 rounded-xl text-xs font-medium border bg-red-50 text-red-700 border-red-200 block";
@@ -500,16 +506,17 @@
             loadMatches();
 
           } else {
+            // New Registration Flow
             statusBox.className = "mt-4 p-3.5 rounded-xl text-xs font-medium border bg-emerald-50 text-emerald-800 border-emerald-200 block";
-            statusBox.innerHTML = `✓ <b>सत्यापन सफल!</b> आपका मोबाइल एवं मानव संपदा कोड लॉक कर दिया गया है। कृपया नीचे अपना पूरा विवरण भरें।`;
-            document.getElementById('formHeaderTitle').innerText = "अन्तःजनपदीय ट्रांसफर - नया पंजीकरण";
+            statusBox.innerHTML = `✓ <b>नया पंजीकरण:</b> यह मोबाइल नंबर व मानव संपदा कोड नया है। कृपया नीचे अपना पूरा विवरण भरकर रजिस्टर करें।`;
+            document.getElementById('formHeaderTitle').innerText = "अन्तःजनपदीय ट्रांसफर - नया पंजीकरण फ़ॉर्म";
           }
 
           document.getElementById('registrationCard').scrollIntoView({ behavior: 'smooth' });
         })
         .catch(() => {
           verifyBtn.disabled = false;
-          verifyBtn.innerHTML = '<span>🔍</span> सत्यापित करें एवं फ़ॉर्म खोलें (Verify & Proceed)';
+          verifyBtn.innerHTML = '<span>🔍</span> आगे बढ़ें / सत्यापन करें (Verify & Proceed)';
           alert("सर्वर से संपर्क नहीं हो सका। कृपया पुनः प्रयास करें।");
         });
     }
