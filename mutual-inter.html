@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>अंतर जनपदीय शिक्षक म्यूचुअल ट्रांसफर साथी - desimaster.in</title>
+  <title>अंतर-जनपदीय पारस्परिक ट्रांसफर - deshimaster.in</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
@@ -12,34 +12,46 @@
   <!-- Firebase SDK (Compat Version) -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .article-body p { margin-bottom: 1.2rem; line-height: 1.85; text-align: justify; }
+    .article-body h2 { margin-top: 2rem; margin-bottom: 1rem; color: #1e1b4b; font-weight: 700; }
+    .article-body h3 { margin-top: 1.3rem; margin-bottom: 0.6rem; color: #312e81; font-weight: 600; }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
-  <!-- Header -->
-  <header class="bg-indigo-700 text-white shadow-md sticky top-0 z-50">
-    <div class="max-w-4xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center gap-3">
-        <a href="https://desimaster.in" class="w-10 h-10 bg-amber-400 text-indigo-900 rounded-xl flex items-center justify-center font-black text-xl shadow-inner">
+  <!-- Header (आपकी वेबसाइट के मूल लेआउट के अनुसार) -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <!-- Logo Section -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 bg-emerald-700 text-white rounded-lg flex items-center justify-center font-black text-xl tracking-tight shadow-sm">
           DM
-        </a>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs bg-amber-400/20 text-amber-300 font-mono px-2 py-0.5 rounded border border-amber-300/30">desimaster.in</span>
-            <span class="text-[11px] text-indigo-200">अंतर जनपदीय पोर्टल</span>
-          </div>
-          <h1 class="text-lg sm:text-xl font-bold tracking-tight">यूपी शिक्षक म्यूचुअल ट्रांसफर साथी</h1>
         </div>
-      </div>
-      <div class="text-xs text-indigo-100 bg-indigo-800/80 px-3 py-1.5 rounded-full border border-indigo-500/60">
-        <i class="fa-solid fa-shield-halved text-amber-300 mr-1"></i> प्रमाणित पारस्परिक मंच
-      </div>
+        <div>
+          <h1 class="text-xl font-bold text-slate-900 leading-tight tracking-tight">deshimaster.in</h1>
+          <p class="text-xs text-slate-500 font-medium">देशी मास्टर - शिक्षक डिजिटल साथी</p>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="flex items-center gap-4 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-emerald-700 transition">होम पोर्टल</a>
+        <a href="shasanadesh.html" class="hover:text-emerald-700 transition">शासनादेश</a>
+        <a href="about.html" class="hover:text-emerald-700 transition">हमारे बारे में</a>
+        <a href="mutual-intra.html" class="text-xs bg-indigo-700 hover:bg-indigo-800 text-white px-3 py-1.5 rounded-lg transition shadow-xs flex items-center gap-1">
+          <i class="fa-solid fa-school"></i> अंतःजनपदीय
+        </a>
+      </nav>
     </div>
   </header>
 
   <!-- Main Container -->
-  <main class="max-w-4xl mx-auto px-4 py-6 space-y-8 w-full">
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-10 w-full flex-1">
 
-    <!-- Auth Section (Tabs: Register vs Login) -->
+    <!-- Section 1: Auth & Portal Operations -->
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
       <!-- Tabs Header -->
       <div class="flex border-b border-slate-200 bg-slate-100 text-sm font-semibold">
@@ -57,7 +69,7 @@
       <div id="tab-pane-register" class="p-6">
         <div class="mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
           <div>
-            <h2 class="text-base font-bold text-slate-800">अंतर जनपदीय विवरण दर्ज करें</h2>
+            <h2 class="text-base font-bold text-slate-800">अंतर-जनपदीय विवरण दर्ज करें</h2>
             <p class="text-xs text-slate-500">वर्तमान तैनाती एवं इच्छित 5 जनपदों की वरीयता भरें</p>
           </div>
           <span class="text-xs bg-emerald-50 text-emerald-700 font-medium px-2.5 py-1 rounded-md border border-emerald-200">100% नि:शुल्क पंजीकरण</span>
@@ -212,9 +224,9 @@
 
           <div class="md:col-span-2 lg:col-span-3 pt-2">
             <button type="submit" id="reg-btn"
-              class="w-full sm:w-auto px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
+              class="w-full sm:w-auto px-8 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-medium rounded-lg shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
               <i class="fa-solid fa-cloud-arrow-up"></i>
-              <span>अंतर जनपदीय पंजीकरण सुरक्षित करें</span>
+              <span>अंतर-जनपदीय पंजीकरण सुरक्षित करें</span>
             </button>
           </div>
         </form>
@@ -228,8 +240,8 @@
             <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
               <i class="fa-solid fa-user-check"></i>
             </div>
-            <h2 class="text-lg font-bold text-slate-800">अंतर जनपदीय शिक्षक लॉगिन</h2>
-            <p class="text-xs text-slate-500">पंजीकृत मोबाइल नंबर एवं eHRMS कोड दर्ज कर अंतर जनपदीय मैच देखें</p>
+            <h2 class="text-lg font-bold text-slate-800">अंतर-जनपदीय शिक्षक लॉगिन</h2>
+            <p class="text-xs text-slate-500">पंजीकृत मोबाइल नंबर एवं eHRMS कोड दर्ज कर अंतर-जनपदीय मैच देखें</p>
           </div>
 
           <form id="login-form" class="space-y-4">
@@ -248,7 +260,7 @@
             </div>
 
             <button type="submit" id="login-btn"
-              class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2 cursor-pointer">
+              class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2 cursor-pointer">
               <i class="fa-solid fa-right-to-bracket"></i>
               <span>लॉगिन करें एवं पारस्परिक साथी देखें</span>
             </button>
@@ -262,7 +274,7 @@
             <div class="flex justify-between items-start mb-3 border-b border-indigo-100 pb-3">
               <div>
                 <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md mb-1">
-                  <i class="fa-solid fa-circle-check"></i> प्रमाणित अंतर जनपदीय प्रोफाइल
+                  <i class="fa-solid fa-circle-check"></i> प्रमाणित अंतर-जनपदीय प्रोफाइल
                 </span>
                 <h3 id="loggedName" class="font-bold text-slate-900 text-lg uppercase"></h3>
                 <p id="loggedEhrms" class="text-xs text-slate-600 font-medium"></p>
@@ -293,7 +305,7 @@
             <div class="border-b border-slate-100 pb-3">
               <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
                 <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
-                आपके लिए उपलब्ध अंतर जनपदीय पारस्परिक (म्यूचुअल) साथी
+                आपके लिए उपलब्ध अंतर-जनपदीय पारस्परिक (म्यूचुअल) साथी
               </h4>
               <p id="match-summary-text" class="text-xs text-indigo-600 font-semibold mt-0.5">डेटाबेस स्कैन किया जा रहा है...</p>
             </div>
@@ -388,36 +400,149 @@
       </div>
     </div>
 
+    <!-- Section 2: Comprehensive 1200+ Words Guide & Legal Reality -->
+    <div id="rules-guide-section" class="space-y-6 pt-4">
+      
+      <!-- Article Header Card -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div class="flex items-center gap-2 text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-scale-balanced"></i> बेसिक शिक्षा विभाग विधिक एवं प्रशासनिक अध्ययन
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight mb-4">
+          उत्तर प्रदेश बेसिक शिक्षा परिषद: शिक्षक स्थानांतरण नियमावली, 5 व 2 वर्ष की सेवा अवधि की परिवर्तनशीलता एवं पारस्परिक स्थानांतरण का यथार्थ
+        </h2>
+        <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500 border-t border-slate-100 pt-4">
+          <span><i class="fa-regular fa-clock mr-1"></i> विस्तृत आलेख (1200+ शब्द)</span>
+          <span><i class="fa-solid fa-graduation-cap mr-1"></i> प्राथमिक एवं उच्च प्राथमिक शिक्षक संवर्ग</span>
+          <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> प्रामाणिक विश्लेषण</span>
+        </div>
+      </div>
+
+      <!-- Article Body -->
+      <article class="bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-slate-200 article-body text-slate-700 leading-relaxed text-sm sm:text-base">
+        
+        <h2>1. प्रस्तावना: परिषदीय स्थानांतरण नीतियों की गतिशील प्रकृति</h2>
+        <p>
+          उत्तर प्रदेश बेसिक शिक्षा परिषद के अधीन परिषदीय प्राथमिक एवं उच्च प्राथमिक विद्यालयों में कार्यरत शिक्षकों के लिए स्थानांतरण सदैव से एक अत्यंत संवेदनशील, बहुप्रतीक्षित और विचारणीय विषय रहा है। राज्य के सुदूर जनपदों में पदस्थापित शिक्षक अपनी पारिवारिक परिस्थितियों, गृह जनपद से अत्यधिक दूरी, स्वास्थ्य संबंधी चुनौतियों, बुजुर्ग माता-पिता की देखभाल और सामाजिक दायित्वों के निर्वहन हेतु निरंतर स्थानांतरण की प्रतीक्षा में रहते हैं।
+        </p>
+        <p>
+          किंतु इस संपूर्ण प्रक्रिया में जो सबसे बड़ा असमंजस शिक्षकों के मध्य बना रहता है, वह है—<strong>"न्यूनतम अनिवार्य सेवा अवधि" (Minimum Service Tenure)</strong>। शिक्षकों के बीच सामान्यतः यह चर्चा चलती रहती है कि क्या पुरुष अध्यापकों के लिए 5 वर्ष और महिला अध्यापिकाओं के लिए 2 वर्ष अथवा 3 वर्ष की सेवा पूर्ण होना विधिक रूप से अनिवार्य है? धरातलीय यथार्थ यह है कि <strong>बेसिक शिक्षा विभाग की स्थानांतरण नियमावली कोई स्थायी अथवा पत्थर की लकीर जैसी विधिक व्यवस्था नहीं है; यह समय, प्रशासनिक प्राथमिकताओं, छात्र-शिक्षक अनुपात (PTR), विद्यालयों में रिक्त पदों की स्थिति तथा माननीय उच्च न्यायालय व उच्चतम न्यायालय के निर्णयों के अधीन निरंतर परिवर्तित होती रहती है।</strong> अतः किसी एक सत्र या पुराने शासनादेश के नियम को शाश्वत मान लेना न केवल पूर्णतः भ्रामक है, बल्कि शिक्षकों की भविष्य की तैयारियों को भी बाधित करता है।
+        </p>
+
+        <h2>2. बेसिक शिक्षा (अध्यापक) सेवा नियमावली, 1981 और नियम 21 की विधिक स्थिति</h2>
+        <p>
+          परिषदीय शिक्षकों की सेवा शर्तें, संवर्ग विभाजन, पदोन्नति और स्थानांतरण मूलतः <strong>उत्तर प्रदेश बेसिक शिक्षा (अध्यापक) सेवा नियमावली, 1981 (The U.P. Basic Education (Teachers) Service Rules, 1981)</strong> द्वारा शासित होते हैं। इस नियमावली की संरचना को समझना प्रत्येक शिक्षक के लिए अत्यंत आवश्यक है:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 mb-4 text-slate-700">
+          <li>
+            <strong>नियम 21 (स्थानांतरण की शक्तियां):</strong> नियमावली का नियम 21 बेसिक शिक्षा परिषद को यह अधिकार प्रदान करता है कि वह प्रशासनिक हित में अथवा शिक्षक के व्यक्तिगत प्रार्थना पत्र पर एक विद्यालय से दूसरे विद्यालय अथवा एक जनपद से दूसरे जनपद में स्थानांतरण कर सके।
+          </li>
+          <li>
+            <strong>संवर्ग की स्वायत्तता (District Cadre बनाम Local Cadre):</strong> परिषदीय सहायक अध्यापक मूलतः जनपदीय संवर्ग (District Cadre) के पद पर नियुक्त होते हैं। अंतः जनपदीय स्थानांतरण (Intra-District Transfer) जिले की सीमा के भीतर कार्यरत ब्लॉक या विद्यालय परिवर्तन का विषय है, जबकि अंतर जनपदीय स्थानांतरण (Inter-District Transfer) एक जनपदीय संवर्ग से त्यागपत्र देकर दूसरे जनपद के संवर्ग की अंतिम वरिष्ठता स्वीकार करने जैसी जटिल प्रशासनिक प्रक्रिया है।
+          </li>
+          <li>
+            <strong>शासनादेशों का प्रभुत्व (Primacy of Executive Orders):</strong> नियम 21 में कोई स्थायी सेवा-अवधि (जैसे 2 वर्ष या 5 वर्ष) स्पष्ट रूप से नियमावली के मूल पाठ में नहीं बाँधी गई है। इसके स्थान पर राज्य सरकार को प्रत्येक शैक्षणिक सत्र में आवश्यकतानुसार नीति निर्धारण की छूट दी गई है। यही कारण है कि प्रत्येक स्थानांतरण चक्र में शासन बिल्कुल नया शासनादेश जारी करता है, जो पूर्ववर्ती नियमों से भिन्न हो सकता है।
+          </li>
+        </ul>
+
+        <h2>3. "5 वर्ष बनाम 2 वर्ष" का मिथक और प्रशासनिक आवश्यकताओं के अनुसार बदलाव</h2>
+        <p>
+          विगत वर्षों के कुछ विशिष्ट शासनादेशों (विशेषकर सत्र 2019-20 एवं 2020-21 के दौरान) में पुरुष अध्यापकों के लिए 5 वर्ष और महिला अध्यापिकाओं के लिए 2 वर्ष की न्यूनतम नियमित सेवा की शर्त जोड़ी गई थी। उस एक आदेश के कारण परिषदीय समाज में यह धारणा बैठ गई कि यह कोई शाश्वत नियम है। किंतु इसके बाद के घटनाक्रमों ने इस भ्रम को पूरी तरह तोड़ दिया:
+        </p>
+        
+        <h3>क. सामान्य स्थानांतरण बनाम पारस्परिक स्थानांतरण (General vs Mutual Transfer)</h3>
+        <p>
+          शासन ने अपने विभिन्न स्पष्टीकरणों में यह भली-भांति माना है कि एकतरफा (One-Way) सामान्य स्थानांतरण और पारस्परिक (Mutual) स्थानांतरण में ज़मीन-आसमान का अंतर है:
+        </p>
+        <p>
+          एकतरफा स्थानांतरण में किसी विद्यालय से शिक्षक चला जाता है, जिससे वहाँ छात्र-शिक्षक अनुपात (RTE Act 2009 के मानक) बिगड़ सकता है। विशेष रूप से आकांक्षी जनपदों (Aspirational Districts) में पद रिक्त होने का भय रहता है। इसलिए वहाँ सरकार कठोर सेवा अवधि और विभिन्न श्रेणियों के भारांक (Weightage Points) निर्धारित करती है। इसके विपरीत, <strong>पारस्परिक स्थानांतरण में पदों का संतुलन शून्य प्रभाव (Zero Net Impact) पर रहता है</strong>—एक शिक्षक के जाने पर ठीक उसी पद और उसी विषय का दूसरा शिक्षक उस स्थान पर पदभार ग्रहण कर लेता है। इसलिए पारस्परिक स्थानांतरण में सेवा अवधि की बाध्यता को शिथिल करने की मांग सदैव न्यायसंगत मानी गई है और कई अवसरों पर शासन ने इसे अत्यंत लचीला बनाया है।
+        </p>
+
+        <h3>ख. माननीय उच्च न्यायालय के ऐतिहासिक निर्णय</h3>
+        <p>
+          माननीय इलाहाबाद उच्च न्यायालय की एकल पीठ एवं खंडपीठों द्वारा विभिन्न रिट याचिकाओं (जैसे <em>दिव्या गोस्वामी बनाम उत्तर प्रदेश राज्य</em> एवं अन्य समवर्ती वाद) में सेवा अवधि की कठोरता पर गंभीर टिप्पणियां की गई हैं। न्यायालय ने स्पष्ट किया कि मानवीय संवेदनाओं, गंभीर असाध्य रोगों से ग्रसित शिक्षकों, दिव्यांगों, असाधारण पारिवारिक संकटों तथा पारस्परिक सहमति के मामलों में शासन को अपनी नीतियों को जड़ (Rigid) बनाने के स्थान पर विवेकपूर्ण और लचीला बनाना चाहिए। न्यायालय के आदेशों के अनुपालन में शासन को समय-समय पर अपने शासनादेशों में संशोधन करने पड़े हैं।
+        </p>
+
+        <h3>ग. विभिन्न बैचों के लिए नियमों का शिथिलीकरण</h3>
+        <p>
+          इतिहास साक्षी है कि 68,500 शिक्षक भर्ती और 69,000 शिक्षक भर्ती के उपरांत नए नियुक्त अध्यापकों के संदर्भ में भी कई बार सेवा-अवधि की शर्तों को लेकर व्यापक प्रशासनिक विमर्श हुआ। कभी प्रोबेशन अवधि (3 वर्ष) को आधार बनाया गया, तो कभी केवल महिलाओं व विशेष परिस्थितियों को छूट मिली, और कभी पारस्परिक आवेदनों के लिए न्यूनतम समय-सीमा को गौण मान लिया गया। यह निरंतर परिवर्तनशीलता दर्शाती है कि सेवा अवधि की कोई अंतिम या अपरिवर्तनीय विधिक परिभाषा मौजूद नहीं है।
+        </p>
+
+        <h2>4. अंतः जनपदीय स्थानांतरण (Intra-District): ब्लॉक वरीयता एवं स्थानीय गतिशीलता</h2>
+        <p>
+          यदि जिले के अंदर (Intra-District) की बात करें, तो यहाँ सेवा अवधि के नियम और भी अधिक अप्रत्याशित और प्रशासनिक आवश्यकताओं पर आधारित रहे हैं:
+        </p>
+        <p>
+          जिले के भीतर ब्लॉक परिवर्तन या विद्यालय परिवर्तन में कई बार सेवा अवधि की कोई बाध्यता रखी ही नहीं गई। नव-नियुक्त शिक्षक भी अपने कार्यरत ब्लॉक से अपने निवास के निकटवर्ती ब्लॉक में पारस्परिक साथी मिलने पर स्थानांतरण हेतु अग्रसर होते रहे हैं। अंतः जनपदीय प्रक्रिया में मुख्य बाधा सेवा अवधि नहीं, बल्कि <strong>"समान पद", "समान संवर्ग (प्राथमिक/जूनियर)" और "समान विषय"</strong> का सटीक साथी खोजना होता है।
+        </p>
+        <p>
+          यदि दो शिक्षक प्राथमिक स्तर पर सहायक अध्यापक हैं और दोनों एक-दूसरे के कार्यरत ब्लॉक को अपनी प्राथमिकता सूची में दर्ज कर लेते हैं, तो विभागीय अधिकारियों के लिए भी ऐसे पारस्परिक आवेदनों का निस्तारण करना सर्वाधिक सुगम और विवाद-रहित होता है।
+        </p>
+
+        <h2>5. डिजिटल तैयारी का महत्व: desimaster.in की भूमिका क्यों अनिवार्य है?</h2>
+        <p>
+          चूँकि बेसिक शिक्षा विभाग की स्थानांतरण नियमावली कब, किस रूप में और किन विशेष शर्तों के साथ जारी होगी, इसके बारे में पहले से कोई दावा नहीं किया जा सकता, इसलिए शिक्षकों के लिए सबसे व्यावहारिक रणनीति यह है कि वे <strong>शासनादेश जारी होने की प्रतीक्षा में समय व्यर्थ न करें, बल्कि पहले से अपना पारस्परिक साथी (Mutual Partner) खोजकर आपसी सहमति बना लें।</strong>
+        </p>
+        <p>
+          विभागीय अनुभव यह बताता है कि शासन जब भी मानव संपदा अथवा बेसिक शिक्षा परिषद पोर्टल पर स्थानांतरण की विंडो खोलता है, तो ऑनलाइन आवेदन, रजिस्ट्रेशन और ओटीपी सत्यापन के लिए मात्र 7 से 15 दिनों का अत्यंत अल्प समय दिया जाता है। उस भागदौड़ और अफरा-तफरी में:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 mb-4 text-slate-700">
+          <li>शिक्षकों को अपने ही संवर्ग और इच्छित जनपद का सटीक साथी ढूंढने में अत्यधिक मानसिक तनाव और कठिनाई होती है।</li>
+          <li>व्हाट्सएप ग्रुपों और फेसबुक पोस्ट्स पर असत्यापित और बिखरी हुई सूचनाओं के कारण समय पर सही मिलान नहीं हो पाता।</li>
+          <li>समय-सीमा समाप्त हो जाने पर शिक्षक पूरे एक शैक्षणिक सत्र के लिए अपने गृह जनपद में जाने के अवसर से वंचित रह जाते हैं।</li>
+        </ul>
+        <p>
+          यही कारण है कि <strong>desimaster.in</strong> शिक्षकों को एक सुव्यवस्थित, डेटा-संरक्षित और तकनीक-आधारित मंच उपलब्ध कराता है, जहाँ शिक्षक अपनी प्राथमिकताओं को पूर्व-दर्ज करके सटीक 2-Way मैच खोज सकते हैं और विभागीय आदेश आते ही बिना किसी देरी के सीधे आवेदन कर सकते हैं।
+        </p>
+
+        <h2>6. शिक्षकों के लिए अंतिम निष्कर्ष एवं मुख्य व्यावहारिक सूत्र</h2>
+        <div class="space-y-4 pt-2">
+          <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100">
+            <h4 class="font-bold text-indigo-900 text-sm mb-1">1. किसी निश्चित वर्ष की अफवाहों में न उलझें</h4>
+            <p class="text-xs text-slate-700 mb-0">
+              "5 वर्ष पूरे नहीं हुए हैं तो स्थानांतरण नहीं हो सकता" या "2 वर्ष से पहले पोर्टल नहीं खुलेगा"—ऐसी बातों पर ध्यान देकर अपनी तैयारी शिथिल न करें। नियमावली शासन का नीतिगत विषय है और यह आवश्यकतानुसार किसी भी क्षण परिवर्तित हो सकती है।
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-100">
+            <h4 class="font-bold text-emerald-900 text-sm mb-1">2. संवर्ग, स्तर और विषय की समानता को प्राथमिकता दें</h4>
+            <p class="text-xs text-slate-700 mb-0">
+              म्यूचुअल ट्रांसफर में सेवा अवधि से कहीं अधिक महत्वपूर्ण यह है कि दोनों शिक्षकों का पदनाम (सहायक अध्यापक / प्रधानाध्यापक), विद्यालय स्तर (प्राथमिक / उच्च प्राथमिक) और जूनियर स्तर पर विषय (भाषा, सामाजिक विषय अथवा गणित-विज्ञान) पूर्णतः समान होना चाहिए।
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-amber-50/60 border border-amber-100">
+            <h4 class="font-bold text-amber-900 text-sm mb-1">3. साथी खोजकर पहले से संपर्क में रहें</h4>
+            <p class="text-xs text-slate-700 mb-0">
+              पोर्टल पर अपना विवरण सुरक्षित दर्ज रखें और जैसे ही आपके इच्छित जनपद का शिक्षक उपलब्ध हो, उनसे संवाद स्थापित कर आपसी सहमति तैयार रखें। समय पर लिया गया निर्णय ही स्थानांतरण को सुनिश्चित बनाता है।
+            </p>
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+
   </main>
 
-  <!-- Footer with Links and Disclaimer -->
-  <footer class="bg-slate-900 text-slate-400 text-xs mt-12 border-t border-slate-800">
-    <div class="max-w-4xl mx-auto px-4 py-8 space-y-5">
-      <!-- Legal Disclaimer text -->
-      <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-300 space-y-1.5 leading-relaxed">
-        <p class="font-bold text-amber-300 flex items-center gap-1.5">
-          <i class="fa-solid fa-triangle-exclamation"></i> कानूनी अस्वीकरण (Disclaimer):
-        </p>
-        <p class="text-[11px]">
-          यह वेबसाइट <strong>desimaster.in</strong> केवल उत्तर प्रदेश बेसिक शिक्षा परिषद के शिक्षकों को पारस्परिक स्थानांतरण (Mutual Transfer) हेतु संपर्क सूत्र उपलब्ध कराने का एक स्वतंत्र डिजिटल मंच है। शिक्षकों के मध्य होने वाली किसी भी प्रकार की आपसी सहमति, विधिक प्रक्रिया या विभागीय नियमों के अनुपालन/उल्लंघन के लिए यह पोर्टल किसी भी रूप में उत्तरदायी नहीं होगा।
-        </p>
+  <!-- Footer (आपके स्क्रीनशॉट के अनुसार वास्तविक फाइल लिंक्स) -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-4xl mx-auto px-4 space-y-2">
+      <!-- Direct HTML File Links -->
+      <div class="flex flex-wrap justify-center items-center gap-x-3 text-sm font-semibold text-blue-600">
+        <a href="about.html" class="hover:underline">About Us</a>
+        <span class="text-slate-300">|</span>
+        <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
+        <span class="text-slate-300">|</span>
+        <a href="disclaimer.html" class="hover:underline">Disclaimer</a>
+        <span class="text-slate-300">|</span>
+        <a href="terms.html" class="hover:underline">Contact Us</a>
       </div>
-
-      <!-- Footer Navigation Links -->
-      <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-[12px] text-slate-300 font-medium">
-        <a href="https://desimaster.in/about" class="hover:text-amber-300 transition">हमारे बारे में (About Us)</a>
-        <span>•</span>
-        <a href="https://desimaster.in/privacy" class="hover:text-amber-300 transition">गोपनीयता नीति (Privacy Policy)</a>
-        <span>•</span>
-        <a href="https://desimaster.in/terms" class="hover:text-amber-300 transition">नियम एवं शर्तें (Terms & Conditions)</a>
-        <span>•</span>
-        <a href="https://desimaster.in/disclaimer" class="hover:text-amber-300 transition">अस्वीकरण (Disclaimer)</a>
-      </div>
-
-      <!-- Copyright -->
-      <div class="text-center pt-2 text-[11px] text-slate-500 border-t border-slate-800">
-        © 2026 <strong>desimaster.in</strong> — सर्वाधिकार सुरक्षित (All Rights Reserved)
-      </div>
+      
+      <!-- Copyright text -->
+      <p class="text-slate-400 text-xs">
+        © deshimaster.in. All Rights Reserved.
+      </p>
     </div>
   </footer>
 
@@ -525,7 +650,7 @@
       }
     }
 
-    // 2. Firebase Configuration
+    // 2. Firebase Configuration (अंतर-जनपदीय के लिए कलेक्शन: inter_teachers)
     const firebaseConfig = {
       apiKey: "AIzaSyAjyeW8kmGoOMurMN7vD-WCu-XWyHTbgYk",
       authDomain: "innerdistricttransfer-portal.firebaseapp.com",
@@ -621,7 +746,7 @@
       });
     }
 
-    // 5. नया अंतर जनपदीय पंजीकरण
+    // 5. नया अंतर-जनपदीय पंजीकरण
     document.getElementById("register-form").addEventListener("submit", async function(e) {
       e.preventDefault();
       const regBtn = document.getElementById("reg-btn");
@@ -643,7 +768,7 @@
       if (targetDistricts.includes(currentDistrict)) {
         alert("वर्तमान तैनात जनपद को इच्छित जनपद के रूप में नहीं चुना जा सकता!");
         regBtn.disabled = false;
-        regBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>अंतर जनपदीय पंजीकरण सुरक्षित करें</span>`;
+        regBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>अंतर-जनपदीय पंजीकरण सुरक्षित करें</span>`;
         return;
       }
 
@@ -676,7 +801,7 @@
         };
 
         const docRef = await db.collection(COLLECTION_NAME).add(teacherRecord);
-        alert("बधाई! आपका अंतर जनपदीय पंजीकरण सुरक्षित हो गया है।");
+        alert("बधाई! आपका अंतर-जनपदीय पंजीकरण सुरक्षित हो गया है।");
         document.getElementById("register-form").reset();
         handleCurrentDistrictChange();
         await fetchAllInterTeachers();
@@ -688,7 +813,7 @@
         alert("पंजीकरण में त्रुटि: " + err.message);
       } finally {
         regBtn.disabled = false;
-        regBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>अंतर जनपदीय पंजीकरण सुरक्षित करें</span>`;
+        regBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>अंतर-जनपदीय पंजीकरण सुरक्षित करें</span>`;
       }
     });
 
@@ -716,7 +841,7 @@
         alert("लॉगिन में त्रुटि: " + err.message);
       } finally {
         loginBtn.disabled = false;
-        loginBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> <span>लॉगिन करें एवं पारस्परिक साथी देखें</span>`;
+        loginBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> <span>लॉगिन करें एवं साथी देखें</span>`;
       }
     });
 
@@ -757,24 +882,23 @@
       return str.split(/\s+/).map(w => maskWord(w)).join(" ");
     }
 
-    // 9. 5-जनपद आधारित अंतर जनपदीय ऑटो-मैचिंग लॉजिक
+    // 9. अंतर-जनपदीय ऑटो-मैचिंग लॉजिक (5 जनपदों के आधार पर)
     function findAndDisplayMatches(user) {
       const summaryText = document.getElementById("match-summary-text");
       const matchesContainer = document.getElementById("matched-teachers-list");
       matchesContainer.innerHTML = "";
 
       const myTargets = Array.isArray(user.targetDistricts) ? user.targetDistricts : [user.targetDistrict].filter(Boolean);
-
       const matchedResults = [];
 
       allInterTeachers.forEach(t => {
         if (t.id === user.id) return;
 
-        // क्या यह साथी हमारे 5 इच्छित जनपदों में से किसी एक में तैनात है?
+        // क्या यह साथी हमारे 5 इच्छित जनपदों में से किसी एक में कार्यरत है?
         const matchDistrictIndex = myTargets.indexOf(t.currentDistrict);
 
         if (matchDistrictIndex !== -1) {
-          // क्या उसने भी अपने इच्छित जनपदों में हमारे जनपद को चुना है?
+          // क्या उसने भी अपने इच्छित जनपदों में हमारे वर्तमान जनपद को चुना है?
           const theirTargets = Array.isArray(t.targetDistricts) ? t.targetDistricts : [t.targetDistrict].filter(Boolean);
           const theirMatchIndex = theirTargets.indexOf(user.currentDistrict);
 
@@ -865,7 +989,7 @@
       const targetsFormatted = targets.map((d, i) => `${i + 1}. ${d}`).join("\n");
 
       const shareText = 
-`*📢 अंतर जनपदीय (Inter-District) म्यूचुअल ट्रांसफर प्रोफाइल*
+`*📢 अंतर-जनपदीय (Inter-District) म्यूचुअल ट्रांसफर प्रोफाइल*
 👤 *शिक्षक:* ${loggedInUser.teacherName}
 🏫 *विद्यालय:* ${loggedInUser.schoolName || '—'}
 📌 *पद:* ${loggedInUser.designation} (${loggedInUser.subject || 'सामान्य'})
@@ -875,7 +999,7 @@
 ${targetsFormatted}
 
 🔗 *यदि आप इनमें से किसी जनपद में कार्यरत हैं और जनपद ${loggedInUser.currentDistrict} में आना चाहते हैं, तो कृपया नीचे पोर्टल पर तुरंत अपना विवरण दर्ज करें:*
-👉 https://desimaster.in
+👉 https://deshimaster.in
 
 (पारस्परिक स्थानांतरण साथी खोज मंच)`;
 
@@ -1027,7 +1151,7 @@ ${targetsFormatted}
 
       try {
         await db.collection(COLLECTION_NAME).doc(loggedInUser.id).update(updatedData);
-        alert("आपकी अंतर जनपदीय प्रोफ़ाइल सफलतापूर्वक अपडेट हो गई है!");
+        alert("आपकी अंतर-जनपदीय प्रोफ़ाइल सफलतापूर्वक अपडेट हो गई है!");
         loggedInUser = { ...loggedInUser, ...updatedData };
         setLoggedInSession(loggedInUser);
       } catch (err) {
