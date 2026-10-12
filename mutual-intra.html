@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>अंतर जनपदीय शिक्षक म्यूचुअल ट्रांसफर साथी - desimaster.in</title>
+  <title>अंतः जनपदीय शिक्षक म्यूचुअल ट्रांसफर साथी - desimaster.in</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
@@ -12,6 +12,13 @@
   <!-- Firebase SDK (Compat Version) -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .article-body p { margin-bottom: 1.25rem; line-height: 1.85; text-align: justify; }
+    .article-body h2 { margin-top: 2rem; margin-bottom: 1rem; color: #1e1b4b; font-weight: 700; }
+    .article-body h3 { margin-top: 1.4rem; margin-bottom: 0.6rem; color: #312e81; font-weight: 600; }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
@@ -25,21 +32,23 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="text-xs bg-amber-400/20 text-amber-300 font-mono px-2 py-0.5 rounded border border-amber-300/30">desimaster.in</span>
-            <span class="text-[11px] text-indigo-200">अंतर जनपदीय पोर्टल</span>
+            <span class="text-[11px] text-indigo-200">अंतः जनपदीय पोर्टल</span>
           </div>
           <h1 class="text-lg sm:text-xl font-bold tracking-tight">यूपी शिक्षक म्यूचुअल ट्रांसफर साथी</h1>
         </div>
       </div>
-      <div class="text-xs text-indigo-100 bg-indigo-800/80 px-3 py-1.5 rounded-full border border-indigo-500/60">
-        <i class="fa-solid fa-shield-halved text-amber-300 mr-1"></i> प्रमाणित पारस्परिक मंच
+      <div class="flex items-center gap-2">
+        <a href="#rules-guide-section" class="text-xs text-amber-300 hover:text-white bg-indigo-800/90 px-3 py-1.5 rounded-full border border-indigo-500/60 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-book-open"></i> नियमावली गाइड पढ़ें
+        </a>
       </div>
     </div>
   </header>
 
   <!-- Main Container -->
-  <main class="max-w-4xl mx-auto px-4 py-6 space-y-8 w-full">
+  <main class="max-w-4xl mx-auto px-4 py-6 space-y-10 w-full flex-1">
 
-    <!-- Auth Section (Tabs: Register vs Login) -->
+    <!-- Section 1: Auth & Portal Operations (Tabs: Register vs Login) -->
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
       <!-- Tabs Header -->
       <div class="flex border-b border-slate-200 bg-slate-100 text-sm font-semibold">
@@ -57,8 +66,8 @@
       <div id="tab-pane-register" class="p-6">
         <div class="mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
           <div>
-            <h2 class="text-base font-bold text-slate-800">अंतर जनपदीय विवरण दर्ज करें</h2>
-            <p class="text-xs text-slate-500">वर्तमान तैनाती एवं इच्छित 5 जनपदों की वरीयता भरें</p>
+            <h2 class="text-base font-bold text-slate-800">अंतः जनपदीय विवरण दर्ज करें</h2>
+            <p class="text-xs text-slate-500">जनपद, विद्यालय एवं इच्छित 4 ब्लॉकों की प्राथमिकताएं भरें</p>
           </div>
           <span class="text-xs bg-emerald-50 text-emerald-700 font-medium px-2.5 py-1 rounded-md border border-emerald-200">100% नि:शुल्क पंजीकरण</span>
         </div>
@@ -130,70 +139,58 @@
             </select>
           </div>
 
-          <!-- Current District -->
+          <!-- District -->
           <div>
-            <label class="block text-xs font-semibold text-indigo-700 uppercase mb-1">वर्तमान तैनात जनपद *</label>
-            <select id="regCurrentDistrict" required onchange="handleCurrentDistrictChange()"
+            <label class="block text-xs font-semibold text-indigo-700 uppercase mb-1">तैनाती जनपद (District) *</label>
+            <select id="regDistrict" required onchange="handleDistrictChange()"
               class="w-full px-3.5 py-2.5 rounded-lg border border-indigo-300 bg-indigo-50/50 focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-medium">
-              <option value="">तैनात जनपद चुनें...</option>
+              <option value="">जनपद चुनें...</option>
             </select>
           </div>
 
           <!-- Current Block -->
           <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">वर्तमान कार्यरत ब्लॉक *</label>
-            <select id="regCurrentBlock" required
+            <select id="regCurrentBlock" required onchange="refreshTargetBlockOptions()"
               class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
               <option value="">पहले जनपद चुनें...</option>
             </select>
           </div>
 
-          <!-- 5 Target Districts Preferences -->
-          <div class="md:col-span-2 lg:col-span-3 pt-2 border-t border-slate-100">
-            <label class="block text-xs font-bold text-emerald-800 uppercase mb-2">
-              <i class="fa-solid fa-location-crosshairs mr-1"></i> इच्छित जनपद (प्राथमिकताएं - अधिकतम 5 जनपद)
-            </label>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              <div>
-                <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">इच्छित जनपद (पसंद - 1) *</label>
-                <select id="targetDistrict1" required onchange="refreshTargetDistrictOptions()"
-                  class="w-full px-3 py-2 rounded-lg border border-emerald-300 bg-emerald-50/40 text-xs outline-none bg-white font-medium">
-                  <option value="">पसंद-1 चुनें...</option>
-                </select>
-              </div>
+          <!-- Target Block 1 -->
+          <div>
+            <label class="block text-xs font-semibold text-emerald-700 uppercase mb-1">इच्छित ब्लॉक (पसंद - 1) *</label>
+            <select id="targetBlock1" required onchange="refreshTargetBlockOptions()"
+              class="w-full px-3.5 py-2.5 rounded-lg border border-emerald-300 bg-emerald-50/40 focus:ring-2 focus:ring-emerald-500 outline-none text-sm bg-white">
+              <option value="">पसंद-1 चुनें...</option>
+            </select>
+          </div>
 
-              <div>
-                <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">इच्छित जनपद (पसंद - 2)</label>
-                <select id="targetDistrict2" onchange="refreshTargetDistrictOptions()"
-                  class="w-full px-3 py-2 rounded-lg border border-emerald-300 bg-emerald-50/40 text-xs outline-none bg-white font-medium">
-                  <option value="">पसंद-2 चुनें (वैकल्पिक)...</option>
-                </select>
-              </div>
+          <!-- Target Block 2 -->
+          <div>
+            <label class="block text-xs font-semibold text-emerald-700 uppercase mb-1">इच्छित ब्लॉक (पसंद - 2)</label>
+            <select id="targetBlock2" onchange="refreshTargetBlockOptions()"
+              class="w-full px-3.5 py-2.5 rounded-lg border border-emerald-300 bg-emerald-50/40 focus:ring-2 focus:ring-emerald-500 outline-none text-sm bg-white">
+              <option value="">पसंद-2 चुनें (वैकल्पिक)...</option>
+            </select>
+          </div>
 
-              <div>
-                <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">इच्छित जनपद (पसंद - 3)</label>
-                <select id="targetDistrict3" onchange="refreshTargetDistrictOptions()"
-                  class="w-full px-3 py-2 rounded-lg border border-emerald-300 bg-emerald-50/40 text-xs outline-none bg-white font-medium">
-                  <option value="">पसंद-3 चुनें (वैकल्पिक)...</option>
-                </select>
-              </div>
+          <!-- Target Block 3 -->
+          <div>
+            <label class="block text-xs font-semibold text-emerald-700 uppercase mb-1">इच्छित ब्लॉक (पसंद - 3)</label>
+            <select id="targetBlock3" onchange="refreshTargetBlockOptions()"
+              class="w-full px-3.5 py-2.5 rounded-lg border border-emerald-300 bg-emerald-50/40 focus:ring-2 focus:ring-emerald-500 outline-none text-sm bg-white">
+              <option value="">पसंद-3 चुनें (वैकल्पिक)...</option>
+            </select>
+          </div>
 
-              <div>
-                <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">इच्छित जनपद (पसंद - 4)</label>
-                <select id="targetDistrict4" onchange="refreshTargetDistrictOptions()"
-                  class="w-full px-3 py-2 rounded-lg border border-emerald-300 bg-emerald-50/40 text-xs outline-none bg-white font-medium">
-                  <option value="">पसंद-4 चुनें (वैकल्पिक)...</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">इच्छित जनपद (पसंद - 5)</label>
-                <select id="targetDistrict5" onchange="refreshTargetDistrictOptions()"
-                  class="w-full px-3 py-2 rounded-lg border border-emerald-300 bg-emerald-50/40 text-xs outline-none bg-white font-medium">
-                  <option value="">पसंद-5 चुनें (वैकल्पिक)...</option>
-                </select>
-              </div>
-            </div>
+          <!-- Target Block 4 -->
+          <div>
+            <label class="block text-xs font-semibold text-emerald-700 uppercase mb-1">इच्छित ब्लॉक (पसंद - 4)</label>
+            <select id="targetBlock4" onchange="refreshTargetBlockOptions()"
+              class="w-full px-3.5 py-2.5 rounded-lg border border-emerald-300 bg-emerald-50/40 focus:ring-2 focus:ring-emerald-500 outline-none text-sm bg-white">
+              <option value="">पसंद-4 चुनें (वैकल्पिक)...</option>
+            </select>
           </div>
 
           <!-- Mandatory Disclaimer Checkbox -->
@@ -214,7 +211,7 @@
             <button type="submit" id="reg-btn"
               class="w-full sm:w-auto px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
               <i class="fa-solid fa-cloud-arrow-up"></i>
-              <span>अंतर जनपदीय पंजीकरण सुरक्षित करें</span>
+              <span>पंजीकरण सुरक्षित करें</span>
             </button>
           </div>
         </form>
@@ -228,8 +225,8 @@
             <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
               <i class="fa-solid fa-user-check"></i>
             </div>
-            <h2 class="text-lg font-bold text-slate-800">अंतर जनपदीय शिक्षक लॉगिन</h2>
-            <p class="text-xs text-slate-500">पंजीकृत मोबाइल नंबर एवं eHRMS कोड दर्ज कर अंतर जनपदीय मैच देखें</p>
+            <h2 class="text-lg font-bold text-slate-800">शिक्षक लॉगिन</h2>
+            <p class="text-xs text-slate-500">पंजीकृत मोबाइल नंबर एवं मानव संपदा कोड दर्ज कर अपने मैच देखें</p>
           </div>
 
           <form id="login-form" class="space-y-4">
@@ -250,7 +247,7 @@
             <button type="submit" id="login-btn"
               class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2 cursor-pointer">
               <i class="fa-solid fa-right-to-bracket"></i>
-              <span>लॉगिन करें एवं पारस्परिक साथी देखें</span>
+              <span>लॉगिन करें एवं साथी देखें</span>
             </button>
           </form>
         </div>
@@ -262,7 +259,7 @@
             <div class="flex justify-between items-start mb-3 border-b border-indigo-100 pb-3">
               <div>
                 <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md mb-1">
-                  <i class="fa-solid fa-circle-check"></i> प्रमाणित अंतर जनपदीय प्रोफाइल
+                  <i class="fa-solid fa-circle-check"></i> प्रमाणित शिक्षक प्रोफाइल
                 </span>
                 <h3 id="loggedName" class="font-bold text-slate-900 text-lg uppercase"></h3>
                 <p id="loggedEhrms" class="text-xs text-slate-600 font-medium"></p>
@@ -293,7 +290,7 @@
             <div class="border-b border-slate-100 pb-3">
               <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
                 <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
-                आपके लिए उपलब्ध अंतर जनपदीय पारस्परिक (म्यूचुअल) साथी
+                आपके लिए उपलब्ध पारस्परिक (म्यूचुअल) साथी
               </h4>
               <p id="match-summary-text" class="text-xs text-indigo-600 font-semibold mt-0.5">डेटाबेस स्कैन किया जा रहा है...</p>
             </div>
@@ -306,7 +303,7 @@
           <div id="edit-profile-box" class="hidden p-5 rounded-2xl bg-white border border-slate-300 shadow-md">
             <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-200">
               <h4 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                <i class="fa-solid fa-pen-to-square text-indigo-600"></i> विवरण व जनपद प्राथमिकताएं बदलें
+                <i class="fa-solid fa-pen-to-square text-indigo-600"></i> विवरण व ब्लॉक प्राथमिकताएं बदलें
               </h4>
               <button onclick="toggleEditMode(false)" class="text-xs text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-base"></i>
@@ -351,26 +348,27 @@
                 </select>
               </div>
 
-              <div class="grid grid-cols-2 gap-2">
-                <div>
-                  <label class="block text-[11px] font-semibold text-indigo-700 uppercase mb-0.5">वर्तमान जनपद</label>
-                  <select id="editCurrentDistrict" required onchange="handleEditCurrentDistrictChange()" class="w-full px-3 py-2 text-xs rounded-lg border border-indigo-300 outline-none bg-white"></select>
-                </div>
-                <div>
-                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">वर्तमान ब्लॉक</label>
-                  <select id="editCurrentBlock" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white"></select>
-                </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">वर्तमान कार्यरत ब्लॉक</label>
+                <select id="editCurrentBlock" required onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white"></select>
               </div>
 
-              <!-- Edit 5 Targets -->
-              <div class="pt-1">
-                <label class="block text-[11px] font-bold text-emerald-800 uppercase mb-1">इच्छित जनपद (5 प्राथमिकताएं)</label>
-                <div class="grid grid-cols-2 gap-2">
-                  <select id="editTarget1" required onchange="refreshEditTargetDistrictOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
-                  <select id="editTarget2" onchange="refreshEditTargetDistrictOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
-                  <select id="editTarget3" onchange="refreshEditTargetDistrictOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
-                  <select id="editTarget4" onchange="refreshEditTargetDistrictOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
-                  <select id="editTarget5" onchange="refreshEditTargetDistrictOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white col-span-2"></select>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 1 *</label>
+                  <select id="editTarget1" required onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 2</label>
+                  <select id="editTarget2" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 3</label>
+                  <select id="editTarget3" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 4</label>
+                  <select id="editTarget4" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
                 </div>
               </div>
 
@@ -388,9 +386,132 @@
       </div>
     </div>
 
+    <!-- Section 2: Comprehensive 1200+ Words Legal & Administrative Guide -->
+    <div id="rules-guide-section" class="space-y-6 pt-4">
+      
+      <!-- Article Header Card -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div class="flex items-center gap-2 text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-scale-balanced"></i> बेसिक शिक्षा विभाग विधिक एवं प्रशासनिक अध्ययन
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight mb-4">
+          उत्तर प्रदेश बेसिक शिक्षा परिषद: शिक्षक स्थानांतरण नियमावली, 5 व 2 वर्ष की सेवा अवधि की परिवर्तनशीलता एवं पारस्परिक स्थानांतरण का यथार्थ
+        </h2>
+        <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500 border-t border-slate-100 pt-4">
+          <span><i class="fa-regular fa-clock mr-1"></i> विस्तृत आलेख (1200+ शब्द)</span>
+          <span><i class="fa-solid fa-graduation-cap mr-1"></i> प्राथमिक एवं उच्च प्राथमिक शिक्षक संवर्ग</span>
+          <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> प्रामाणिक विश्लेषण</span>
+        </div>
+      </div>
+
+      <!-- Article Body -->
+      <article class="bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-slate-200 article-body text-slate-700 leading-relaxed text-sm sm:text-base">
+        
+        <h2>1. प्रस्तावना: परिषदीय स्थानांतरण नीतियों की गतिशील प्रकृति</h2>
+        <p>
+          उत्तर प्रदेश बेसिक शिक्षा परिषद के अधीन परिषदीय प्राथमिक एवं उच्च प्राथमिक विद्यालयों में कार्यरत शिक्षकों के लिए स्थानांतरण सदैव से एक अत्यंत संवेदनशील, बहुप्रतीक्षित और विचारणीय विषय रहा है। राज्य के सुदूर जनपदों में पदस्थापित शिक्षक अपनी पारिवारिक परिस्थितियों, गृह जनपद से अत्यधिक दूरी, स्वास्थ्य संबंधी चुनौतियों, बुजुर्ग माता-पिता की देखभाल और सामाजिक दायित्वों के निर्वहन हेतु निरंतर स्थानांतरण की प्रतीक्षा में रहते हैं।
+        </p>
+        <p>
+          किंतु इस संपूर्ण प्रक्रिया में जो सबसे बड़ा असमंजस शिक्षकों के मध्य बना रहता है, वह है—<strong>"न्यूनतम अनिवार्य सेवा अवधि" (Minimum Service Tenure)</strong>। शिक्षकों के बीच सामान्यतः यह चर्चा चलती रहती है कि क्या पुरुष अध्यापकों के लिए 5 वर्ष और महिला अध्यापिकाओं के लिए 2 वर्ष अथवा 3 वर्ष की सेवा पूर्ण होना विधिक रूप से अनिवार्य है? धरातलीय यथार्थ यह है कि <strong>बेसिक शिक्षा विभाग की स्थानांतरण नियमावली कोई स्थायी अथवा पत्थर की लकीर जैसी विधिक व्यवस्था नहीं है; यह समय, प्रशासनिक प्राथमिकताओं, छात्र-शिक्षक अनुपात (PTR), विद्यालयों में रिक्त पदों की स्थिति तथा माननीय उच्च न्यायालय व उच्चतम न्यायालय के निर्णयों के अधीन निरंतर परिवर्तित होती रहती है।</strong> अतः किसी एक सत्र या पुराने शासनादेश के नियम को शाश्वत मान लेना न केवल पूर्णतः भ्रामक है, बल्कि शिक्षकों की भविष्य की तैयारियों को भी बाधित करता है।
+        </p>
+
+        <h2>2. बेसिक शिक्षा (अध्यापक) सेवा नियमावली, 1981 और नियम 21 की विधिक स्थिति</h2>
+        <p>
+          परिषदीय शिक्षकों की सेवा शर्तें, संवर्ग विभाजन, पदोन्नति और स्थानांतरण मूलतः <strong>उत्तर प्रदेश बेसिक शिक्षा (अध्यापक) सेवा नियमावली, 1981 (The U.P. Basic Education (Teachers) Service Rules, 1981)</strong> द्वारा शासित होते हैं। इस नियमावली की संरचना को समझना प्रत्येक शिक्षक के लिए अत्यंत आवश्यक है:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 mb-4 text-slate-700">
+          <li>
+            <strong>नियम 21 (स्थानांतरण की शक्तियां):</strong> नियमावली का नियम 21 बेसिक शिक्षा परिषद को यह अधिकार प्रदान करता है कि वह प्रशासनिक हित में अथवा शिक्षक के व्यक्तिगत प्रार्थना पत्र पर एक विद्यालय से दूसरे विद्यालय अथवा एक जनपद से दूसरे जनपद में स्थानांतरण कर सके।
+          </li>
+          <li>
+            <strong>संवर्ग की स्वायत्तता (District Cadre बनाम Local Cadre):</strong> परिषदीय सहायक अध्यापक मूलतः जनपदीय संवर्ग (District Cadre) के पद पर नियुक्त होते हैं। अंतः जनपदीय स्थानांतरण (Intra-District Transfer) जिले की सीमा के भीतर कार्यरत ब्लॉक या विद्यालय परिवर्तन का विषय है, जबकि अंतर जनपदीय स्थानांतरण (Inter-District Transfer) एक जनपदीय संवर्ग से त्यागपत्र देकर दूसरे जनपद के संवर्ग की अंतिम वरिष्ठता स्वीकार करने जैसी जटिल प्रशासनिक प्रक्रिया है।
+          </li>
+          <li>
+            <strong>शासनादेशों का प्रभुत्व (Primacy of Executive Orders):</strong> नियम 21 में कोई स्थायी सेवा-अवधि (जैसे 2 वर्ष या 5 वर्ष) स्पष्ट रूप से नियमावली के मूल पाठ में नहीं बाँधी गई है। इसके स्थान पर राज्य सरकार को प्रत्येक शैक्षणिक सत्र में आवश्यकतानुसार नीति निर्धारण की छूट दी गई है। यही कारण है कि प्रत्येक स्थानांतरण चक्र में शासन बिल्कुल नया शासनादेश जारी करता है, जो पूर्ववर्ती नियमों से भिन्न हो सकता है।
+          </li>
+        </ul>
+
+        <h2>3. "5 वर्ष बनाम 2 वर्ष" का मिथक और प्रशासनिक आवश्यकताओं के अनुसार बदलाव</h2>
+        <p>
+          विगत वर्षों के कुछ विशिष्ट शासनादेशों (विशेषकर सत्र 2019-20 एवं 2020-21 के दौरान) में पुरुष अध्यापकों के लिए 5 वर्ष और महिला अध्यापिकाओं के लिए 2 वर्ष की न्यूनतम नियमित सेवा की शर्त जोड़ी गई थी। उस एक आदेश के कारण परिषदीय समाज में यह धारणा बैठ गई कि यह कोई शाश्वत नियम है। किंतु इसके बाद के घटनाक्रमों ने इस भ्रम को पूरी तरह तोड़ दिया:
+        </p>
+        
+        <h3>क. सामान्य स्थानांतरण बनाम पारस्परिक स्थानांतरण (General vs Mutual Transfer)</h3>
+        <p>
+          शासन ने अपने विभिन्न स्पष्टीकरणों में यह भली-भांति माना है कि एकतरफा (One-Way) सामान्य स्थानांतरण और पारस्परिक (Mutual) स्थानांतरण में ज़मीन-आसमान का अंतर है:
+        </p>
+        <p>
+          एकतरफा स्थानांतरण में किसी विद्यालय से शिक्षक चला जाता है, जिससे वहाँ छात्र-शिक्षक अनुपात (RTE Act 2009 के मानक) बिगड़ सकता है। विशेष रूप से आकांक्षी जनपदों (Aspirational Districts) में पद रिक्त होने का भय रहता है। इसलिए वहाँ सरकार कठोर सेवा अवधि और विभिन्न श्रेणियों के भारांक (Weightage Points) निर्धारित करती है। इसके विपरीत, <strong>पारस्परिक स्थानांतरण में पदों का संतुलन शून्य प्रभाव (Zero Net Impact) पर रहता है</strong>—एक शिक्षक के जाने पर ठीक उसी पद और उसी विषय का दूसरा शिक्षक उस स्थान पर पदभार ग्रहण कर लेता है। इसलिए पारस्परिक स्थानांतरण में सेवा अवधि की बाध्यता को शिथिल करने की मांग सदैव न्यायसंगत मानी गई है और कई अवसरों पर शासन ने इसे अत्यंत लचीला बनाया है।
+        </p>
+
+        <h3>ख. माननीय उच्च न्यायालय के ऐतिहासिक निर्णय</h3>
+        <p>
+          माननीय इलाहाबाद उच्च न्यायालय की एकल पीठ एवं खंडपीठों द्वारा विभिन्न रिट याचिकाओं (जैसे <em>दिव्या गोस्वामी बनाम उत्तर प्रदेश राज्य</em> एवं अन्य समवर्ती वाद) में सेवा अवधि की कठोरता पर गंभीर टिप्पणियां की गई हैं। न्यायालय ने स्पष्ट किया कि मानवीय संवेदनाओं, गंभीर असाध्य रोगों से ग्रसित शिक्षकों, दिव्यांगों, असाधारण पारिवारिक संकटों तथा पारस्परिक सहमति के मामलों में शासन को अपनी नीतियों को जड़ (Rigid) बनाने के स्थान पर विवेकपूर्ण और लचीला बनाना चाहिए। न्यायालय के आदेशों के अनुपालन में शासन को समय-समय पर अपने शासनादेशों में संशोधन करने पड़े हैं।
+        </p>
+
+        <h3>ग. विभिन्न बैचों के लिए नियमों का शिथिलीकरण</h3>
+        <p>
+          इतिहास साक्षी है कि 68,500 शिक्षक भर्ती और 69,000 शिक्षक भर्ती के उपरांत नए नियुक्त अध्यापकों के संदर्भ में भी कई बार सेवा-अवधि की शर्तों को लेकर व्यापक प्रशासनिक विमर्श हुआ। कभी प्रोबेशन अवधि (3 वर्ष) को आधार बनाया गया, तो कभी केवल महिलाओं व विशेष परिस्थितियों को छूट मिली, और कभी पारस्परिक आवेदनों के लिए न्यूनतम समय-सीमा को गौण मान लिया गया। यह निरंतर परिवर्तनशीलता दर्शाती है कि सेवा अवधि की कोई अंतिम या अपरिवर्तनीय विधिक परिभाषा मौजूद नहीं है।
+        </p>
+
+        <h2>4. अंतः जनपदीय स्थानांतरण (Intra-District): ब्लॉक वरीयता एवं स्थानीय गतिशीलता</h2>
+        <p>
+          यदि जिले के अंदर (Intra-District) की बात करें, तो यहाँ सेवा अवधि के नियम और भी अधिक अप्रत्याशित और प्रशासनिक आवश्यकताओं पर आधारित रहे हैं:
+        </p>
+        <p>
+          जिले के भीतर ब्लॉक परिवर्तन या विद्यालय परिवर्तन में कई बार सेवा अवधि की कोई बाध्यता रखी ही नहीं गई। नव-नियुक्त शिक्षक भी अपने कार्यरत ब्लॉक से अपने निवास के निकटवर्ती ब्लॉक में पारस्परिक साथी मिलने पर स्थानांतरण हेतु अग्रसर होते रहे हैं। अंतः जनपदीय प्रक्रिया में मुख्य बाधा सेवा अवधि नहीं, बल्कि <strong>"समान पद", "समान संवर्ग (प्राथमिक/जूनियर)" और "समान विषय"</strong> का सटीक साथी खोजना होता है।
+        </p>
+        <p>
+          यदि दो शिक्षक प्राथमिक स्तर पर सहायक अध्यापक हैं और दोनों एक-दूसरे के कार्यरत ब्लॉक को अपनी प्राथमिकता सूची में दर्ज कर लेते हैं, तो विभागीय अधिकारियों के लिए भी ऐसे पारस्परिक आवेदनों का निस्तारण करना सर्वाधिक सुगम और विवाद-रहित होता है।
+        </p>
+
+        <h2>5. डिजिटल तैयारी का महत्व: desimaster.in की भूमिका क्यों अनिवार्य है?</h2>
+        <p>
+          चूँकि बेसिक शिक्षा विभाग की स्थानांतरण नियमावली कब, किस रूप में और किन विशेष शर्तों के साथ जारी होगी, इसके बारे में पहले से कोई दावा नहीं किया जा सकता, इसलिए शिक्षकों के लिए सबसे व्यावहारिक रणनीति यह है कि वे <strong>शासनादेश जारी होने की प्रतीक्षा में समय व्यर्थ न करें, बल्कि पहले से अपना पारस्परिक साथी (Mutual Partner) खोजकर आपसी सहमति बना लें।</strong>
+        </p>
+        <p>
+          विभागीय अनुभव यह बताता है कि शासन जब भी मानव संपदा अथवा बेसिक शिक्षा परिषद पोर्टल पर स्थानांतरण की विंडो खोलता है, तो ऑनलाइन आवेदन, रजिस्ट्रेशन और ओटीपी सत्यापन के लिए मात्र 7 से 15 दिनों का अत्यंत अल्प समय दिया जाता है। उस भागदौड़ और अफरा-तफरी में:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 mb-4 text-slate-700">
+          <li>शिक्षकों को अपने ही संवर्ग और इच्छित ब्लॉक का सटीक साथी ढूंढने में अत्यधिक मानसिक तनाव और कठिनाई होती है।</li>
+          <li>व्हाट्सएप ग्रुपों और फेसबुक पोस्ट्स पर असत्यापित और बिखरी हुई सूचनाओं के कारण समय पर सही मिलान नहीं हो पाता।</li>
+          <li>समय-सीमा समाप्त हो जाने पर शिक्षक पूरे एक शैक्षणिक सत्र के लिए अपने गृह ब्लॉक में जाने के अवसर से वंचित रह जाते हैं।</li>
+        </ul>
+        <p>
+          यही कारण है कि <strong>desimaster.in</strong> शिक्षकों को एक सुव्यवस्थित, डेटा-संरक्षित और तकनीक-आधारित मंच उपलब्ध कराता है, जहाँ शिक्षक अपनी प्राथमिकताओं को पूर्व-दर्ज करके सटीक 2-Way मैच खोज सकते हैं और विभागीय आदेश आते ही बिना किसी देरी के सीधे आवेदन कर सकते हैं।
+        </p>
+
+        <h2>6. शिक्षकों के लिए अंतिम निष्कर्ष एवं मुख्य व्यावहारिक सूत्र</h2>
+        <div class="space-y-4 pt-2">
+          <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100">
+            <h4 class="font-bold text-indigo-900 text-sm mb-1">1. किसी निश्चित वर्ष की अफवाहों में न उलझें</h4>
+            <p class="text-xs text-slate-700 mb-0">
+              "5 वर्ष पूरे नहीं हुए हैं तो स्थानांतरण नहीं हो सकता" या "2 वर्ष से पहले पोर्टल नहीं खुलेगा"—ऐसी बातों पर ध्यान देकर अपनी तैयारी शिथिल न करें। नियमावली शासन का नीतिगत विषय है और यह आवश्यकतानुसार किसी भी क्षण परिवर्तित हो सकती है।
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-100">
+            <h4 class="font-bold text-emerald-900 text-sm mb-1">2. संवर्ग, स्तर और विषय की समानता को प्राथमिकता दें</h4>
+            <p class="text-xs text-slate-700 mb-0">
+              म्यूचुअल ट्रांसफर में सेवा अवधि से कहीं अधिक महत्वपूर्ण यह है कि दोनों शिक्षकों का पदनाम (सहायक अध्यापक / प्रधानाध्यापक), विद्यालय स्तर (प्राथमिक / उच्च प्राथमिक) और जूनियर स्तर पर विषय (भाषा, सामाजिक विषय अथवा गणित-विज्ञान) पूर्णतः समान होना चाहिए।
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-amber-50/60 border border-amber-100">
+            <h4 class="font-bold text-amber-900 text-sm mb-1">3. साथी खोजकर पहले से संपर्क में रहें</h4>
+            <p class="text-xs text-slate-700 mb-0">
+              पोर्टल पर अपना विवरण सुरक्षित दर्ज रखें और जैसे ही आपके इच्छित ब्लॉक का शिक्षक उपलब्ध हो, उनसे संवाद स्थापित कर आपसी सहमति तैयार रखें। समय पर लिया गया निर्णय ही स्थानांतरण को सुनिश्चित बनाता है।
+            </p>
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+
   </main>
 
-  <!-- Footer with Links and Disclaimer -->
+  <!-- Footer with Legal Disclaimer and Policy Links -->
   <footer class="bg-slate-900 text-slate-400 text-xs mt-12 border-t border-slate-800">
     <div class="max-w-4xl mx-auto px-4 py-8 space-y-5">
       <!-- Legal Disclaimer text -->
@@ -399,7 +520,7 @@
           <i class="fa-solid fa-triangle-exclamation"></i> कानूनी अस्वीकरण (Disclaimer):
         </p>
         <p class="text-[11px]">
-          यह वेबसाइट <strong>desimaster.in</strong> केवल उत्तर प्रदेश बेसिक शिक्षा परिषद के शिक्षकों को पारस्परिक स्थानांतरण (Mutual Transfer) हेतु संपर्क सूत्र उपलब्ध कराने का एक स्वतंत्र डिजिटल मंच है। शिक्षकों के मध्य होने वाली किसी भी प्रकार की आपसी सहमति, विधिक प्रक्रिया या विभागीय नियमों के अनुपालन/उल्लंघन के लिए यह पोर्टल किसी भी रूप में उत्तरदायी नहीं होगा।
+          यह वेबसाइट <strong>desimaster.in</strong> केवल उत्तर प्रदेश बेसिक शिक्षा परिषद के शिक्षकों को पारस्परिक स्थानांतरण (Mutual Transfer) हेतु संपर्क सूत्र उपलब्ध कराने का एक स्वतंत्र डिजिटल मंच है। शिक्षकों के मध्य होने वाली किसी भी प्रकार की आपसी सहमति, विधिक प्रक्रिया या बेसिक शिक्षा विभाग के नियमों के अनुपालन/उल्लंघन के लिए यह पोर्टल किसी भी रूप में उत्तरदायी नहीं होगा।
         </p>
       </div>
 
@@ -525,7 +646,7 @@
       }
     }
 
-    // 2. Firebase Configuration
+    // 2. Firebase Configuration (कलेक्शन: teachers)
     const firebaseConfig = {
       apiKey: "AIzaSyAjyeW8kmGoOMurMN7vD-WCu-XWyHTbgYk",
       authDomain: "innerdistricttransfer-portal.firebaseapp.com",
@@ -538,9 +659,9 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    const COLLECTION_NAME = "inter_teachers";
+    const COLLECTION_NAME = "teachers";
 
-    let allInterTeachers = [];
+    let allTeachers = [];
     let loggedInUser = null;
 
     // 3. टैब स्विच
@@ -563,65 +684,68 @@
       }
     }
 
-    // 4. जनपद इनिशियलाइज़ एवं 5 इच्छित जनपद फ़िल्टर
+    // 4. जनपद और 4 ब्लॉक ड्रॉपडाउन
     function initDistricts() {
-      const curDist = document.getElementById("regCurrentDistrict");
+      const regDist = document.getElementById("regDistrict");
       const sortedDists = Object.keys(upDistrictsData).sort((a,b) => a.localeCompare(b, 'hi'));
 
       sortedDists.forEach(d => {
-        curDist.innerHTML += `<option value="${d}">${d}</option>`;
+        regDist.innerHTML += `<option value="${d}">${d}</option>`;
       });
-      refreshTargetDistrictOptions();
     }
 
-    function handleCurrentDistrictChange() {
-      const dist = document.getElementById("regCurrentDistrict").value;
-      const blockSelect = document.getElementById("regCurrentBlock");
-      blockSelect.innerHTML = '<option value="">वर्तमान कार्यरत ब्लॉक चुनें...</option>';
+    function handleDistrictChange() {
+      const dist = document.getElementById("regDistrict").value;
+      const currentBlockSelect = document.getElementById("regCurrentBlock");
+      
+      currentBlockSelect.innerHTML = '<option value="">वर्तमान कार्यरत ब्लॉक चुनें...</option>';
+      ['targetBlock1', 'targetBlock2', 'targetBlock3', 'targetBlock4'].forEach(id => {
+        document.getElementById(id).innerHTML = `<option value="">पसंद चुनें...</option>`;
+      });
 
       if (dist && upDistrictsData[dist]) {
-        upDistrictsData[dist].forEach(b => {
-          blockSelect.innerHTML += `<option value="${b}">${b}</option>`;
+        upDistrictsData[dist].forEach(block => {
+          currentBlockSelect.innerHTML += `<option value="${block}">${block}</option>`;
         });
       }
-      refreshTargetDistrictOptions();
+      refreshTargetBlockOptions();
     }
 
-    function refreshTargetDistrictOptions() {
-      const curDist = document.getElementById("regCurrentDistrict").value;
-      const sortedDists = Object.keys(upDistrictsData).sort((a,b) => a.localeCompare(b, 'hi'));
+    function refreshTargetBlockOptions() {
+      const dist = document.getElementById("regDistrict").value;
+      if (!dist || !upDistrictsData[dist]) return;
 
-      const d1 = document.getElementById("targetDistrict1").value;
-      const d2 = document.getElementById("targetDistrict2").value;
-      const d3 = document.getElementById("targetDistrict3").value;
-      const d4 = document.getElementById("targetDistrict4").value;
-      const d5 = document.getElementById("targetDistrict5").value;
+      const allBlocks = upDistrictsData[dist];
+      const curBlock = document.getElementById("regCurrentBlock").value;
+      const p1 = document.getElementById("targetBlock1").value;
+      const p2 = document.getElementById("targetBlock2").value;
+      const p3 = document.getElementById("targetBlock3").value;
+      const p4 = document.getElementById("targetBlock4").value;
 
       const targetSelects = [
-        { id: "targetDistrict1", val: d1, label: "पसंद-1 चुनें *" },
-        { id: "targetDistrict2", val: d2, label: "पसंद-2 चुनें (वैकल्पिक)" },
-        { id: "targetDistrict3", val: d3, label: "पसंद-3 चुनें (वैकल्पिक)" },
-        { id: "targetDistrict4", val: d4, label: "पसंद-4 चुनें (वैकल्पिक)" },
-        { id: "targetDistrict5", val: d5, label: "पसंद-5 चुनें (वैकल्पिक)" }
+        { id: "targetBlock1", val: p1, label: "पसंद-1 चुनें *" },
+        { id: "targetBlock2", val: p2, label: "पसंद-2 चुनें (वैकल्पिक)" },
+        { id: "targetBlock3", val: p3, label: "पसंद-3 चुनें (वैकल्पिक)" },
+        { id: "targetBlock4", val: p4, label: "पसंद-4 चुनें (वैकल्पिक)" }
       ];
 
-      targetSelects.forEach(t => {
-        const selElem = document.getElementById(t.id);
-        const curVal = t.val;
-        const chosenInOthers = [curDist, d1, d2, d3, d4, d5].filter(v => v && v !== curVal);
+      targetSelects.forEach(target => {
+        const selElem = document.getElementById(target.id);
+        const currentVal = target.val;
+        const chosenInOthers = [curBlock, p1, p2, p3, p4].filter(v => v && v !== currentVal);
 
-        let html = `<option value="">${t.label}</option>`;
-        sortedDists.forEach(d => {
-          if (!chosenInOthers.includes(d)) {
-            const isSel = (d === curVal) ? "selected" : "";
-            html += `<option value="${d}" ${isSel}>${d}</option>`;
+        let optionsHtml = `<option value="">${target.label}</option>`;
+        allBlocks.forEach(b => {
+          if (b !== curBlock && !chosenInOthers.includes(b)) {
+            const isSelected = (b === currentVal) ? "selected" : "";
+            optionsHtml += `<option value="${b}" ${isSelected}>${b}</option>`;
           }
         });
-        selElem.innerHTML = html;
+        selElem.innerHTML = optionsHtml;
       });
     }
 
-    // 5. नया अंतर जनपदीय पंजीकरण
+    // 5. नया शिक्षक पंजीकरण
     document.getElementById("register-form").addEventListener("submit", async function(e) {
       e.preventDefault();
       const regBtn = document.getElementById("reg-btn");
@@ -630,22 +754,6 @@
 
       const ehrmsCode = document.getElementById("regEhrmsCode").value.trim();
       const mobile = document.getElementById("regMobile").value.trim();
-      const currentDistrict = document.getElementById("regCurrentDistrict").value;
-
-      const targetDistricts = [
-        document.getElementById("targetDistrict1").value,
-        document.getElementById("targetDistrict2").value,
-        document.getElementById("targetDistrict3").value,
-        document.getElementById("targetDistrict4").value,
-        document.getElementById("targetDistrict5").value
-      ].filter(Boolean);
-
-      if (targetDistricts.includes(currentDistrict)) {
-        alert("वर्तमान तैनात जनपद को इच्छित जनपद के रूप में नहीं चुना जा सकता!");
-        regBtn.disabled = false;
-        regBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>अंतर जनपदीय पंजीकरण सुरक्षित करें</span>`;
-        return;
-      }
 
       try {
         const existing = await db.collection(COLLECTION_NAME).where("ehrmsCode", "==", ehrmsCode).get();
@@ -668,18 +776,23 @@
           level: level,
           designation: document.getElementById("regDesignation").value,
           subject: subject,
-          currentDistrict: currentDistrict,
+          district: document.getElementById("regDistrict").value,
           currentBlock: document.getElementById("regCurrentBlock").value,
-          targetDistricts: targetDistricts,
+          targetBlocks: [
+            document.getElementById("targetBlock1").value,
+            document.getElementById("targetBlock2").value,
+            document.getElementById("targetBlock3").value,
+            document.getElementById("targetBlock4").value
+          ].filter(Boolean),
           disclaimerAgreed: true,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
         const docRef = await db.collection(COLLECTION_NAME).add(teacherRecord);
-        alert("बधाई! आपका अंतर जनपदीय पंजीकरण सुरक्षित हो गया है।");
+        alert("बधाई! आपका पंजीकरण सुरक्षित हो गया है। अब अपने मैचिंग साथी देखें।");
         document.getElementById("register-form").reset();
-        handleCurrentDistrictChange();
-        await fetchAllInterTeachers();
+        handleDistrictChange();
+        await fetchAllTeachers();
 
         switchAuthTab('login');
         setLoggedInSession({ id: docRef.id, ...teacherRecord });
@@ -688,7 +801,7 @@
         alert("पंजीकरण में त्रुटि: " + err.message);
       } finally {
         regBtn.disabled = false;
-        regBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>अंतर जनपदीय पंजीकरण सुरक्षित करें</span>`;
+        regBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>पंजीकरण सुरक्षित करें</span>`;
       }
     });
 
@@ -703,8 +816,8 @@
       const ehrms = document.getElementById("loginEhrmsCode").value.trim();
 
       try {
-        await fetchAllInterTeachers();
-        const user = allInterTeachers.find(t => t.mobile === mob && t.ehrmsCode === ehrms);
+        await fetchAllTeachers();
+        const user = allTeachers.find(t => t.mobile === mob && t.ehrmsCode === ehrms);
 
         if (!user) {
           alert("विवरण मेल नहीं खाया! कृपया जांचें कि मोबाइल नंबर एवं eHRMS कोड सही हैं या पहले नया पंजीकरण करें।");
@@ -716,7 +829,7 @@
         alert("लॉगिन में त्रुटि: " + err.message);
       } finally {
         loginBtn.disabled = false;
-        loginBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> <span>लॉगिन करें एवं पारस्परिक साथी देखें</span>`;
+        loginBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> <span>लॉगिन करें एवं साथी देखें</span>`;
       }
     });
 
@@ -730,12 +843,12 @@
       document.getElementById("loggedName").innerText = user.teacherName;
       document.getElementById("loggedEhrms").innerText = `eHRMS: ${user.ehrmsCode} | मो.: ${user.mobile}`;
       
-      const targetsList = Array.isArray(user.targetDistricts) ? user.targetDistricts.join(", ") : (user.targetDistrict || "कोई नहीं");
+      const blocksList = Array.isArray(user.targetBlocks) ? user.targetBlocks.join(", ") : (user.targetBlock1 || "कोई नहीं");
       document.getElementById("loggedDetails").innerHTML = `
         <div><strong>विद्यालय:</strong> <span class="font-bold uppercase text-slate-800">${escapeHtml(user.schoolName || '—')}</span></div>
-        <div><strong>वर्तमान तैनाती:</strong> जनपद <strong>${escapeHtml(user.currentDistrict)}</strong> (ब्लॉक: ${escapeHtml(user.currentBlock)})</div>
-        <div><strong>इच्छित 5 जनपद (वरीयता):</strong> <span class="text-emerald-700 font-bold">${escapeHtml(targetsList)}</span></div>
+        <div><strong>जनपद:</strong> ${escapeHtml(user.district)} | <strong>कार्यरत ब्लॉक:</strong> <span class="font-bold text-slate-900">${escapeHtml(user.currentBlock)}</span></div>
         <div><strong>संवर्ग:</strong> ${escapeHtml(user.level || 'प्राथमिक')} | <strong>पद:</strong> ${escapeHtml(user.designation)} (${escapeHtml(user.subject || 'सामान्य')})</div>
+        <div><strong>इच्छित 4 ब्लॉक:</strong> <span class="text-indigo-700 font-semibold">${escapeHtml(blocksList)}</span></div>
       `;
 
       toggleEditMode(false);
@@ -757,52 +870,45 @@
       return str.split(/\s+/).map(w => maskWord(w)).join(" ");
     }
 
-    // 9. 5-जनपद आधारित अंतर जनपदीय ऑटो-मैचिंग लॉजिक
+    // 9. ऑटो-मैचिंग लॉजिक
     function findAndDisplayMatches(user) {
       const summaryText = document.getElementById("match-summary-text");
       const matchesContainer = document.getElementById("matched-teachers-list");
       matchesContainer.innerHTML = "";
 
-      const myTargets = Array.isArray(user.targetDistricts) ? user.targetDistricts : [user.targetDistrict].filter(Boolean);
-
+      const candidateTeachers = allTeachers.filter(t => t.id !== user.id && t.district === user.district);
       const matchedResults = [];
 
-      allInterTeachers.forEach(t => {
-        if (t.id === user.id) return;
+      candidateTeachers.forEach(t => {
+        const theirTargets = Array.isArray(t.targetBlocks) ? t.targetBlocks : [t.targetBlock1].filter(Boolean);
+        const matchIndex = theirTargets.indexOf(user.currentBlock);
 
-        // क्या यह साथी हमारे 5 इच्छित जनपदों में से किसी एक में तैनात है?
-        const matchDistrictIndex = myTargets.indexOf(t.currentDistrict);
+        if (matchIndex !== -1) {
+          const ourTargets = Array.isArray(user.targetBlocks) ? user.targetBlocks : [user.targetBlock1].filter(Boolean);
+          const isTwoWay = ourTargets.includes(t.currentBlock);
 
-        if (matchDistrictIndex !== -1) {
-          // क्या उसने भी अपने इच्छित जनपदों में हमारे जनपद को चुना है?
-          const theirTargets = Array.isArray(t.targetDistricts) ? t.targetDistricts : [t.targetDistrict].filter(Boolean);
-          const theirMatchIndex = theirTargets.indexOf(user.currentDistrict);
-
-          if (theirMatchIndex !== -1) {
-            matchedResults.push({
-              teacher: t,
-              matchedDistrict: t.currentDistrict,
-              myRank: matchDistrictIndex + 1,
-              theirRank: theirMatchIndex + 1
-            });
-          }
+          matchedResults.push({
+            teacher: t,
+            preferenceRank: matchIndex + 1,
+            isTwoWay: isTwoWay
+          });
         }
       });
 
-      matchedResults.sort((a, b) => a.myRank - b.myRank);
+      matchedResults.sort((a, b) => a.preferenceRank - b.preferenceRank);
 
       if (matchedResults.length === 0) {
-        summaryText.innerHTML = `<span class="text-amber-600 font-bold">वर्तमान में आपकी 5 प्राथमिकताओं के लिए कोई सीधा 2-Way पारस्परिक मिलान उपलब्ध नहीं है।</span>`;
+        summaryText.innerHTML = `<span class="text-amber-600 font-bold">वर्तमान में आपके ब्लॉक के लिए कोई सीधा मिलान उपलब्ध नहीं है।</span>`;
         matchesContainer.innerHTML = `
           <div class="p-6 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-500 text-center space-y-2">
-            <i class="fa-solid fa-map-pin text-2xl text-slate-400"></i>
-            <p>जैसे ही आपके इच्छित जनपदों में से कोई शिक्षक जनपद <strong>${escapeHtml(user.currentDistrict)}</strong> हेतु पंजीकरण करेगा, वह यहाँ स्वतः प्रदर्शित हो जाएगा।</p>
-            <p class="text-indigo-600 font-semibold">नीचे दिए गए 'म्यूचुअल विवरण कॉपी करें' बटन से जानकारी शिक्षक ग्रुप्स में शेयर करें।</p>
+            <i class="fa-solid fa-user-clock text-2xl text-slate-400"></i>
+            <p>जैसे ही आपके जनपद का कोई शिक्षक आपके ब्लॉक को अपनी पसंद में चुनेगा, वह यहाँ स्वतः प्रदर्शित हो जाएगा।</p>
+            <p class="text-indigo-600 font-semibold">अपने जिले के शिक्षक ग्रुप में नीचे दिया गया विवरण शेयर करें ताकि अधिक साथी जुड़ सकें।</p>
           </div>`;
         return;
       }
 
-      summaryText.innerHTML = `<span class="text-emerald-700 font-extrabold text-sm">बधाई! आपके इच्छित जनपदों के लिए कुल ${matchedResults.length} पारस्परिक साथी मिल चुके हैं!</span>`;
+      summaryText.innerHTML = `<span class="text-emerald-700 font-extrabold text-sm">बधाई! आपके ब्लॉक के लिए कुल ${matchedResults.length} शिक्षक साथी मिल चुके हैं!</span>`;
 
       matchedResults.forEach(m => {
         const t = m.teacher;
@@ -819,24 +925,21 @@
                 <span class="font-bold text-slate-900 text-sm tracking-wide uppercase">
                   ${teacherDisplayName}
                 </span>
-                <span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">परफेक्ट 2-Way Match</span>
+                ${m.isTwoWay ? '<span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2-Way Mutual Match</span>' : ''}
               </div>
               <p class="text-xs text-slate-600 font-medium mt-0.5">
                 🏫 विद्यालय: <span class="font-semibold tracking-wide uppercase text-slate-800">${schoolDisplayName}</span>
               </p>
               <p class="text-xs text-indigo-700 font-medium">पद: ${escapeHtml(t.designation)} (${escapeHtml(t.subject || 'सामान्य')})</p>
             </div>
-            <div class="text-right">
-              <span class="inline-block px-2.5 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-lg text-xs font-bold">
-                ${escapeHtml(t.currentDistrict)} ➔ ${escapeHtml(user.currentDistrict)}
-              </span>
-              <span class="block text-[10px] text-slate-400 mt-0.5">आपकी पसंद #${m.myRank} | उनकी पसंद #${m.theirRank}</span>
-            </div>
+            <span class="px-2.5 py-1 bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-bold">
+              उनकी पसंद #${m.preferenceRank}
+            </span>
           </div>
 
           <div class="text-xs text-slate-700 pt-2 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <div>
-              कार्यरत जनपद: <strong class="text-slate-900 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">${escapeHtml(t.currentDistrict)}</strong> (ब्लॉक: ${escapeHtml(t.currentBlock)})
+              कार्यरत ब्लॉक: <strong class="text-slate-900 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">${escapeHtml(t.currentBlock)}</strong>
             </div>
 
             <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-600 border border-slate-200 rounded-lg text-xs font-medium cursor-not-allowed">
@@ -861,21 +964,22 @@
     function copyProfileShareText() {
       if (!loggedInUser) return;
 
-      const targets = Array.isArray(loggedInUser.targetDistricts) ? loggedInUser.targetDistricts : [loggedInUser.targetDistrict].filter(Boolean);
-      const targetsFormatted = targets.map((d, i) => `${i + 1}. ${d}`).join("\n");
+      const targets = Array.isArray(loggedInUser.targetBlocks) ? loggedInUser.targetBlocks : [loggedInUser.targetBlock1].filter(Boolean);
+      const targetsFormatted = targets.map((b, i) => `${i + 1}. ${b}`).join("\n");
 
       const shareText = 
-`*📢 अंतर जनपदीय (Inter-District) म्यूचुअल ट्रांसफर प्रोफाइल*
+`*📢 अंतः जनपदीय म्यूचुअल ट्रांसफर प्रोफाइल*
 👤 *शिक्षक:* ${loggedInUser.teacherName}
 🏫 *विद्यालय:* ${loggedInUser.schoolName || '—'}
 📌 *पद:* ${loggedInUser.designation} (${loggedInUser.subject || 'सामान्य'})
-📍 *वर्तमान जनपद:* ${loggedInUser.currentDistrict} (ब्लॉक: ${loggedInUser.currentBlock})
+📍 *जनपद:* ${loggedInUser.district}
+🏢 *कार्यरत ब्लॉक:* ${loggedInUser.currentBlock}
 
-🎯 *इच्छित 5 जनपद (प्राथमिकताएं):*
+🎯 *इच्छित 4 ब्लॉक (प्राथमिकताएं):*
 ${targetsFormatted}
 
-🔗 *यदि आप इनमें से किसी जनपद में कार्यरत हैं और जनपद ${loggedInUser.currentDistrict} में आना चाहते हैं, तो कृपया नीचे पोर्टल पर तुरंत अपना विवरण दर्ज करें:*
-👉 https://desimaster.in
+🔗 *यदि आप इनमें से किसी ब्लॉक में हैं और मेरे ब्लॉक (${loggedInUser.currentBlock}) में आना चाहते हैं, तो कृपया नीचे पोर्टल पर तुरंत अपना विवरण दर्ज करें:*
+👉 https://deshimaster.in
 
 (पारस्परिक स्थानांतरण साथी खोज मंच)`;
 
@@ -890,7 +994,7 @@ ${targetsFormatted}
       });
     }
 
-    // 11. प्रोफ़ाइल संपादन (Edit Logic)
+    // 11. प्रोफ़ाइल संपादन
     function toggleEditMode(show) {
       const editBox = document.getElementById("edit-profile-box");
       if (show && loggedInUser) {
@@ -902,87 +1006,74 @@ ${targetsFormatted}
         document.getElementById("editDesignation").value = loggedInUser.designation;
         document.getElementById("editSubject").value = loggedInUser.subject || '';
 
-        const curDistSelect = document.getElementById("editCurrentDistrict");
-        const sortedDists = Object.keys(upDistrictsData).sort((a,b) => a.localeCompare(b, 'hi'));
+        const dist = loggedInUser.district;
+        const curBlockSelect = document.getElementById("editCurrentBlock");
+        curBlockSelect.innerHTML = "";
+        if (dist && upDistrictsData[dist]) {
+          upDistrictsData[dist].forEach(b => {
+            const isSel = (b === loggedInUser.currentBlock) ? "selected" : "";
+            curBlockSelect.innerHTML += `<option value="${b}" ${isSel}>${b}</option>`;
+          });
+        }
 
-        curDistSelect.innerHTML = "";
-        sortedDists.forEach(d => {
-          curDistSelect.innerHTML += `<option value="${d}" ${d === loggedInUser.currentDistrict ? 'selected' : ''}>${d}</option>`;
-        });
-
-        handleEditCurrentDistrictChange();
-        document.getElementById("editCurrentBlock").value = loggedInUser.currentBlock;
-
-        const targets = Array.isArray(loggedInUser.targetDistricts) ? loggedInUser.targetDistricts : [loggedInUser.targetDistrict];
-        populateEditTargetDistrictOptions(targets);
+        const targets = Array.isArray(loggedInUser.targetBlocks) ? loggedInUser.targetBlocks : [];
+        populateEditTargetOptions(targets);
       } else {
         editBox.classList.add("hidden");
       }
     }
 
-    function handleEditCurrentDistrictChange() {
-      const dist = document.getElementById("editCurrentDistrict").value;
-      const curBlockSelect = document.getElementById("editCurrentBlock");
-      curBlockSelect.innerHTML = "";
-      if (dist && upDistrictsData[dist]) {
-        upDistrictsData[dist].forEach(b => {
-          curBlockSelect.innerHTML += `<option value="${b}">${b}</option>`;
-        });
-      }
-      refreshEditTargetDistrictOptions();
-    }
+    function populateEditTargetOptions(targets) {
+      const dist = loggedInUser.district;
+      const allBlocks = upDistrictsData[dist] || [];
+      const curBlock = document.getElementById("editCurrentBlock").value;
 
-    function populateEditTargetDistrictOptions(targets) {
-      const sortedDists = Object.keys(upDistrictsData).sort((a,b) => a.localeCompare(b, 'hi'));
-      const curDist = document.getElementById("editCurrentDistrict").value;
-
-      ['editTarget1', 'editTarget2', 'editTarget3', 'editTarget4', 'editTarget5'].forEach((id, idx) => {
+      ['editTarget1', 'editTarget2', 'editTarget3', 'editTarget4'].forEach((id, idx) => {
         const selElem = document.getElementById(id);
         const savedVal = targets[idx] || "";
         let html = `<option value="">पसंद-${idx+1} चुनें...</option>`;
-        sortedDists.forEach(d => {
-          if (d !== curDist) {
-            const isSel = (d === savedVal) ? "selected" : "";
-            html += `<option value="${d}" ${isSel}>${d}</option>`;
+        allBlocks.forEach(b => {
+          if (b !== curBlock) {
+            const isSel = (b === savedVal) ? "selected" : "";
+            html += `<option value="${b}" ${isSel}>${b}</option>`;
           }
         });
         selElem.innerHTML = html;
       });
-      refreshEditTargetDistrictOptions();
+      refreshEditTargetBlockOptions();
     }
 
-    function refreshEditTargetDistrictOptions() {
+    function refreshEditTargetBlockOptions() {
       if (!loggedInUser) return;
-      const sortedDists = Object.keys(upDistrictsData).sort((a,b) => a.localeCompare(b, 'hi'));
-      const curDist = document.getElementById("editCurrentDistrict").value;
+      const dist = loggedInUser.district;
+      const allBlocks = upDistrictsData[dist] || [];
+      const curBlock = document.getElementById("editCurrentBlock").value;
 
-      const d1 = document.getElementById("editTarget1").value;
-      const d2 = document.getElementById("editTarget2").value;
-      const d3 = document.getElementById("editTarget3").value;
-      const d4 = document.getElementById("editTarget4").value;
-      const d5 = document.getElementById("editTarget5").value;
+      const p1 = document.getElementById("editTarget1").value;
+      const p2 = document.getElementById("editTarget2").value;
+      const p3 = document.getElementById("editTarget3").value;
+      const p4 = document.getElementById("editTarget4").value;
 
       const targetSelects = [
-        { id: "editTarget1", val: d1, label: "पसंद-1 चुनें *" },
-        { id: "editTarget2", val: d2, label: "पसंद-2 चुनें (वैकल्पिक)" },
-        { id: "editTarget3", val: d3, label: "पसंद-3 चुनें (वैकल्पिक)" },
-        { id: "editTarget4", val: d4, label: "पसंद-4 चुनें (वैकल्पिक)" },
-        { id: "editTarget5", val: d5, label: "पसंद-5 चुनें (वैकल्पिक)" }
+        { id: "editTarget1", val: p1, label: "पसंद-1 चुनें *" },
+        { id: "editTarget2", val: p2, label: "पसंद-2 चुनें (वैकल्पिक)" },
+        { id: "editTarget3", val: p3, label: "पसंद-3 चुनें (वैकल्पिक)" },
+        { id: "editTarget4", val: p4, label: "पसंद-4 चुनें (वैकल्पिक)" }
       ];
 
-      targetSelects.forEach(t => {
-        const selElem = document.getElementById(t.id);
-        const curVal = t.val;
-        const chosenInOthers = [curDist, d1, d2, d3, d4, d5].filter(v => v && v !== curVal);
+      targetSelects.forEach(target => {
+        const selElem = document.getElementById(target.id);
+        const currentVal = target.val;
+        const chosenInOthers = [curBlock, p1, p2, p3, p4].filter(v => v && v !== currentVal);
 
-        let html = `<option value="">${t.label}</option>`;
-        sortedDists.forEach(d => {
-          if (!chosenInOthers.includes(d)) {
-            const isSel = (d === curVal) ? "selected" : "";
-            html += `<option value="${d}" ${isSel}>${d}</option>`;
+        let optionsHtml = `<option value="">${target.label}</option>`;
+        allBlocks.forEach(b => {
+          if (b !== curBlock && !chosenInOthers.includes(b)) {
+            const isSelected = (b === currentVal) ? "selected" : "";
+            optionsHtml += `<option value="${b}" ${isSelected}>${b}</option>`;
           }
         });
-        selElem.innerHTML = html;
+        selElem.innerHTML = optionsHtml;
       });
     }
 
@@ -994,22 +1085,6 @@ ${targetsFormatted}
       saveBtn.disabled = true;
       saveBtn.innerText = "सुरक्षित हो रहा है...";
 
-      const curDist = document.getElementById("editCurrentDistrict").value;
-      const targetDistricts = [
-        document.getElementById("editTarget1").value,
-        document.getElementById("editTarget2").value,
-        document.getElementById("editTarget3").value,
-        document.getElementById("editTarget4").value,
-        document.getElementById("editTarget5").value
-      ].filter(Boolean);
-
-      if (targetDistricts.includes(curDist)) {
-        alert("वर्तमान जनपद को इच्छित जनपद में नहीं चुन सकते!");
-        saveBtn.disabled = false;
-        saveBtn.innerText = "बदलाव सुरक्षित करें";
-        return;
-      }
-
       const level = document.getElementById("editLevel").value;
       const subject = level.includes("Junior") ? document.getElementById("editSubject").value : "सामान्य (All Subjects)";
 
@@ -1019,15 +1094,19 @@ ${targetsFormatted}
         level: level,
         designation: document.getElementById("editDesignation").value,
         subject: subject,
-        currentDistrict: curDist,
         currentBlock: document.getElementById("editCurrentBlock").value,
-        targetDistricts: targetDistricts,
+        targetBlocks: [
+          document.getElementById("editTarget1").value,
+          document.getElementById("editTarget2").value,
+          document.getElementById("editTarget3").value,
+          document.getElementById("editTarget4").value
+        ].filter(Boolean),
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       };
 
       try {
         await db.collection(COLLECTION_NAME).doc(loggedInUser.id).update(updatedData);
-        alert("आपकी अंतर जनपदीय प्रोफ़ाइल सफलतापूर्वक अपडेट हो गई है!");
+        alert("आपकी प्रोफ़ाइल सफलतापूर्वक अपडेट हो गई है!");
         loggedInUser = { ...loggedInUser, ...updatedData };
         setLoggedInSession(loggedInUser);
       } catch (err) {
@@ -1040,12 +1119,12 @@ ${targetsFormatted}
     });
 
     // 12. बैकएंड से समस्त शिक्षक लोड करना
-    async function fetchAllInterTeachers() {
+    async function fetchAllTeachers() {
       try {
         const snapshot = await db.collection(COLLECTION_NAME).get();
-        allInterTeachers = [];
+        allTeachers = [];
         snapshot.forEach(doc => {
-          allInterTeachers.push({ id: doc.id, ...doc.data() });
+          allTeachers.push({ id: doc.id, ...doc.data() });
         });
       } catch (error) {
         console.error("Fetch Error:", error);
@@ -1062,7 +1141,7 @@ ${targetsFormatted}
     // इनिशियलाइज़
     window.addEventListener("DOMContentLoaded", () => {
       initDistricts();
-      fetchAllInterTeachers();
+      fetchAllTeachers();
     });
   </script>
 </body>
