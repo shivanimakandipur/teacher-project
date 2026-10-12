@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>उत्तर प्रदेश शिक्षक म्यूचुअल ट्रांसफर साथी</title>
+  <title>अंतः जनपदीय शिक्षक म्यूचुअल ट्रांसफर साथी</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
@@ -22,7 +22,7 @@
         <i class="fa-solid fa-school-flag text-2xl text-amber-300"></i>
         <div>
           <h1 class="text-lg sm:text-xl font-bold tracking-tight">यूपी शिक्षक म्यूचुअल ट्रांसफर साथी</h1>
-          <p class="text-xs text-indigo-200">अंतः जनपदीय पारस्परिक स्थानांतरण प्रोफाइल पंजीकरण एवं मिलान मंच</p>
+          <p class="text-xs text-indigo-200">अंतः जनपदीय (Intra-District) पारस्परिक स्थानांतरण एवं साथी मिलान मंच</p>
         </div>
       </div>
       <div class="flex items-center gap-2 text-xs bg-indigo-800/80 px-3.5 py-1.5 rounded-full border border-indigo-500">
@@ -45,7 +45,7 @@
         </button>
         <button id="tab-btn-login" onclick="switchAuthTab('login')"
           class="flex-1 py-3.5 px-4 text-center text-slate-600 hover:text-indigo-600 flex items-center justify-center gap-2 transition">
-          <i class="fa-solid fa-right-to-bracket"></i> शिक्षक लॉगिन (eHRMS + मोबाइल)
+          <i class="fa-solid fa-right-to-bracket"></i> शिक्षक लॉगिन (मोबाइल + eHRMS)
         </button>
       </div>
 
@@ -54,31 +54,53 @@
         <div class="mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h2 class="text-base font-bold text-slate-800">नया विवरण दर्ज करें</h2>
-            <p class="text-xs text-slate-500">जनपद चुनकर अपने वर्तमान एवं इच्छित 4 ब्लॉकों की प्राथमिकताएं भरें</p>
+            <p class="text-xs text-slate-500">जनपद, विद्यालय एवं इच्छित 4 ब्लॉकों की प्राथमिकताएं भरें</p>
           </div>
-          <span class="text-xs bg-emerald-50 text-emerald-700 font-medium px-2.5 py-1 rounded-md border border-emerald-200">सुरक्षित क्लाउड स्टोरेज</span>
+          <span class="text-xs bg-emerald-50 text-emerald-700 font-medium px-2.5 py-1 rounded-md border border-emerald-200">सुरक्षित पोर्टल</span>
         </div>
 
         <form id="register-form" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <!-- Teacher Name -->
+          <!-- Teacher Name (Only English Letters, Uppercase) -->
           <div>
-            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">शिक्षक का नाम *</label>
-            <input type="text" id="regTeacherName" required placeholder="उदा. दीपक सिंह"
-              class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">शिक्षक का नाम (IN CAPITAL LETTERS) *</label>
+            <input type="text" id="regTeacherName" required placeholder="DEEPAK SINGH"
+              oninput="filterAlphaUpper(this)"
+              class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm uppercase">
           </div>
 
-          <!-- eHRMS Code -->
+          <!-- School Name (Only English Letters, Uppercase) -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">कार्यरत विद्यालय का नाम (IN CAPITAL) *</label>
+            <input type="text" id="regSchoolName" required placeholder="PS MOHRANIYA"
+              oninput="filterAlphaUpper(this)"
+              class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm uppercase">
+          </div>
+
+          <!-- eHRMS Code (Numbers Only) -->
           <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मानव संपदा कोड (eHRMS Code) *</label>
-            <input type="text" id="regEhrmsCode" required placeholder="उदा. 847291" pattern="[0-9]{5,8}" title="5 से 8 अंकों का eHRMS कोड"
+            <input type="text" id="regEhrmsCode" required placeholder="केवल अंक (उदा. 847291)" maxlength="8"
+              oninput="filterNumbersOnly(this)"
               class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
           </div>
 
-          <!-- Mobile -->
+          <!-- Mobile (Numbers Only) -->
           <div>
-            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मोबाइल नंबर *</label>
-            <input type="tel" id="regMobile" required pattern="[0-9]{10}" placeholder="10 अंकों का मोबाइल नंबर"
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मोबाइल नंबर (10 अंक) *</label>
+            <input type="tel" id="regMobile" required maxlength="10" placeholder="केवल 10 अंक"
+              oninput="filterNumbersOnly(this)"
               class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+          </div>
+
+          <!-- Level Category (Primary vs Junior) -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">विद्यालय स्तर (Level) *</label>
+            <select id="regLevel" required onchange="handleLevelChange('regLevel', 'regSubjectBox', 'regSubject')"
+              class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
+              <option value="">स्तर चुनें...</option>
+              <option value="प्राथमिक स्तर (Primary)">प्राथमिक स्तर (कक्षा 1 से 5)</option>
+              <option value="उच्च प्राथमिक / जूनियर स्तर (Junior)">उच्च प्राथमिक / जूनियर स्तर (कक्षा 6 से 8)</option>
+            </select>
           </div>
 
           <!-- Designation -->
@@ -87,21 +109,20 @@
             <select id="regDesignation" required
               class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
               <option value="">पद चुनें...</option>
-              <option value="सहायक अध्यापक (PS)">सहायक अध्यापक (PS)</option>
-              <option value="प्रधानाध्यापक (PS)">प्रधानाध्यापक (PS)</option>
-              <option value="सहायक अध्यापक (UPS)">सहायक अध्यापक (UPS)</option>
-              <option value="प्रधानाध्यापक (UPS)">प्रधानाध्यापक (UPS)</option>
+              <option value="सहायक अध्यापक">सहायक अध्यापक (Assistant Teacher)</option>
+              <option value="प्रधानाध्यापक">प्रधानाध्यापक (Head Master)</option>
             </select>
           </div>
 
-          <!-- Subject -->
-          <div>
-            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">संवर्ग / विषय (UPS हेतु)</label>
+          <!-- Subject (Only visible for Junior) -->
+          <div id="regSubjectBox" class="hidden">
+            <label class="block text-xs font-semibold text-indigo-700 uppercase mb-1">विषय संवर्ग (Junior हेतु) *</label>
             <select id="regSubject"
-              class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
-              <option value="सामान्य / ऑल (PS)">सामान्य / ऑल (PS)</option>
-              <option value="गणित / विज्ञान">गणित / विज्ञान (Science/Maths)</option>
-              <option value="सामाजिक विषय / भाषा">सामाजिक विषय / भाषा (Arts/Language)</option>
+              class="w-full px-3.5 py-2.5 rounded-lg border border-indigo-300 bg-indigo-50/40 focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
+              <option value="">विषय चुनें...</option>
+              <option value="भाषा (Language)">भाषा (हिंदी / अंग्रेजी / संस्कृत)</option>
+              <option value="सामाजिक विषय (Social Science)">सामाजिक विषय</option>
+              <option value="गणित एवं विज्ञान (Maths & Science)">गणित एवं विज्ञान</option>
             </select>
           </div>
 
@@ -163,14 +184,14 @@
             <button type="submit" id="reg-btn"
               class="w-full sm:w-auto px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
               <i class="fa-solid fa-cloud-arrow-up"></i>
-              <span>पंजीकरण दर्ज करें</span>
+              <span>पंजीकरण सुरक्षित करें</span>
             </button>
           </div>
         </form>
       </div>
 
       <!-- Tab 2: Teacher Login & Dashboard -->
-      <div id="tab-pane-login" class="hidden p-6 max-w-xl mx-auto">
+      <div id="tab-pane-login" class="p-6 max-w-xl mx-auto hidden">
         <!-- Login Form -->
         <div id="login-box">
           <div class="text-center mb-6">
@@ -178,19 +199,23 @@
               <i class="fa-solid fa-lock"></i>
             </div>
             <h2 class="text-lg font-bold text-slate-800">शिक्षक लॉगिन</h2>
-            <p class="text-xs text-slate-500">पंजीकृत eHRMS कोड और मोबाइल नंबर से प्रोफाइल देखें एवं प्रबंधित करें</p>
+            <p class="text-xs text-slate-500">पंजीकृत मोबाइल नंबर एवं eHRMS कोड से प्रोफाइल व मैचिंग खोजें</p>
           </div>
 
           <form id="login-form" class="space-y-4">
+            <!-- 1. Registered Mobile Number First -->
             <div>
-              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मानव संपदा कोड (eHRMS Code)</label>
-              <input type="text" id="loginEhrmsCode" required placeholder="उदा. 847291"
+              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">पंजीकृत मोबाइल नंबर (10 अंक) *</label>
+              <input type="tel" id="loginMobile" required maxlength="10" placeholder="उदा. 9876543210"
+                oninput="filterNumbersOnly(this)"
                 class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
             </div>
 
+            <!-- 2. eHRMS Code Second -->
             <div>
-              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">पंजीकृत मोबाइल नंबर</label>
-              <input type="tel" id="loginMobile" required pattern="[0-9]{10}" placeholder="10 अंकों का मोबाइल नंबर"
+              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मानव संपदा कोड (eHRMS Code) *</label>
+              <input type="text" id="loginEhrmsCode" required maxlength="8" placeholder="उदा. 847291"
+                oninput="filterNumbersOnly(this)"
                 class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
             </div>
 
@@ -202,15 +227,15 @@
           </form>
         </div>
 
-        <!-- Logged-in Profile View / Edit Section -->
-        <div id="logged-profile-card" class="hidden space-y-4">
-          <div class="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100 shadow-sm">
-            <div class="flex justify-between items-start mb-3 border-b border-indigo-100/80 pb-3">
+        <!-- Logged-in Profile & Auto Matched Results -->
+        <div id="logged-profile-card" class="hidden space-y-6">
+          <div class="p-5 rounded-2xl bg-indigo-50/70 border border-indigo-100 shadow-sm">
+            <div class="flex justify-between items-start mb-3 border-b border-indigo-100 pb-3">
               <div>
                 <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md mb-1">
                   <i class="fa-solid fa-circle-check"></i> सत्यापित प्रोफाइल
                 </span>
-                <h3 id="loggedName" class="font-bold text-slate-800 text-lg"></h3>
+                <h3 id="loggedName" class="font-bold text-slate-800 text-lg uppercase"></h3>
                 <p id="loggedEhrms" class="text-xs text-slate-600 font-medium"></p>
               </div>
               <button onclick="logoutTeacher()" class="text-xs bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg shadow-xs transition">
@@ -222,13 +247,11 @@
 
             <!-- Action Buttons -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-indigo-100">
-              <!-- Share / Copy Profile Button -->
               <button onclick="copyProfileShareText()" class="w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
                 <i class="fa-solid fa-copy"></i>
                 <span id="copy-btn-text">म्यूचुअल विवरण कॉपी करें (Share)</span>
               </button>
 
-              <!-- Edit Profile Button -->
               <button onclick="toggleEditMode(true)" class="w-full py-2.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
                 <i class="fa-solid fa-pen-to-square"></i>
                 <span>प्रोफ़ाइल संपादित करें (Edit)</span>
@@ -236,7 +259,25 @@
             </div>
           </div>
 
-          <!-- Edit Profile Inline Modal/Box -->
+          <!-- Auto-Search Matched Partners Banner & List -->
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div>
+                <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
+                  आपके लिए खोजे गए पारस्परिक (म्यूचुअल) साथी
+                </h4>
+                <p id="match-summary-text" class="text-xs text-indigo-600 font-medium mt-0.5">साथी खोजे जा रहे हैं...</p>
+              </div>
+            </div>
+
+            <!-- Matched Teachers Cards Container -->
+            <div id="matched-teachers-list" class="space-y-3">
+              <!-- Matched cards will be injected here -->
+            </div>
+          </div>
+
+          <!-- Edit Profile Box -->
           <div id="edit-profile-box" class="hidden p-5 rounded-2xl bg-white border border-slate-300 shadow-md">
             <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-200">
               <h4 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
@@ -249,28 +290,40 @@
 
             <form id="edit-form" class="space-y-3">
               <div>
-                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">शिक्षक का नाम</label>
-                <input type="text" id="editTeacherName" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-500">
+                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">शिक्षक का नाम (CAPITAL)</label>
+                <input type="text" id="editTeacherName" required oninput="filterAlphaUpper(this)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none uppercase">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">विद्यालय का नाम (CAPITAL)</label>
+                <input type="text" id="editSchoolName" required oninput="filterAlphaUpper(this)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none uppercase">
               </div>
 
               <div class="grid grid-cols-2 gap-2">
                 <div>
-                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">पदनाम</label>
-                  <select id="editDesignation" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
-                    <option value="सहायक अध्यापक (PS)">सहायक अध्यापक (PS)</option>
-                    <option value="प्रधानाध्यापक (PS)">प्रधानाध्यापक (PS)</option>
-                    <option value="सहायक अध्यापक (UPS)">सहायक अध्यापक (UPS)</option>
-                    <option value="प्रधानाध्यापक (UPS)">प्रधानाध्यापक (UPS)</option>
+                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">विद्यालय स्तर</label>
+                  <select id="editLevel" required onchange="handleLevelChange('editLevel', 'editSubjectBox', 'editSubject')" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
+                    <option value="प्राथमिक स्तर (Primary)">प्राथमिक स्तर (1 से 5)</option>
+                    <option value="उच्च प्राथमिक / जूनियर स्तर (Junior)">उच्च प्राथमिक / जूनियर (6 से 8)</option>
                   </select>
                 </div>
                 <div>
-                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">विषय / संवर्ग</label>
-                  <select id="editSubject" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
-                    <option value="सामान्य / ऑल (PS)">सामान्य / ऑल (PS)</option>
-                    <option value="गणित / विज्ञान">गणित / विज्ञान</option>
-                    <option value="सामाजिक विषय / भाषा">सामाजिक विषय / भाषा</option>
+                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">पदनाम</label>
+                  <select id="editDesignation" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
+                    <option value="सहायक अध्यापक">सहायक अध्यापक</option>
+                    <option value="प्रधानाध्यापक">प्रधानाध्यापक</option>
                   </select>
                 </div>
+              </div>
+
+              <div id="editSubjectBox" class="hidden">
+                <label class="block text-[11px] font-semibold text-indigo-700 uppercase mb-0.5">विषय संवर्ग (Junior)</label>
+                <select id="editSubject" class="w-full px-3 py-2 text-xs rounded-lg border border-indigo-300 outline-none bg-white">
+                  <option value="">विषय चुनें...</option>
+                  <option value="भाषा (Language)">भाषा</option>
+                  <option value="सामाजिक विषय (Social Science)">सामाजिक विषय</option>
+                  <option value="गणित एवं विज्ञान (Maths & Science)">गणित एवं विज्ञान</option>
+                </select>
               </div>
 
               <div>
@@ -319,7 +372,7 @@
             <i class="fa-solid fa-users-viewfinder text-indigo-600"></i>
             पंजीकृत साथी प्रोफाइल (सत्यापन प्रक्रियाधीन)
           </h2>
-          <p class="text-xs text-slate-500">डेटा सत्यापन पूर्ण होते ही पारस्परिक संपर्क विवरण जारी किए जाएंगे</p>
+          <p class="text-xs text-slate-500">पारस्परिक साथी विवरण एवं ब्लॉक वरीयता सूची</p>
         </div>
 
         <!-- Filter Controls -->
@@ -330,8 +383,8 @@
           </select>
           
           <input type="text" id="searchInput" oninput="applyFilters()"
-            placeholder="ब्लॉक या शिक्षक खोजें..."
-            class="px-4 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none w-full sm:w-60">
+            placeholder="ब्लॉक, शिक्षक या विद्यालय खोजें..."
+            class="px-4 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none w-full sm:w-60 uppercase">
         </div>
       </div>
 
@@ -346,8 +399,9 @@
         <table class="w-full text-left text-sm hidden md:table">
           <thead class="bg-slate-50 text-slate-600 uppercase text-xs border-b border-slate-200">
             <tr>
-              <th class="px-6 py-3.5">शिक्षक प्रोफाइल</th>
-              <th class="px-6 py-3.5">तैनाती जनपद एवं वर्तमान ब्लॉक</th>
+              <th class="px-6 py-3.5">शिक्षक व विद्यालय</th>
+              <th class="px-6 py-3.5">संवर्ग / स्तर</th>
+              <th class="px-6 py-3.5">तैनाती जनपद एवं ब्लॉक</th>
               <th class="px-6 py-3.5">इच्छित ब्लॉक प्राथमिकताएं</th>
               <th class="px-6 py-3.5">संपर्क स्थिति</th>
             </tr>
@@ -453,6 +507,32 @@
       "भदोही": ["औराई", "भदोही", "डीघ", "ज्ञानपुर", "सुरियावां", "अभोली"]
     };
 
+    // इनपुट फ़िल्टर: केवल अंग्रेजी अक्षर और स्पेस, स्वतः Uppercase
+    function filterAlphaUpper(input) {
+      input.value = input.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
+    }
+
+    // इनपुट फ़िल्टर: केवल नंबर्स (0-9)
+    function filterNumbersOnly(input) {
+      input.value = input.value.replace(/[^0-9]/g, '');
+    }
+
+    // लेवल बदलने पर विषय का टॉगल
+    function handleLevelChange(levelSelectId, subjectBoxId, subjectSelectId) {
+      const level = document.getElementById(levelSelectId).value;
+      const subBox = document.getElementById(subjectBoxId);
+      const subSelect = document.getElementById(subjectSelectId);
+
+      if (level.includes("Junior")) {
+        subBox.classList.remove("hidden");
+        subSelect.required = true;
+      } else {
+        subBox.classList.add("hidden");
+        subSelect.required = false;
+        subSelect.value = "";
+      }
+    }
+
     // 2. Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyAjyeW8kmGoOMurMN7vD-WCu-XWyHTbgYk",
@@ -469,7 +549,7 @@
     let allTeachers = [];
     let loggedInUser = null;
 
-    // 3. टैब स्विच (Register vs Login)
+    // 3. टैब स्विच
     function switchAuthTab(tab) {
       const regTabBtn = document.getElementById("tab-btn-register");
       const logTabBtn = document.getElementById("tab-btn-login");
@@ -489,7 +569,7 @@
       }
     }
 
-    // 4. जनपद और 4 ब्लॉकों का डायनेमिक ड्रॉपडाउन फ़िल्टर (Duplicate Elimination)
+    // 4. जनपद और 4 ब्लॉक ड्रॉपडाउन
     function initDistricts() {
       const regDist = document.getElementById("regDistrict");
       const filterDist = document.getElementById("filterDistrictSelect");
@@ -552,7 +632,7 @@
       });
     }
 
-    // 5. शिक्षक पंजीकरण
+    // 5. नया पंजीकरण सबमिशन
     document.getElementById("register-form").addEventListener("submit", async function(e) {
       e.preventDefault();
       const regBtn = document.getElementById("reg-btn");
@@ -568,15 +648,21 @@
           alert(`eHRMS कोड ${ehrmsCode} पहले से पंजीकृत है! कृपया 'शिक्षक लॉगिन' टैब का उपयोग करें।`);
           switchAuthTab('login');
           document.getElementById("loginEhrmsCode").value = ehrmsCode;
+          document.getElementById("loginMobile").value = mobile;
           return;
         }
 
+        const level = document.getElementById("regLevel").value;
+        const subject = level.includes("Junior") ? document.getElementById("regSubject").value : "सामान्य (All Subjects)";
+
         const teacherRecord = {
           teacherName: document.getElementById("regTeacherName").value.trim(),
+          schoolName: document.getElementById("regSchoolName").value.trim(),
           ehrmsCode: ehrmsCode,
           mobile: mobile,
+          level: level,
           designation: document.getElementById("regDesignation").value,
-          subject: document.getElementById("regSubject").value,
+          subject: subject,
           district: document.getElementById("regDistrict").value,
           currentBlock: document.getElementById("regCurrentBlock").value,
           targetBlocks: [
@@ -601,33 +687,32 @@
         alert("पंजीकरण में त्रुटि: " + err.message);
       } finally {
         regBtn.disabled = false;
-        regBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>पंजीकरण दर्ज करें</span>`;
+        regBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>पंजीकरण सुरक्षित करें</span>`;
       }
     });
 
-    // 6. लॉगिन लॉजिक
+    // 6. लॉगिन सबमिशन (Mobile First, then eHRMS)
     document.getElementById("login-form").addEventListener("submit", async function(e) {
       e.preventDefault();
       const loginBtn = document.getElementById("login-btn");
       loginBtn.disabled = true;
       loginBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> सत्यापन हो रहा है...`;
 
-      const ehrms = document.getElementById("loginEhrmsCode").value.trim();
       const mob = document.getElementById("loginMobile").value.trim();
+      const ehrms = document.getElementById("loginEhrmsCode").value.trim();
 
       try {
         const querySnapshot = await db.collection("teachers")
-          .where("ehrmsCode", "==", ehrms)
           .where("mobile", "==", mob)
+          .where("ehrmsCode", "==", ehrms)
           .get();
 
         if (querySnapshot.empty) {
-          alert("कोई रिकॉर्ड नहीं मिला! कृपया जांचें कि eHRMS कोड एवं मोबाइल नंबर सही हैं।");
+          alert("विवरण मेल नहीं खाया! कृपया जांचें कि मोबाइल नंबर एवं eHRMS कोड सही हैं।");
         } else {
           let userDoc = null;
           querySnapshot.forEach(doc => { userDoc = { id: doc.id, ...doc.data() }; });
           setLoggedInSession(userDoc);
-          alert(`स्वागत है ${userDoc.teacherName} जी! आपका प्रोफ़ाइल सत्यापित हो गया है।`);
         }
       } catch (err) {
         console.error("Login Error:", err);
@@ -638,6 +723,7 @@
       }
     });
 
+    // लॉगिन के बाद प्रोफाइल व ऑटो-सर्च चलाना
     function setLoggedInSession(user) {
       loggedInUser = user;
       document.getElementById("login-box").classList.add("hidden");
@@ -648,12 +734,81 @@
       
       const blocksList = Array.isArray(user.targetBlocks) ? user.targetBlocks.join(", ") : (user.targetBlock1 || "कोई नहीं");
       document.getElementById("loggedDetails").innerHTML = `
-        <div><strong>जनपद:</strong> ${escapeHtml(user.district)}</div>
-        <div><strong>वर्तमान कार्यरत ब्लॉक:</strong> <span class="font-bold text-slate-800">${escapeHtml(user.currentBlock)}</span></div>
-        <div><strong>पद / विषय:</strong> ${escapeHtml(user.designation)} (${escapeHtml(user.subject || '')})</div>
-        <div><strong>इच्छित 4 ब्लॉक (प्राथमिकताएं):</strong> <span class="text-indigo-700 font-semibold">${escapeHtml(blocksList)}</span></div>
+        <div><strong>विद्यालय:</strong> <span class="font-bold uppercase">${escapeHtml(user.schoolName || '—')}</span></div>
+        <div><strong>जनपद:</strong> ${escapeHtml(user.district)} | <strong>कार्यरत ब्लॉक:</strong> <span class="font-bold text-slate-900">${escapeHtml(user.currentBlock)}</span></div>
+        <div><strong>संवर्ग:</strong> ${escapeHtml(user.level || 'प्राथमिक')} | <strong>पद:</strong> ${escapeHtml(user.designation)} (${escapeHtml(user.subject || 'सामान्य')})</div>
+        <div><strong>इच्छित 4 ब्लॉक:</strong> <span class="text-indigo-700 font-semibold">${escapeHtml(blocksList)}</span></div>
       `;
       toggleEditMode(false);
+      findAndDisplayMatches(user);
+    }
+
+    // ऑटो-सर्च मैचिंग लॉजिक
+    function findAndDisplayMatches(user) {
+      const summaryText = document.getElementById("match-summary-text");
+      const matchesContainer = document.getElementById("matched-teachers-list");
+      matchesContainer.innerHTML = "";
+
+      // उसी जनपद के अन्य शिक्षक
+      const candidateTeachers = allTeachers.filter(t => t.id !== user.id && t.district === user.district);
+
+      const matchedResults = [];
+
+      candidateTeachers.forEach(t => {
+        const theirTargets = Array.isArray(t.targetBlocks) ? t.targetBlocks : [t.targetBlock1].filter(Boolean);
+        // क्या साथी शिक्षक ने हमारे वर्तमान ब्लॉक को अपनी पसंद में डाला है?
+        const matchIndex = theirTargets.indexOf(user.currentBlock);
+
+        if (matchIndex !== -1) {
+          // क्या हमने भी उनके ब्लॉक को अपनी पसंद में चुना है? (Perfect 2-Way Match check)
+          const ourTargets = Array.isArray(user.targetBlocks) ? user.targetBlocks : [user.targetBlock1].filter(Boolean);
+          const isTwoWay = ourTargets.includes(t.currentBlock);
+
+          matchedResults.push({
+            teacher: t,
+            preferenceRank: matchIndex + 1, // पसंद #1, #2 आदि
+            isTwoWay: isTwoWay
+          });
+        }
+      });
+
+      // प्राथमिकता क्रम से सॉर्ट
+      matchedResults.sort((a, b) => a.preferenceRank - b.preferenceRank);
+
+      if (matchedResults.length === 0) {
+        summaryText.innerHTML = `<span class="text-amber-600 font-bold">वर्तमान में आपके ब्लॉक के लिए कोई सीधा मिलान उपलब्ध नहीं है।</span> जैसे ही कोई शिक्षक आपके ब्लॉक को चुनेगा, यहाँ स्वतः दिखने लगेगा।`;
+        matchesContainer.innerHTML = `<div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-500 text-center">पोर्टल पर बने रहें या अपने जिले के शिक्षक ग्रुप में नीचे दिया गया लिंक शेयर करें।</div>`;
+        return;
+      }
+
+      summaryText.innerHTML = `<span class="text-emerald-700 font-extrabold text-sm">हमारे पास आपके लिए ${matchedResults.length} शिक्षक उपलब्ध हैं!</span>`;
+
+      matchedResults.forEach(m => {
+        const t = m.teacher;
+        const card = document.createElement("div");
+        card.className = "p-4 rounded-xl border border-indigo-100 bg-indigo-50/40 space-y-2 shadow-xs";
+        card.innerHTML = `
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-900 text-sm uppercase">${escapeHtml(t.teacherName)}</span>
+                ${m.isTwoWay ? '<span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">पारस्परिक (2-Way Match)</span>' : ''}
+              </div>
+              <p class="text-xs text-slate-600 font-medium">🏫 विद्यालय: <strong class="uppercase text-slate-800">${escapeHtml(t.schoolName || 'विद्यालय दर्ज नहीं')}</strong></p>
+              <p class="text-xs text-indigo-700">पद: ${escapeHtml(t.designation)} (${escapeHtml(t.subject || 'सामान्य')})</p>
+            </div>
+            <span class="px-2.5 py-1 bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-bold">
+              उनकी पसंद #${m.preferenceRank}
+            </span>
+          </div>
+
+          <div class="text-xs text-slate-600 pt-1 border-t border-indigo-100/60 flex flex-wrap justify-between items-center gap-1">
+            <div>वर्तमान तैनात ब्लॉक: <strong class="text-slate-900">${escapeHtml(t.currentBlock)}</strong></div>
+            <div class="text-[11px] text-slate-400">सत्यापन शीघ्र उपलब्ध होगा</div>
+          </div>
+        `;
+        matchesContainer.appendChild(card);
+      });
     }
 
     function logoutTeacher() {
@@ -664,7 +819,7 @@
       toggleEditMode(false);
     }
 
-    // 7. शेयर / कॉपी संदूक (Website URL + Teacher Details Copy)
+    // 7. शेयर / कॉपी संदूक
     function copyProfileShareText() {
       if (!loggedInUser) return;
 
@@ -674,14 +829,15 @@
       const shareText = 
 `*📢 अंतः जनपदीय म्यूचुअल ट्रांसफर प्रोफाइल*
 👤 *शिक्षक:* ${loggedInUser.teacherName}
-📌 *पदनाम:* ${loggedInUser.designation} (${loggedInUser.subject || 'सामान्य'})
+🏫 *विद्यालय:* ${loggedInUser.schoolName || '—'}
+📌 *पद:* ${loggedInUser.designation} (${loggedInUser.subject || 'सामान्य'})
 📍 *जनपद:* ${loggedInUser.district}
-🏫 *वर्तमान कार्यरत ब्लॉक:* ${loggedInUser.currentBlock}
+🏢 *कार्यरत ब्लॉक:* ${loggedInUser.currentBlock}
 
-🎯 *इच्छित ब्लॉक (प्राथमिकताएं):*
+🎯 *इच्छित 4 ब्लॉक (प्राथमिकताएं):*
 ${targetsFormatted}
 
-🔗 *यदि आप इस ब्लॉक से म्यूचुअल ट्रांसफर चाहते हैं, तो कृपया नीचे दिए गए पोर्टल पर अपना विवरण दर्ज करें:*
+🔗 *यदि आप इनमें से किसी ब्लॉक में हैं और मेरे ब्लॉक (${loggedInUser.currentBlock}) में आना चाहते हैं, तो कृपया नीचे पोर्टल पर तुरंत दर्ज करें:*
 👉 https://deshimaster.in
 
 (पारस्परिक स्थानांतरण साथी खोज मंच)`;
@@ -693,18 +849,21 @@ ${targetsFormatted}
           btnText.innerText = "म्यूचुअल विवरण कॉपी करें (Share)";
         }, 3000);
       }).catch(err => {
-        alert("कॉपी करने में त्रुटि आई: " + err);
+        alert("कॉपी करने में त्रुटि: " + err);
       });
     }
 
-    // 8. प्रोफ़ाइल संपादन (Edit Profile Logic)
+    // 8. संपादन (Edit Profile Logic)
     function toggleEditMode(show) {
       const editBox = document.getElementById("edit-profile-box");
       if (show && loggedInUser) {
         editBox.classList.remove("hidden");
         document.getElementById("editTeacherName").value = loggedInUser.teacherName;
+        document.getElementById("editSchoolName").value = loggedInUser.schoolName || '';
+        document.getElementById("editLevel").value = loggedInUser.level || 'प्राथमिक स्तर (Primary)';
+        handleLevelChange('editLevel', 'editSubjectBox', 'editSubject');
         document.getElementById("editDesignation").value = loggedInUser.designation;
-        document.getElementById("editSubject").value = loggedInUser.subject || "सामान्य / ऑल (PS)";
+        document.getElementById("editSubject").value = loggedInUser.subject || '';
 
         const dist = loggedInUser.district;
         const curBlockSelect = document.getElementById("editCurrentBlock");
@@ -777,7 +936,6 @@ ${targetsFormatted}
       });
     }
 
-    // एडिट फॉर्म सबमिशन
     document.getElementById("edit-form").addEventListener("submit", async function(e) {
       e.preventDefault();
       if (!loggedInUser) return;
@@ -786,10 +944,15 @@ ${targetsFormatted}
       saveBtn.disabled = true;
       saveBtn.innerText = "सुरक्षित हो रहा है...";
 
+      const level = document.getElementById("editLevel").value;
+      const subject = level.includes("Junior") ? document.getElementById("editSubject").value : "सामान्य (All Subjects)";
+
       const updatedData = {
         teacherName: document.getElementById("editTeacherName").value.trim(),
+        schoolName: document.getElementById("editSchoolName").value.trim(),
+        level: level,
         designation: document.getElementById("editDesignation").value,
-        subject: document.getElementById("editSubject").value,
+        subject: subject,
         currentBlock: document.getElementById("editCurrentBlock").value,
         targetBlocks: [
           document.getElementById("editTarget1").value,
@@ -804,13 +967,12 @@ ${targetsFormatted}
         await db.collection("teachers").doc(loggedInUser.id).update(updatedData);
         alert("आपकी प्रोफ़ाइल सफलतापूर्वक अपडेट हो गई है!");
         
-        // लोकल स्टेट अपडेट करें
         loggedInUser = { ...loggedInUser, ...updatedData };
         setLoggedInSession(loggedInUser);
         fetchTeachers();
       } catch (err) {
         console.error("Update Error:", err);
-        alert("अपडेट करने में त्रुटि आई: " + err.message);
+        alert("अपडेट में त्रुटि: " + err.message);
       } finally {
         saveBtn.disabled = false;
         saveBtn.innerText = "बदलाव सुरक्षित करें";
@@ -831,6 +993,14 @@ ${targetsFormatted}
           allTeachers.push({ id: doc.id, ...doc.data() });
         });
         applyFilters();
+
+        if (loggedInUser) {
+          const freshUser = allTeachers.find(t => t.id === loggedInUser.id);
+          if (freshUser) {
+            loggedInUser = freshUser;
+            findAndDisplayMatches(loggedInUser);
+          }
+        }
       } catch (error) {
         console.error("Fetch Error:", error);
       } finally {
@@ -841,12 +1011,12 @@ ${targetsFormatted}
     // 10. फ़िल्टर
     function applyFilters() {
       const selectedDist = document.getElementById("filterDistrictSelect").value;
-      const query = document.getElementById("searchInput").value.toLowerCase().trim();
+      const query = document.getElementById("searchInput").value.toUpperCase().trim();
 
       const filtered = allTeachers.filter(t => {
         const matchDist = !selectedDist || (t.district === selectedDist);
         const targetsString = Array.isArray(t.targetBlocks) ? t.targetBlocks.join(" ") : (t.targetBlock1 || '');
-        const searchPool = `${t.teacherName} ${t.currentBlock} ${targetsString} ${t.designation} ${t.district}`.toLowerCase();
+        const searchPool = `${t.teacherName} ${t.schoolName || ''} ${t.currentBlock} ${targetsString} ${t.designation} ${t.district}`.toUpperCase();
         const matchQuery = !query || searchPool.includes(query);
 
         return matchDist && matchQuery;
@@ -855,7 +1025,7 @@ ${targetsFormatted}
       renderTeachers(filtered);
     }
 
-    // 11. सीमित प्रदर्शन (फ़ेज़-1 सुरक्षा)
+    // 11. डायरेक्टरी रेंडर
     function renderTeachers(list) {
       const tableBody = document.getElementById("teachers-table-body");
       const cardsContainer = document.getElementById("teachers-cards-container");
@@ -883,14 +1053,18 @@ ${targetsFormatted}
         row.className = "hover:bg-slate-50/80 transition";
         row.innerHTML = `
           <td class="px-6 py-4">
-            <div class="font-bold text-slate-800">${escapeHtml(t.teacherName)}</div>
-            <div class="text-xs text-indigo-600 font-medium">${escapeHtml(t.designation || '')} • ${escapeHtml(t.subject || '')}</div>
+            <div class="font-bold text-slate-900 uppercase">${escapeHtml(t.teacherName)}</div>
+            <div class="text-xs text-indigo-700 font-semibold uppercase">🏫 ${escapeHtml(t.schoolName || '—')}</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-xs font-medium text-slate-700">${escapeHtml(t.level || 'प्राथमिक स्तर')}</div>
+            <div class="text-xs text-slate-500">${escapeHtml(t.designation)} • ${escapeHtml(t.subject || 'सामान्य')}</div>
           </td>
           <td class="px-6 py-4">
             <span class="inline-block bg-indigo-50 text-indigo-700 px-2.5 py-0.5 rounded text-xs font-semibold mb-1">
               ${escapeHtml(t.district)}
             </span>
-            <div class="text-xs text-slate-600">वर्तमान ब्लॉक: <span class="font-semibold text-slate-800">${escapeHtml(t.currentBlock)}</span></div>
+            <div class="text-xs text-slate-600">कार्यरत ब्लॉक: <span class="font-semibold text-slate-800">${escapeHtml(t.currentBlock)}</span></div>
           </td>
           <td class="px-6 py-4 max-w-xs">
             <div class="flex flex-wrap">${targetBadges || '<span class="text-xs text-slate-400">कोई नहीं</span>'}</div>
@@ -911,8 +1085,9 @@ ${targetsFormatted}
         card.innerHTML = `
           <div class="flex justify-between items-start">
             <div>
-              <h3 class="font-bold text-slate-800 text-base">${escapeHtml(t.teacherName)}</h3>
-              <p class="text-xs text-indigo-600 font-medium">${escapeHtml(t.designation || '')} (${escapeHtml(t.subject || '')})</p>
+              <h3 class="font-bold text-slate-900 text-base uppercase">${escapeHtml(t.teacherName)}</h3>
+              <p class="text-xs text-indigo-700 font-semibold uppercase">🏫 ${escapeHtml(t.schoolName || '—')}</p>
+              <p class="text-xs text-slate-500">${escapeHtml(t.level || 'प्राथमिक')} | ${escapeHtml(t.designation)} (${escapeHtml(t.subject || 'सामान्य')})</p>
             </div>
             <div class="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-100 text-slate-600 border border-slate-200 rounded-lg text-xs font-medium cursor-not-allowed">
               <i class="fa-brands fa-whatsapp text-slate-400"></i> लॉक
@@ -920,7 +1095,7 @@ ${targetsFormatted}
           </div>
           <div class="text-xs pt-1 border-t border-slate-100 flex justify-between">
             <span class="text-slate-500">जनपद: <strong>${escapeHtml(t.district)}</strong></span>
-            <span class="text-slate-700">वर्तमान: <strong>${escapeHtml(t.currentBlock)}</strong></span>
+            <span class="text-slate-700">वर्तमान ब्लॉक: <strong>${escapeHtml(t.currentBlock)}</strong></span>
           </div>
           <div class="text-xs">
             <span class="text-slate-400 block text-[11px] mb-1">इच्छित ब्लॉक प्राथमिकताएं:</span>
