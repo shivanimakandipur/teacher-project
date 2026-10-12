@@ -12,15 +12,6 @@
   <!-- Firebase SDK (Compat Version) -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-  <style>
-    /* संवेदनशील डेटा को धुंधला (Blur) करने के लिए क्लास */
-    .blur-text {
-      filter: blur(4.5px);
-      user-select: none;
-      pointer-events: none;
-    }
-  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
 
@@ -71,14 +62,14 @@
         <form id="register-form" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">शिक्षक का नाम (CAPITAL LETTERS) *</label>
-            <input type="text" id="regTeacherName" required placeholder="DEEPAK SINGH"
+            <input type="text" id="regTeacherName" required placeholder="SHIVANI"
               oninput="filterAlphaUpper(this)"
               class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm uppercase">
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">कार्यरत विद्यालय का नाम (CAPITAL) *</label>
-            <input type="text" id="regSchoolName" required placeholder="PS MOHRANIYA"
+            <input type="text" id="regSchoolName" required placeholder="PS BEHTA"
               oninput="filterAlphaUpper(this)"
               class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm uppercase">
           </div>
@@ -671,7 +662,22 @@
       findAndDisplayMatches(user);
     }
 
-    // 8. ऑटो-मैचिंग और ब्लर (Blur) प्रदर्शन
+    // 8. स्मार्ट मास्किंग फ़ंक्शन (शुरू के 2 + स्टार + अंत के 1-2 अक्षर)
+    function maskWord(word) {
+      if (!word) return "";
+      const len = word.length;
+      if (len <= 2) return word;
+      if (len <= 4) return word[0] + "*".repeat(len - 2) + word[len - 1];
+      const keepEnd = len > 5 ? 2 : 1;
+      return word.substring(0, 2) + "*".repeat(len - 2 - keepEnd) + word.substring(len - keepEnd);
+    }
+
+    function maskText(str) {
+      if (!str) return "******";
+      return str.split(/\s+/).map(w => maskWord(w)).join(" ");
+    }
+
+    // 9. ऑटो-मैचिंग और स्टार-मास्किंग प्रदर्शन
     function findAndDisplayMatches(user) {
       const summaryText = document.getElementById("match-summary-text");
       const matchesContainer = document.getElementById("matched-teachers-list");
@@ -716,20 +722,20 @@
         const card = document.createElement("div");
         card.className = "p-4 rounded-xl border border-indigo-100 bg-white space-y-3 shadow-xs";
 
-        const teacherDisplayName = maskName(t.teacherName);
-        const schoolDisplayName = 'PS / UPS **********';
+        const teacherDisplayName = maskText(t.teacherName);
+        const schoolDisplayName = maskText(t.schoolName || 'PS SCHOOL');
 
         card.innerHTML = `
           <div class="flex justify-between items-start">
             <div>
               <div class="flex items-center gap-2">
-                <span class="font-bold text-slate-900 text-sm uppercase blur-text">
+                <span class="font-bold text-slate-900 text-sm tracking-wide uppercase">
                   ${teacherDisplayName}
                 </span>
                 ${m.isTwoWay ? '<span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2-Way Mutual Match</span>' : ''}
               </div>
               <p class="text-xs text-slate-600 font-medium mt-0.5">
-                🏫 विद्यालय: <span class="font-bold uppercase text-slate-800 blur-text">${schoolDisplayName}</span>
+                🏫 विद्यालय: <span class="font-semibold tracking-wide uppercase text-slate-800">${schoolDisplayName}</span>
               </p>
               <p class="text-xs text-indigo-700 font-medium">पद: ${escapeHtml(t.designation)} (${escapeHtml(t.subject || 'सामान्य')})</p>
             </div>
@@ -743,7 +749,6 @@
               कार्यरत ब्लॉक: <strong class="text-slate-900 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">${escapeHtml(t.currentBlock)}</strong>
             </div>
 
-            <!-- संपर्क स्थिति (बिना किसी शुल्क या पैसे के ज़िक्र के) -->
             <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-600 border border-slate-200 rounded-lg text-xs font-medium cursor-not-allowed">
               <i class="fa-solid fa-lock text-slate-400"></i>
               <span>सत्यापन प्रक्रियाधीन (शीघ्र उपलब्ध होगा)</span>
@@ -754,11 +759,6 @@
       });
     }
 
-    function maskName(str) {
-      if (!str) return "TEACHER PROFILE";
-      return str.split(" ").map(w => w.length > 3 ? w.substring(0, 3) + "***" : w + "***").join(" ");
-    }
-
     function logoutTeacher() {
       loggedInUser = null;
       document.getElementById("login-box").classList.remove("hidden");
@@ -767,7 +767,7 @@
       toggleEditMode(false);
     }
 
-    // 9. शेयर / कॉपी संदूक
+    // 10. शेयर / कॉपी संदूक
     function copyProfileShareText() {
       if (!loggedInUser) return;
 
@@ -801,7 +801,7 @@ ${targetsFormatted}
       });
     }
 
-    // 10. प्रोफ़ाइल संपादन
+    // 11. प्रोफ़ाइल संपादन
     function toggleEditMode(show) {
       const editBox = document.getElementById("edit-profile-box");
       if (show && loggedInUser) {
@@ -925,7 +925,7 @@ ${targetsFormatted}
       }
     });
 
-    // 11. बैकएंड से समस्त शिक्षक लोड करना
+    // 12. बैकएंड से समस्त शिक्षक लोड करना
     async function fetchAllTeachers() {
       try {
         const snapshot = await db.collection("teachers").get();
