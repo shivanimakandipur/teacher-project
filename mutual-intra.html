@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>अंतः जनपदीय शिक्षक म्यूचुअल ट्रांसफर साथी - desimaster.in</title>
+  <title>अंतःजनपदीय पारस्परिक ट्रांसफर - deshimaster.in</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
@@ -15,40 +15,43 @@
 
   <style>
     html { scroll-behavior: smooth; }
-    .article-body p { margin-bottom: 1.25rem; line-height: 1.85; text-align: justify; }
+    .article-body p { margin-bottom: 1.2rem; line-height: 1.85; text-align: justify; }
     .article-body h2 { margin-top: 2rem; margin-bottom: 1rem; color: #1e1b4b; font-weight: 700; }
-    .article-body h3 { margin-top: 1.4rem; margin-bottom: 0.6rem; color: #312e81; font-weight: 600; }
+    .article-body h3 { margin-top: 1.3rem; margin-bottom: 0.6rem; color: #312e81; font-weight: 600; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
-  <!-- Header -->
-  <header class="bg-indigo-700 text-white shadow-md sticky top-0 z-50">
-    <div class="max-w-4xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center gap-3">
-        <a href="https://desimaster.in" class="w-10 h-10 bg-amber-400 text-indigo-900 rounded-xl flex items-center justify-center font-black text-xl shadow-inner">
+  <!-- Header (आपकी वेबसाइट के हूबहू मूल डिज़ाइन के अनुसार) -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <!-- Logo Section -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 bg-emerald-700 text-white rounded-lg flex items-center justify-center font-black text-xl tracking-tight shadow-sm">
           DM
-        </a>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs bg-amber-400/20 text-amber-300 font-mono px-2 py-0.5 rounded border border-amber-300/30">desimaster.in</span>
-            <span class="text-[11px] text-indigo-200">अंतः जनपदीय पोर्टल</span>
-          </div>
-          <h1 class="text-lg sm:text-xl font-bold tracking-tight">यूपी शिक्षक म्यूचुअल ट्रांसफर साथी</h1>
         </div>
-      </div>
-      <div class="flex items-center gap-2">
-        <a href="#rules-guide-section" class="text-xs text-amber-300 hover:text-white bg-indigo-800/90 px-3 py-1.5 rounded-full border border-indigo-500/60 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-book-open"></i> नियमावली गाइड पढ़ें
+        <div>
+          <h1 class="text-xl font-bold text-slate-900 leading-tight tracking-tight">deshimaster.in</h1>
+          <p class="text-xs text-slate-500 font-medium">देशी मास्टर - शिक्षक डिजिटल साथी</p>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="flex items-center gap-4 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-emerald-700 transition">होम पोर्टल</a>
+        <a href="shasanadesh.html" class="hover:text-emerald-700 transition">शासनादेश</a>
+        <a href="about.html" class="hover:text-emerald-700 transition">हमारे बारे में</a>
+        <a href="mutual-inter.html" class="text-xs bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg transition shadow-xs flex items-center gap-1">
+          <i class="fa-solid fa-arrow-right-arrow-left"></i> अंतर-जनपदीय
         </a>
-      </div>
+      </nav>
     </div>
   </header>
 
   <!-- Main Container -->
   <main class="max-w-4xl mx-auto px-4 py-6 space-y-10 w-full flex-1">
 
-    <!-- Section 1: Auth & Portal Operations (Tabs: Register vs Login) -->
+    <!-- Section 1: Auth & Portal Operations -->
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
       <!-- Tabs Header -->
       <div class="flex border-b border-slate-200 bg-slate-100 text-sm font-semibold">
@@ -66,7 +69,7 @@
       <div id="tab-pane-register" class="p-6">
         <div class="mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
           <div>
-            <h2 class="text-base font-bold text-slate-800">अंतः जनपदीय विवरण दर्ज करें</h2>
+            <h2 class="text-base font-bold text-slate-800">अंतःजनपदीय विवरण दर्ज करें</h2>
             <p class="text-xs text-slate-500">जनपद, विद्यालय एवं इच्छित 4 ब्लॉकों की प्राथमिकताएं भरें</p>
           </div>
           <span class="text-xs bg-emerald-50 text-emerald-700 font-medium px-2.5 py-1 rounded-md border border-emerald-200">100% नि:शुल्क पंजीकरण</span>
@@ -209,7 +212,7 @@
 
           <div class="md:col-span-2 lg:col-span-3 pt-2">
             <button type="submit" id="reg-btn"
-              class="w-full sm:w-auto px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
+              class="w-full sm:w-auto px-8 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-medium rounded-lg shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
               <i class="fa-solid fa-cloud-arrow-up"></i>
               <span>पंजीकरण सुरक्षित करें</span>
             </button>
@@ -245,7 +248,7 @@
             </div>
 
             <button type="submit" id="login-btn"
-              class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2 cursor-pointer">
+              class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2 cursor-pointer">
               <i class="fa-solid fa-right-to-bracket"></i>
               <span>लॉगिन करें एवं साथी देखें</span>
             </button>
@@ -386,7 +389,7 @@
       </div>
     </div>
 
-    <!-- Section 2: Comprehensive 1200+ Words Legal & Administrative Guide -->
+    <!-- Section 2: 1200+ Words Guide & Legal Reality -->
     <div id="rules-guide-section" class="space-y-6 pt-4">
       
       <!-- Article Header Card -->
@@ -511,34 +514,24 @@
 
   </main>
 
-  <!-- Footer with Legal Disclaimer and Policy Links -->
-  <footer class="bg-slate-900 text-slate-400 text-xs mt-12 border-t border-slate-800">
-    <div class="max-w-4xl mx-auto px-4 py-8 space-y-5">
-      <!-- Legal Disclaimer text -->
-      <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700/60 text-slate-300 space-y-1.5 leading-relaxed">
-        <p class="font-bold text-amber-300 flex items-center gap-1.5">
-          <i class="fa-solid fa-triangle-exclamation"></i> कानूनी अस्वीकरण (Disclaimer):
-        </p>
-        <p class="text-[11px]">
-          यह वेबसाइट <strong>desimaster.in</strong> केवल उत्तर प्रदेश बेसिक शिक्षा परिषद के शिक्षकों को पारस्परिक स्थानांतरण (Mutual Transfer) हेतु संपर्क सूत्र उपलब्ध कराने का एक स्वतंत्र डिजिटल मंच है। शिक्षकों के मध्य होने वाली किसी भी प्रकार की आपसी सहमति, विधिक प्रक्रिया या बेसिक शिक्षा विभाग के नियमों के अनुपालन/उल्लंघन के लिए यह पोर्टल किसी भी रूप में उत्तरदायी नहीं होगा।
-        </p>
+  <!-- Footer (आपकी वेबसाइट के चित्र-2 के हूबहू स्वरूप और वास्तविक फाइल लिंक्स के साथ) -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-4xl mx-auto px-4 space-y-2">
+      <!-- Direct HTML File Links -->
+      <div class="flex flex-wrap justify-center items-center gap-x-3 text-sm font-semibold text-blue-600">
+        <a href="about.html" class="hover:underline">About Us</a>
+        <span class="text-slate-300">|</span>
+        <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
+        <span class="text-slate-300">|</span>
+        <a href="disclaimer.html" class="hover:underline">Disclaimer</a>
+        <span class="text-slate-300">|</span>
+        <a href="terms.html" class="hover:underline">Contact Us</a>
       </div>
-
-      <!-- Footer Navigation Links -->
-      <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-[12px] text-slate-300 font-medium">
-        <a href="https://desimaster.in/about" class="hover:text-amber-300 transition">हमारे बारे में (About Us)</a>
-        <span>•</span>
-        <a href="https://desimaster.in/privacy" class="hover:text-amber-300 transition">गोपनीयता नीति (Privacy Policy)</a>
-        <span>•</span>
-        <a href="https://desimaster.in/terms" class="hover:text-amber-300 transition">नियम एवं शर्तें (Terms & Conditions)</a>
-        <span>•</span>
-        <a href="https://desimaster.in/disclaimer" class="hover:text-amber-300 transition">अस्वीकरण (Disclaimer)</a>
-      </div>
-
-      <!-- Copyright -->
-      <div class="text-center pt-2 text-[11px] text-slate-500 border-t border-slate-800">
-        © 2026 <strong>desimaster.in</strong> — सर्वाधिकार सुरक्षित (All Rights Reserved)
-      </div>
+      
+      <!-- Copyright text as shown in screenshot -->
+      <p class="text-slate-400 text-xs">
+        © deshimaster.in. All Rights Reserved.
+      </p>
     </div>
   </footer>
 
