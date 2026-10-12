@@ -3,950 +3,500 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>अन्तःजनपदीय म्यूचुअल ट्रांसफर - शिक्षक लॉगिन एवं पंजीकरण | deshimaster.in</title>
-  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के प्राथमिक एवं उच्च प्राथमिक शिक्षकों हेतु अन्तःजनपदीय पारस्परिक स्थानांतरण ऑनलाइन पोर्टल।">
-
+  <title>उत्तर प्रदेश बेसिक शिक्षक म्यूचुअल ट्रांसफर पोर्टल</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>body { font-family: 'Inter', 'Noto Sans Devanagari', sans-serif; }</style>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Firebase SDK (Compat Version) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
 
   <!-- Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5">
-        <div class="bg-emerald-600 text-white font-extrabold text-base px-2.5 py-1.5 rounded-lg shadow-sm">DM</div>
+  <header class="bg-indigo-700 text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-graduation-cap text-3xl text-amber-300"></i>
         <div>
-          <span class="block font-bold text-lg text-slate-900 leading-tight">deshimaster.in</span>
-          <span class="block text-[10px] text-slate-500 uppercase tracking-wider font-semibold">देशी मास्टर - अन्तःजनपदीय पोर्टल</span>
+          <h1 class="text-xl font-bold tracking-tight">यूपी शिक्षक म्यूचुअल ट्रांसफर साथी</h1>
+          <p class="text-xs text-indigo-200">75 जनपद • 826 ब्लॉक — पारस्परिक स्थानांतरण साथी खोज एवं पंजीकरण पोर्टल</p>
         </div>
-      </a>
-      <nav class="flex items-center gap-5 text-sm font-medium text-slate-600">
-        <a href="index.html" class="hover:text-emerald-600 transition">← होम पोर्टल</a>
-      </nav>
+      </div>
+      <div class="flex items-center gap-2 text-sm bg-indigo-800/80 px-3 py-1.5 rounded-full border border-indigo-500">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="live-count">कुल पंजीकृत: लोड हो रहा है...</span>
+      </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="max-w-3xl mx-auto px-4 py-8 flex-grow w-full space-y-6">
-    
-    <!-- 1. LOGIN CARD (Default View) -->
-    <div id="loginCard" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
-      <div class="border-b border-slate-100 pb-4 mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <div class="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md mb-2">
-            <span>🔐 शिक्षक पोर्टल</span> सुरक्षित प्रवेश
-          </div>
-          <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
-            अन्तःजनपदीय ट्रांसफर पोर्टल
-          </h1>
-          <p class="text-xs text-slate-500 mt-1">
-            पंजीकृत शिक्षक लॉगिन करें, अथवा पहली बार आने पर नया पंजीकरण करें।
-          </p>
+  <!-- Main Container -->
+  <main class="max-w-6xl mx-auto px-4 py-6 space-y-8">
+
+    <!-- Registration Section -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 px-6 py-4 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-user-plus text-amber-300"></i>
+          <h2 class="text-lg font-semibold">नया पंजीकरण फॉर्म (Add Profile)</h2>
         </div>
+        <span class="text-xs bg-white/20 px-2 py-1 rounded">100% मुफ़्त एवं सुरक्षित</span>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            मुख्य मोबाइल नंबर (Login ID) <span class="text-red-500">*</span>
-          </label>
-          <input 
-            type="tel" 
-            id="loginMobile" 
-            required 
-            inputmode="numeric"
-            pattern="[0-9]{10}" 
-            maxlength="10" 
-            placeholder="10 अंकों का मोबाइल नंबर" 
-            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
-            class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            मानव संपदा कोड (Password) <span class="text-red-500">*</span>
-          </label>
-          <input 
-            type="text" 
-            id="loginCode" 
-            required 
-            inputmode="numeric"
-            maxlength="8" 
-            placeholder="उदा. 123456" 
-            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-            class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-        </div>
-      </div>
-
-      <!-- Action Buttons: Login & New Registration -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-        <button 
-          type="button" 
-          id="loginBtn" 
-          onclick="handleTeacherLogin()" 
-          class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-sm text-sm flex items-center justify-center gap-2">
-          <span>🔓</span> लॉगिन करें (Login)
-        </button>
-
-        <button 
-          type="button" 
-          onclick="openNewRegistrationForm()" 
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-sm text-sm flex items-center justify-center gap-2">
-          <span>📝</span> न्यू रजिस्ट्रेशन (New Registration)
-        </button>
-      </div>
-
-      <div id="loginStatusBox" class="mt-4 hidden p-3.5 rounded-xl text-xs font-medium border leading-relaxed"></div>
-    </div>
-
-    <!-- 2. LOGGED-IN DASHBOARD VIEW (Shown After Successful Login) -->
-    <div id="dashboardCard" class="hidden bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
-        <div>
-          <span class="inline-block bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md mb-1">✓ सत्यापित शिक्षक</span>
-          <h2 class="text-xl font-bold text-slate-900" id="dashTeacherName">शिक्षक का नाम</h2>
-          <p class="text-xs text-slate-500" id="dashTeacherInfo">ब्लॉक: - | विद्यालय: -</p>
-        </div>
-        <div class="flex gap-2">
-          <button onclick="enableDetailEdit()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5">
-            <span>✏️</span> चेंज डिटेल (Change Details)
-          </button>
-          <button onclick="handleLogout()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 py-2 rounded-xl transition">
-            लॉगआउट
-          </button>
-        </div>
-      </div>
-
-      <!-- Quick Info Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-xl text-xs border border-slate-200">
-        <div>
-          <span class="block text-slate-400">मानव संपदा कोड</span>
-          <span class="font-bold text-slate-800" id="dashCode">-</span>
-        </div>
-        <div>
-          <span class="block text-slate-400">मोबाइल नंबर</span>
-          <span class="font-bold text-slate-800" id="dashMobile">-</span>
-        </div>
-        <div>
-          <span class="block text-slate-400">संवर्ग / स्तर</span>
-          <span class="font-bold text-slate-800" id="dashLevel">-</span>
-        </div>
-        <div>
-          <span class="block text-slate-400">शिक्षण विषय</span>
-          <span class="font-bold text-slate-800" id="dashSubject">-</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. MAIN FORM (FOR NEW REGISTRATION / CHANGE DETAILS) -->
-    <div id="formCard" class="hidden bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-        <div>
-          <div class="inline-flex items-center gap-1.5 bg-blue-100 text-blue-800 text-[11px] font-bold px-2.5 py-0.5 rounded-md mb-1" id="formBadge">
-            <span>📝</span> नया पंजीकरण फ़ॉर्म
-          </div>
-          <h2 class="text-xl font-extrabold text-slate-900" id="formMainTitle">
-            अन्तःजनपदीय ट्रांसफर - विवरण भरें
-          </h2>
-        </div>
-        <button type="button" onclick="cancelFormToLogin()" class="text-slate-400 hover:text-slate-600 text-xs font-semibold px-2 py-1 rounded-md border border-slate-200">
-          ✕ वापस जाएं
-        </button>
-      </div>
-
-      <form id="intraDistrictForm" onsubmit="submitForm(event)" class="space-y-5">
-        
-        <!-- Registration Credentials (Mobile & Manav Sampada) -->
-        <div id="regAuthInputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              मुख्य मोबाइल नंबर (लॉगिन आईडी) <span class="text-red-500">*</span>
-            </label>
-            <input 
-              type="tel" 
-              id="formMobile" 
-              required 
-              inputmode="numeric"
-              pattern="[0-9]{10}" 
-              maxlength="10" 
-              placeholder="10 अंकों का मोबाइल नंबर" 
-              oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
-              class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
-          </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              मानव संपदा कोड (पासवर्ड) <span class="text-red-500">*</span>
-            </label>
-            <input 
-              type="text" 
-              id="formCode" 
-              required 
-              inputmode="numeric"
-              maxlength="8" 
-              placeholder="उदा. 123456" 
-              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-              class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
-          </div>
-        </div>
-
+      <form id="transfer-form" class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <!-- Teacher Name -->
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            शिक्षक का पूरा नाम (Full Name - English Only) <span class="text-red-500">*</span>
-          </label>
-          <input 
-            type="text" 
-            id="teacherName" 
-            required 
-            placeholder="e.g. Ramesh Kumar" 
-            pattern="[A-Za-z\s]+" 
-            title="कृपया केवल अंग्रेजी के अक्षरों (A-Z, a-z) का ही उपयोग करें"
-            oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
-            class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">शिक्षक का नाम *</label>
+          <input type="text" id="teacherName" required placeholder="उदा. दीपक सिंह"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition text-sm">
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              दूसरा मोबाइल नंबर (Secondary Mobile - वैकल्पिक)
-            </label>
-            <input 
-              type="tel" 
-              id="secondaryMobile" 
-              inputmode="numeric"
-              pattern="[0-9]{10}" 
-              maxlength="10" 
-              placeholder="वैकल्पिक 10 अंकों का नंबर" 
-              oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
-              class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-          </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              संपर्क का पसंदीदा माध्यम (Contact Medium) <span class="text-red-500">*</span>
-            </label>
-            <select id="contactMedium" required class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-              <option value="">-- चयन करें --</option>
-              <option value="Call Only">केवल फोन कॉल (Phone Call)</option>
-              <option value="WhatsApp Only">केवल व्हाट्सएप मैसेज (WhatsApp)</option>
-              <option value="Both">फोन कॉल और व्हाट्सएप दोनों (Both)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-emerald-50/50 border border-emerald-100 rounded-2xl">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-emerald-950 mb-1.5">
-              विद्यालय स्तर (School Level) <span class="text-red-500">*</span>
-            </label>
-            <select id="schoolLevel" required onchange="handleLevelChange(); loadMatches();" class="w-full px-4 py-2.5 border border-emerald-300 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
-              <option value="">-- संवर्ग चुनें --</option>
-              <option value="Primary (1-5)">प्राथमिक स्तर (कक्षा 1 से 5)</option>
-              <option value="Upper Primary (6-8)">उच्च प्राथमिक स्तर / जूनियर (कक्षा 6 से 8)</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-emerald-950 mb-1.5">
-              शिक्षण विषय (Subject) <span class="text-red-500">*</span>
-            </label>
-            <select id="subject" required onchange="loadMatches();" class="w-full px-4 py-2.5 border border-emerald-300 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
-              <option value="">-- पहले विद्यालय स्तर चुनें --</option>
-            </select>
-          </div>
-        </div>
-
+        <!-- EHMS Code -->
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-            कार्यरत जनपद (District) <span class="text-red-500">*</span>
-          </label>
-          <select id="district" required onchange="handleDistrictChange(); loadMatches();" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-            <option value="">-- अपना जिला चुनें --</option>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मानव संपदा कोड (EHMS Code)</label>
+          <input type="text" id="ehmsCode" placeholder="उदा. 847291"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition text-sm">
+        </div>
+
+        <!-- Mobile / WhatsApp -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मोबाइल / व्हाट्सएप नंबर *</label>
+          <input type="tel" id="mobile" required pattern="[0-9]{10}" placeholder="10 अंकों का नंबर"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition text-sm">
+        </div>
+
+        <!-- Designation -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">वर्तमान पदनाम *</label>
+          <select id="designation" required
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition text-sm bg-white">
+            <option value="">पद चुनें...</option>
+            <option value="सहायक अध्यापक (PS)">सहायक अध्यापक (PS)</option>
+            <option value="प्रधानाध्यापक (PS)">प्रधानाध्यापक (PS)</option>
+            <option value="सहायक अध्यापक (UPS)">सहायक अध्यापक (UPS)</option>
+            <option value="प्रधानाध्यापक (UPS)">प्रधानाध्यापक (UPS)</option>
           </select>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              वर्तमान ब्लॉक (Current Block) <span class="text-red-500">*</span>
-            </label>
-            <select id="currentBlock" required onchange="updateBlockDropdowns(); loadMatches();" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-              <option value="">-- पहले जिला चुनें --</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              वर्तमान विद्यालय (Current School Name) <span class="text-red-500">*</span>
-            </label>
-            <input type="text" id="currentSchool" required placeholder="उदा. प्रा.वि. / उच्च प्रा.वि. / संविलियन..." class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500">
-          </div>
+        <!-- Subject/Cadre -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">विषय / संवर्ग (UPS हेतु)</label>
+          <select id="subject"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition text-sm bg-white">
+            <option value="सामान्य / ऑल (PS)">सामान्य / ऑल (PS)</option>
+            <option value="गणित / विज्ञान">गणित / विज्ञान (Science/Maths)</option>
+            <option value="सामाजिक विषय / भाषा">सामाजिक विषय / भाषा (Arts/Language)</option>
+          </select>
         </div>
 
-        <!-- Target Blocks (1 to 4) -->
-        <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
-          <h3 class="text-sm font-bold text-slate-900">जिले के भीतर इच्छित ब्लॉक (Priority 1 to 4)</h3>
-          <p class="text-[11px] text-slate-500 -mt-3">स्थानांतरण हेतु अपने पसंदीदा ब्लॉकों का चयन करें। चयनित ब्लॉक अगले विकल्पों से स्वतः हट जाएंगे।</p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">1. प्रथम पसंद ब्लॉक (Priority 1) <span class="text-red-500">*</span></label>
-              <select id="p1Block" required onchange="updateBlockDropdowns()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                <option value="">-- प्रथम ब्लॉक चुनें --</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">2. द्वितीय पसंद ब्लॉक (Priority 2)</label>
-              <select id="p2Block" onchange="updateBlockDropdowns()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                <option value="">-- द्वितीय ब्लॉक चुनें --</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">3. तृतीय पसंद ब्लॉक (Priority 3)</label>
-              <select id="p3Block" onchange="updateBlockDropdowns()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                <option value="">-- तृतीय ब्लॉक चुनें --</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">4. चतुर्थ पसंद ब्लॉक (Priority 4)</label>
-              <select id="p4Block" onchange="updateBlockDropdowns()" class="w-full px-3.5 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                <option value="">-- चतुर्थ ब्लॉक चुनें --</option>
-              </select>
-            </div>
-          </div>
+        <!-- Current District -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">वर्तमान जनपद *</label>
+          <select id="currentDistrict" required onchange="updateBlocks('currentDistrict', 'currentBlock')"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition text-sm bg-white">
+            <option value="">जनपद चुनें...</option>
+          </select>
         </div>
 
-        <!-- Disclaimer -->
-        <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 space-y-2">
-          <p class="font-bold">महत्वपूर्ण सूचना एवं अस्वीकरण (Disclaimer):</p>
-          <p>
-            deshimaster.in केवल एक डिजिटल माध्यम है जो शिक्षकों को पारस्परिक स्थानांतरण हेतु संपर्क सूत्र उपलब्ध कराता है। शिक्षकों के बीच होने वाली व्यक्तिगत सहमति या विभागीय नियमों के अनुपालन के लिए यह पोर्टल उत्तरदायी नहीं होगा।
-          </p>
-          <label class="flex items-start gap-2 pt-2 font-medium cursor-pointer text-slate-900">
-            <input type="checkbox" id="disclaimerAgree" required class="mt-0.5 h-4 w-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500">
-            <span>मैंने उपर्युक्त नियमों व डिस्क्लेमर को अच्छी तरह पढ़ व समझ लिया है और मैं इससे सहमत हूँ।</span>
-          </label>
+        <!-- Current Block -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">वर्तमान विकास खंड (ब्लॉक) *</label>
+          <select id="currentBlock" required
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition text-sm bg-white">
+            <option value="">पहले जनपद चुनें...</option>
+          </select>
         </div>
 
-        <button type="submit" id="submitBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-md text-sm">
-          पंजीकरण सुरक्षित / अपडेट करें (Save Record)
-        </button>
+        <!-- Target District -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">इच्छित जनपद (जहाँ जाना चाहते हैं) *</label>
+          <select id="targetDistrict" required onchange="updateBlocks('targetDistrict', 'targetBlock', true)"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition text-sm bg-white">
+            <option value="">इच्छित जनपद चुनें...</option>
+          </select>
+        </div>
 
+        <!-- Target Block -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">इच्छित विकास खंड (वैकल्पिक)</label>
+          <select id="targetBlock"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition text-sm bg-white">
+            <option value="कोई भी ब्लॉक">कोई भी ब्लॉक</option>
+          </select>
+        </div>
+
+        <div class="md:col-span-2 lg:col-span-3 pt-2">
+          <button type="submit" id="submit-btn"
+            class="w-full sm:w-auto px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-sm transition flex items-center justify-center gap-2 cursor-pointer">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <span>पंजीकरण सबमिट करें</span>
+          </button>
+        </div>
       </form>
     </div>
 
-    <!-- 4. LIVE MATCHING TEACHERS TABLE -->
-    <div id="matchingCard" class="hidden bg-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-xl border border-slate-800 space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+    <!-- Directory & Search Section -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-400 text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-1">
-            <span>🎯 लाइव मैचिंग</span> आपके ब्लॉक में आने वाले साथी
-          </div>
-          <h3 class="text-base sm:text-lg font-bold text-slate-100">
-            उपलब्ध संभावित म्यूचुअल शिक्षक: <span id="matchCountBadge" class="text-emerald-400 font-extrabold text-xl">0</span>
-          </h3>
+          <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-magnifying-glass text-indigo-600"></i>
+            म्यूचुअल साथी खोजें (Search Directory)
+          </h2>
+          <p class="text-xs text-slate-500">जनपद या ब्लॉक के अनुसार फ़िल्टर करें</p>
         </div>
-        <span class="text-[11px] text-amber-300 bg-amber-950/60 border border-amber-800/60 px-3 py-1 rounded-lg">
-          🔒 प्राइवेसी सुरक्षा: मोबाइल नंबर आंशिक सुरक्षित हैं
-        </span>
+
+        <!-- Search Bar -->
+        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+          <input type="text" id="search-input" oninput="filterTeachers()"
+            placeholder="जनपद, ब्लॉक या नाम से खोजें..."
+            class="px-4 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none w-full sm:w-64">
+          <button onclick="fetchTeachers()" title="रिफ्रेश करें"
+            class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm rounded-lg border border-slate-300 transition">
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+        </div>
       </div>
 
+      <!-- Loading State -->
+      <div id="loading-spinner" class="py-12 text-center text-slate-500">
+        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-indigo-600 mb-2"></i>
+        <p class="text-sm">डेटा लोड हो रहा है...</p>
+      </div>
+
+      <!-- Table for Desktop -->
       <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr class="bg-slate-800/80 text-slate-300 border-b border-slate-700">
-              <th class="py-2.5 px-3 font-semibold">क्र.</th>
-              <th class="py-2.5 px-3 font-semibold">शिक्षक का नाम</th>
-              <th class="py-2.5 px-3 font-semibold">वर्तमान तैनाती (ब्लॉक)</th>
-              <th class="py-2.5 px-3 font-semibold">उनकी पसंद क्रम</th>
-              <th class="py-2.5 px-3 font-semibold">मोबाइल नंबर</th>
-              <th class="py-2.5 px-3 font-semibold text-center">स्थिति</th>
+        <table class="w-full text-left text-sm hidden md:table">
+          <thead class="bg-slate-50 text-slate-600 uppercase text-xs border-b border-slate-200">
+            <tr>
+              <th class="px-6 py-3.5">शिक्षक विवरण</th>
+              <th class="px-6 py-3.5">वर्तमान तैनाती</th>
+              <th class="px-6 py-3.5">इच्छित जनपद/ब्लॉक</th>
+              <th class="px-6 py-3.5">संपर्क करें</th>
             </tr>
           </thead>
-          <tbody id="matchingTableBody" class="divide-y divide-slate-800 text-slate-200"></tbody>
+          <tbody id="teachers-table-body" class="divide-y divide-slate-100">
+            <!-- Dynamic rows will be inserted here -->
+          </tbody>
         </table>
       </div>
 
-      <div id="noMatchMsg" class="hidden text-center py-4 text-xs text-slate-400">
-        फिलहाल आपके ब्लॉक व विषय के लिए कोई शिक्षक पंजीकृत नहीं है। जैसे ही कोई साथी जुड़ेगा, सूची यहाँ दिखेगी।
+      <!-- Cards for Mobile -->
+      <div id="teachers-cards-container" class="grid grid-cols-1 gap-4 p-4 md:hidden">
+        <!-- Dynamic mobile cards will be inserted here -->
       </div>
 
-      <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700 text-[11px] text-slate-300 flex items-center justify-between">
-        <span>💡 पूरा मोबाइल नंबर देखने एवं सीधे संपर्क करने की सुविधा शीघ्र चालू होगी।</span>
-        <span class="bg-emerald-600 text-white font-bold text-[10px] px-2 py-0.5 rounded">Free Access Soon</span>
+      <!-- Empty State -->
+      <div id="empty-state" class="hidden py-12 text-center text-slate-400">
+        <i class="fa-solid fa-folder-open text-4xl mb-2 text-slate-300"></i>
+        <p class="text-sm">कोई रिकॉर्ड नहीं मिला।</p>
       </div>
     </div>
 
   </main>
 
-  <!-- Success & Viral Copy Modal -->
-  <div id="successModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100">
-      <div class="text-center mb-4">
-        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold mb-2">✓</div>
-        <h3 class="text-lg font-bold text-slate-900">अन्तःजनपदीय पंजीकरण सफल!</h3>
-        <p class="text-xs text-slate-500">अपना विवरण कॉपी करके ब्लॉक/जनपद के शिक्षक व्हाट्सएप ग्रुप्स में शेयर करें ताकि तुरंत म्यूचुअल साथी मिल सके।</p>
-      </div>
-
-      <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-xs text-slate-700 whitespace-pre-line font-mono mb-4 leading-relaxed" id="previewText"></div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <button onclick="copyToClipboard()" id="copyBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition">
-          <span>📋</span> विवरण कॉपी करें (Copy)
-        </button>
-        <button onclick="shareWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition">
-          <span>💬</span> WhatsApp पर भेजें
-        </button>
-      </div>
-      <button onclick="closeModal()" class="w-full mt-3 text-slate-500 hover:text-slate-800 text-xs font-semibold py-1.5 transition">
-        बंद करें (Close)
-      </button>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12">
-    <div class="max-w-3xl mx-auto px-4">
-      <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-3 font-medium text-slate-600">
-        <a href="index.html" class="hover:text-emerald-600 transition">होम</a>
-        <a href="about.html" class="hover:text-emerald-600 transition">हमारे बारे में</a>
-        <a href="privacy-policy.html" class="hover:text-emerald-600 transition">गोपनीयता नीति</a>
-        <a href="terms.html" class="hover:text-emerald-600 transition">नियम व शर्तें</a>
-        <a href="disclaimer.html" class="hover:text-emerald-600 transition">डिस्क्लेमर</a>
-      </div>
-      <p>© deshimaster.in (देशी मास्टर)। सर्वाधिकार सुरक्षित।</p>
-    </div>
+  <footer class="text-center py-6 text-xs text-slate-400">
+    उत्तर प्रदेश बेसिक शिक्षा परिषद म्यूचुअल ट्रांसफर सहायता पोर्टल
   </footer>
 
-  <!-- Complete Dynamic JavaScript with JSONP Support -->
+  <!-- Logic & Data Script -->
   <script>
-    // आपका नया Google Apps Script URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzOLdqCCH3_l-9tqySInil_e1vIDjvJnKBoDnKRPFoIvzD2GhXIX6J6E-pJxe0tz3kgtg/exec';
-
-    const districtBlocks = {
-      "आगरा": ["अकोला", "अछनेरा", "एत्मादपुर", "फतेहाबाद", "फतेहपुर सीकरी", "जगनेर", "जैतपुर कलां", "खंदौली", "खेरागढ़", "पिनाहट", "सैंया", "शमसाबाद", "बरौली अहीर", "बाह", "बिचपुरी"],
-      "अलीगढ़": ["अतरौली", "बिजौली", "चंडौस", "धनीपुर", "गंगीरी", "गोंडा", "इगलास", "जवां सिकंदरपुर", "खैर", "लोधा", "टप्पल", "अकराबाद"],
-      "अंबेडकर नगर": ["अकबरपुर", "कटेहरी", "टांडा", "जहांगीरगंज", "जलालपुर", "भियांव", "भीटी", "रामनगर", "बसखारी"],
-      "अमेठी": ["अमेठी", "गौरीगंज", "जगदीशपुर", "जामो", "तिलोई", "भादर", "भेंटुआ", "मुसाफिरखाना", "संग्रामपुर", "शाहगढ़", "सिंहपुर", "बाजार शुकुल", "बहादुरपुर"],
-      "अमरोहा": ["अमरोहा", "गजरौला", "गंगेश्वरी", "जोया", "धनौरा", "हसनपुर"],
-      "औरैया": ["अजीतमल", "अछल्दा", "औरैया", "एरवाकटरा", "सहार", "बिधूना", "भाग्यनगर"],
-      "अयोध्या": ["अमानीगंज", "तारुन", "पूरा बाजार", "बीकापुर", "मसौधा", "मवई", "मया बाजार", "मिल्कीपुर", "रुदौली", "सोहावल", "हरिंगटनगंज"],
-      "आजमगढ़": ["अजमतगढ़", "अतरौलिया", "अहरौला", "कोयलसा", "जहानागंज", "तहबरपुर", "तरवां", "ठेकमा", "पल्हना", "पवई", "फूलपुर", "बिलरियागंज", "महराजगंज", "मार्टीनगंज", "मिर्ज़ापुर", "मुहम्मदपुर", "मेंहनगर", "रानी की सराय", "लालगंज", "सठियांव", "सरायमीर", "हरैया"],
-      "बदायूं": ["अंबियापुर", "आसफपुर", "इस्लामनगर", "उझानी", "उसावां", "कादरचौक", "जगत", "दहगवां", "दातागंज", "बिसौली", "म्याऊं", "वजीरगंज", "सहसवान", "समरेर", "सालारपुर"],
-      "बागपत": ["खेकड़ा", "छपरौली", "बागपत", "बड़ौत", "बिनौली", "पिलाना"],
-      "बहराइच": ["कैसरगंज", "चित्तौरा", "जरवल", "तेजवापुर", "नवाबगंज", "पयागपुर", "फखरपुर", "बलहा", "महसी", "मिहींपुरवा (मोतीपुर)", "रिसिया", "विशेश्वरगंज", "शिवपुर", "हुजूरपुर"],
-      "बलिया": ["गड़वार", "चिलकहर", "दुबहड़", "नगरा", "नवानगर", "नियर", "पंदह", "बांसडीह", "बैरिया", "बेलहरी", "बेरूआरबारी", "मनियर", "मुरली छपरा", "रसड़ा", "रेवती", "सीयर", "सोहांव"],
-      "बलरामपुर": ["उतरौला", "गैंसड़ी", "पचपेड़वा", "तुलसीपुर", "बलरामपुर", "रेहरा बाजार", "शिवपुरा", "श्रीदत्तगंज", "हरैया सतघरवा"],
-      "बांदा": ["कमासिन", "जसपुरा", "तिंदवारी", "नरैनी", "बड़ोखर खुर्द", "बबेरू", "बिसंडा", "महुआ"],
-      "बाराबंकी": ["दरियाबाद", "देवा", "निंदूरा", "पूरेडलई", "फतेहपुर", "बनीकोडर", "बंकी", "मसौली", "रामनगर", "सूरतगंज", "सिरौली गौसपुर", "सिद्धौर", "हरख", "हैदरगढ़", "त्रिवेदीगंज"],
-      "बरेली": ["आंवला", "आलमपुर जाफराबाद", "क्यारा", "बिथरी चैनपुर", "दमखोदा", "नवाबगंज", "फरीदपुर", "फतेहगंज पश्चिमी", "बहेड़ी", "भदपुरा", "भोजीपुरा", "भुता", "मीरगंज", "रामनगर", "शेरगढ़"],
-      "बस्ती": ["कप्तानगंज", "कुदरहा", "गौर", "दुबौलिया", "नगर बाजार", "परशुरामपुर", "बहादुरपुर", "बनकटी", "बस्ती सदर", "रामनगर", "रुधौली", "विक्रमजोत", "सांऊघाट", "हरैया"],
-      "बिजनौर": ["अफजलगढ़", "अल्हैपुर (धामपुर)", "आकु", "किरतपुर", "कोतवाली", "जलीलपुर", "नजीबाबाद", "नहटौर", "नूरपुर", "मोहम्मदपुर देवमल", "स्योहारा"],
-      "बुलंदशहर": ["अगौता", "अनूपशहर", "अरनिया", "ऊंचागांव", "गुलावठी", "जहांगीराबाद", "दानपुर", "डिबाई", "पहासू", "बीबीनगर", "बुलंदशहर", "भवान बहादुर नगर", "लखावटी", "शिकारपुर", "सिकंदराबाद", "स्याना"],
-      "चंदौली": ["चकिया", "चहनियां", "चंदौली (सदर)", "धानापुर", "नौगढ़", "नियामताबाद", "बरहनी", "शहाबगंज", "सकलडीहा"],
-      "चित्रकूट": ["कर्वी", "पहाड़ी", "मऊ", "मानिकपुर", "रामनगर"],
-      "देवरिया": ["गौरी बाजार", "देवरिया सदर", "देसही देवरिया", "पथरदेवा", "बरहज", "बनकटा", "भागलपुर", "भटनी", "भाटपार रानी", "भलुअनी", "महेन", "रामपुर कारखाना", "रुद्रपुर", "लार", "सलामपुर", "तरकुलवा"],
-      "एटा": ["अवागढ़", "अलीगंज", "जलेसर", "जैथरा", "निधौली कलां", "मारहरा", "सकीट", "शीतलपुर"],
-      "इटावा": ["इटावा (बढ़पुरा)", "चकरनगर", "जसवंतनगर", "ताखा", "बसरेहर", "भरथना", "महेवा", "सैफई"],
-      "फर्रुखाबाद": ["कमालगंज", "कायमगंज", "नवाबगंज", "बढ़पुर", "मोहम्मदाबाद", "राजेपुर", "शमसाबाद"],
-      "फतेहपुर": ["अमौली", "असोथर", "ऐरायां", "कस्वा", "खजुहा", "देवमई", "धाता", "बहुआ", "भिटौरा", "मलवां", "तेलियानी", "विजयीपुर", "हथगाम"],
-      "फिरोजाबाद": ["अरांव", "एका", "जसराना", "टूंडला", "नारखी", "फिरोजाबाद", "मदनपुर", "शिकोहाबाद", "हाथवंत"],
-      "गौतम बुद्ध नगर": ["जेवर", "दादरी", "बिसरख"],
-      "गाजियाबाद": ["भोजपुर", "मुरादनगर", "रजापुर", "लोनी"],
-      "गाजीपुर": ["कासिमाबाद", "करंडा", "जमानियां", "जखनिया", "देवकली", "बिरनो", "भदौरा", "भांवरकोल", "मनिहारी", "मरदह", "मुहम्मदबाद", "रेवतीपुर", "वाराचवर", "सादात", "सैदपुर", "सदर गाजीपुर"],
-      "गोंडा": ["इटियाथोक", "कटरा बाजार", "कर्नलगंज", "छपिया", "झंझरी", "तरबगंज", "नवाबगंज", "पड़री कृपाल", "परसपुर", "बभनजोत", "बेलसर", "मनकापुर", "मुजेहना", "रूपईडीह", "वजीरगंज", "हलधरमऊ"],
-      "गोरखपुर": ["उरुवा", "कैंपियरगंज", "कौड़ीराम", "खजनी", "खोराबार", "गगहा", "गोला", "चरगांवा", "जंगल कौड़िया", "ठरवा", "पिपराइच", "पिपरौली", "पाली", "बड़हलगंज", "बांसगांव", "भटहट", "बेलघाट", "ब्रह्मपुर", "सहजनवा", "सरदार नगर"],
-      "हमीरपुर": ["कुरारा", "गोहांड", "मुस्कुरा", "मौदहा", "राठ", "सरीला", "सुमेरपुर"],
-      "हापुड़": ["गढ़मुक्तेश्वर", "धौलाना", "सिम्भावली", "हापुड़"],
-      "हरदोई": ["अहिरोरी", "कछौना", "कोथावां", "टड़ियावां", "टोडरपुर", "पिहानी", "बावन", "बिलग्राम", "भरखनी", "भरावन", "माधौगंज", "मल्लावां", "शाहाबाद", "संडीला", "सांडी", "सुरसा", "हरपालपुर", "हरियावां"],
-      "हाथरस": ["सादाबाद", "सहपऊ", "सासनी", "सिकंदराराऊ", "हसायन", "हाथरस", "मुरसान"],
-      "जालौन": ["कदौरा", "कोंच", "कुठौंद", "डकोर", "नदीगांव", "पिरौना", "माधौगढ़", "महेवा", "रामपुरा"],
-      "जौनपुर": ["करंजाकला", "केराकत", "खुटहन", "जलालपुर", "डोभी", "धर्मापुर", "बक्शा", "बदलापुर", "बरसठी", "मछलीशहर", "मड़ियाहूं", "महाराजगंज", "मुंगराबादशाहपुर", "मुफ्तीगंज", "रामनगर", "रामपुर", "शाहगंज (सूइथाकलां)", "शाहगंज", "सिरकोनी", "सिकरारा", "सुजानगंज"],
-      "झांसी": ["गुरसराय", "चिरगांव", "बामौर", "बबीना", "बड़ागांव", "बंगरा", "मऊरानीपुर", "मोंठ"],
-      "कन्नौज": ["उमर्दा", "कन्नौज", "छिबरामऊ", "जलालाबाद", "तालग्राम", "तिर्वा", "सौरिख", "हसेरन"],
-      "कानपुर देहात": ["अमरौधा", "अकबरपुर", "झींझक", "डेरापुर", "मलासा", "मैथा", "रसूलाबाद", "राजपुर", "संदलपुर", "सरवनखेड़ा"],
-      "कानपुर नगर": ["ककवन", "कल्याणपुर", "घाटमपुर", "चौबेपुर", "पतारा", "बिल्हौर", "बिधनू", "भीतरगांव", "सरसौल", "शिवराजपुर"],
-      "कासगंज": ["अमापुर", "कासगंज", "गंजडुंडवारा", "पटियाली", "सहावर", "सिढ़पुरा", "सोरों"],
-      "कौशाम्बी": ["कड़ा", "चायल", "नेवादा", "पश्चिम शरीरा", "मंझनपुर", "मूरतगंज", "सिराथू", "सरसवां"],
-      "कुशीनगर": ["कप्तानगंज", "कसया", "खड्डा", "तमकुहीराज", "दुदही", "नेबुआ नौरंगिया", "पडरौना", "फाजिलनगर", "बरवापट्टी", "विशुनपुरा", "मोतीचक", "रामकोला", "सेवरही", "सुकरौली"],
-      "लखीमपुर खीरी": ["ईसानगर", "कुंभी", "गोला", "धौरहरा", "नकहा", "निघासन", "पलिया", "पसगवां", "फूलबेहड़", "बांकेगंज", "बिजुआ", "बेहजम", "मितौली", "मोहम्मदी", "रमियाबेहड़"],
-      "ललितपुर": ["जखौरा", "तालबेहट", "बार", "बिरधा", "मड़ावरा", "महरौनी"],
-      "लखनऊ": ["काकोरी", "गोसाईगंज", "चिनहट", "बक्शी का तालाब", "मलिहाबाद", "माल", "मोहनलालगंज", "सरोजनीनगर"],
-      "महाराजगंज": ["घुघली", "धानी", "नौतनवा", "निचलौल", "पनियरा", "परतावल", "फरेन्दा", "बृजमनगंज", "मिठौरा", "रतनपुर", "लक्ष्मीपुर", "सिसवा"],
-      "महोबा": ["कबरई", "चरखारी", "जैतपुर", "पनवाड़ी"],
-      "मैनपुरी": ["करहल", "किशनी", "कुरावली", "घिरोर", "जागीर", "बेवर", "बरनाहल", "मैनपुरी", "सुल्तानगंज"],
-      "मथुरा": ["गोवर्धन", "चौमुहां", "छाता", "नंदगांव", "नौहझील", "फरह", "बलदेव", "मांट", "मथुरा", "राया"],
-      "मऊ": ["कोपागंज", "घोसी", "दोहरीघाट", "परदहां", "फतेहपुर मंडाव", "बड़राव", "मुहम्मदबाद गोहना", "रतनपुरा", "रानीपुर"],
-      "मेरठ": ["जानीखुर्द", "दौराला", "परीक्षितगढ़", "खरखौदा", "मवाना", "माछरा", "मेरठ", "रजपुरा", "रोहटा", "सरधना", "सरूरपुर", "हस्तिनापुर"],
-      "मिर्ज़ापुर": ["कोन", "छानबे", "जमालपुर", "नरायनपुर", "पटेहरा कलां", "पहाड़ी", "मझवां", "मरिहान", "राजगढ़", "लालगंज", "सीखड़", "हलिया"],
-      "मुरादाबाद": ["कुंदरकी", "छजलैट", "ठाकुरद्वारा", "डिलारी", "भगतपुर टांडा", "भोजपुर", "मूंढापांडे", "मुरादाबाद"],
-      "मुजफ्फरनगर": ["चरथावल", "जानसठ", "खतौली", "पुरकाजी", "बघरा", "बुढ़ाना", "मोरना", "शाहपुर", "सदर मुजफ्फरनगर"],
-      "पीलीभीत": ["अमरिया", "बरखेड़ा", "बीसलपुर", "बिलसंडा", "मरौरी", "पूरनपुर", "ललौरीखेड़ा"],
-      "प्रतापगढ़": ["आसपुर देवसरा", "कुंडा", "कालाकांकर", "गौरा", "पट्टी", "बाबागंज", "बाबा बेलखरनाथ धाम", "बिहार", "मंगरौरा", "मंधाता", "रामपुर खास", "लक्ष्मणपुर", "लालगंज", "शिवगढ़", "सण्ढवा चंद्रिका", "सांगीपुर", "सदर प्रतापगढ़"],
-      "प्रयागराज": ["उरुवा", "करछना", "कौड़िहार", "कौंधियारा", "कोरांव", "चाका", "जसरा", "धनूपपुर", "प्रतापपुर", "फूलपुर", "बहरिया", "बहादुरपुर", "भगवतपुर", "मऊआइमा", "मांडा", "मेजा", "यमुनापार", "शंकरगढ़", "शृंग्वेरपुर धाम", "सोरांव", "सहसों", "हंडिया", "होलागढ़"],
-      "रायबरेली": ["अमावां", "ऊंचाहार", "खीरों", "गौरा", "जगतपुर", "डीह", "डलमऊ", "दीनशाह गौरा", "बछरावां", "महराजगंज", "राही", "रोहनियां", "लालगंज", "शिवगढ़", "सरेनी", "सलोन", "सतांव", "हरचंदपुर"],
-      "रामपुर": ["चमरौआ", "मिलक", "बिलासपुर", "शाहबाद", "सैदनगर", "स्वार"],
-      "सहारनपुर": ["गंगोह", "देवबंद", "नकुड़", "नागल", "नानौता", "पुवारका", "बलियाखेड़ी", "मुजफ्फराबाद", "रामपुर मनिहारन", "सरसावा", "साढौली कदीम"],
-      "संभल": ["असमोली", "गुन्नौर", "जुनावई", "पवांसा", "बहजोई", "बनियाखेड़ा", "रजपुरा", "सम्भल"],
-      "संत कबीर नगर": ["खलीलाबाद", "बघौली", "बेलहर कलां", "सांथा", "सेमरियावां", "मेंहदावल", "पौली", "हैंसर बाजार", "नाथनगर"],
-      "शाहजहांपुर": ["कांट", "कलान", "खुदागंज", "खुटार", "जलालाबाद", "जैतीपुर", "ददरौल", "निगोही", "पुवायां", "बंडा", "भावलखेड़ा", "मदनापुर", "मिर्ज़ापुर", "सिंधौली", "तिलहर"],
-      "शामली": ["उन", "कांधला", "कैराना", "थानाभवन", "शामली"],
-      "श्रावस्ती": ["इकौना", "गिलौला", "जमुनहा", "सिरसिया", "हरिहरपुर रानी"],
-      "सिद्धार्थनगर": ["उसका बाजार", "इटवा", "ककरहवा (बर्डपुर)", "खेसरहा", "खुनियांव", "जोगिया", "डुमरियागंज", "नौगढ़", "बांसी", "बढ़नी", "भनवापुर", "मिठवल", "लोटन", "शोहरतगढ़"],
-      "सीतापुर": ["ऐलिया", "कसमंडा", "खैराबाद", "गोंदलामऊ", "पिसावां", "परसेंडी", "पहला", "बिसवां", "बेहटा", "मछरेहटा", "महमूदाबाद", "महोली", "मिश्रिख", "रामपुर मथुरा", "रेउसा", "लहरपुर", "सांडी", "सिधौली", "हरगांव"],
-      "सोनभद्र": ["कोन", "घोरावल", "चतरा", "चोपन", "चोपन (नगवां)", "दुद्धी", "बभनी", "म्योरपुर", "राबर्ट्सगंज", "विंधमगंज"],
-      "सुल्तानपुर": ["अखंड नगर", "इसौली (बल्दीराय)", "कादीपुर", "कूरेभार", "कुड़वार", "जयसिंहपुर", "दोस्तपुर", "धनपतगंज", "दूबेपुर", "प्रतापपुर कमैचा", "भदैंया", "मोतिगरपुर", "लंभुआ", "सुल्तानपुर सदर"],
-      "उन्नाव": ["असोहा", "औरास", "गंज मुरादाबाद", "बिछिया", "बांगरमऊ", "बीघापुर", "मियागंज", "नवाबगंज", "पुरवा", "फतेहपुर चौरासी", "सिकंदरपुर कर्ण", "सिकंदरपुर सरोसी", "सफीपुर", "सुमेरपुर", "हसनगंज", "हिलौली"],
-      "वाराणसी": ["आराजी लाइन", "काशी विद्यापीठ", "चिरईगांव", "चोलापुर", "पिंडरा", "बड़ागांव", "सेवापुरी", "हरहुआ"]
+    // 1. उत्तर प्रदेश के 75 जनपद और 826 ब्लॉक डेटाबेस
+    const upDistrictsData = {
+      "लखनऊ": ["बक्शी का तालाब (BKT)", "चिनहट", "गोसाईंगंज", "काकोरी", "माल", "मलिहाबाद", "मोहनलालगंज", "सरोजिनी नगर"],
+      "सीतापुर": ["ऐलिया", "बेहटा", "बिसवां", "गोंदलामऊ", "हरगांव", "कसमंडा", "खैराबाद", "लहरपुर", "महमूदाबाद", "महोली", "पहला", "मछरेहटा", "मिश्रिख", "परसेंडी", "पिसावां", "रामपुर मथुरा", "रेउसा", "सकरन", "सिधौली"],
+      "हरदोई": ["अहिरोरी", "बावन", "बेहंदर", "भरावन", "भरखनी", "बिलग्राम", "हरपालपुर", "हरियावां", "कछौना", "कोथावां", "माधौगंज", "मल्लावां", "पिहानी", "सांडी", "सण्डीला", "सुरसा", "शाहाबाद", "टड़ियावां", "टोडरपुर"],
+      "लखीमपुर खीरी": ["बांकेगंज", "बेजम", "बिजुआ", "धौरहरा", "ईसानगर", "गोला गोकर्णनाथ (कुंभी)", "लखीमपुर", "मितौली", "मोहम्मदी", "नकहा", "निघासन", "पलिया", "पसगवां", "फूलबेहड़", "रमियाबेहड़"],
+      "रायबरेली": ["अमावां", "बछरावां", "बहादुरपुर", "छतोह", "डीह", "दीनशाह गौरा", "जगतपुर", "खीरों", "लालगंज", "महराजगंज", "राही", "रोहनियां", "सरेनी", "सतांव", "सलोन", "शिवगढ़", "सिंहपुर", "ऊंचाहार"],
+      "उन्नाव": ["आसीवन", "असोहा", "बांगरमऊ", "बिछिया", "बीघापुर", "फतेहपुर चौरासी", "गंज मुरादाबाद", "हसनगंज", "हिलौली", "मियांगंज", "नवाबगंज", "पुरवा", "सफीपुर", "सरोसी", "सिकंदरपुर कर्ण", "सुमेरपुर"],
+      "कानपुर नगर": ["बिल्हौर", "भीतरगांव", "चौबेपुर", "घाटमपुर", "ककवन", "कल्याणपुर", "पतारा", "सरसौल", "शिवराजपुर", "विधनू"],
+      "कानपुर देहात": ["अकबरपुर", "अमरौधा", "डेरापुर", "झींझक", "मलासा", "मैथा", "राजपुर", "रसूलाबाद", "संदलपुर", "सरवनखेड़ा"],
+      "इटावा": ["बढ़पुरा", "बसरेहर", "भरथना", "चकरनगर", "जसवंतनगर", "महेवा", "सैफई", "ताखा"],
+      "कन्नौज": ["छिबरामऊ", "गुगरापुर", "हसेरन", "जलालाबाद", "कन्नौज", "सौरिख", "तालग्राम", "उमर्दा"],
+      "फर्रुखाबाद": ["बढ़पुर", "कमालगंज", "कायमगंज", "मोहम्मदाबाद", "नवाबगंज", "राजेपुर", "शमसाबाद"],
+      "औरैया": ["अजीतमल", "अछल्दा", "औरैया", "भाग्यनगर", "बिधूना", "एरवाकटरा", "सहार"],
+      "प्रयागराज": ["बहादुरपुर", "बहरिया", "चाका", "चांवल (कौड़िहार)", "धनूपुर", "हंडिया", "होलागढ़", "जसरा", "करछना", "कौंधियारा", "कोरांव", "मऊआइमा", "मेजा", "प्रतापपुर", "फूलपुर", "सहसों", "सैदाबाद", "शंकरगढ़", "श्रृंगवेरपुर धाम", "सोरांव", "उरुवा", "भगवतपुर", "मांडा"],
+      "फतेहपुर": ["ऐरायां", "अमौली", "असोथर", "बहुआ", "भिटौरा", "देवमई", "धाता", "हसवा", "हथगाम", "मलवां", "तेलियानी", "खजुहा", "विजयीपुर"],
+      "कौशाम्बी": ["चायल", "कड़ा", "कौशाम्बी", "मंझनपुर", "मूरतगंज", "नेवादा", "सरसवां", "सिराथू"],
+      "प्रतापगढ़": ["आसपुर देवसरा", "बाबागंज", "बिहार", "बेलखरनाथ धाम", "गौरा", "कालाकांकर", "कुंडा", "लक्ष्मणपुर", "लालगंज", "मंगरौरा", "मांधाता", "पट्टी", "पट्टी सदर", "रामपुर संग्रामगढ़", "संडवा चंद्रिका", "सांगीपुर", "शिवगढ़"],
+      "वाराणसी": ["अराजीलाइन", "बड़ागांव", "चिरईगांव", "चोलापुर", "हरहुआ", "काशी विद्यापीठ", "पिंडरा", "सेवापुरी"],
+      "गाजीपुर": ["बाराचवर", "भावरकोल", "बिरनो", "देवकली", "गाजीपुर सदर", "जखनियां", "करंडा", "कासिमाबाद", "मनिहारी", "मरदह", "मोहम्मदाबाद", "रेवतीपुर", "सादात", "सैदपुर", "जमानियां", "भदौरा"],
+      "जौनपुर": ["बक्शा", "बदलापुर", "बरसठी", "धर्मापुर", "डोभी", "जलालपुर", "करंजाकला", "केराकत", "खुटहन", "मछलीशहर", "महराजगंज", "मड़ियाहूं", "मुंगरा बादशाहपुर", "मुफ्तीगंज", "रामनगर", "रामपुर", "शाहगंज (सोंधी)", "सुइथाकला", "सुजानगंज", "सिरकोनी", "सिकरारा"],
+      "चंदौली": ["बरहनी", "चहनियां", "चकिया", "चंदौली (सदर)", "धानापुर", "नौगढ़", "नियामताबाद", "सकलडीहा", "शहाबगंज"],
+      "गोरखपुर": ["बड़हलगंज", "बांसगांव", "बेलघाट", "भटहट", "ब्रह्मपुर", "कैंपियरगंज", "चरगांवा", "गगहा", "गोला", "जंगल कौड़िया", "खोराबार", "कौड़ीराम", "पाली", "पिपराइच", "पिपरौली", "सहजनवां", "सरदारनगर", "उरुवा", "खजनी"],
+      "देवरिया": ["बैतालपुर", "बनकटा", "बरहज", "भागलपुर", "भाटपार रानी", "भटनी", "देवरिया सदर", "देसही देवरिया", "गौरी बाजार", "लार", "पथरदेवा", "रामपुर कारखाना", "रुद्रपुर", "सलेमपुर", "तरकुलवा", "भलुअनी"],
+      "कुशीनगर": ["कप्तानगंज", "कसया", "खड्डा", "दुदही", "नेबुआ नौरंगिया", "पडरौना", "फाजिलनगर", "विशुनपुरा", "मोतीचक", "रामकोला", "सेवरही", "सुकरौली", "तमकुही राज", "हाटा"],
+      "महराजगंज": ["बृजमनगंज", "धानी", "फरेंदा", "घुघली", "जगन्नाथपुर", "लक्ष्मीपुर", "महराजगंज (सदर)", "मिठौरा", "निचलौल", "नौतनवा", "पनियरा", "परतावल"],
+      "अयोध्या": ["अमानीगंज", "बीकापुर", "पूरा बाजार", "हरिंगटनगंज", "मवई", "मसौधा", "मया बाजार", "मिल्कीपुर", "रुदौली", "सोहावल", "तारुन"],
+      "अम्बेडकर नगर": ["अकबरपुर", "बसखारी", "भीटी", "भियांव", "जलालपुर", "जहांगीरगंज", "कटेहरी", "रामनगर", "टांडा"],
+      "बाराबंकी": ["बनीकोडर", "बंकी", "दरियाबाद", "देवा", "फतेहपुर", "हरख", "हैदरगढ़", "मसौली", "निंदूरा", "पूरेडलई", "रामनगर", "सूरतगंज", "सिद्दौर", "सिरौली गौसपुर", "त्रिवेदीगंज"],
+      "सुल्तानपुर": ["अखंड नगर", "बल्दीराय", "भदैंया", "धनपतगंज", "दोस्तपुर", "दूबेपुर", "जयसिंहपुर", "कादीपुर", "कूरेभार", "कुड़वार", "लंभुआ", "मोतिगरपुर", "पीपरपुर", "प्रतापपुर कमैचा"],
+      "अमेठी": ["अमेठी", "भादर", "भेटुआ", "गौरीगंज", "जगदीशपुर", "जामो", "मुसाफिरखाना", "संग्रामपुर", "शाहगढ़", "शुकुल बाज़ार", "सिंहपुर", "तिलोई", "बहादुरपुर"],
+      "बरेली": ["आंवला", "आलमपुर जाफराबाद", "बहेड़ी", "भदपुरा", "भोजीपुरा", "बिथरी चैनपुर", "दमखोदा", "फरीदपुर", "फतेहगंज पश्चिमी", "क्यारा", "मीरगंज", "मझगवां", "नवाबगंज", "रामनगर", "शेरगढ़"],
+      "बदायूं": ["आसफपुर", "बिसौली", "दहगवां", "दातागंज", "इस्लामनगर", "जगत", "कादरचौक", "म्याऊं", "सहसवान", "समरेर", "सालारपुर", "उझानी", "उसावां", "वजीरगंज", "अम्बियापुर"],
+      "पीलीभीत": ["अमरिया", "बरखेड़ा", "बीसलपुर", "बिलसंडा", "ललौरीखेड़ा", "मरौरी", "पूरनपुर"],
+      "शाहजहांपुर": ["बंडा", "भावलखेड़ा", "ददरौल", "जलालाबाद", "कांट", "कटरा (खुदागंज)", "कलान", "मदनापुर", "मिर्जापुर", "निगोही", "पुवायां", "सिंधौली", "तिलहर", "जैतीपुर", "खुटार"],
+      "मुरादाबाद": ["भगतपुर टांडा", "बिलारी", "छजलैट", "डींगारपुर (कुंदरकी)", "डिलारी", "मुरादाबाद सदर", "मूढ़ापांडे", "ठाकुरद्वारा"],
+      "बिजनौर": ["अफजलगढ़", "अल्हणपुर", "धामपुर", "हल्दौर", "जलीलपुर", "किरतपुर", "कोतवाली", "मोहम्मदपुर देवमल", "नजीबाबाद", "नहटौर", "नूरपुर"],
+      "रामपुर": ["बिलासपुर", "चमरौआ", "मिलक", "शाहबाद", "स्वार", "सैदनगर"],
+      "अमरोहा": ["अमरोहा", "धनौरा", "गंगेश्वरी", "गजरौला", "हसनपुर", "जोया"],
+      "संभल": ["असमोली", "बहजोई", "बनियाखेड़ा", "चन्दौसी", "गुन्नौर", "जुनावई", "पंवासा", "रजपुरा"],
+      "मेरठ": ["दौराला", "हस्तिनापुर", "जानीखुर्द", "खरखौदा", "माछरा", "मवाना", "मेरठ", "परीक्षितगढ़", "रोहटा", "सरधना", "सरूरपुर", "रजपुरा"],
+      "गाजियाबाद": ["भोजपुर", "लोनी", "मुरादनगर", "रजापुर"],
+      "गौतम बुद्ध नगर": ["बिसरख", "दादरी", "जेवर"],
+      "बुलंदशहर": ["अगौता", "अनूपशहर", "अरनिया", "बीबीनगर", "बुलंदशहर", "दानपुर", "डिबाई", "गुलावठी", "जहांगीराबाद", "खुर्जा", "कोटवन", "लखावटी", "पहासू", "शिकारपुर", "सियाणा", "ऊंचागांव"],
+      "हापुड़": ["धौलाना", "गढ़मुक्तेश्वर", "हापुड़", "सिंभावली"],
+      "बागपत": ["बागपत", "बड़ौत", "बिनौली", "छपरौली", "खेकड़ा", "पिलाना"],
+      "आगरा": ["अछनेरा", "अकोला", "बाह", "बरौली अहीर", "एत्मादपुर", "फतेहाबाद", "फतेहपुर सीकरी", "जगनेर", "जैतपुर कलां", "खंदौली", "खेरागढ़", "पिनाहट", "सैंया", "शमसाबाद", "बरहन"],
+      "मथुरा": ["बलदेव", "चौमुहां", "छाता", "फरह", "गोवर्धन", "मांट", "मथुरा", "नंदगांव", "नौहझील", "राया"],
+      "फिरोजाबाद": ["अरांव", "एका", "फिरोजाबाद", "जसराना", "खैरगढ़", "मदनपुर", "नारखी", "शिकोहाबाद", "टूंडला"],
+      "मैनपुरी": ["बेवर", "बरनाहल", "घिरोर", "जागीर", "करहल", "किशनी", "कुरावली", "मैनपुरी", "सुल्तानगंज"],
+      "अलीगढ़": ["अतरौली", "बिजौली", "चंडौस", "धनीपुर", "गंगीरी", "गोंडा", "इगलास", "जवां", "खैर", "लोधा", "अकराबाद", "टप्पल"],
+      "एटा": ["अलीगंज", "अवागढ़", "जलेसर", "जैथरा", "मारहरा", "निधौली कलां", "सकीट", "शीतलपुर"],
+      "हाथरस": ["हाथरस", "हसायन", "मुरसान", "सादाबाद", "सहपऊ", "सासनी", "सिकंदराराऊ"],
+      "कासगंज": ["अमांपुर", "गंजडुंडवारा", "कासगंज", "पटियाली", "सहावर", "सिढ़पुरा", "सोरों"],
+      "सहारनपुर": ["बलियाखेड़ी", "देवबंद", "गंगोह", "मुजफ्फराबाद", "नांगल", "नकुड़", "पुंवारका", "रामपुर मनिहारान", "सरसावा", "साढौली कदीम", "तल्हेड़ी बुजुर्ग"],
+      "मुजफ्फरनगर": ["बघरा", "बुढ़ाना", "चरथावल", "जानसठ", "खतौली", "मोरना", "पुरकाजी", "सदर (मुजफ्फरनगर)", "शाहपुर"],
+      "शामली": ["कांधला", "कैराना", "थानाभवन", "शामली", "ऊन"],
+      "झांसी": ["बबीना", "बामौर", "बड़ागांव", "चिरगांव", "गुरसराय", "मऊरानीपुर", "मोंठ", "बंगरा"],
+      "ललितपुर": ["बार", "बिरधा", "जखौरा", "मड़ावरा", "महरौनी", "तालबेहट"],
+      "जालौन": ["डकोर", "जालौन", "कदौरा", "कोंच", "कुठौंद", "माधौगढ़", "महेवा", "नदीगांव", "रेंडर"],
+      "बांदा": ["बड़ोखर खुर्द", "बबेरू", "बिसंडा", "जसपुरा", "कमासिन", "महुआ", "नरैनी", "तिंदवारी"],
+      "चित्रकूट": ["कर्वी", "मानिकपुर", "मऊ", "पहाड़ी", "रामनगर"],
+      "हमीरपुर": ["कुरारा", "सुमेरपुर", "मौदहा", "मुस्करा", "राठ", "सरीला", "गोहांड"],
+      "महोबा": ["चरखारी", "जैतपुर", "कबरई", "पनवाड़ी"],
+      "गोंडा": ["बभनजोत", "बेलसर", "छपिया", "हलधरमऊ", "इटियाथोक", "झंझरी", "कटरा बाजार", "कर्नलगंज", "मनकापुर", "मुजेहना", "नवाबगंज", "पडरी कृपाल", "परसपुर", "रुपईडीह", "तरबगंज", "वजीरगंज"],
+      "बहराइच": ["बलहा", "चित्तौरा", "फखरपुर", "हुजूरपुर", "जरवल", "कैसरगंज", "महसी", "मिहींपुरवा (मोतीपुर)", "नवाबगंज", "पयागपुर", "रिसिया", "शिवपुर", "तजवापुर", "विशेश्वरगंज"],
+      "बलरामपुर": ["बलरामपुर", "गैसड़ी", "हरैया सतघरवा", "पचपेड़वा", "रेहरा बाजार", "श्रीदत्तगंज", "तुलसीपुर", "उतरौला", "शिवपुरा"],
+      "श्रावस्ती": ["गिलौला", "इकौना", "जमुनहा", "सिरसिया", "हरिहरपुर रानी"],
+      "बस्ती": ["बहादुरपुर", "बनकटी", "बस्ती सदर", "गौर", "हर्रैया", "कप्तानगंज", "कुदरहा", "परशुरामपुर", "रामनगर", "रुधौली", "साऊंघाट", "सल्टौआ गोपालपुर", "विक्रमजोत", "कलवारी"],
+      "संत कबीर नगर": ["बघौली", "बेलहर कलां", "हैंसर बाजार", "खलीलाबाद", "मेंहदावल", "नाथनगर", "पौली", "सांथा", "सेमरियावां"],
+      "सिद्धार्थनगर": ["बांसी", "बढ़नी", "बर्डपुर", "भनवापुर", "डुमरियागंज", "इटवा", "जोगिया", "खेसरहा", "खुनियांव", "लोटन", "मिठवल", "नौगढ़", "शोहरतगढ़", "उस्का बाजार"],
+      "आजमगढ़": ["अतरौलिया", "अजमतगढ़", "बिलरियागंज", "कोयलसा", "जहानागंज", "लालगंज", "महाराजगंज", "मेंहनगर", "मिर्जापुर", "मोहम्मदपुर", "मुबारकपुर", "पल्हना", "पल्हनी", "पवई", "फूलपुर", "रानी की सराय", "सठियांव", "स्मार्ट (सगड़ी)", "तरवां", "टेकनपुर", "तहबरपुर", "मार्टीनगंज"],
+      "मऊ": ["बड़रावं", "दोहरीघाट", "फतेहपुर मंडाव", "घोसी", "कोपागंज", "मुहम्मदबाद गोहना", "परदहां", "रानीपुर", "रतनपुरा"],
+      "बलिया": ["बांसडीह", "बैरिया", "बेलहरी", "बेरूआरबारी", "चिलकहक", "दुबहड़", "गड़वार", "हनुमानगंज", "मनियर", "मुरली छपरा", "नगरा", "नवानगर", "पंदह", "रसड़ा", "रेवती", "सीयर", "सोहांव"],
+      "मिर्जापुर": ["छानबे", "सिटी", "हलिया", "जमालपुर", "कोन", "लालगंज", "मझवां", "मड़िहान", "नरायनपुर", "पहाड़ी", "पटेहरा कलां", "राजगढ़"],
+      "सोनभद्र": ["बभनी", "चोपन", "चतरा", "दुद्धी", "घोरावल", "म्योरपुर", "नगवां", "राबर्ट्सगंज", "कोन", "करमा"],
+      "भदोही": ["औराई", "भदोही", "डीघ", "ज्ञानपुर", "सुरियावां", "अभोली"]
     };
 
-    window.onload = function() {
-      const districtSelect = document.getElementById('district');
-      Object.keys(districtBlocks).forEach(dist => {
-        let opt = document.createElement('option');
-        opt.value = dist;
-        opt.textContent = dist;
-        districtSelect.appendChild(opt);
+    // 2. ड्रॉपडाउन पॉप्युलेट करना
+    function initDistrictDropdowns() {
+      const curDistSelect = document.getElementById("currentDistrict");
+      const tgtDistSelect = document.getElementById("targetDistrict");
+      const distNames = Object.keys(upDistrictsData).sort((a,b) => a.localeCompare(b, 'hi'));
+
+      distNames.forEach(dist => {
+        curDistSelect.innerHTML += `<option value="${dist}">${dist}</option>`;
+        tgtDistSelect.innerHTML += `<option value="${dist}">${dist}</option>`;
       });
+    }
+
+    function updateBlocks(distSelectId, blockSelectId, isTarget = false) {
+      const selectedDist = document.getElementById(distSelectId).value;
+      const blockSelect = document.getElementById(blockSelectId);
+      
+      blockSelect.innerHTML = isTarget ? '<option value="कोई भी ब्लॉक">कोई भी ब्लॉक (समस्त जनपद)</option>' : '<option value="">ब्लॉक चुनें...</option>';
+
+      if (selectedDist && upDistrictsData[selectedDist]) {
+        upDistrictsData[selectedDist].forEach(block => {
+          blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
+        });
+      }
+    }
+
+    // 3. Firebase कॉन्फ़िगरेशन
+    const firebaseConfig = {
+      apiKey: "AIzaSyAjyeW8kmGoOMurMN7vD-WCu-XWyHTbgYk",
+      authDomain: "innerdistricttransfer-portal.firebaseapp.com",
+      projectId: "innerdistricttransfer-portal",
+      storageBucket: "innerdistricttransfer-portal.firebasestorage.app",
+      messagingSenderId: "460083768458",
+      appId: "1:460083768458:web:80018b7dec87f347c91173"
     };
 
-    let currentUserData = null;
-    let isEditMode = false;
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-    // JSONP Helper to avoid CORS issues
-    function callJSONP(url, callbackName) {
-      return new Promise((resolve, reject) => {
-        window[callbackName] = function(data) {
-          resolve(data);
-          delete window[callbackName];
-          const el = document.getElementById(callbackName);
-          if (el) el.remove();
-        };
+    let allTeachers = [];
 
-        const script = document.createElement('script');
-        script.id = callbackName;
-        script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + callbackName;
-        script.onerror = function() {
-          reject(new Error("Network error"));
-          delete window[callbackName];
-          const el = document.getElementById(callbackName);
-          if (el) el.remove();
-        };
-        document.body.appendChild(script);
-      });
-    }
+    // 4. नया फॉर्म सबमिशन
+    document.getElementById("transfer-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById("submit-btn");
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> सबमिट हो रहा है...`;
 
-    // 1. LOGIN HANDLER
-    function handleTeacherLogin() {
-      const mobile = document.getElementById('loginMobile').value.trim();
-      const code = document.getElementById('loginCode').value.trim();
-      const statusBox = document.getElementById('loginStatusBox');
-      const loginBtn = document.getElementById('loginBtn');
-
-      if (mobile.length !== 10) {
-        alert("कृपया 10 अंकों का मान्य मोबाइल नंबर दर्ज करें।");
-        document.getElementById('loginMobile').focus();
-        return;
-      }
-      if (!code) {
-        alert("कृपया अपना मानव संपदा कोड दर्ज करें।");
-        document.getElementById('loginCode').focus();
-        return;
-      }
-
-      loginBtn.disabled = true;
-      loginBtn.innerHTML = '<span>⏳</span> लॉगिन जांची जा रही है...';
-      statusBox.classList.add('hidden');
-
-      const cbName = 'loginCb_' + Math.round(100000 * Math.random());
-      const requestUrl = `${SCRIPT_URL}?mobile=${encodeURIComponent(mobile)}&code=${encodeURIComponent(code)}`;
-
-      callJSONP(requestUrl, cbName)
-        .then(result => {
-          loginBtn.disabled = false;
-          loginBtn.innerHTML = '<span>🔓</span> लॉगिन करें (Login)';
-
-          if (result.status === "error") {
-            statusBox.className = "mt-4 p-3.5 rounded-xl text-xs font-medium border bg-red-50 text-red-700 border-red-200 block";
-            statusBox.innerHTML = `⚠️ ${result.message}`;
-            return;
-          }
-
-          if (result.isExisting && result.data) {
-            currentUserData = result.data;
-            showDashboard(currentUserData);
-          } else {
-            statusBox.className = "mt-4 p-3.5 rounded-xl text-xs font-medium border bg-amber-50 text-amber-800 border-amber-200 block";
-            statusBox.innerHTML = `ℹ️ इस मोबाइल नंबर अथवा कोड से कोई पूर्व पंजीकरण नहीं मिला। कृपया <b>"न्यू रजिस्ट्रेशन"</b> बटन पर क्लिक करके नया फ़ॉर्म भरें।`;
-          }
-        })
-        .catch(() => {
-          loginBtn.disabled = false;
-          loginBtn.innerHTML = '<span>🔓</span> लॉगिन करें (Login)';
-          alert("सर्वर से संपर्क नहीं हो सका। कृपया पुनः प्रयास करें।");
-        });
-    }
-
-    // 2. DASHBOARD VIEW
-    function showDashboard(d) {
-      document.getElementById('loginCard').classList.add('hidden');
-      document.getElementById('formCard').classList.add('hidden');
-      document.getElementById('dashboardCard').classList.remove('hidden');
-
-      document.getElementById('dashTeacherName').textContent = d.teacherName || 'शिक्षक';
-      document.getElementById('dashTeacherInfo').textContent = `जनपद: ${d.district || '-'} | ब्लॉक: ${d.currentBlock || '-'} (${d.currentSchool || '-'})`;
-      document.getElementById('dashCode').textContent = d.manavSampada || '-';
-      document.getElementById('dashMobile').textContent = d.primaryMobile || '-';
-      document.getElementById('dashLevel').textContent = d.schoolLevel || '-';
-      document.getElementById('dashSubject').textContent = d.subject || '-';
-
-      loadMatchesForTeacher(d.district, d.currentBlock, d.schoolLevel, d.subject);
-    }
-
-    // 3. NEW REGISTRATION HANDLER
-    function openNewRegistrationForm() {
-      isEditMode = false;
-      currentUserData = null;
-
-      document.getElementById('loginCard').classList.add('hidden');
-      document.getElementById('dashboardCard').classList.add('hidden');
-      document.getElementById('matchingCard').classList.add('hidden');
-      document.getElementById('formCard').classList.remove('hidden');
-
-      document.getElementById('formBadge').innerHTML = `<span>✨</span> नया पंजीकरण फ़ॉर्म`;
-      document.getElementById('formMainTitle').textContent = `अन्तःजनपदीय ट्रांसफर - नया शिक्षक पंजीकरण`;
-      
-      document.getElementById('intraDistrictForm').reset();
-      document.getElementById('formMobile').value = document.getElementById('loginMobile').value.trim();
-      document.getElementById('formCode').value = document.getElementById('loginCode').value.trim();
-      document.getElementById('formMobile').readOnly = false;
-      document.getElementById('formCode').readOnly = false;
-      document.getElementById('regAuthInputs').classList.remove('hidden');
-
-      handleLevelChange();
-      document.getElementById('formCard').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // 4. EDIT DETAILS HANDLER
-    function enableDetailEdit() {
-      if (!currentUserData) return;
-      isEditMode = true;
-
-      document.getElementById('dashboardCard').classList.add('hidden');
-      document.getElementById('formCard').classList.remove('hidden');
-
-      document.getElementById('formBadge').innerHTML = `<span>✏️</span> विवरण संपादन`;
-      document.getElementById('formMainTitle').textContent = `अन्तःजनपदीय ट्रांसफर - विवरण में बदलाव करें`;
-
-      document.getElementById('formMobile').value = currentUserData.primaryMobile || '';
-      document.getElementById('formCode').value = currentUserData.manavSampada || '';
-      document.getElementById('formMobile').readOnly = true;
-      document.getElementById('formCode').readOnly = true;
-
-      document.getElementById('teacherName').value = currentUserData.teacherName || '';
-      document.getElementById('secondaryMobile').value = currentUserData.secondaryMobile || '';
-      document.getElementById('contactMedium').value = currentUserData.contactMedium || '';
-      document.getElementById('schoolLevel').value = currentUserData.schoolLevel || '';
-      
-      handleLevelChange();
-      document.getElementById('subject').value = currentUserData.subject || '';
-      document.getElementById('district').value = currentUserData.district || '';
-
-      handleDistrictChange();
-      document.getElementById('currentBlock').value = currentUserData.currentBlock || '';
-      document.getElementById('currentSchool').value = currentUserData.currentSchool || '';
-
-      updateBlockDropdowns();
-      document.getElementById('p1Block').value = currentUserData.p1Block || '';
-      document.getElementById('p2Block').value = currentUserData.p2Block || '';
-      document.getElementById('p3Block').value = currentUserData.p3Block || '';
-      document.getElementById('p4Block').value = currentUserData.p4Block || '';
-      updateBlockDropdowns();
-
-      document.getElementById('formCard').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function cancelFormToLogin() {
-      document.getElementById('formCard').classList.add('hidden');
-      if (currentUserData) {
-        document.getElementById('dashboardCard').classList.remove('hidden');
-      } else {
-        document.getElementById('loginCard').classList.remove('hidden');
-      }
-    }
-
-    function handleLogout() {
-      currentUserData = null;
-      isEditMode = false;
-      document.getElementById('dashboardCard').classList.add('hidden');
-      document.getElementById('matchingCard').classList.add('hidden');
-      document.getElementById('loginCard').classList.remove('hidden');
-      document.getElementById('loginMobile').value = '';
-      document.getElementById('loginCode').value = '';
-      document.getElementById('loginStatusBox').classList.add('hidden');
-    }
-
-    function handleLevelChange() {
-      const level = document.getElementById('schoolLevel').value;
-      const subSelect = document.getElementById('subject');
-      subSelect.innerHTML = '';
-
-      if (level === 'Primary (1-5)') {
-        let opt = document.createElement('option');
-        opt.value = 'सभी विषय (All Subjects)';
-        opt.textContent = 'सभी विषय (All Subjects / General)';
-        subSelect.appendChild(opt);
-      } else if (level === 'Upper Primary (6-8)') {
-        const subjects = [
-          { val: 'गणित एवं विज्ञान (Math & Science)', text: 'गणित एवं विज्ञान (Math & Science)' },
-          { val: 'भाषा (Language - Hindi/Eng/Sans)', text: 'भाषा (हिन्दी / अंग्रेजी / संस्कृत)' },
-          { val: 'सामाजिक विषय (Social Studies)', text: 'सामाजिक विषय (Social Studies)' }
-        ];
-        let defaultOpt = document.createElement('option');
-        defaultOpt.value = '';
-        defaultOpt.textContent = '-- विषय का चयन करें --';
-        subSelect.appendChild(defaultOpt);
-
-        subjects.forEach(s => {
-          let opt = document.createElement('option');
-          opt.value = s.val;
-          opt.textContent = s.text;
-          subSelect.appendChild(opt);
-        });
-      } else {
-        let opt = document.createElement('option');
-        opt.value = '';
-        opt.textContent = '-- पहले विद्यालय स्तर चुनें --';
-        subSelect.appendChild(opt);
-      }
-    }
-
-    function handleDistrictChange() {
-      const dist = document.getElementById('district').value;
-      const currentBlockSelect = document.getElementById('currentBlock');
-      currentBlockSelect.innerHTML = '<option value="">-- वर्तमान ब्लॉक चुनें --</option>';
-
-      if (dist && districtBlocks[dist]) {
-        districtBlocks[dist].forEach(blk => {
-          let opt = document.createElement('option');
-          opt.value = blk;
-          opt.textContent = blk;
-          currentBlockSelect.appendChild(opt);
-        });
-      }
-      updateBlockDropdowns();
-    }
-
-    function updateBlockDropdowns() {
-      const dist = document.getElementById('district').value;
-      const currentVal = document.getElementById('currentBlock').value;
-      const selects = ['p1Block', 'p2Block', 'p3Block', 'p4Block'];
-
-      const availableBlocks = (dist && districtBlocks[dist]) ? districtBlocks[dist] : [];
-
-      selects.forEach((id, index) => {
-        const selectElem = document.getElementById(id);
-        const selectedValue = selectElem.value;
-        selectElem.innerHTML = `<option value="">-- ${index + 1}वीं पसंद ब्लॉक चुनें --</option>`;
-
-        availableBlocks.forEach(blk => {
-          let isChosen = false;
-          selects.forEach(otherId => {
-            if (otherId !== id && document.getElementById(otherId).value === blk) {
-              isChosen = true;
-            }
-          });
-
-          if (blk !== currentVal && !isChosen) {
-            let opt = document.createElement('option');
-            opt.value = blk;
-            opt.textContent = blk;
-            if (blk === selectedValue) opt.selected = true;
-            selectElem.appendChild(opt);
-          }
-        });
-      });
-    }
-
-    function loadMatches() {
-      const dist = document.getElementById('district').value;
-      const block = document.getElementById('currentBlock').value;
-      const level = document.getElementById('schoolLevel').value;
-      const sub = document.getElementById('subject').value;
-      if (dist && block && level) {
-        loadMatchesForTeacher(dist, block, level, sub);
-      }
-    }
-
-    function loadMatchesForTeacher(dist, block, level, sub) {
-      if (!dist || !block || !level) return;
-
-      const matchCard = document.getElementById('matchingCard');
-      const countBadge = document.getElementById('matchCountBadge');
-      const tableBody = document.getElementById('matchingTableBody');
-      const noMatchMsg = document.getElementById('noMatchMsg');
-
-      matchCard.classList.remove('hidden');
-      countBadge.textContent = "खोज रहे हैं...";
-      tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-slate-400">डेटा खोजा जा रहा है...</td></tr>`;
-
-      const cbName = 'matchCb_' + Math.round(100000 * Math.random());
-      const requestUrl = `${SCRIPT_URL}?action=getMatches&district=${encodeURIComponent(dist)}&block=${encodeURIComponent(block)}&schoolLevel=${encodeURIComponent(level)}&subject=${encodeURIComponent(sub || '')}`;
-
-      callJSONP(requestUrl, cbName)
-        .then(data => {
-          tableBody.innerHTML = '';
-          if (data.status === 'success' && data.matches.length > 0) {
-            countBadge.textContent = data.matches.length;
-            noMatchMsg.classList.add('hidden');
-
-            data.matches.forEach((m, idx) => {
-              const row = document.createElement('tr');
-              row.className = "hover:bg-slate-800/40 transition";
-              row.innerHTML = `
-                <td class="py-2.5 px-3 text-slate-400">${idx + 1}</td>
-                <td class="py-2.5 px-3 font-bold text-white">${m.name}</td>
-                <td class="py-2.5 px-3 text-slate-300">${m.currentPosting}</td>
-                <td class="py-2.5 px-3 text-emerald-400 font-medium">${m.choiceMatched}</td>
-                <td class="py-2.5 px-3 font-mono font-bold tracking-wider text-amber-300">${m.maskedMobile}</td>
-                <td class="py-2.5 px-3 text-center">
-                  <span class="bg-slate-800 text-slate-400 border border-slate-700 text-[10px] px-2 py-0.5 rounded-full">🔒 लॉक</span>
-                </td>
-              `;
-              tableBody.appendChild(row);
-            });
-          } else {
-            countBadge.textContent = "0";
-            noMatchMsg.classList.remove('hidden');
-          }
-        })
-        .catch(() => {
-          countBadge.textContent = "0";
-          tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-slate-500">डेटा लोड नहीं हो सका।</td></tr>`;
-        });
-    }
-
-    let shareableText = "";
-
-    function submitForm(event) {
-      event.preventDefault();
-
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.textContent = "विवरण सुरक्षित किया जा रहा है...";
-
-      const pMobile = document.getElementById('formMobile').value.trim();
-      const mCode = document.getElementById('formCode').value.trim();
-
-      if (pMobile.length !== 10) {
-        alert("कृपया 10 अंकों का मुख्य मोबाइल नंबर दर्ज करें।");
-        btn.disabled = false;
-        btn.textContent = "पंजीकरण सुरक्षित / अपडेट करें (Save Record)";
-        return;
-      }
-      if (!mCode) {
-        alert("कृपया मानव संपदा कोड दर्ज करें।");
-        btn.disabled = false;
-        btn.textContent = "पंजीकरण सुरक्षित / अपडेट करें (Save Record)";
-        return;
-      }
-
-      const tName = document.getElementById('teacherName').value.trim();
-      const cMedium = document.getElementById('contactMedium').value;
-      const sLevel = document.getElementById('schoolLevel').value;
-      const sub = document.getElementById('subject').value;
-      const dist = document.getElementById('district').value;
-      const curBlock = document.getElementById('currentBlock').value;
-      const curSchool = document.getElementById('currentSchool').value.trim();
-
-      const priorities = [
-        document.getElementById('p1Block').value,
-        document.getElementById('p2Block').value,
-        document.getElementById('p3Block').value,
-        document.getElementById('p4Block').value
-      ].filter(Boolean).join(', ');
-
-      const formData = {
-        teacherName: tName,
-        manavSampada: mCode,
-        primaryMobile: pMobile,
-        secondaryMobile: document.getElementById('secondaryMobile').value.trim(),
-        contactMedium: cMedium,
-        schoolLevel: sLevel,
-        subject: sub,
-        district: dist,
-        currentBlock: curBlock,
-        currentSchool: curSchool,
-        p1Block: document.getElementById('p1Block').value,
-        p2Block: document.getElementById('p2Block').value,
-        p3Block: document.getElementById('p3Block').value,
-        p4Block: document.getElementById('p4Block').value,
-        paymentStatus: "Free",
-        paymentId: "Initial Launch",
-        expiryDate: "-"
+      const teacherData = {
+        teacherName: document.getElementById("teacherName").value.trim(),
+        ehmsCode: document.getElementById("ehmsCode").value.trim(),
+        mobile: document.getElementById("mobile").value.trim(),
+        designation: document.getElementById("designation").value,
+        subject: document.getElementById("subject").value,
+        currentDistrict: document.getElementById("currentDistrict").value,
+        currentBlock: document.getElementById("currentBlock").value,
+        targetDistrict: document.getElementById("targetDistrict").value,
+        targetBlock: document.getElementById("targetBlock").value || "कोई भी ब्लॉक",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
       };
 
-      fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      })
-      .then(() => {
-        let detailsText = `🏫 *बेसिक शिक्षा परिषद - अन्तःजनपदीय (जिले के अंदर) म्यूचुअल ट्रांसफर*\n\n` +
-          `👤 *नाम:* ${tName}\n` +
-          `📞 *संपर्क:* ${pMobile} (${cMedium})\n` +
-          `🏫 *स्तर:* ${sLevel}\n`;
+      try {
+        await db.collection("teachers").add(teacherData);
+        alert("बधाई! आपका विवरण सफलतापूर्वक पंजीकृत हो गया है।");
+        document.getElementById("transfer-form").reset();
+        document.getElementById("currentBlock").innerHTML = '<option value="">पहले जनपद चुनें...</option>';
+        document.getElementById("targetBlock").innerHTML = '<option value="कोई भी ब्लॉक">कोई भी ब्लॉक</option>';
+        fetchTeachers();
+      } catch (error) {
+        console.error("Firebase Error:", error);
+        alert("डेटा सेव करने में त्रुटि आई: " + error.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>पंजीकरण सबमिट करें</span>`;
+      }
+    });
 
-        if (sLevel.includes('Upper Primary') || sLevel.includes('जूनियर')) {
-          detailsText += `📚 *विषय:* ${sub}\n`;
+    // 5. डेटा लोड करना
+    async function fetchTeachers() {
+      const spinner = document.getElementById("loading-spinner");
+      const emptyState = document.getElementById("empty-state");
+      spinner.classList.remove("hidden");
+      emptyState.classList.add("hidden");
+
+      try {
+        const snapshot = await db.collection("teachers").orderBy("createdAt", "desc").get();
+        allTeachers = [];
+        snapshot.forEach(doc => {
+          allTeachers.push({ id: doc.id, ...doc.data() });
+        });
+
+        document.getElementById("live-count").innerText = `कुल पंजीकृत: ${allTeachers.length} शिक्षक`;
+        renderTeachers(allTeachers);
+      } catch (error) {
+        console.error("Fetch Error:", error);
+        try {
+          const fallback = await db.collection("teachers").get();
+          allTeachers = [];
+          fallback.forEach(doc => allTeachers.push({ id: doc.id, ...doc.data() }));
+          document.getElementById("live-count").innerText = `कुल पंजीकृत: ${allTeachers.length} शिक्षक`;
+          renderTeachers(allTeachers);
+        } catch (err) {
+          alert("डेटा लोड नहीं हो पाया: " + err.message);
         }
+      } finally {
+        spinner.classList.add("hidden");
+      }
+    }
 
-        detailsText += `📍 *जनपद:* ${dist}\n` +
-          `🏢 *वर्तमान ब्लॉक:* ${curBlock} (${curSchool})\n` +
-          `🎯 *इच्छित ब्लॉक:* ${priorities}\n\n` +
-          `🔗 *जिले के अंदर म्यूचुअल साथी खोजने हेतु तुरंत रजिस्टर करें:*\n` +
-          `👉 https://deshimaster.in`;
+    // 6. डेटा रेंडर करना
+    function renderTeachers(list) {
+      const tableBody = document.getElementById("teachers-table-body");
+      const cardsContainer = document.getElementById("teachers-cards-container");
+      const emptyState = document.getElementById("empty-state");
 
-        shareableText = detailsText;
+      tableBody.innerHTML = "";
+      cardsContainer.innerHTML = "";
 
-        document.getElementById('previewText').innerText = shareableText;
-        document.getElementById('successModal').classList.remove('hidden');
-        btn.disabled = false;
-        btn.textContent = "पंजीकरण सुरक्षित / अपडेट करें (Save Record)";
+      if (list.length === 0) {
+        emptyState.classList.remove("hidden");
+        return;
+      }
+      emptyState.classList.add("hidden");
 
-        currentUserData = formData;
-        showDashboard(currentUserData);
-      })
-      .catch(() => {
-        alert("डेटा सुरक्षित करने में समस्या आई। कृपया पुनः प्रयास करें।");
-        btn.disabled = false;
-        btn.textContent = "पंजीकरण सुरक्षित / अपडेट करें (Save Record)";
+      list.forEach(t => {
+        // Desktop Row
+        const row = document.createElement("tr");
+        row.className = "hover:bg-slate-50/80 transition";
+        row.innerHTML = `
+          <td class="px-6 py-4">
+            <div class="font-bold text-slate-800">${escapeHtml(t.teacherName)}</div>
+            <div class="text-xs text-indigo-600 font-medium">${escapeHtml(t.designation || '')} • ${escapeHtml(t.subject || '')}</div>
+            ${t.ehmsCode ? `<div class="text-[11px] text-slate-400">EHMS: ${escapeHtml(t.ehmsCode)}</div>` : ''}
+          </td>
+          <td class="px-6 py-4">
+            <span class="inline-block bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-xs font-semibold mb-1">
+              ${escapeHtml(t.currentDistrict)}
+            </span>
+            <div class="text-xs text-slate-500">ब्लॉक: ${escapeHtml(t.currentBlock)}</div>
+          </td>
+          <td class="px-6 py-4">
+            <span class="inline-block bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded text-xs font-semibold mb-1">
+              <i class="fa-solid fa-arrow-right text-[10px] mr-1"></i>${escapeHtml(t.targetDistrict)}
+            </span>
+            <div class="text-xs text-slate-500">ब्लॉक: ${escapeHtml(t.targetBlock || 'कोई भी ब्लॉक')}</div>
+          </td>
+          <td class="px-6 py-4">
+            <a href="https://wa.me/91${t.mobile}?text=${encodeURIComponent('नमस्ते ' + t.teacherName + ' जी, मुझे आपका विवरण बेसिक शिक्षा म्यूचुअल ट्रांसफर पोर्टल पर मिला।')}" 
+               target="_blank"
+               class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition shadow-sm">
+              <i class="fa-brands fa-whatsapp text-sm"></i> चैट करें
+            </a>
+          </td>
+        `;
+        tableBody.appendChild(row);
+
+        // Mobile Card
+        const card = document.createElement("div");
+        card.className = "bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3";
+        card.innerHTML = `
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-bold text-slate-800 text-base">${escapeHtml(t.teacherName)}</h3>
+              <p class="text-xs text-indigo-600 font-medium">${escapeHtml(t.designation || '')} (${escapeHtml(t.subject || '')})</p>
+            </div>
+            <a href="https://wa.me/91${t.mobile}?text=${encodeURIComponent('नमस्ते ' + t.teacherName + ' जी, बेसिक ट्रांसफर पोर्टल के संदर्भ में संपर्क।')}" 
+               target="_blank"
+               class="px-2.5 py-1 bg-emerald-600 text-white rounded-lg text-xs font-medium flex items-center gap-1">
+              <i class="fa-brands fa-whatsapp"></i> संपर्क
+            </a>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-slate-100">
+            <div>
+              <span class="text-slate-400 block text-[10px]">वर्तमान</span>
+              <span class="font-semibold text-slate-700">${escapeHtml(t.currentDistrict)}</span> (${escapeHtml(t.currentBlock)})
+            </div>
+            <div>
+              <span class="text-slate-400 block text-[10px]">इच्छित</span>
+              <span class="font-semibold text-emerald-600">${escapeHtml(t.targetDistrict)}</span> (${escapeHtml(t.targetBlock || 'कोई भी')})
+            </div>
+          </div>
+        `;
+        cardsContainer.appendChild(card);
       });
     }
 
-    function copyToClipboard() {
-      navigator.clipboard.writeText(shareableText).then(() => {
-        const cBtn = document.getElementById('copyBtn');
-        cBtn.innerHTML = '<span>✓</span> कॉपी हो गया!';
-        setTimeout(() => { cBtn.innerHTML = '<span>📋</span> विवरण कॉपी करें (Copy)'; }, 2000);
+    // 7. सर्च/फ़िल्टर
+    function filterTeachers() {
+      const q = document.getElementById("search-input").value.toLowerCase().trim();
+      if (!q) {
+        renderTeachers(allTeachers);
+        return;
+      }
+      const filtered = allTeachers.filter(t => 
+        (t.teacherName && t.teacherName.toLowerCase().includes(q)) ||
+        (t.currentDistrict && t.currentDistrict.toLowerCase().includes(q)) ||
+        (t.currentBlock && t.currentBlock.toLowerCase().includes(q)) ||
+        (t.targetDistrict && t.targetDistrict.toLowerCase().includes(q)) ||
+        (t.targetBlock && t.targetBlock.toLowerCase().includes(q)) ||
+        (t.designation && t.designation.toLowerCase().includes(q))
+      );
+      renderTeachers(filtered);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
       });
     }
 
-    function shareWhatsApp() {
-      const url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareableText);
-      window.open(url, '_blank');
-    }
-
-    function closeModal() {
-      document.getElementById('successModal').classList.add('hidden');
-    }
+    // इनिशियलाइज़ेशन
+    window.addEventListener("DOMContentLoaded", () => {
+      initDistrictDropdowns();
+      fetchTeachers();
+    });
   </script>
-
 </body>
 </html>
