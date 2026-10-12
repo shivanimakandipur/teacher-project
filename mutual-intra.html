@@ -169,52 +169,144 @@
         </form>
       </div>
 
-      <!-- Tab 2: Teacher Login -->
-      <div id="tab-pane-login" class="hidden p-6 max-w-lg mx-auto">
-        <div class="text-center mb-6">
-          <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
-            <i class="fa-solid fa-lock"></i>
+      <!-- Tab 2: Teacher Login & Dashboard -->
+      <div id="tab-pane-login" class="hidden p-6 max-w-xl mx-auto">
+        <!-- Login Form -->
+        <div id="login-box">
+          <div class="text-center mb-6">
+            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <h2 class="text-lg font-bold text-slate-800">शिक्षक लॉगिन</h2>
+            <p class="text-xs text-slate-500">पंजीकृत eHRMS कोड और मोबाइल नंबर से प्रोफाइल देखें एवं प्रबंधित करें</p>
           </div>
-          <h2 class="text-lg font-bold text-slate-800">शिक्षक लॉगिन</h2>
-          <p class="text-xs text-slate-500">पंजीकृत eHRMS कोड और मोबाइल नंबर से प्रोफाइल सत्यापित करें</p>
+
+          <form id="login-form" class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मानव संपदा कोड (eHRMS Code)</label>
+              <input type="text" id="loginEhrmsCode" required placeholder="उदा. 847291"
+                class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">पंजीकृत मोबाइल नंबर</label>
+              <input type="tel" id="loginMobile" required pattern="[0-9]{10}" placeholder="10 अंकों का मोबाइल नंबर"
+                class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+            </div>
+
+            <button type="submit" id="login-btn"
+              class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2 cursor-pointer">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <span>लॉगिन करें</span>
+            </button>
+          </form>
         </div>
 
-        <form id="login-form" class="space-y-4">
-          <div>
-            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मानव संपदा कोड (eHRMS Code)</label>
-            <input type="text" id="loginEhrmsCode" required placeholder="उदा. 847291"
-              class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">पंजीकृत मोबाइल नंबर</label>
-            <input type="tel" id="loginMobile" required pattern="[0-9]{10}" placeholder="10 अंकों का मोबाइल नंबर"
-              class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
-          </div>
-
-          <button type="submit" id="login-btn"
-            class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2 cursor-pointer">
-            <i class="fa-solid fa-right-to-bracket"></i>
-            <span>लॉगिन करें</span>
-          </button>
-        </form>
-
-        <!-- Logged-in Profile View / Delete Option -->
-        <div id="logged-profile-card" class="hidden mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200">
-          <div class="flex justify-between items-start mb-2">
-            <div>
-              <span class="text-xs text-emerald-600 font-semibold uppercase">लॉगिन सत्यापित</span>
-              <h3 id="loggedName" class="font-bold text-slate-800 text-base"></h3>
-              <p id="loggedEhrms" class="text-xs text-slate-500"></p>
+        <!-- Logged-in Profile View / Edit Section -->
+        <div id="logged-profile-card" class="hidden space-y-4">
+          <div class="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100 shadow-sm">
+            <div class="flex justify-between items-start mb-3 border-b border-indigo-100/80 pb-3">
+              <div>
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md mb-1">
+                  <i class="fa-solid fa-circle-check"></i> सत्यापित प्रोफाइल
+                </span>
+                <h3 id="loggedName" class="font-bold text-slate-800 text-lg"></h3>
+                <p id="loggedEhrms" class="text-xs text-slate-600 font-medium"></p>
+              </div>
+              <button onclick="logoutTeacher()" class="text-xs bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg shadow-xs transition">
+                <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> लॉगआउट
+              </button>
             </div>
-            <button onclick="logoutTeacher()" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 px-2 py-1 rounded">
-              लॉगआउट
-            </button>
+
+            <div id="loggedDetails" class="text-xs text-slate-700 space-y-1.5 mb-4"></div>
+
+            <!-- Action Buttons -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-indigo-100">
+              <!-- Share / Copy Profile Button -->
+              <button onclick="copyProfileShareText()" class="w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
+                <i class="fa-solid fa-copy"></i>
+                <span id="copy-btn-text">म्यूचुअल विवरण कॉपी करें (Share)</span>
+              </button>
+
+              <!-- Edit Profile Button -->
+              <button onclick="toggleEditMode(true)" class="w-full py-2.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>प्रोफ़ाइल संपादित करें (Edit)</span>
+              </button>
+            </div>
           </div>
-          <div id="loggedDetails" class="text-xs text-slate-600 space-y-1 mb-3"></div>
-          <button onclick="deleteCurrentProfile()" class="text-xs text-red-600 hover:text-red-700 font-medium flex items-center gap-1">
-            <i class="fa-solid fa-trash"></i> मेरी प्रोफ़ाइल हटाएं
-          </button>
+
+          <!-- Edit Profile Inline Modal/Box -->
+          <div id="edit-profile-box" class="hidden p-5 rounded-2xl bg-white border border-slate-300 shadow-md">
+            <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-200">
+              <h4 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                <i class="fa-solid fa-pen-to-square text-indigo-600"></i> प्राथमिकताएं व विवरण संपादित करें
+              </h4>
+              <button onclick="toggleEditMode(false)" class="text-xs text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-base"></i>
+              </button>
+            </div>
+
+            <form id="edit-form" class="space-y-3">
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">शिक्षक का नाम</label>
+                <input type="text" id="editTeacherName" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none focus:ring-2 focus:ring-indigo-500">
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">पदनाम</label>
+                  <select id="editDesignation" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
+                    <option value="सहायक अध्यापक (PS)">सहायक अध्यापक (PS)</option>
+                    <option value="प्रधानाध्यापक (PS)">प्रधानाध्यापक (PS)</option>
+                    <option value="सहायक अध्यापक (UPS)">सहायक अध्यापक (UPS)</option>
+                    <option value="प्रधानाध्यापक (UPS)">प्रधानाध्यापक (UPS)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">विषय / संवर्ग</label>
+                  <select id="editSubject" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
+                    <option value="सामान्य / ऑल (PS)">सामान्य / ऑल (PS)</option>
+                    <option value="गणित / विज्ञान">गणित / विज्ञान</option>
+                    <option value="सामाजिक विषय / भाषा">सामाजिक विषय / भाषा</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">वर्तमान कार्यरत ब्लॉक</label>
+                <select id="editCurrentBlock" required onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white"></select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 1 *</label>
+                  <select id="editTarget1" required onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 2</label>
+                  <select id="editTarget2" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 3</label>
+                  <select id="editTarget3" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 4</label>
+                  <select id="editTarget4" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+              </div>
+
+              <div class="flex gap-2 pt-2">
+                <button type="submit" id="save-edit-btn" class="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition">
+                  बदलाव सुरक्षित करें
+                </button>
+                <button type="button" onclick="toggleEditMode(false)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition">
+                  रद्द करें
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -277,7 +369,7 @@
   </main>
 
   <footer class="text-center py-6 text-xs text-slate-400">
-    उत्तर प्रदेश बेसिक शिक्षा परिषद — पारस्परिक स्थानांतरण साथी मंच
+    उत्तर प्रदेश बेसिक शिक्षा परिषद — पारस्परिक स्थानांतरण साथी मंच (deshimaster.in)
   </footer>
 
   <!-- Application Logic -->
@@ -335,7 +427,7 @@
       "अलीगढ़": ["अतरौली", "बिजौली", "चंडौस", "धनीपुर", "गंगीरी", "गोंडा", "इगलास", "जवां", "खैर", "लोधा", "अकराबाद", "टप्पल"],
       "एटा": ["अलीगंज", "अवागढ़", "जलेसर", "जैथरा", "मारहरा", "निधौली कलां", "सकीट", "शीतलपुर"],
       "हाथरस": ["हाथरस", "हसायन", "मुरसान", "सादाबाद", "सहपऊ", "सासनी", "सिकंदराराऊ"],
-      "कासगंज": ["अमांपपुर", "गंजडुंडवारा", "कासगंज", "पटियाली", "सहावर", "सिढ़पुरा", "सोरों"],
+      "कासगंज": ["अमांपुर", "गंजडुंडवारा", "कासगंज", "पटियाली", "सहावर", "सिढ़पुरा", "सोरों"],
       "सहारनपुर": ["बलियाखेड़ी", "देवबंद", "गंगोह", "मुजफ्फराबाद", "नांगल", "नकुड़", "पुंवारका", "रामपुर मनिहारान", "सरसावा", "साढौली कदीम", "तल्हेड़ी बुजुर्ग"],
       "मुजफ्फरनगर": ["बघरा", "बुढ़ाना", "चरथावल", "जानसठ", "खतौली", "मोरना", "पुरकाजी", "सदर (मुजफ्फरनगर)", "शाहपुर"],
       "शामली": ["कांधला", "कैराना", "थानाभवन", "शामली", "ऊन"],
@@ -426,7 +518,6 @@
       refreshTargetBlockOptions();
     }
 
-    // ब्लॉक डि-डुप्लिकेशन
     function refreshTargetBlockOptions() {
       const dist = document.getElementById("regDistrict").value;
       if (!dist || !upDistrictsData[dist]) return;
@@ -448,7 +539,6 @@
       targetSelects.forEach(target => {
         const selElem = document.getElementById(target.id);
         const currentVal = target.val;
-
         const chosenInOthers = [curBlock, p1, p2, p3, p4].filter(v => v && v !== currentVal);
 
         let optionsHtml = `<option value="">${target.label}</option>`;
@@ -499,11 +589,12 @@
         };
 
         const docRef = await db.collection("teachers").add(teacherRecord);
-        alert("आपका विवरण सफलतापूर्वक सुरक्षित कर लिया गया है। डेटा सत्यापन के पश्चात मैचिंग प्रोफाइल उपलब्ध होगी।");
+        alert("आपका विवरण सफलतापूर्वक सुरक्षित कर लिया गया है।");
         document.getElementById("register-form").reset();
         handleDistrictChange();
         fetchTeachers();
 
+        switchAuthTab('login');
         setLoggedInSession({ id: docRef.id, ...teacherRecord });
       } catch (err) {
         console.error("Save Error:", err);
@@ -549,7 +640,7 @@
 
     function setLoggedInSession(user) {
       loggedInUser = user;
-      document.getElementById("login-form").classList.add("hidden");
+      document.getElementById("login-box").classList.add("hidden");
       const card = document.getElementById("logged-profile-card");
       card.classList.remove("hidden");
       document.getElementById("loggedName").innerText = user.teacherName;
@@ -558,34 +649,175 @@
       const blocksList = Array.isArray(user.targetBlocks) ? user.targetBlocks.join(", ") : (user.targetBlock1 || "कोई नहीं");
       document.getElementById("loggedDetails").innerHTML = `
         <div><strong>जनपद:</strong> ${escapeHtml(user.district)}</div>
-        <div><strong>वर्तमान ब्लॉक:</strong> ${escapeHtml(user.currentBlock)}</div>
+        <div><strong>वर्तमान कार्यरत ब्लॉक:</strong> <span class="font-bold text-slate-800">${escapeHtml(user.currentBlock)}</span></div>
         <div><strong>पद / विषय:</strong> ${escapeHtml(user.designation)} (${escapeHtml(user.subject || '')})</div>
-        <div><strong>इच्छित ब्लॉक प्राथमिकताएं:</strong> <span class="text-indigo-700 font-semibold">${escapeHtml(blocksList)}</span></div>
+        <div><strong>इच्छित 4 ब्लॉक (प्राथमिकताएं):</strong> <span class="text-indigo-700 font-semibold">${escapeHtml(blocksList)}</span></div>
       `;
+      toggleEditMode(false);
     }
 
     function logoutTeacher() {
       loggedInUser = null;
-      document.getElementById("login-form").classList.remove("hidden");
+      document.getElementById("login-box").classList.remove("hidden");
       document.getElementById("logged-profile-card").classList.add("hidden");
       document.getElementById("login-form").reset();
+      toggleEditMode(false);
     }
 
-    async function deleteCurrentProfile() {
+    // 7. शेयर / कॉपी संदूक (Website URL + Teacher Details Copy)
+    function copyProfileShareText() {
       if (!loggedInUser) return;
-      if (!confirm("क्या आप वाकई अपनी प्रोफ़ाइल सूची से हटाना चाहते हैं?")) return;
 
-      try {
-        await db.collection("teachers").doc(loggedInUser.id).delete();
-        alert("आपकी प्रोफ़ाइल हटा दी गई है।");
-        logoutTeacher();
-        fetchTeachers();
-      } catch (err) {
-        alert("त्रुटि: " + err.message);
+      const targets = Array.isArray(loggedInUser.targetBlocks) ? loggedInUser.targetBlocks : [loggedInUser.targetBlock1].filter(Boolean);
+      const targetsFormatted = targets.map((b, i) => `${i + 1}. ${b}`).join("\n");
+
+      const shareText = 
+`*📢 अंतः जनपदीय म्यूचुअल ट्रांसफर प्रोफाइल*
+👤 *शिक्षक:* ${loggedInUser.teacherName}
+📌 *पदनाम:* ${loggedInUser.designation} (${loggedInUser.subject || 'सामान्य'})
+📍 *जनपद:* ${loggedInUser.district}
+🏫 *वर्तमान कार्यरत ब्लॉक:* ${loggedInUser.currentBlock}
+
+🎯 *इच्छित ब्लॉक (प्राथमिकताएं):*
+${targetsFormatted}
+
+🔗 *यदि आप इस ब्लॉक से म्यूचुअल ट्रांसफर चाहते हैं, तो कृपया नीचे दिए गए पोर्टल पर अपना विवरण दर्ज करें:*
+👉 https://deshimaster.in
+
+(पारस्परिक स्थानांतरण साथी खोज मंच)`;
+
+      navigator.clipboard.writeText(shareText).then(() => {
+        const btnText = document.getElementById("copy-btn-text");
+        btnText.innerText = "कॉपी हो गया! (Copied ✅)";
+        setTimeout(() => {
+          btnText.innerText = "म्यूचुअल विवरण कॉपी करें (Share)";
+        }, 3000);
+      }).catch(err => {
+        alert("कॉपी करने में त्रुटि आई: " + err);
+      });
+    }
+
+    // 8. प्रोफ़ाइल संपादन (Edit Profile Logic)
+    function toggleEditMode(show) {
+      const editBox = document.getElementById("edit-profile-box");
+      if (show && loggedInUser) {
+        editBox.classList.remove("hidden");
+        document.getElementById("editTeacherName").value = loggedInUser.teacherName;
+        document.getElementById("editDesignation").value = loggedInUser.designation;
+        document.getElementById("editSubject").value = loggedInUser.subject || "सामान्य / ऑल (PS)";
+
+        const dist = loggedInUser.district;
+        const curBlockSelect = document.getElementById("editCurrentBlock");
+        curBlockSelect.innerHTML = "";
+        if (dist && upDistrictsData[dist]) {
+          upDistrictsData[dist].forEach(b => {
+            const isSel = (b === loggedInUser.currentBlock) ? "selected" : "";
+            curBlockSelect.innerHTML += `<option value="${b}" ${isSel}>${b}</option>`;
+          });
+        }
+
+        const targets = Array.isArray(loggedInUser.targetBlocks) ? loggedInUser.targetBlocks : [];
+        populateEditTargetOptions(targets);
+      } else {
+        editBox.classList.add("hidden");
       }
     }
 
-    // 7. डेटा फेच
+    function populateEditTargetOptions(targets) {
+      const dist = loggedInUser.district;
+      const allBlocks = upDistrictsData[dist] || [];
+      const curBlock = document.getElementById("editCurrentBlock").value;
+
+      ['editTarget1', 'editTarget2', 'editTarget3', 'editTarget4'].forEach((id, idx) => {
+        const selElem = document.getElementById(id);
+        const savedVal = targets[idx] || "";
+        let html = `<option value="">पसंद-${idx+1} चुनें...</option>`;
+        allBlocks.forEach(b => {
+          if (b !== curBlock) {
+            const isSel = (b === savedVal) ? "selected" : "";
+            html += `<option value="${b}" ${isSel}>${b}</option>`;
+          }
+        });
+        selElem.innerHTML = html;
+      });
+      refreshEditTargetBlockOptions();
+    }
+
+    function refreshEditTargetBlockOptions() {
+      if (!loggedInUser) return;
+      const dist = loggedInUser.district;
+      const allBlocks = upDistrictsData[dist] || [];
+      const curBlock = document.getElementById("editCurrentBlock").value;
+
+      const p1 = document.getElementById("editTarget1").value;
+      const p2 = document.getElementById("editTarget2").value;
+      const p3 = document.getElementById("editTarget3").value;
+      const p4 = document.getElementById("editTarget4").value;
+
+      const targetSelects = [
+        { id: "editTarget1", val: p1, label: "पसंद-1 चुनें *" },
+        { id: "editTarget2", val: p2, label: "पसंद-2 चुनें (वैकल्पिक)" },
+        { id: "editTarget3", val: p3, label: "पसंद-3 चुनें (वैकल्पिक)" },
+        { id: "editTarget4", val: p4, label: "पसंद-4 चुनें (वैकल्पिक)" }
+      ];
+
+      targetSelects.forEach(target => {
+        const selElem = document.getElementById(target.id);
+        const currentVal = target.val;
+        const chosenInOthers = [curBlock, p1, p2, p3, p4].filter(v => v && v !== currentVal);
+
+        let optionsHtml = `<option value="">${target.label}</option>`;
+        allBlocks.forEach(b => {
+          if (b !== curBlock && !chosenInOthers.includes(b)) {
+            const isSelected = (b === currentVal) ? "selected" : "";
+            optionsHtml += `<option value="${b}" ${isSelected}>${b}</option>`;
+          }
+        });
+        selElem.innerHTML = optionsHtml;
+      });
+    }
+
+    // एडिट फॉर्म सबमिशन
+    document.getElementById("edit-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      if (!loggedInUser) return;
+
+      const saveBtn = document.getElementById("save-edit-btn");
+      saveBtn.disabled = true;
+      saveBtn.innerText = "सुरक्षित हो रहा है...";
+
+      const updatedData = {
+        teacherName: document.getElementById("editTeacherName").value.trim(),
+        designation: document.getElementById("editDesignation").value,
+        subject: document.getElementById("editSubject").value,
+        currentBlock: document.getElementById("editCurrentBlock").value,
+        targetBlocks: [
+          document.getElementById("editTarget1").value,
+          document.getElementById("editTarget2").value,
+          document.getElementById("editTarget3").value,
+          document.getElementById("editTarget4").value
+        ].filter(Boolean),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      try {
+        await db.collection("teachers").doc(loggedInUser.id).update(updatedData);
+        alert("आपकी प्रोफ़ाइल सफलतापूर्वक अपडेट हो गई है!");
+        
+        // लोकल स्टेट अपडेट करें
+        loggedInUser = { ...loggedInUser, ...updatedData };
+        setLoggedInSession(loggedInUser);
+        fetchTeachers();
+      } catch (err) {
+        console.error("Update Error:", err);
+        alert("अपडेट करने में त्रुटि आई: " + err.message);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerText = "बदलाव सुरक्षित करें";
+      }
+    });
+
+    // 9. डेटा फेच
     async function fetchTeachers() {
       const spinner = document.getElementById("loading-spinner");
       const emptyState = document.getElementById("empty-state");
@@ -606,7 +838,7 @@
       }
     }
 
-    // 8. फ़िल्टर
+    // 10. फ़िल्टर
     function applyFilters() {
       const selectedDist = document.getElementById("filterDistrictSelect").value;
       const query = document.getElementById("searchInput").value.toLowerCase().trim();
@@ -623,7 +855,7 @@
       renderTeachers(filtered);
     }
 
-    // 9. सीमित प्रदर्शन (फ़ेज़-1 सुरक्षा एवं व्यावसायिक ढांचा)
+    // 11. सीमित प्रदर्शन (फ़ेज़-1 सुरक्षा)
     function renderTeachers(list) {
       const tableBody = document.getElementById("teachers-table-body");
       const cardsContainer = document.getElementById("teachers-cards-container");
@@ -646,7 +878,7 @@
            </span>`
         ).join("");
 
-        // Desktop Row (सीमित विवरण)
+        // Desktop Row
         const row = document.createElement("tr");
         row.className = "hover:bg-slate-50/80 transition";
         row.innerHTML = `
@@ -655,7 +887,7 @@
             <div class="text-xs text-indigo-600 font-medium">${escapeHtml(t.designation || '')} • ${escapeHtml(t.subject || '')}</div>
           </td>
           <td class="px-6 py-4">
-            <span class="inline-block bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded text-xs font-semibold mb-1">
+            <span class="inline-block bg-indigo-50 text-indigo-700 px-2.5 py-0.5 rounded text-xs font-semibold mb-1">
               ${escapeHtml(t.district)}
             </span>
             <div class="text-xs text-slate-600">वर्तमान ब्लॉक: <span class="font-semibold text-slate-800">${escapeHtml(t.currentBlock)}</span></div>
@@ -673,7 +905,7 @@
         `;
         tableBody.appendChild(row);
 
-        // Mobile Card (सीमित विवरण)
+        // Mobile Card
         const card = document.createElement("div");
         card.className = "bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2.5";
         card.innerHTML = `
