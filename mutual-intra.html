@@ -48,215 +48,37 @@
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
       <!-- Tabs Header -->
       <div class="flex border-b border-slate-200 bg-slate-100 text-sm font-semibold">
-        <button id="tab-btn-login" onclick="switchAuthTab('login')"
-          class="flex-1 py-3.5 px-4 text-center border-b-2 border-indigo-600 bg-white text-indigo-700 flex items-center justify-center gap-2 transition">
-          <i class="fa-solid fa-right-to-bracket"></i> शिक्षक लॉगिन (मोबाइल + eHRMS)
-        </button>
         <button id="tab-btn-register" onclick="switchAuthTab('register')"
-          class="flex-1 py-3.5 px-4 text-center text-slate-600 hover:text-indigo-600 flex items-center justify-center gap-2 transition">
+          class="flex-1 py-3.5 px-4 text-center border-b-2 border-indigo-600 bg-white text-indigo-700 font-semibold flex items-center justify-center gap-2 transition">
           <i class="fa-solid fa-user-plus"></i> नया पंजीकरण (New Register)
         </button>
+        <button id="tab-btn-login" onclick="switchAuthTab('login')"
+          class="flex-1 py-3.5 px-4 text-center text-slate-600 hover:text-indigo-600 flex items-center justify-center gap-2 transition">
+          <i class="fa-solid fa-right-to-bracket"></i> शिक्षक लॉगिन (मोबाइल + eHRMS)
+        </button>
       </div>
 
-      <!-- Tab 1: Teacher Login & Private Matched Dashboard -->
-      <div id="tab-pane-login" class="p-6">
-        <!-- Login Form -->
-        <div id="login-box" class="max-w-md mx-auto">
-          <div class="text-center mb-6">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
-              <i class="fa-solid fa-user-check"></i>
-            </div>
-            <h2 class="text-lg font-bold text-slate-800">शिक्षक लॉगिन</h2>
-            <p class="text-xs text-slate-500">पंजीकृत मोबाइल नंबर एवं मानव संपदा कोड दर्ज कर अपने मैच देखें</p>
-          </div>
-
-          <form id="login-form" class="space-y-4">
-            <!-- 1. Registered Mobile Number First -->
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">पंजीकृत मोबाइल नंबर (10 अंक) *</label>
-              <input type="tel" id="loginMobile" required maxlength="10" placeholder="उदा. 9876543210"
-                oninput="filterNumbersOnly(this)"
-                class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
-            </div>
-
-            <!-- 2. eHRMS Code Second -->
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मानव संपदा कोड (eHRMS Code) *</label>
-              <input type="text" id="loginEhrmsCode" required maxlength="8" placeholder="उदा. 847291"
-                oninput="filterNumbersOnly(this)"
-                class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
-            </div>
-
-            <button type="submit" id="login-btn"
-              class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2 cursor-pointer">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              <span>लॉगिन करें एवं साथी देखें</span>
-            </button>
-          </form>
-        </div>
-
-        <!-- Logged-in Private Dashboard -->
-        <div id="logged-dashboard" class="hidden space-y-6">
-          <!-- Profile Card -->
-          <div class="p-5 rounded-2xl bg-indigo-50/70 border border-indigo-100 shadow-sm">
-            <div class="flex justify-between items-start mb-3 border-b border-indigo-100 pb-3">
-              <div>
-                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md mb-1">
-                  <i class="fa-solid fa-circle-check"></i> प्रमाणित शिक्षक प्रोफाइल
-                </span>
-                <h3 id="loggedName" class="font-bold text-slate-900 text-lg uppercase"></h3>
-                <p id="loggedEhrms" class="text-xs text-slate-600 font-medium"></p>
-              </div>
-              <button onclick="logoutTeacher()" class="text-xs bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg shadow-xs transition">
-                <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> लॉगआउट
-              </button>
-            </div>
-
-            <div id="loggedDetails" class="text-xs text-slate-700 space-y-1.5 mb-4"></div>
-
-            <!-- Profile Actions -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-indigo-100">
-              <button onclick="copyProfileShareText()" class="w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-copy"></i>
-                <span id="copy-btn-text">म्यूचुअल विवरण कॉपी करें (Share)</span>
-              </button>
-
-              <button id="edit-profile-btn" onclick="toggleEditMode(true)" class="w-full py-2.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-pen-to-square"></i>
-                <span>प्रोफ़ाइल संपादित करें (Edit)</span>
-              </button>
-            </div>
-            <p id="profile-lock-notice" class="hidden text-[11px] text-amber-700 font-medium mt-2 text-center">
-              🔒 आपका 1-वर्षीय एक्टिव प्लान चालू है। प्लान समाप्ति तक विवरण संपादित नहीं किया जा सकता।
-            </p>
-          </div>
-
-          <!-- Matched Teachers Private Section -->
-          <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div>
-                <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-                  <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
-                  आपके लिए उपलब्ध पारस्परिक (म्यूचुअल) साथी
-                </h4>
-                <p id="match-summary-text" class="text-xs text-indigo-600 font-semibold mt-0.5">डेटाबेस स्कैन किया जा रहा है...</p>
-              </div>
-              <div id="plan-pricing-badge" class="text-xs bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded-lg font-bold">
-                शुल्क: ₹70 / शिक्षक
-              </div>
-            </div>
-
-            <!-- Matched Cards Container -->
-            <div id="matched-teachers-list" class="space-y-3"></div>
-          </div>
-
-          <!-- Edit Profile Box -->
-          <div id="edit-profile-box" class="hidden p-5 rounded-2xl bg-white border border-slate-300 shadow-md">
-            <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-200">
-              <h4 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                <i class="fa-solid fa-pen-to-square text-indigo-600"></i> विवरण व ब्लॉक प्राथमिकताएं बदलें
-              </h4>
-              <button onclick="toggleEditMode(false)" class="text-xs text-slate-400 hover:text-slate-600">
-                <i class="fa-solid fa-xmark text-base"></i>
-              </button>
-            </div>
-
-            <form id="edit-form" class="space-y-3">
-              <div>
-                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">शिक्षक का नाम (CAPITAL)</label>
-                <input type="text" id="editTeacherName" required oninput="filterAlphaUpper(this)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none uppercase">
-              </div>
-
-              <div>
-                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">विद्यालय का नाम (CAPITAL)</label>
-                <input type="text" id="editSchoolName" required oninput="filterAlphaUpper(this)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none uppercase">
-              </div>
-
-              <div class="grid grid-cols-2 gap-2">
-                <div>
-                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">विद्यालय स्तर</label>
-                  <select id="editLevel" required onchange="handleLevelChange('editLevel', 'editSubjectBox', 'editSubject')" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
-                    <option value="प्राथमिक स्तर (Primary)">प्राथमिक स्तर (1 से 5)</option>
-                    <option value="उच्च प्राथमिक / जूनियर स्तर (Junior)">उच्च प्राथमिक / जूनियर (6 से 8)</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">पदनाम</label>
-                  <select id="editDesignation" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
-                    <option value="सहायक अध्यापक">सहायक अध्यापक</option>
-                    <option value="प्रधानाध्यापक">प्रधानाध्यापक</option>
-                  </select>
-                </div>
-              </div>
-
-              <div id="editSubjectBox" class="hidden">
-                <label class="block text-[11px] font-semibold text-indigo-700 uppercase mb-0.5">विषय संवर्ग (Junior)</label>
-                <select id="editSubject" class="w-full px-3 py-2 text-xs rounded-lg border border-indigo-300 outline-none bg-white">
-                  <option value="">विषय चुनें...</option>
-                  <option value="भाषा (Language)">भाषा</option>
-                  <option value="सामाजिक विषय (Social Science)">सामाजिक विषय</option>
-                  <option value="गणित एवं विज्ञान (Maths & Science)">गणित एवं विज्ञान</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">वर्तमान कार्यरत ब्लॉक</label>
-                <select id="editCurrentBlock" required onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white"></select>
-              </div>
-
-              <div class="grid grid-cols-2 gap-2">
-                <div>
-                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 1 *</label>
-                  <select id="editTarget1" required onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
-                </div>
-                <div>
-                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 2</label>
-                  <select id="editTarget2" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
-                </div>
-                <div>
-                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 3</label>
-                  <select id="editTarget3" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
-                </div>
-                <div>
-                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 4</label>
-                  <select id="editTarget4" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
-                </div>
-              </div>
-
-              <div class="flex gap-2 pt-2">
-                <button type="submit" id="save-edit-btn" class="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition">
-                  बदलाव सुरक्षित करें
-                </button>
-                <button type="button" onclick="toggleEditMode(false)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition">
-                  रद्द करें
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab 2: New Registration Form -->
-      <div id="tab-pane-register" class="hidden p-6">
+      <!-- Tab 1: New Registration Form -->
+      <div id="tab-pane-register" class="p-6">
         <div class="mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h2 class="text-base font-bold text-slate-800">नया विवरण दर्ज करें</h2>
             <p class="text-xs text-slate-500">जनपद, विद्यालय एवं इच्छित 4 ब्लॉकों की प्राथमिकताएं भरें</p>
           </div>
-          <span class="text-xs bg-emerald-50 text-emerald-700 font-medium px-2.5 py-1 rounded-md border border-emerald-200">सुरक्षित पोर्टल</span>
+          <span class="text-xs bg-emerald-50 text-emerald-700 font-medium px-2.5 py-1 rounded-md border border-emerald-200">100% नि:शुल्क पंजीकरण</span>
         </div>
 
         <form id="register-form" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">शिक्षक का नाम (CAPITAL LETTERS) *</label>
-            <input type="text" id="regTeacherName" required placeholder="SHIVANI"
+            <input type="text" id="regTeacherName" required placeholder="DEEPAK SINGH"
               oninput="filterAlphaUpper(this)"
               class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm uppercase">
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">कार्यरत विद्यालय का नाम (CAPITAL) *</label>
-            <input type="text" id="regSchoolName" required placeholder="PS BEHTA"
+            <input type="text" id="regSchoolName" required placeholder="PS MOHRANIYA"
               oninput="filterAlphaUpper(this)"
               class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm uppercase">
           </div>
@@ -363,6 +185,174 @@
           </div>
         </form>
       </div>
+
+      <!-- Tab 2: Teacher Login & Private Matched Dashboard -->
+      <div id="tab-pane-login" class="hidden p-6">
+        <!-- Login Form -->
+        <div id="login-box" class="max-w-md mx-auto">
+          <div class="text-center mb-6">
+            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+              <i class="fa-solid fa-user-check"></i>
+            </div>
+            <h2 class="text-lg font-bold text-slate-800">शिक्षक लॉगिन</h2>
+            <p class="text-xs text-slate-500">पंजीकृत मोबाइल नंबर एवं मानव संपदा कोड दर्ज कर अपने मैच देखें</p>
+          </div>
+
+          <form id="login-form" class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">पंजीकृत मोबाइल नंबर (10 अंक) *</label>
+              <input type="tel" id="loginMobile" required maxlength="10" placeholder="उदा. 9876543210"
+                oninput="filterNumbersOnly(this)"
+                class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">मानव संपदा कोड (eHRMS Code) *</label>
+              <input type="text" id="loginEhrmsCode" required maxlength="8" placeholder="उदा. 847291"
+                oninput="filterNumbersOnly(this)"
+                class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+            </div>
+
+            <button type="submit" id="login-btn"
+              class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2 cursor-pointer">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              <span>लॉगिन करें एवं साथी देखें</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Logged-in Private Dashboard -->
+        <div id="logged-dashboard" class="hidden space-y-6">
+          <!-- Profile Card -->
+          <div class="p-5 rounded-2xl bg-indigo-50/70 border border-indigo-100 shadow-sm">
+            <div class="flex justify-between items-start mb-3 border-b border-indigo-100 pb-3">
+              <div>
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md mb-1">
+                  <i class="fa-solid fa-circle-check"></i> प्रमाणित शिक्षक प्रोफाइल
+                </span>
+                <h3 id="loggedName" class="font-bold text-slate-900 text-lg uppercase"></h3>
+                <p id="loggedEhrms" class="text-xs text-slate-600 font-medium"></p>
+              </div>
+              <button onclick="logoutTeacher()" class="text-xs bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg shadow-xs transition">
+                <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> लॉगआउट
+              </button>
+            </div>
+
+            <div id="loggedDetails" class="text-xs text-slate-700 space-y-1.5 mb-4"></div>
+
+            <!-- Profile Actions -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-indigo-100">
+              <button onclick="copyProfileShareText()" class="w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
+                <i class="fa-solid fa-copy"></i>
+                <span id="copy-btn-text">म्यूचुअल विवरण कॉपी करें (Share)</span>
+              </button>
+
+              <button id="edit-profile-btn" onclick="toggleEditMode(true)" class="w-full py-2.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>प्रोफ़ाइल संपादित करें (Edit)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Matched Teachers Private Section -->
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+            <div class="border-b border-slate-100 pb-3">
+              <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
+                आपके लिए उपलब्ध पारस्परिक (म्यूचुअल) साथी
+              </h4>
+              <p id="match-summary-text" class="text-xs text-indigo-600 font-semibold mt-0.5">डेटाबेस स्कैन किया जा रहा है...</p>
+            </div>
+
+            <!-- Matched Cards Container -->
+            <div id="matched-teachers-list" class="space-y-3"></div>
+          </div>
+
+          <!-- Edit Profile Box -->
+          <div id="edit-profile-box" class="hidden p-5 rounded-2xl bg-white border border-slate-300 shadow-md">
+            <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-200">
+              <h4 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                <i class="fa-solid fa-pen-to-square text-indigo-600"></i> विवरण व ब्लॉक प्राथमिकताएं बदलें
+              </h4>
+              <button onclick="toggleEditMode(false)" class="text-xs text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-base"></i>
+              </button>
+            </div>
+
+            <form id="edit-form" class="space-y-3">
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">शिक्षक का नाम (CAPITAL)</label>
+                <input type="text" id="editTeacherName" required oninput="filterAlphaUpper(this)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none uppercase">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">विद्यालय का नाम (CAPITAL)</label>
+                <input type="text" id="editSchoolName" required oninput="filterAlphaUpper(this)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none uppercase">
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">विद्यालय स्तर</label>
+                  <select id="editLevel" required onchange="handleLevelChange('editLevel', 'editSubjectBox', 'editSubject')" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
+                    <option value="प्राथमिक स्तर (Primary)">प्राथमिक स्तर (1 से 5)</option>
+                    <option value="उच्च प्राथमिक / जूनियर स्तर (Junior)">उच्च प्राथमिक / जूनियर (6 से 8)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">पदनाम</label>
+                  <select id="editDesignation" required class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white">
+                    <option value="सहायक अध्यापक">सहायक अध्यापक</option>
+                    <option value="प्रधानाध्यापक">प्रधानाध्यापक</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="editSubjectBox" class="hidden">
+                <label class="block text-[11px] font-semibold text-indigo-700 uppercase mb-0.5">विषय संवर्ग (Junior)</label>
+                <select id="editSubject" class="w-full px-3 py-2 text-xs rounded-lg border border-indigo-300 outline-none bg-white">
+                  <option value="">विषय चुनें...</option>
+                  <option value="भाषा (Language)">भाषा</option>
+                  <option value="सामाजिक विषय (Social Science)">सामाजिक विषय</option>
+                  <option value="गणित एवं विज्ञान (Maths & Science)">गणित एवं विज्ञान</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-semibold text-slate-600 uppercase mb-0.5">वर्तमान कार्यरत ब्लॉक</label>
+                <select id="editCurrentBlock" required onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 outline-none bg-white"></select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 1 *</label>
+                  <select id="editTarget1" required onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 2</label>
+                  <select id="editTarget2" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 3</label>
+                  <select id="editTarget3" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-emerald-700 uppercase mb-0.5">पसंद - 4</label>
+                  <select id="editTarget4" onchange="refreshEditTargetBlockOptions()" class="w-full px-3 py-2 text-xs rounded-lg border border-emerald-300 bg-emerald-50/30 outline-none bg-white"></select>
+                </div>
+              </div>
+
+              <div class="flex gap-2 pt-2">
+                <button type="submit" id="save-edit-btn" class="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition">
+                  बदलाव सुरक्षित करें
+                </button>
+                <button type="button" onclick="toggleEditMode(false)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition">
+                  रद्द करें
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
   </main>
@@ -452,17 +442,14 @@
       "भदोही": ["औराई", "भदोही", "डीघ", "ज्ञानपुर", "सुरियावां", "अभोली"]
     };
 
-    // इनपुट फ़िल्टर: केवल अंग्रेजी अक्षर और स्पेस, स्वतः Uppercase
     function filterAlphaUpper(input) {
       input.value = input.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
     }
 
-    // इनपुट फ़िल्टर: केवल नंबर्स (0-9)
     function filterNumbersOnly(input) {
       input.value = input.value.replace(/[^0-9]/g, '');
     }
 
-    // स्तर बदलने पर विषय का टॉगल
     function handleLevelChange(levelSelectId, subjectBoxId, subjectSelectId) {
       const level = document.getElementById(levelSelectId).value;
       const subBox = document.getElementById(subjectBoxId);
@@ -494,7 +481,7 @@
     let allTeachers = [];
     let loggedInUser = null;
 
-    // 3. टैब स्विच (Login vs Register)
+    // 3. टैब स्विच
     function switchAuthTab(tab) {
       const regTabBtn = document.getElementById("tab-btn-register");
       const logTabBtn = document.getElementById("tab-btn-login");
@@ -614,14 +601,11 @@
             document.getElementById("targetBlock3").value,
             document.getElementById("targetBlock4").value
           ].filter(Boolean),
-          planStatus: "unpaid", // unpaid या active
-          planExpiry: null,
-          unlockedTeachers: [], // अनलॉक किए गए शिक्षकों की आईडी
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
         const docRef = await db.collection("teachers").add(teacherRecord);
-        alert("आपका विवरण सुरक्षित हो गया है! अब आप सीधे लॉगिन कर अपने मैच देख सकते हैं।");
+        alert("बधाई! आपका पंजीकरण सुरक्षित हो गया है। अब अपने मैचिंग साथी देखें।");
         document.getElementById("register-form").reset();
         handleDistrictChange();
         await fetchAllTeachers();
@@ -665,7 +649,7 @@
       }
     });
 
-    // 7. लॉगिन सत्र एवं प्रोफाइल नियंत्रण (1-वर्षीय लॉक चेक)
+    // 7. लॉगिन सत्र
     function setLoggedInSession(user) {
       loggedInUser = user;
       document.getElementById("login-box").classList.add("hidden");
@@ -683,40 +667,16 @@
         <div><strong>इच्छित 4 ब्लॉक:</strong> <span class="text-indigo-700 font-semibold">${escapeHtml(blocksList)}</span></div>
       `;
 
-      // 1-वर्षीय एक्टिव प्लान चेक (Active Plan Lock Rules)
-      const isPlanActive = checkIsPlanActive(user);
-      const editBtn = document.getElementById("edit-profile-btn");
-      const lockNotice = document.getElementById("profile-lock-notice");
-
-      if (isPlanActive) {
-        editBtn.classList.add("hidden");
-        lockNotice.classList.remove("hidden");
-      } else {
-        editBtn.classList.remove("hidden");
-        lockNotice.classList.add("hidden");
-      }
-
       toggleEditMode(false);
       findAndDisplayMatches(user);
     }
 
-    function checkIsPlanActive(user) {
-      if (user.planStatus === "active" && user.planExpiry) {
-        const expiryDate = user.planExpiry.toDate ? user.planExpiry.toDate() : new Date(user.planExpiry);
-        if (new Date() < expiryDate) {
-          return true; // प्लान अभी वैध है
-        }
-      }
-      return false; // प्लान एक्सपायर हो गया या unpaid है
-    }
-
-    // 8. ऑटो-मैचिंग और ब्लर (Blur) प्रदर्शन लॉजिक
+    // 8. ऑटो-मैचिंग और ब्लर (Blur) प्रदर्शन
     function findAndDisplayMatches(user) {
       const summaryText = document.getElementById("match-summary-text");
       const matchesContainer = document.getElementById("matched-teachers-list");
       matchesContainer.innerHTML = "";
 
-      // उसी जिले के साथी शिक्षक
       const candidateTeachers = allTeachers.filter(t => t.id !== user.id && t.district === user.district);
       const matchedResults = [];
 
@@ -744,36 +704,32 @@
           <div class="p-6 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-500 text-center space-y-2">
             <i class="fa-solid fa-user-clock text-2xl text-slate-400"></i>
             <p>जैसे ही आपके जनपद का कोई शिक्षक आपके ब्लॉक को अपनी पसंद में चुनेगा, वह यहाँ स्वतः प्रदर्शित हो जाएगा।</p>
-            <p class="text-indigo-600 font-semibold">अपने जिले के शिक्षक ग्रुप में नीचे दिया गया लिंक शेयर करें ताकि अधिक साथी जुड़ सकें।</p>
+            <p class="text-indigo-600 font-semibold">अपने जिले के शिक्षक ग्रुप में नीचे दिया गया विवरण शेयर करें ताकि अधिक साथी जुड़ सकें।</p>
           </div>`;
         return;
       }
 
-      const totalFee = matchedResults.length * 70;
-      summaryText.innerHTML = `<span class="text-emerald-700 font-extrabold text-sm">बधाई! हमारे पास आपके लिए कुल ${matchedResults.length} शिक्षक उपलब्ध हैं!</span>`;
+      summaryText.innerHTML = `<span class="text-emerald-700 font-extrabold text-sm">बधाई! आपके ब्लॉक के लिए कुल ${matchedResults.length} शिक्षक साथी मिल चुके हैं!</span>`;
 
       matchedResults.forEach(m => {
         const t = m.teacher;
-        const isUnlocked = user.unlockedTeachers && user.unlockedTeachers.includes(t.id);
-
         const card = document.createElement("div");
         card.className = "p-4 rounded-xl border border-indigo-100 bg-white space-y-3 shadow-xs";
 
-        // यदि अनलॉक नहीं है तो ब्लर किया जाएगा
-        const teacherDisplayName = isUnlocked ? escapeHtml(t.teacherName) : maskName(t.teacherName);
-        const schoolDisplayName = isUnlocked ? escapeHtml(t.schoolName || '—') : 'PS / UPS **********';
+        const teacherDisplayName = maskName(t.teacherName);
+        const schoolDisplayName = 'PS / UPS **********';
 
         card.innerHTML = `
           <div class="flex justify-between items-start">
             <div>
               <div class="flex items-center gap-2">
-                <span class="font-bold text-slate-900 text-sm uppercase ${!isUnlocked ? 'blur-text' : ''}">
+                <span class="font-bold text-slate-900 text-sm uppercase blur-text">
                   ${teacherDisplayName}
                 </span>
-                ${m.isTwoWay ? '<span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2-Way Mutual</span>' : ''}
+                ${m.isTwoWay ? '<span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2-Way Mutual Match</span>' : ''}
               </div>
               <p class="text-xs text-slate-600 font-medium mt-0.5">
-                🏫 विद्यालय: <span class="font-bold uppercase text-slate-800 ${!isUnlocked ? 'blur-text' : ''}">${schoolDisplayName}</span>
+                🏫 विद्यालय: <span class="font-bold uppercase text-slate-800 blur-text">${schoolDisplayName}</span>
               </p>
               <p class="text-xs text-indigo-700 font-medium">पद: ${escapeHtml(t.designation)} (${escapeHtml(t.subject || 'सामान्य')})</p>
             </div>
@@ -787,63 +743,20 @@
               कार्यरत ब्लॉक: <strong class="text-slate-900 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">${escapeHtml(t.currentBlock)}</strong>
             </div>
 
-            <!-- संपर्क / पेमेंट बटन -->
-            ${isUnlocked ? `
-              <a href="https://wa.me/91${t.mobile}?text=${encodeURIComponent('नमस्ते ' + t.teacherName + ' जी, मुझे आपका विवरण बेसिक शिक्षा अंतः जनपदीय ट्रांसफर पोर्टल पर मिला। आप ' + t.currentBlock + ' ब्लॉक में हैं और मुझे स्थानांतरण हेतु चर्चा करनी है।')}" 
-                 target="_blank"
-                 class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition shadow-xs">
-                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp चैट
-              </a>
-            ` : `
-              <button onclick="initiatePayment('${t.id}', 70)" 
-                      class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg text-xs transition shadow-xs cursor-pointer">
-                <i class="fa-solid fa-lock"></i>
-                <span>अनलॉक करें (₹70 भुगतान)</span>
-              </button>
-            `}
+            <!-- संपर्क स्थिति (बिना किसी शुल्क या पैसे के ज़िक्र के) -->
+            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-600 border border-slate-200 rounded-lg text-xs font-medium cursor-not-allowed">
+              <i class="fa-solid fa-lock text-slate-400"></i>
+              <span>सत्यापन प्रक्रियाधीन (शीघ्र उपलब्ध होगा)</span>
+            </div>
           </div>
         `;
         matchesContainer.appendChild(card);
       });
     }
 
-    // नाम को आंशिक मास्क करना (e.g. DEEPAK SINGH -> DEE*** SI***)
     function maskName(str) {
       if (!str) return "TEACHER PROFILE";
       return str.split(" ").map(w => w.length > 3 ? w.substring(0, 3) + "***" : w + "***").join(" ");
-    }
-
-    // पेमेंट एवं 1-वर्षीय लॉक प्रक्रिया (Simulated / Payment Ready)
-    async function initiatePayment(targetTeacherId, amount) {
-      const confirmPay = confirm(`इस शिक्षक का नाम, विद्यालय एवं व्हाट्सएप नंबर अनलॉक करने हेतु ₹${amount} का भुगतान करें?\n\n(भुगतान के पश्चात आपकी प्रोफाइल 1 वर्ष के लिए सुरक्षित एवं लॉक हो जाएगी)`);
-      if (!confirmPay) return;
-
-      try {
-        // 1 वर्ष (365 दिन) की समाप्ति तिथि की गणना
-        const oneYearExpiry = new Date();
-        oneYearExpiry.setDate(oneYearExpiry.getDate() + 365);
-
-        const updatedUnlocked = loggedInUser.unlockedTeachers || [];
-        if (!updatedUnlocked.includes(targetTeacherId)) {
-          updatedUnlocked.push(targetTeacherId);
-        }
-
-        const updatePayload = {
-          planStatus: "active",
-          planExpiry: oneYearExpiry,
-          unlockedTeachers: updatedUnlocked,
-          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
-
-        await db.collection("teachers").doc(loggedInUser.id).update(updatePayload);
-        alert("भुगतान सफल! शिक्षक का पूरा विवरण एवं संपर्क सूत्र अनलॉक कर दिया गया है।");
-        
-        loggedInUser = { ...loggedInUser, ...updatePayload };
-        setLoggedInSession(loggedInUser);
-      } catch (err) {
-        console.error("Payment Error:", err);
-        alert("त्रुटि आई: " + err.message);
-      }
     }
 
     function logoutTeacher() {
@@ -872,7 +785,7 @@
 🎯 *इच्छित 4 ब्लॉक (प्राथमिकताएं):*
 ${targetsFormatted}
 
-🔗 *यदि आप इनमें से किसी ब्लॉक में हैं और मेरे ब्लॉक (${loggedInUser.currentBlock}) में आना चाहते हैं, तो कृपया नीचे पोर्टल पर तुरंत लॉगिन/पंजीकरण करें:*
+🔗 *यदि आप इनमें से किसी ब्लॉक में हैं और मेरे ब्लॉक (${loggedInUser.currentBlock}) में आना चाहते हैं, तो कृपया नीचे पोर्टल पर तुरंत अपना विवरण दर्ज करें:*
 👉 https://deshimaster.in
 
 (पारस्परिक स्थानांतरण साथी खोज मंच)`;
@@ -888,15 +801,10 @@ ${targetsFormatted}
       });
     }
 
-    // 10. प्रोफ़ाइल संपादन (Edit Logic - Only accessible if unpaid)
+    // 10. प्रोफ़ाइल संपादन
     function toggleEditMode(show) {
       const editBox = document.getElementById("edit-profile-box");
       if (show && loggedInUser) {
-        if (checkIsPlanActive(loggedInUser)) {
-          alert("आपका प्लान एक्टिव है। 1 वर्ष तक प्रोफ़ाइल लॉक रहेगी।");
-          return;
-        }
-
         editBox.classList.remove("hidden");
         document.getElementById("editTeacherName").value = loggedInUser.teacherName;
         document.getElementById("editSchoolName").value = loggedInUser.schoolName || '';
@@ -1017,7 +925,7 @@ ${targetsFormatted}
       }
     });
 
-    // 11. बैकएंड से समस्त शिक्षक लोड करना (Only In-Memory for Matching)
+    // 11. बैकएंड से समस्त शिक्षक लोड करना
     async function fetchAllTeachers() {
       try {
         const snapshot = await db.collection("teachers").get();
