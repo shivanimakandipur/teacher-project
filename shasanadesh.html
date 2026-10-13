@@ -203,7 +203,7 @@
     }
 
     // 2. orders.json लोड करना
-    fetch('orders.json')
+  fetch('orders.json?v=' + new Date().getTime())
       .then(response => {
         if (!response.ok) throw new Error('Network response failed');
         return response.json();
