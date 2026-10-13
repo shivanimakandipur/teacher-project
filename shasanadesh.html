@@ -16,31 +16,34 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+  <!-- Header (आपकी वेबसाइट का मूल DM लोगो लेआउट) -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
     <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5">
-        <div class="bg-emerald-600 text-white font-extrabold text-base px-2.5 py-1.5 rounded-lg shadow-sm">DM</div>
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-11 h-11 bg-emerald-700 text-white rounded-lg flex items-center justify-center font-black text-xl tracking-tight shadow-sm">
+          DM
+        </div>
         <div>
-          <span class="block font-bold text-lg text-slate-900 leading-tight">deshimaster.in</span>
-          <span class="block text-[10px] text-slate-500 uppercase tracking-wider font-semibold">देशी मास्टर - शासनादेश संग्रह</span>
+          <span class="block font-bold text-lg text-slate-900 leading-tight tracking-tight">deshimaster.in</span>
+          <span class="block text-xs text-slate-500 font-medium">देशी मास्टर - शासनादेश संग्रह</span>
         </div>
       </a>
-      <nav class="flex items-center gap-5 text-sm font-medium text-slate-600">
-        <a href="index.html" class="hover:text-emerald-600 transition">← होम पोर्टल</a>
+      <nav class="flex items-center gap-4 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-emerald-700 transition">← होम पोर्टल</a>
       </nav>
     </div>
   </header>
 
   <!-- Main Content -->
-  <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
+  <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full space-y-6">
     
-    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-6">
+    <!-- Top Search & Dynamic Filter Card -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
       <h1 class="text-2xl font-extrabold text-slate-900 flex items-center gap-2 mb-2">
-        <span>📖</span> महत्वपूर्ण शासनादेश (Government Orders)
+        <span>📖</span> महत्वपूर्ण शासनादेश व प्रपत्र (Government Orders & Formats)
       </h1>
       <p class="text-xs sm:text-sm text-slate-500 mb-6">
-        उत्तर प्रदेश बेसिक शिक्षा विभाग के नवीनतम आदेश, निर्देश व पत्र। आप हिंदी या अंग्रेजी किसी भी शब्द से तुरंत सर्च कर सकते हैं।
+        उत्तर प्रदेश बेसिक शिक्षा विभाग के नवीनतम आदेश, निर्देश, चेकलिस्ट व प्रारूप। आप श्रेणी चुनकर या सीधे सर्च करके देख सकते हैं।
       </p>
 
       <!-- Search Bar -->
@@ -49,22 +52,32 @@
           type="text" 
           id="searchOrder" 
           onkeyup="filterOrders()" 
-          placeholder="यहाँ टाइप करें (उदा. MDM, Tithi Bhojan, मध्याह्न भोजन)..."
-          class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl text-xs sm:text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="यहाँ खोजें (उदा. भर्ती, MDM, Tithi Bhojan, अवकाश, शपथ-पत्र, चेकलिस्ट)..."
+          class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl text-xs sm:text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-600"
         >
         <span class="absolute left-3.5 top-3.5 text-slate-400 text-sm">🔍</span>
       </div>
+
+      <!-- Auto-Generated Category Tabs (अपने-आप श्रेणियां यहाँ बनेंगी) -->
+      <div class="mt-5 pt-4 border-t border-slate-100">
+        <span class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2.5">
+          श्रेणी अनुसार देखें (Filter by Category):
+        </span>
+        <div id="categoryTabs" class="flex flex-wrap gap-2">
+          <!-- जावास्क्रिप्ट द्वारा अपने-आप बटन यहाँ बनेंगे -->
+        </div>
+      </div>
     </div>
 
-    <!-- Table -->
+    <!-- Orders Table -->
     <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full border-collapse text-xs sm:text-sm text-left">
           <thead>
             <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
-              <th class="p-3.5 sm:p-4 w-32">दिनांक (Date)</th>
-              <th class="p-3.5 sm:p-4">शासनादेश का विषय / विवरण (Subject)</th>
-              <th class="p-3.5 sm:p-4 text-center w-40">कार्रवाई (Action)</th>
+              <th class="p-3.5 sm:p-4 w-36">दिनांक / स्थिति</th>
+              <th class="p-3.5 sm:p-4">शासनादेश का विषय / विवरण</th>
+              <th class="p-3.5 sm:p-4 text-center w-48">कार्रवाई (Action)</th>
             </tr>
           </thead>
           <tbody id="tableBody" class="divide-y divide-slate-200 text-slate-700">
@@ -76,73 +89,168 @@
 
   </main>
 
+  <!-- Footer (आपके काम करने वाले वास्तविक लिंक्स) -->
   <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-3 font-medium text-slate-600">
-        <a href="index.html" class="hover:text-emerald-600 transition">होम</a>
-        <a href="about.html" class="hover:text-emerald-600 transition">हमारे बारे में</a>
-        <a href="privacy-policy.html" class="hover:text-emerald-600 transition">गोपनीयता नीति</a>
-        <a href="terms.html" class="hover:text-emerald-600 transition">नियम व शर्तें</a>
-        <a href="disclaimer.html" class="hover:text-emerald-600 transition">डिस्क्लेमर</a>
+    <div class="max-w-4xl mx-auto px-4 space-y-2">
+      <div class="flex flex-wrap justify-center items-center gap-x-3 text-sm font-semibold text-blue-600">
+        <a href="about.html" class="hover:underline">About Us</a>
+        <span class="text-slate-300">|</span>
+        <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
+        <span class="text-slate-300">|</span>
+        <a href="disclaimer.html" class="hover:underline">Disclaimer</a>
+        <span class="text-slate-300">|</span>
+        <a href="terms.html" class="hover:underline">Contact Us</a>
       </div>
-      <p>© deshimaster.in (देशी मास्टर)। सर्वाधिकार सुरक्षित।</p>
+      <p class="text-slate-400 text-xs">
+        © deshimaster.in. All Rights Reserved.
+      </p>
     </div>
   </footer>
 
-  <!-- Script to load JSON data and enable smart search -->
+  <!-- Smart Logic: Auto Category + Login Bypass + No-Date Handler -->
   <script>
     let allOrders = [];
+    let currentCategory = 'all';
 
+    // 1. गूगल ड्राइव लॉगिन बाईपास लिंक कनवर्टर
+    function getBypassLinks(rawLink) {
+      if (!rawLink) return { viewUrl: '#', downloadUrl: '#' };
+      
+      let fileId = '';
+      const match1 = rawLink.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      const match2 = rawLink.match(/id=([a-zA-Z0-9_-]+)/);
+
+      if (match1) {
+        fileId = match1[1];
+      } else if (match2) {
+        fileId = match2[1];
+      }
+
+      if (fileId) {
+        // बिना लॉगिन के सीधे ब्राउज़र में खोलने वाला लिंक
+        const viewUrl = `https://docs.google.com/viewer?url=https://drive.google.com/uc?id=${fileId}%26export=download&embedded=true`;
+        // सीधे फोन में डाउनलोड करने वाला लिंक
+        const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+        return { viewUrl, downloadUrl };
+      }
+
+      return { viewUrl: rawLink, downloadUrl: rawLink };
+    }
+
+    // 2. orders.json लोड करना
     fetch('orders.json')
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        if (!response.ok) throw new Error('Network error');
         return response.json();
       })
       .then(data => {
         allOrders = data;
-        displayTable(allOrders);
+        renderCategoryTabs();
+        filterOrders();
       })
       .catch(error => {
         console.error('Error loading orders:', error);
-        document.getElementById('tableBody').innerHTML = `<tr><td colspan="3" class="p-6 text-center text-red-500 font-medium">शासनादेश लोड करने में समस्या आई। कृपया सुनिश्चित करें कि orders.json फाइल सही जगह पर है।</td></tr>`;
+        document.getElementById('tableBody').innerHTML = `
+          <tr><td colspan="3" class="p-6 text-center text-red-500 font-medium">शासनादेश लोड करने में समस्या आई। कृपया सुनिश्चित करें कि orders.json सही जगह पर है।</td></tr>`;
       });
 
+    // 3. JSON में मौजूद सभी श्रेणियों को ढूँढकर अपने-आप टैब्स बनाना
+    function renderCategoryTabs() {
+      const container = document.getElementById('categoryTabs');
+      container.innerHTML = '';
+
+      const categories = ['all'];
+      allOrders.forEach(o => {
+        const cat = o.category ? o.category.trim() : 'विविध एवं प्रारूप';
+        if (!categories.includes(cat)) {
+          categories.push(cat);
+        }
+      });
+
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => setCategory(cat);
+        
+        const label = cat === 'all' ? 'सभी शासनादेश (All)' : cat;
+        btn.textContent = label;
+        btn.className = `px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+          currentCategory === cat 
+            ? 'bg-emerald-700 text-white shadow-xs' 
+            : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+        }`;
+        container.appendChild(btn);
+      });
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      renderCategoryTabs();
+      filterOrders();
+    }
+
+    // 4. सर्च + कैटेगरी फ़िल्टर
+    function filterOrders() {
+      const query = document.getElementById('searchOrder').value.toLowerCase().trim();
+
+      const filtered = allOrders.filter(order => {
+        const orderCat = order.category ? order.category.trim() : 'विविध एवं प्रारूप';
+        const matchesCategory = (currentCategory === 'all') || (orderCat === currentCategory);
+
+        const subjectText = (order.subject || '').toLowerCase();
+        const dateText = (order.date || '').toLowerCase();
+        const catText = orderCat.toLowerCase();
+        
+        const matchesQuery = subjectText.includes(query) || dateText.includes(query) || catText.includes(query);
+
+        return matchesCategory && matchesQuery;
+      });
+
+      displayTable(filtered);
+    }
+
+    // 5. टेबल रेंडरिंग (बिना तारीख वालों को भी खूबसूरत दिखाना)
     function displayTable(orders) {
       const tbody = document.getElementById('tableBody');
       tbody.innerHTML = '';
       
-      if(!orders || orders.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-slate-500">कोई शासनादेश उपलब्ध नहीं है।</td></tr>`;
+      if (!orders || orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-slate-500">इस श्रेणी या खोज में कोई शासनादेश/प्रारूप नहीं मिला।</td></tr>`;
         return;
       }
 
       orders.forEach(order => {
-        let tr = document.createElement('tr');
+        const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50 transition";
+
+        const { viewUrl, downloadUrl } = getBypassLinks(order.driveLink);
+        
+        // कैटेगरी बैज
+        const catName = order.category ? order.category.trim() : 'विविध एवं प्रारूप';
+        const categoryBadge = `<span class="inline-block bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded border border-slate-200 mt-1">${catName}</span>`;
+
+        // यदि डेट न हो तो 'स्थायी प्रारूप' या '—' दिखाना
+        const displayDate = order.date && order.date.trim() !== '' ? order.date : 'स्थायी / अद्यतन';
+
         tr.innerHTML = `
-          <td class="p-3.5 sm:p-4 font-medium whitespace-nowrap text-slate-600">${order.date}</td>
-          <td class="p-3.5 sm:p-4 font-semibold text-slate-900">${order.subject}</td>
-          <td class="p-3.5 sm:p-4 text-center whitespace-nowrap">
+          <td class="p-3.5 sm:p-4 font-medium whitespace-nowrap text-slate-600 align-top">${displayDate}</td>
+          <td class="p-3.5 sm:p-4 align-top">
+            <div class="font-semibold text-slate-900 leading-snug">${order.subject}</div>
+            ${categoryBadge}
+          </td>
+          <td class="p-3.5 sm:p-4 text-center whitespace-nowrap align-top">
             <div class="flex items-center justify-center gap-2">
-              <a href="${order.driveLink}" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition shadow-sm inline-flex items-center gap-1">👁️ देखें</a>
-              <a href="${order.driveLink}" target="_blank" download class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition shadow-sm inline-flex items-center gap-1">📥 डाउनलोड</a>
+              <a href="${viewUrl}" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition shadow-xs inline-flex items-center gap-1">
+                👁️ देखें
+              </a>
+              <a href="${downloadUrl}" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition shadow-xs inline-flex items-center gap-1">
+                📥 डाउनलोड
+              </a>
             </div>
           </td>
         `;
         tbody.appendChild(tr);
       });
-    }
-
-    function filterOrders() {
-      let query = document.getElementById('searchOrder').value.toLowerCase().trim();
-      let filtered = allOrders.filter(order => {
-        let subjectText = order.subject.toLowerCase();
-        let dateText = order.date.toLowerCase();
-        return subjectText.includes(query) || dateText.includes(query);
-      });
-      displayTable(filtered);
     }
   </script>
 
