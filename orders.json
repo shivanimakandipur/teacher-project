@@ -1,12 +1,68 @@
 [
   {
     "date": "08 अक्टूबर 2026",
-    "subject": "शुक्रवार को तिथि भोजन / सप्लीमेंट्री न्यूट्रिशन (सूजी का मीठा हलवा एवं उपमा) वितरण संबंधी शासनादेश - Tithi Bhojan Supplementary Nutrition MDM Order",
-    "driveLink": "https://drive.google.com/file/d/1VM3YL8It_pntyrLOhA87uDlF_tjw-khc/view?usp=drivesdk"
+    "category": "MDM",
+    "subject": "शुक्रवार को तिथि भोजन / सप्लीमेंट्री न्यूट्रिशन (सूजी का मीठा हलवा एवं उपमा) वितरण सम्बन्धी शासनादेश",
+    "driveLink": "https://drive.google.com/file/d/1ZrB3AOx1RKFLnzWmRldMyZrH5_BiLkT-/view"
   },
   {
     "date": "18 अक्टूबर 2023",
-    "subject": "मध्याह्न भोजन (MDM) मेनू परिवर्तन संबंधी समस्त आदेश एवं दिशा-निर्देश - Mid Day Meal Menu Change Guidelines Shasanadesh",
-    "driveLink": "https://drive.google.com/file/d/1ZrB3AOx1RKFLnzWmRldMyZrH5_BiLkT-/view?usp=drivesdk"
+    "category": "MDM",
+    "subject": "मध्याह्न भोजन (MDM) मेनू परिवर्तन सम्बन्धी समस्त आदेश एवं दिशा-निर्देश",
+    "driveLink": "https://drive.google.com/file/d/1VM3YL8It_pntyrLOhA87uDlF_tjw-khc/view"
+  },
+  {
+    "date": "स्थायी नियमावली",
+    "category": "अध्यापक सेवा नियमावली",
+    "subject": "उत्तर प्रदेश बेसिक शिक्षा (अध्यापक) सेवा नियमावली, 1981 (अद्यतन संशोधन सहित)",
+    "driveLink": "https://drive.google.com/file/d/1o9fXlpw_0hLJo9iRL3y_ksmanwTAEA6y/view"
+  },
+  {
+    "date": "30 दिसम्बर 2024",
+    "category": "अवकाश नियम",
+    "subject": "परिषदीय विद्यालयों हेतु आधिकारिक वार्षिक अवकाश तालिका एवं अवकाश उपभोग नियम",
+    "driveLink": "https://drive.google.com/file/d/1_aCiBVjCoEfjxsHyQWUaYQ5OPzvJM91J/view"
+  },
+  {
+    "date": "20 जून 2024",
+    "category": "ट्रांसफर",
+    "subject": "बेसिक शिक्षा परिषद शिक्षक अंतः जनपदीय एवं अंतर जनपदीय पारस्परिक स्थानांतरण दिशा-निर्देश",
+    "driveLink": "https://drive.google.com/file/d/1Sjxk6TWKjLmLADDQcc_6qa1mWMxvdy6d/view"
+  },
+  {
+    "date": "05 मार्च 2024",
+    "category": "नियुक्ति",
+    "subject": "परिषदीय प्राथमिक विद्यालयों में सहायक अध्यापक चयन, अर्हता एवं नियुक्ति सम्बन्धी शासनादेश",
+    "driveLink": "https://drive.google.com/file/d/1edbUx9WEcn3LJkaIKiHI-0ZeQoNqq1aU/view"
+  },
+  {
+    "date": "15 सितम्बर 2024",
+    "category": "परीक्षाएं",
+    "subject": "निपुण असेसमेंट टेस्ट (NAT) एवं सत्रांत मूल्यांकन परीक्षा संचालन दिशा-निर्देश",
+    "driveLink": "https://drive.google.com/file/d/15OAgVv18Ocpy6X193WlDrC6ImAjX2Rwf/view"
+  },
+  {
+    "date": "स्थायी प्रारूप",
+    "category": "बैठक",
+    "subject": "विद्यालय प्रबंध समिति (SMC) मासिक बैठक एजेंडा एवं कार्यवृत्त संधारण प्रारूप",
+    "driveLink": "https://drive.google.com/file/d/1KpSjdJuo3PakvYM7mGcCE0MUekxjr-4B/view"
+  },
+  {
+    "date": "28 मार्च 2025",
+    "category": "रिजल्ट",
+    "subject": "वार्षिक परीक्षाफल निर्माण, प्रगति पत्र वितरण एवं नवीन सत्र प्रवेश सम्बन्धी निर्देश",
+    "driveLink": "https://drive.google.com/file/d/1wFEvhNJsTnj792Fa617h1ON1MWtx38sm/view"
+  },
+  {
+    "date": "12 जुलाई 2024",
+    "category": "न्यायिक आदेश",
+    "subject": "माननीय उच्च न्यायालय इलाहाबाद द्वारा शिक्षक सेवा एवं स्थानांतरण सम्बन्धी पारित महत्वपूर्ण निर्णय",
+    "driveLink": "https://drive.google.com/file/d/11syp7fAsy9qXrVaET4yX-8I4roHvtlFr/view"
+  },
+  {
+    "date": "स्थायी प्रारूप",
+    "category": "विविध एवं प्रारूप",
+    "subject": "पारस्परिक स्थानांतरण आपसी सहमति शपथ-पत्र एवं विद्यालय कार्यमुक्ति/कार्यभार प्रपत्र",
+    "driveLink": "https://drive.google.com/file/d/1ceckbY6PuQjF4RNy0D0edpvuFBDXo0wv/view"
   }
 ]
