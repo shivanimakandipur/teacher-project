@@ -4,22 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Primary SEO Meta Tags -->
+  <!-- Primary SEO Meta Tags (Google Search Ranking के लिए) -->
   <title>UP Basic Shiksha Shasanadesh 2026 | All Teacher Orders PDF Download - deshimaster.in</title>
   <meta name="title" content="UP Basic Shiksha Shasanadesh 2026 | All Teacher Orders PDF Download - deshimaster.in">
-  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के नवीनतम शासनादेश, MDM मेनू, शिक्षक पारस्परिक स्थानांतरण (Mutual Transfer), अवकाश तालिका, सेवा नियमावली 1981, हाई कोर्ट ऑर्डर्स और SMC प्रारूप सीधे PDF में डाउनलोड करें।">
+  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के नवीनतम शासनादेश, MDM मेनू, शिक्षक पारस्परिक स्थानांतरण (Mutual Transfer), अवकाश तालिका, सेवा नियमावली 1981, हाई कोर्ट ऑर्डर्स और SMC प्रारूप सीधे PDF में बिना लॉगिन डाउनलोड करें।">
   <meta name="keywords" content="up basic shiksha shasanadesh, basic shiksha parishad orders pdf, up teacher mutual transfer policy, mdm menu order pdf, teacher leave rules up basic, nipun bharat nat exam order, up primary teacher service rules 1981 pdf, high court order up teacher, deshimaster, deshi master">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://deshimaster.in/shasanadesh.html">
 
-  <!-- Open Graph / WhatsApp Preview -->
+  <!-- Open Graph / Facebook / WhatsApp Preview Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://deshimaster.in/shasanadesh.html">
   <meta property="og:title" content="UP Basic Shiksha Shasanadesh & Orders PDF Portal | deshimaster.in">
-  <meta property="og:description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के समस्त शासनादेश, अवकाश तालिका, म्यूचुअल ट्रांसफर नीति, MDM एवं कोर्ट ऑर्डर्स तुरंत देखें व डाउनलोड करें।">
+  <meta property="og:description" content="उत्तर प्रदेश बेसिक शिक्षा विभाग के समस्त शासनादेश, अवकाश तालिका, म्यूचुअल ट्रांसफर नीति, MDM एवं कोर्ट ऑर्डर्स सीधे बिना ईमेल लॉगिन डाउनलोड करें।">
   <meta property="og:site_name" content="deshimaster.in">
 
-  <!-- Schema.org JSON-LD for Google Rich Snippets -->
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UP Basic Shiksha Shasanadesh & Orders PDF | deshimaster.in">
+  <meta name="twitter:description" content="UP Basic Education latest government orders, holiday list, transfer rules, and court orders PDF download without login.">
+
+  <!-- Google Structured Data (Schema.org JSON-LD for Search Rich Snippets) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -76,7 +81,7 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Content Area -->
   <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full space-y-6">
     
     <!-- Top Search & Dynamic Filter Card -->
@@ -116,7 +121,7 @@
           </span>
         </div>
         <div id="categoryTabs" class="flex flex-wrap gap-2">
-          <!-- जावास्क्रिप्ट द्वारा orders.json से श्रेणियां यहाँ लोड होंगी -->
+          <!-- जावास्क्रिप्ट द्वारा orders.json से अपने-आप बटन यहाँ बनेंगे -->
         </div>
       </div>
     </div>
@@ -149,7 +154,6 @@
   <!-- Footer -->
   <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
     <div class="max-w-4xl mx-auto px-4 space-y-2">
-      <!-- Direct HTML File Links -->
       <div class="flex flex-wrap justify-center items-center gap-x-3 text-sm font-semibold text-blue-600">
         <a href="about.html" class="hover:underline">About Us</a>
         <span class="text-slate-300">|</span>
@@ -160,19 +164,63 @@
         <a href="terms.html" class="hover:underline">Contact Us</a>
       </div>
       
-      <!-- Copyright text -->
       <p class="text-slate-400 text-xs">
         © deshimaster.in. All Rights Reserved.
       </p>
     </div>
   </footer>
 
-  <!-- Script: Google Drive Fast Direct Stream + Cache Buster + Dynamic Filter -->
+  <!-- Script to Auto-Sort Dates, Auto-Categorize & Bypass Login -->
   <script>
     let allOrders = [];
     let currentCategory = 'all';
 
-    // 1. गूगल ड्राइव तीव्र प्रीव्यू एवं डायरेक्ट डाउनलोड लिंक जनरेटर
+    // दिनांक को Timestamp में बदलने वाला स्मार्ट पार्सर (हिंदी व अंग्रेज़ी दोनों सपोर्ट)
+    function parseDateToTimestamp(dateStr) {
+      if (!dateStr) return 0;
+      const str = dateStr.trim();
+
+      // अगर स्थायी नियमावली/प्रारूप है तो सबसे कम प्राथमिकता दें (सबसे नीचे जाएँगे)
+      if (str.includes("स्थायी")) return 0;
+
+      // हिंदी महीनों की मैपिंग
+      const hindiMonths = {
+        'जनवरी': '01', 'फ़रवरी': '02', 'फरवरी': '02', 'मार्च': '03',
+        'अप्रैल': '04', 'मई': '05', 'जून': '06', 'जुलाई': '07',
+        'अगस्त': '08', 'सितम्बर': '09', 'सितंबर': '09', 'अक्टूबर': '10',
+        'नवम्बर': '11', 'नवंबर': '11', 'दिसम्बर': '12', 'दिसंबर': '12'
+      };
+
+      // 1. फ़ॉर्मेट: "23 जनवरी 2002" या "12 अक्टूबर 2026"
+      const dmyMatch = str.match(/(\d{1,2})\s+([^\s\d]+)\s+(\d{4})/);
+      if (dmyMatch) {
+        const day = dmyMatch[1].padStart(2, '0');
+        const monthWord = dmyMatch[2];
+        const year = dmyMatch[3];
+        const month = hindiMonths[monthWord] || '01';
+        return new Date(`${year}-${month}-${day}T00:00:00`).getTime();
+      }
+
+      // 2. फ़ॉर्मेट: "अक्टूबर 2026"
+      const myMatch = str.match(/([^\s\d]+)\s+(\d{4})/);
+      if (myMatch && hindiMonths[myMatch[1]]) {
+        const month = hindiMonths[myMatch[1]];
+        const year = myMatch[2];
+        return new Date(`${year}-${month}-01T00:00:00`).getTime();
+      }
+
+      // 3. फ़ॉर्मेट: "वर्ष 2021" या "सत्र 2023" या केवल साल "2024"
+      const yearMatch = str.match(/\b(19\d{2}|20\d{2})\b/);
+      if (yearMatch) {
+        return new Date(`${yearMatch[1]}-01-01T00:00:00`).getTime();
+      }
+
+      // 4. सामान्य मानक तारीख़ (YYYY-MM-DD या DD-MM-YYYY)
+      const parsed = Date.parse(str);
+      return isNaN(parsed) ? 0 : parsed;
+    }
+
+    // 1. गूगल ड्राइव लॉगिन बाईपास लिंक कनवर्टर
     function getBypassLinks(rawLink) {
       if (!rawLink) return { viewUrl: '#', downloadUrl: '#' };
       
@@ -187,9 +235,7 @@
       }
 
       if (fileId) {
-        // ⚡ तीव्र Google Drive Preview Mode (दस्तावेज़ तुरंत लोड होता है)
-        const viewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
-        // 📥 सीधा डाउनलोड लिंक
+        const viewUrl = `https://docs.google.com/viewer?url=https://drive.google.com/uc?id=${fileId}%26export=download&embedded=true`;
         const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
         return { viewUrl, downloadUrl };
       }
@@ -197,13 +243,21 @@
       return { viewUrl: rawLink, downloadUrl: rawLink };
     }
 
-    // 2. orders.json लोड करना (ब्राउज़र कैश रोकने के लिए टाइमस्टैम्प जोड़ा गया)
+    // 2. orders.json लोड करना एवं ऑटो-सॉर्टिंग
     fetch('orders.json?v=' + new Date().getTime())
       .then(response => {
         if (!response.ok) throw new Error('Network response failed');
         return response.json();
       })
       .then(data => {
+        // यहाँ अपने-आप तारीख अनुसार सॉर्टिंग होती है:
+        // नवीनतम (जैसे 2026) सबसे ऊपर, पुराना (जैसे 2002) नीचे, और 2002 में भी 25 जनवरी ऊपर व 23 जनवरी नीचे
+        data.sort((a, b) => {
+          const timeA = parseDateToTimestamp(a.date);
+          const timeB = parseDateToTimestamp(b.date);
+          return timeB - timeA;
+        });
+
         allOrders = data;
         renderCategoryTabs();
         filterOrders();
@@ -219,7 +273,7 @@
           </tr>`;
       });
 
-    // 3. JSON में मौजूद श्रेणियों के आधार पर अपने-आप बटन (Tabs) बनाना
+    // 3. श्रेणियों के डायनामिक टैब्स बनाना
     function renderCategoryTabs() {
       const container = document.getElementById('categoryTabs');
       container.innerHTML = '';
@@ -254,7 +308,7 @@
       filterOrders();
     }
 
-    // 4. सर्च + श्रेणी फ़िल्टर (द्विभाषी खोज समर्थित)
+    // 4. सर्च एवं फ़िल्टर
     function filterOrders() {
       const query = document.getElementById('searchOrder').value.toLowerCase().trim();
 
@@ -279,7 +333,7 @@
       displayTable(filtered);
     }
 
-    // 5. टेबल रेंडरिंग
+    // 5. टेबल डिस्प्ले
     function displayTable(orders) {
       const tbody = document.getElementById('tableBody');
       tbody.innerHTML = '';
