@@ -1,0 +1,86 @@
+name: Sync Orders from Google Sheet
+
+on:
+  schedule:
+    # यह दिन में 3 बार चलेगा (भारतीय समयानुसार: सुबह 6:30, दोपहर 1:30 और रात 8:30 बजे)
+    - cron: '0 1,8,15 * * *'
+  # जब आप चाहें, GitHub के Actions टैब से "Run workflow" बटन दबाकर तुरंत भी चला सकते हैं
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Fetch Google Sheet and Update orders.json
+        run: |
+          node -e '
+          const https = require("https");
+          const fs = require("fs");
+
+          // आपकी Google Sheet का CSV एक्सपोर्ट लिंक
+          const CSV_URL = "https://docs.google.com/spreadsheets/d/1gBUOg17oQRJR-lTrm2MTP64CaUWXijnnYvnNd8h2ET4/gviz/tq?tqx=out:csv&sheet=OrdersData";
+
+          function parseCSV(text) {
+            const lines = text.trim().split(/\r?\n/);
+            const result = [];
+            for (let i = 1; i < lines.length; i++) {
+              const regex = /(?:,|\n|^)("(?:(?:"")*[^"]*)*"|[^",\n]*|(?:\n|$))/g;
+              let row = [];
+              let match;
+              while ((match = regex.exec(lines[i])) !== null) {
+                let val = match[1] || "";
+                if (val.startsWith("\"") && val.endsWith("\"")) {
+                  val = val.substring(1, val.length - 1).replace(/""/g, "\"");
+                }
+                row.push(val.trim());
+                if (regex.lastIndex >= lines[i].length) break;
+              }
+              if (row[2] || row[4]) {
+                result.push({
+                  date: row[0] || "स्थायी / अद्यतन",
+                  category: row[1] || "विविध एवं प्रारूप",
+                  subject: row[2] || "",
+                  keywords: row[3] || "",
+                  driveLink: row[4] || ""
+                });
+              }
+            }
+            return result;
+          }
+
+          https.get(CSV_URL, (res) => {
+            let data = "";
+            res.on("data", (chunk) => data += chunk);
+            res.on("end", () => {
+              if (res.statusCode === 200 && data.length > 50) {
+                const orders = parseCSV(data);
+                fs.writeFileSync("orders.json", JSON.stringify(orders, null, 2), "utf8");
+                console.log(`Successfully synced ${orders.length} orders.`);
+              } else {
+                console.error("Failed to fetch sheet data, status:", res.statusCode);
+                process.exit(1);
+              }
+            });
+          }).on("error", (err) => {
+            console.error("Error fetching sheet:", err.message);
+            process.exit(1);
+          });
+          '
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add orders.json
+          git diff --staged --quiet || (git commit -m "Auto-sync orders.json from Google Sheet" && git push)
