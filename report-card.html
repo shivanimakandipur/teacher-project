@@ -55,12 +55,13 @@
     .print-only { display: none !important; }
     .hidden { display: none !important; }
 
+    /* Block & Inline Select Styling */
     select.hpc-select {
       border: 1px solid #94a3b8;
       border-radius: 4px;
       background-color: #ffffff;
       padding: 1px 3px;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 600;
       color: #0f172a;
       cursor: pointer;
@@ -69,6 +70,15 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+    }
+    select.hpc-select.inline-sel {
+      width: auto !important;
+      min-width: 90px;
+      max-width: 165px;
+      display: inline-block !important;
+      vertical-align: middle;
+      margin: 0 2px;
+      padding: 0px 4px;
     }
     select.hpc-select:hover {
       background-color: #f0fdf4;
@@ -79,14 +89,18 @@
       background-color: #fffbeb !important;
       border-radius: 4px;
       padding: 1px 4px;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
       color: #78350f;
       width: 100%;
-      margin-top: 2px;
       box-sizing: border-box;
     }
+    input.hpc-custom-input.inline-inp {
+      width: 125px !important;
+      display: inline-block !important;
+    }
 
+    /* 1★, 2★, 3★ Button Group */
     .star-btn-group {
       display: flex;
       align-items: center;
@@ -109,27 +123,27 @@
     .star-btn:hover {
       background-color: #fef3c7;
       border-color: #f59e0b;
-      transform: scale(1.08);
+      transform: scale(1.06);
     }
     .star-btn.active {
       background-color: #fef3c7 !important;
       border-color: #d97706 !important;
       color: #b45309 !important;
       font-weight: 900;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
     }
 
+    /* Colored HPC Table Themes */
     table.hpc-table {
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
-      margin-bottom: 2px;
+      margin-bottom: 1.5px;
       background-color: #ffffff;
     }
     table.hpc-table th, table.hpc-table td {
       border: 1px solid #475569;
-      padding: 2.2px 3.5px;
-      font-size: 10.5px;
+      padding: 1.8px 3.2px;
+      font-size: 10px;
       vertical-align: middle;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -155,17 +169,52 @@
     .theme-cyan th { background-color: #cffafe !important; color: #164e63 !important; border-color: #06b6d4 !important; }
     .theme-cyan td { border-color: #22d3ee !important; }
 
+    /* Screen Card Preview Box */
     .hpc-page {
       background: #ffffff;
       border: 2px solid #1e3a8a;
       border-radius: 10px;
-      padding: 14px;
+      padding: 12px;
       margin-bottom: 24px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 5px;
+      gap: 3px;
+    }
+
+    /* Page 2 Full-Page Auto-Stretch Engine */
+    .p2-fill-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+      gap: 4px;
+      height: 100%;
+    }
+    .p2-fill-wrapper table.hpc-table {
+      flex-grow: 1;
+      height: 100%;
+      margin-bottom: 0 !important;
+    }
+    .p2-two-col-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+      flex-grow: 1;
+      align-items: stretch;
+      height: 100%;
+    }
+    .p2-col-flex {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 4px;
+      height: 100%;
+    }
+    .p2-col-flex table.hpc-table {
+      flex-grow: 1;
+      margin-bottom: 0 !important;
     }
 
     @media print {
@@ -202,7 +251,7 @@
         display: inline !important;
         font-weight: 700 !important;
         color: #000 !important;
-        line-height: 1.2 !important;
+        line-height: 1.15 !important;
       }
       .print-star-text {
         display: inline-block !important;
@@ -215,9 +264,9 @@
 
       .hpc-page {
         width: 100% !important;
-        height: 285mm !important;
-        max-height: 285mm !important;
-        padding: 3mm 4mm !important;
+        height: 286mm !important;
+        max-height: 286mm !important;
+        padding: 2.5mm 3.5mm !important;
         margin: 0 auto !important;
         box-sizing: border-box !important;
         page-break-after: always !important;
@@ -239,29 +288,21 @@
         break-after: auto !important;
       }
 
-      .hpc-page.layout-primary { font-size: 10px; line-height: 1.25; }
-      .hpc-page.layout-primary table.hpc-table th,
-      .hpc-page.layout-primary table.hpc-table td { padding: 2.2px 3.5px; font-size: 9.6px; }
+      /* Page 1 Compact Print Sizing (Fits Profile, Likes, 1-Line Ambition, Exams, Remarks, Legend & Promotion) */
+      .hpc-page.layout-p1-all { font-size: 9px; line-height: 1.15; }
+      .hpc-page.layout-p1-all table.hpc-table th,
+      .hpc-page.layout-p1-all table.hpc-table td { padding: 1.4px 2.8px; font-size: 8.6px; }
 
-      .hpc-page.layout-upper-p1 { font-size: 9.5px; line-height: 1.22; }
-      .hpc-page.layout-upper-p1 table.hpc-table th,
-      .hpc-page.layout-upper-p1 table.hpc-table td { padding: 2px 3.2px; font-size: 9.1px; }
+      /* Page 2 Primary (Balvatika & 1-5) Full Page Stretch Sizing */
+      .hpc-page.layout-primary-p2 { font-size: 10.5px; line-height: 1.32; }
+      .hpc-page.layout-primary-p2 table.hpc-table th,
+      .hpc-page.layout-primary-p2 table.hpc-table td { padding: 3.5px 4.5px; font-size: 10.2px; }
 
-      .hpc-page.layout-upper-p2 {
-        font-size: 8.2px;
-        line-height: 1.14;
-        padding: 2.5mm 3.5mm !important;
-      }
-      .hpc-page.layout-upper-p2 table.hpc-table { margin-bottom: 1.2px; }
+      /* Page 2 Upper Primary (6-8) Full Page Stretch Sizing */
+      .hpc-page.layout-upper-p2 { font-size: 9px; line-height: 1.22; }
       .hpc-page.layout-upper-p2 table.hpc-table th,
-      .hpc-page.layout-upper-p2 table.hpc-table td {
-        padding: 1.1px 2.2px;
-        font-size: 8px;
-      }
-      .hpc-page.layout-upper-p2 .print-star-text {
-        font-size: 9.5px !important;
-        letter-spacing: 0.8px;
-      }
+      .hpc-page.layout-upper-p2 table.hpc-table td { padding: 2px 3px; font-size: 8.8px; }
+      .hpc-page.layout-upper-p2 .print-star-text { font-size: 10px !important; letter-spacing: 1px; }
     }
   </style>
 </head>
@@ -364,7 +405,7 @@
             2. छात्र/छात्रा जोड़ें (नाम केवल अक्षरों में तथा SR व APAAR केवल अंकों में)
           </h3>
           <p class="text-[11px] text-slate-500">
-            अंग्रेजी या हिंदी में नाम लिखने पर स्वतः Title Case लागू होगा और फॉर्म का ड्राफ्ट भी सुरक्षित रहेगा।
+            पेज-1 पर ही ग्रेडिंग व सरिता/पर्वत/आसमान मानक सेट हैं तथा पेज-2 पर दक्षताएं पूरे पृष्ठ पर ऑटो-स्ट्रेच होती हैं।
           </p>
         </div>
         <div id="urduToggleContainer" class="hidden items-center gap-2 bg-amber-50 border border-amber-300 px-3 py-1.5 rounded-lg text-xs font-bold text-amber-900">
@@ -373,7 +414,6 @@
         </div>
       </div>
 
-      <!-- Basic Student Info Row -->
       <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-3 text-xs items-end">
         <div>
           <label class="font-bold text-slate-700 block mb-1">विद्यार्थी का नाम (अक्षर) *</label>
@@ -413,7 +453,6 @@
         </div>
       </div>
 
-      <!-- Health + Attendance + Level Row -->
       <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs items-end mt-3 pt-3 border-t border-slate-100">
         <div>
           <label class="font-bold text-rose-800 block mb-1">ब्लड ग्रुप & हीमोग्लोबिन (Hb):</label>
@@ -488,7 +527,6 @@
         </div>
       </div>
 
-      <!-- Saved Students Interactive Bar -->
       <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
         <div id="studentListPills" class="flex flex-wrap gap-2 items-center text-xs"></div>
         <button onclick="clearCurrentClassStudents()" class="text-xs text-red-600 hover:underline font-semibold cursor-pointer">
@@ -497,30 +535,30 @@
       </div>
     </section>
 
-    <!-- Helper Banner -->
+    <!-- Clean Professional Status Banner (Zero Technical/File References) -->
     <div class="bg-gradient-to-r from-amber-50 via-emerald-50 to-blue-50 border border-emerald-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 flex flex-wrap items-center justify-between gap-2 no-print">
       <span>
-        <i class="fa-solid fa-bolt text-emerald-700 mr-1"></i> <b>स्मार्ट मॉड्यूलर आर्किटेक्चर:</b> डेटा और मार्गदर्शिका बाह्य JSON फाइलों से सुपरफास्ट लोड हो रहे हैं।
+        <i class="fa-solid fa-circle-check text-emerald-700 mr-1"></i> <b>स्मार्ट A4 लेआउट:</b> सभी विकल्पों को अपनी आवश्यकतानुसार चुनें और सीधे 2-पेज (आगे-पीछे) में प्रिंट निकालें।
       </span>
-      <span id="totalQuestionsBadge" class="font-bold bg-white px-2.5 py-1 rounded border border-emerald-300">कुल आधिकारिक प्रश्न: लोड हो रहा है...</span>
+      <span id="totalQuestionsBadge" class="font-bold bg-white px-2.5 py-1 rounded border border-emerald-300">कुल दक्षता प्रश्न: तैयार है</span>
     </div>
 
     <!-- 3. Live Printable Report Cards Container -->
     <div id="printContainer" class="print-area">
-      <div class="bg-white p-8 rounded-2xl text-center text-slate-500 border border-slate-200 animate-pulse">
-        <i class="fa-solid fa-spinner fa-spin mr-2 text-emerald-600"></i> कक्षा का डेटा लोड हो रहा है...
+      <div class="bg-white p-8 rounded-2xl text-center text-slate-500 border border-slate-200">
+        <i class="fa-solid fa-spinner fa-spin mr-2 text-emerald-600"></i> प्रगति पत्र तैयार किया जा रहा है...
       </div>
     </div>
 
-    <!-- 4. Comprehensive SEO & Google AdSense Pillar Article (Loaded from hpc-article.json) -->
+    <!-- 4. Comprehensive SEO & Google AdSense Pillar Article -->
     <article id="hpc-guide-article" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-8 no-print mt-12 leading-relaxed text-slate-700">
       <div class="text-center text-slate-400 py-6">
-        <i class="fa-solid fa-book-open mr-2"></i> विस्तृत मार्गदर्शिका लेख लोड हो रहा है...
+        <i class="fa-solid fa-book-open mr-2"></i> विस्तृत शैक्षिक मार्गदर्शिका लोड हो रही है...
       </div>
     </article>
   </main>
 
-  <!-- MODAL 1: Mandatory Month-Wise Class Working Days Configuration Modal -->
+  <!-- MODAL 1: Working Days Modal -->
   <div id="workingDaysModal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center z-50 p-4 no-print">
     <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-xl border border-slate-200 space-y-4">
       <div class="flex items-center justify-between border-b border-slate-200 pb-3">
@@ -530,26 +568,18 @@
         </div>
         <button onclick="closeWorkingDaysModal()" class="text-slate-400 hover:text-slate-700 text-xl font-bold cursor-pointer">&times;</button>
       </div>
-
       <div id="wdInputsGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-3 text-xs"></div>
-
       <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-200">
         <div class="flex flex-wrap gap-1.5">
-          <button onclick="copyWorkingDaysToGroup(['balvatika','1','2','3','4','5'])" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold cursor-pointer">
-            प्राथमिक (बालवाटिका व 1-5) में लागू करें
-          </button>
-          <button onclick="copyWorkingDaysToGroup(['6','7','8'])" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold cursor-pointer">
-            जूनियर (6-8) में लागू करें
-          </button>
+          <button onclick="copyWorkingDaysToGroup(['balvatika','1','2','3','4','5'])" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold cursor-pointer">प्राथमिक (बालवाटिका व 1-5) में लागू करें</button>
+          <button onclick="copyWorkingDaysToGroup(['6','7','8'])" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold cursor-pointer">जूनियर (6-8) में लागू करें</button>
         </div>
-        <button onclick="saveWorkingDaysFromModal()" class="px-5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow-sm cursor-pointer">
-          <i class="fa-solid fa-check mr-1"></i> कार्यदिवस कन्फर्म व सेव करें
-        </button>
+        <button onclick="saveWorkingDaysFromModal()" class="px-5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow-sm cursor-pointer"><i class="fa-solid fa-check mr-1"></i> कार्यदिवस कन्फर्म व सेव करें</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 2: Student Attendance Popup Modal -->
+  <!-- MODAL 2: Attendance Modal -->
   <div id="attendanceModal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center z-50 p-4 no-print">
     <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-xl border border-slate-200 space-y-4">
       <div class="flex items-center justify-between border-b border-slate-200 pb-3">
@@ -559,7 +589,6 @@
         </div>
         <button onclick="closeAttendanceModal()" class="text-slate-400 hover:text-slate-700 text-xl font-bold cursor-pointer">&times;</button>
       </div>
-
       <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2 text-xs">
         <span class="font-bold text-indigo-950"><i class="fa-solid fa-calculator mr-1"></i> उपस्थिति प्रतिशत से ऑटो-सेट करें:</span>
         <div class="flex items-center gap-1.5">
@@ -571,38 +600,28 @@
           <input type="number" id="customAttPctInput" placeholder="%" min="10" max="100" oninput="applyPercentToAttendanceModal(this.value)" class="w-14 border border-indigo-400 rounded p-1 text-center font-bold bg-white">
         </div>
       </div>
-
       <div id="attModalMonthsGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-3 text-xs"></div>
-
       <div class="flex items-center justify-between pt-3 border-t border-slate-200 text-xs">
         <div id="attModalSummary" class="font-bold text-slate-700">कुल उपस्थिति: 0 / 0 दिन</div>
         <div class="flex gap-2">
           <button onclick="closeAttendanceModal()" class="px-4 py-2 border border-slate-300 rounded-xl font-bold text-slate-600 hover:bg-slate-100 cursor-pointer">रद्द करें</button>
-          <button onclick="saveAttendanceFromModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow-sm cursor-pointer">
-            <i class="fa-solid fa-check mr-1"></i> उपस्थिति लागू करें
-          </button>
+          <button onclick="saveAttendanceFromModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow-sm cursor-pointer"><i class="fa-solid fa-check mr-1"></i> उपस्थिति लागू करें</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: Print Verification Modal -->
+  <!-- MODAL 3: Print Modal -->
   <div id="printModal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center z-50 p-4 no-print">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-4">
       <div class="flex items-center gap-3 text-emerald-700">
         <i class="fa-solid fa-print text-2xl"></i>
         <h3 class="text-lg font-extrabold text-slate-900">रंगीन / B&W 2-पेज प्रिंट के लिए तैयार!</h3>
       </div>
-      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-        प्रत्येक छात्र का रिपोर्ट कार्ड सटीक <b>2 पेज (1 A4 शीट आगे-पीछे)</b> में सेट है। रंगीन प्रिंट के लिए प्रिंट डायलॉग में <b>Background Graphics: Checked (✔)</b> रखें। यदि ब्लैक एंड व्हाइट निकालना हो तो सीधे B&W / Grayscale चुनें।
-      </p>
+      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">प्रत्येक छात्र का रिपोर्ट कार्ड सटीक <b>2 पेज (1 A4 शीट आगे-पीछे)</b> में सेट है। रंगीन प्रिंट के लिए प्रिंट डायलॉग में <b>Background Graphics: Checked (✔)</b> रखें।</p>
       <div class="flex items-center justify-end gap-3 pt-2">
-        <button onclick="closePrintConfirmModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-100 cursor-pointer">
-          अभी सुधार करें
-        </button>
-        <button onclick="proceedToPrint()" class="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold shadow-sm cursor-pointer flex items-center gap-1.5">
-          <i class="fa-solid fa-print"></i> सीधा प्रिंट / PDF निकालें
-        </button>
+        <button onclick="closePrintConfirmModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-100 cursor-pointer">अभी सुधार करें</button>
+        <button onclick="proceedToPrint()" class="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold shadow-sm cursor-pointer flex items-center gap-1.5"><i class="fa-solid fa-print"></i> सीधा प्रिंट / PDF निकालें</button>
       </div>
     </div>
   </div>
@@ -611,19 +630,15 @@
   <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500 no-print">
     <div class="max-w-4xl mx-auto px-4 space-y-2">
       <div class="flex flex-wrap justify-center items-center gap-x-3 text-sm font-semibold text-blue-600">
-        <a href="about.html" class="hover:underline">About Us</a>
-        <span class="text-slate-300">|</span>
-        <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
-        <span class="text-slate-300">|</span>
-        <a href="disclaimer.html" class="hover:underline">Disclaimer</a>
-        <span class="text-slate-300">|</span>
+        <a href="about.html" class="hover:underline">About Us</a><span class="text-slate-300">|</span>
+        <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a><span class="text-slate-300">|</span>
+        <a href="disclaimer.html" class="hover:underline">Disclaimer</a><span class="text-slate-300">|</span>
         <a href="terms.html" class="hover:underline">Terms & Conditions</a>
       </div>
       <p class="text-slate-400 text-xs">© deshimaster.in. All Rights Reserved.</p>
     </div>
   </footer>
-
-  <!-- Modular JavaScript Engine -->
+  <!-- Complete JavaScript Engine (Part 2 of 2) -->
   <script>
     const MONTHS_HI = [
       "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर",
@@ -654,70 +669,171 @@
       "8": { h1: 152, w1: 41 }
     };
 
-    // डायनामिक डेटा ऑब्जेक्ट्स (JSON फाइलों से पॉप्युलेट होंगे)
-    let RANDOM_POOLS = {};
-    let BUILTIN_SCHEMAS = {};
+    const FALLBACK_POOLS = {
+      festivals: ["दीपावली", "होली", "रक्षाबंधन", "दशहरा", "नवरात्रि", "मकर संक्रांति", "जन्माष्टमी", "बसंत पंचमी", "15 अगस्त"],
+      foods: ["पूड़ी-सब्ज़ी", "हलवा-पूड़ी", "दाल-चावल", "कढ़ी-चावल", "आलू-कचौड़ी", "खीर", "समोसा", "तहरी", "रोटी-सब्ज़ी"],
+      games: ["खो-खो", "कबड्डी", "बैडमिंटन", "छुपन-छुपाई", "फुटबॉल", "क्रिकेट", "पकड़म-पकड़ाई", "कैरम", "लूडो", "दौड़"],
+      animals: ["गाय", "खरगोश", "तोता", "बछड़ा", "गिलहरी", "हिरण", "मोर", "कबूतर", "कोयल", "बकरी"],
+      flowers: ["गेंदा", "गुलाब", "कमल", "सूरजमुखी", "चमेली", "गुड़हल", "सदाबहार", "हरसिंगार", "बेला"],
+      subjects: ["गणित", "हिन्दी", "चित्रकला", "अंग्रेजी", "विज्ञान", "हमारा परिवेश", "संस्कृत", "खेल", "संगीत"],
+      gardening: ["पौधे लगाना", "पानी देना", "तुलसी व गेंदा उगाना", "किचन गार्डन बनाना", "गमले सजाना", "नीम लगाना"],
+      books: ["पंचतंत्र कथाएं", "बालहंस", "अकबर-बीरबल", "विज्ञान की बातें", "महापुरुषों की जीवनी", "तेनालीराम कथाएं"],
+      friendsM: ["अमन", "रोहित", "अंकित", "सुमित", "विकास", "राहुल", "शिवम", "सूरज", "अनुराग", "आयुष"],
+      friendsF: ["खुशी", "पूजा", "अंजलि", "प्रिया", "रोशनी", "शिवानी", "आरती", "स्नेहा", "मुस्कान", "प्रीति"],
+      ambitionM: ["फ़ौजी (सैनिक)", "शिक्षक", "डॉक्टर", "पुलिस अधिकारी", "इंजीनियर", "वैज्ञानिक", "पायलट", "खिलाड़ी"],
+      ambitionF: ["शिक्षिका", "डॉक्टर", "पुलिस अधिकारी", "नर्स", "वैज्ञानिक", "पायलट", "प्रशासनिक अधिकारी", "खिलाड़ी"],
+      toSee: ["चिड़ियाघर", "ताजमहल", "लाल किला", "मेट्रो ट्रेन", "हवाई जहाज", "विज्ञान प्रदर्शनी", "बड़ा मेला"],
+      toLearn: ["कंप्यूटर चलाना", "चित्र बनाना", "साइकिल चलाना", "अंग्रेजी बोलना", "तैराकी करना", "गायन", "विज्ञान प्रयोग"],
+      toVisit: ["अयोध्या धाम", "लखनऊ", "आगरा", "दिल्ली", "नैनीताल", "वाराणसी", "मामा का घर", "नानी का घर", "प्रयागराज"],
+      toMake: ["मिट्टी के खिलौने", "कागज की नाव", "घर का चित्र", "रंगोली", "फूलों की माला", "गुल्लक", "बधाई कार्ड"],
+      selfImprove6to8: [
+        "गणित के सूत्रों और कठिन सवालों के नियमित अभ्यास में",
+        "अंग्रेजी वाचन, सही उच्चारण और शब्दकोश बढ़ाने में",
+        "कक्षा में बिना झिझक खुलकर अपने प्रश्न पूछने में",
+        "पढ़ाई और खेलकूद के बीच सही समय प्रबंधन करने में",
+        "अपनी लिखावट (हस्तलेख) को और अधिक सुंदर व स्पष्ट बनाने में"
+      ],
+      parentInterest: [
+        "खेलकूद, दौड़-भाग और साथियों के साथ समूह में खेलने में",
+        "सुंदर चित्र बनाने, रंग भरने और कागज की आकृतियाँ बनाने में",
+        "कहानियों की रोचक पुस्तकें पढ़ने और नई बातें जानने में",
+        "गणितीय पहेलियाँ सुलझाने और गिनती संबंधी खेलों में"
+      ],
+      behavPos: [
+        "सहपाठियों के साथ मिल-जुलकर रहता/रहती है एवं सहयोग करता/करती है।",
+        "कक्षा में शांत, शिष्ट और अनुशासित व्यवहार प्रदर्शित करता/करती है।",
+        "विद्यालयी नियमों व शिक्षकों के निर्देशों का आदरपूर्वक पालन करता/करती है।"
+      ],
+      behavCor: [
+        "खेल व गतिविधि के दौरान अपनी बारी की प्रतीक्षा करने का धैर्य बढ़ाएं।",
+        "समूह कार्यों में साथियों के साथ और अधिक सामंजस्य स्थापित करें।"
+      ],
+      skillPos: [
+        "दिए गए गृहकार्य व कक्षा-कार्य को समय पर पूरा करता/करती है।",
+        "नई चीजें सीखने के प्रति सदैव उत्सुक और जिज्ञासु रहता/रहती है।"
+      ],
+      skillCor: [
+        "गृहकार्य को प्रतिदिन निर्धारित समय पर पूरा करने की आदत डालें।",
+        "कठिनाई आने पर संकोच न करें और शिक्षक से तुरंत मार्गदर्शन लें।"
+      ],
+      healthPos: [
+        "प्रतिदिन स्वच्छ यूनिफॉर्म पहनकर साफ-सुथरे रूप में विद्यालय आता/आती है।",
+        "व्यक्तिगत स्वच्छता (नाखून, बाल, दांत) का पूरा ध्यान रखता/रखती है।"
+      ],
+      healthCor: [
+        "नाखूनों को नियमित रूप से काटने और साफ रखने पर ध्यान दें।",
+        "दांतों और बालों की दैनिक सफाई के प्रति और अधिक सजग रहें।"
+      ],
+      artPos: [
+        "चित्रकला, रंग भरने व क्राफ्ट कार्यों में गहरी रुचि लेता/लेती है।",
+        "सांस्कृतिक कार्यक्रमों व बाल-सभा में उत्साहपूर्वक भाग लेता/लेती है।"
+      ],
+      artCor: [
+        "पाठ्येतर व सांस्कृतिक गतिविधियों में संकोच छोड़कर प्रतिभाग करें।",
+        "चित्रकला में रेखाओं की स्पष्टता और रंग भरने के अभ्यास पर ध्यान दें।"
+      ]
+    };
 
-    // State Management
+    const CO_SCHOLASTIC_FALLBACK = [
+      {
+        name: "व्यवहार एवं भावनाएँ",
+        indicators: [
+          "विद्यार्थी गतिविधियों के दौरान अपने क्रम (बारी) का इंतजार करता है एवं प्रक्रिया का पालन करता है।",
+          "विद्यार्थी सामाजिक एवं भावनात्मक गतिविधियों में सक्रिय प्रतिभाग करता है।",
+          "विद्यार्थी सहपाठियों के साथ सम्मानजनक भाषा में बात करता है।",
+          "विद्यार्थी अपने सहपाठियों की भावनाओं को समझता और सम्मान देता है।"
+        ]
+      },
+      {
+        name: "सीखने के प्रति तत्परता एवं जीवन कौशल",
+        indicators: [
+          "विद्यार्थी निर्देशों को ध्यान से सुनता और उनका पालन करता है।",
+          "विद्यार्थी अपनी पसंद नापसंद के बारे में बता पाता है।",
+          "विद्यार्थी अपनी आवश्यकता एवं समस्या के बारे में बता पाता है।",
+          "विद्यार्थी अपनी समझ बढ़ाने के लिए प्रश्न पूछता है।"
+        ]
+      },
+      {
+        name: "स्वच्छता एवं स्वास्थ्य",
+        indicators: [
+          "विद्यार्थी अपने नाखून, बाल और दांतों की साफ-सफाई का ध्यान रखता है।",
+          "विद्यार्थी स्वच्छता एवं साफ-सफाई के प्रति जागरूक है।",
+          "विद्यार्थी विद्यालय को स्वच्छ रखने संबंधी गतिविधियों में रुचि लेता है।"
+        ]
+      },
+      {
+        name: "कलात्मक एवं अन्य रुचियाँ",
+        indicators: [
+          "विद्यार्थी सांस्कृतिक गतिविधियों में प्रतिभाग करता है।",
+          "विद्यार्थी चित्रकला / रंग भरने / संगीत / क्राफ्ट गतिविधियों में रुचि लेता है।",
+          "विद्यार्थी नृत्य, गायन एवं खेल-कूद में रुचि लेता है।"
+        ]
+      }
+    ];
+
+    const FALLBACK_SCHEMAS = {
+      "1": {
+        className: "कक्षा : 1", promoteTo: "कक्षा - 2",
+        examSubjects: ["हिन्दी (मौखिक)", "गणित (मौखिक)", "अंग्रेजी (मौखिक)"],
+        subjects: [
+          { name: "हिन्दी", indicators: ["विद्यार्थी परिवेशीय / सुनी हुई कविता या गीत की चार पंक्तियाँ हाव-भाव के साथ सुना लेता है।", "विद्यार्थी 4 से 5 सरल शब्दों से बने हुए 4 वाक्यों को पढ़ लेता है।", "विद्यार्थी 5 सरल शब्दों से बने हुए 2 वाक्यों को सुनकर लिख लेता है।"] },
+          { name: "गणित", indicators: ["विद्यार्थी 20 तक के अंकों की गिनती एवं पहचान कर लेता है।", "विद्यार्थी वस्तुओं या चित्रों के माध्यम से 9 तक की संख्या का जोड़ एवं घटाव कर लेता है।", "विद्यार्थी ₹20 तक की भारतीय मुद्रा के नोट एवं सिक्कों की पहचान कर लेता है।", "विद्यार्थी चित्र एवं संख्या के सरल पैटर्न की पहचान कर लेता है एवं उसे आगे बढ़ा लेता है।"] },
+          { name: "अंग्रेजी", indicators: ["Student can understand verbal instructions and respond accordingly.", "Student can sing rhymes with actions.", "Student can write capital letters of all alphabets."] }
+        ],
+        coScholastic: CO_SCHOLASTIC_FALLBACK,
+        cognitivePos: ["परिवेशीय कविता/गीत की 4 पंक्तियाँ पूरे हाव-भाव से सुना लेता/लेती है।", "20 तक के अंकों की गिनती व 9 तक का जोड़-घटाव सही करता/करती है।"],
+        cognitiveCor: ["4-5 शब्दों वाले सरल वाक्यों के नियमित पठन अभ्यास की आवश्यकता है।", "सुनकर वाक्य लिखने (इमला) में मात्राओं पर थोड़ा ध्यान दें।"]
+      }
+    };
+
+    let RANDOM_POOLS = FALLBACK_POOLS;
+    let BUILTIN_SCHEMAS = FALLBACK_SCHEMAS;
+
     let currentClassKey = "1";
-    let currentClassSchema = null;
+    let currentClassSchema = FALLBACK_SCHEMAS["1"];
     let studentsByClass = {};
     let workingDaysByClass = {};
     let workingDaysConfirmedByClass = {};
     let pendingNewStudentAttendance = null;
     let activeAttendanceStudentId = null;
 
-    // 1. बाह्य JSON फाइलों को लोड और रेंडर करने का फंक्शन
-    async function loadExternalJsonResources() {
+    async function loadExternalResources() {
       try {
         const [primaryRes, upperRes] = await Promise.all([
-          fetch("hpc-primary.json"),
-          fetch("hpc-upper.json")
+          fetch("hpc-primary.json").catch(() => null),
+          fetch("hpc-upper.json").catch(() => null)
         ]);
 
-        if (!primaryRes.ok || !upperRes.ok) {
-          throw new Error("JSON डेटा फाइलें लोड नहीं हो सकीं।");
+        let primaryData = primaryRes && primaryRes.ok ? await primaryRes.json() : null;
+        let upperData = upperRes && upperRes.ok ? await upperRes.json() : null;
+
+        if (primaryData && primaryData.randomPools) {
+          RANDOM_POOLS = primaryData.randomPools;
         }
+        const coScholastic1to5 = (primaryData && primaryData.coScholastic1to5) ? primaryData.coScholastic1to5 : CO_SCHOLASTIC_FALLBACK;
 
-        const primaryData = await primaryRes.json();
-        const upperData = await upperRes.json();
+        let mergedSchemas = {};
+        if (primaryData && primaryData.schemas) Object.assign(mergedSchemas, primaryData.schemas);
+        if (upperData && upperData.schemas) Object.assign(mergedSchemas, upperData.schemas);
 
-        RANDOM_POOLS = primaryData.randomPools || {};
-        const coScholastic1to5 = primaryData.coScholastic1to5 || [];
-
-        const mergedSchemas = {
-          ...(primaryData.schemas || {}),
-          ...(upperData.schemas || {})
-        };
-
-        ["1", "2", "3", "4", "5"].forEach(cKey => {
-          if (mergedSchemas[cKey] && (!mergedSchemas[cKey].coScholastic || mergedSchemas[cKey].coScholastic.length === 0)) {
-            mergedSchemas[cKey].coScholastic = coScholastic1to5;
-          }
-        });
-
-        BUILTIN_SCHEMAS = mergedSchemas;
+        if (Object.keys(mergedSchemas).length > 0) {
+          ["1", "2", "3", "4", "5"].forEach(cKey => {
+            if (mergedSchemas[cKey] && (!mergedSchemas[cKey].coScholastic || mergedSchemas[cKey].coScholastic.length === 0)) {
+              mergedSchemas[cKey].coScholastic = coScholastic1to5;
+            }
+          });
+          BUILTIN_SCHEMAS = mergedSchemas;
+        }
       } catch (err) {
-        console.error("JSON Load Error:", err);
-        document.getElementById("printContainer").innerHTML = `
-          <div class="bg-red-50 border border-red-200 text-red-800 p-6 rounded-2xl text-center text-xs sm:text-sm">
-            <i class="fa-solid fa-triangle-exclamation text-xl mb-2 block"></i>
-            <b>JSON डेटा फाइलें (hpc-primary.json / hpc-upper.json) लोड नहीं हो सकीं।</b><br>
-            कृपया सुनिश्चित करें कि सभी 4 फाइलें एक ही फोल्डर में हैं और आप इसे लाइव सर्वर या GitHub Pages पर चला रहे हैं।
-          </div>
-        `;
+        // Silent fallback without exposing technical details
       }
 
-      // AdSense / SEO Article JSON अलग से लोड करें ताकि कार्ड तुरंत दिखे
       fetch("hpc-article.json")
         .then(r => r.ok ? r.json() : null)
-        .then(artData => {
-          if (artData) renderSeoArticle(artData);
-        })
-        .catch(e => console.warn("Article JSON load info:", e));
+        .then(artData => { if (artData) renderSeoArticle(artData); })
+        .catch(() => {});
     }
 
-    // 2. hpc-article.json से SEO लेख को HTML में रेंडर करने का फंक्शन
     function renderSeoArticle(data) {
       const container = document.getElementById("hpc-guide-article");
       if (!container || !data) return;
@@ -1004,9 +1120,7 @@
           if (d.stuDefaultLevel) document.getElementById("stuDefaultLevel").value = d.stuDefaultLevel;
           if (d.stuPercent) document.getElementById("stuPercent").value = d.stuPercent;
         }
-      } catch (e) {
-        console.warn("LocalStorage load warning:", e);
-      }
+      } catch (e) {}
     }
 
     function saveSchoolConfig() {
@@ -1055,7 +1169,8 @@
 
     function switchClass(classKey) {
       currentClassKey = classKey;
-      currentClassSchema = BUILTIN_SCHEMAS[classKey] || BUILTIN_SCHEMAS["1"];
+      currentClassSchema = (BUILTIN_SCHEMAS && BUILTIN_SCHEMAS[classKey]) ? BUILTIN_SCHEMAS[classKey] : FALLBACK_SCHEMAS["1"];
+
       const cSel = document.getElementById("classSelect");
       if (cSel && cSel.value !== classKey) cSel.value = classKey;
 
@@ -1086,7 +1201,7 @@
           totalQ += (s.indicators || []).length;
         });
         (currentClassSchema.coScholastic || []).forEach(c => totalQ += (c.indicators || []).length);
-        document.getElementById("totalQuestionsBadge").innerText = `${labelText} — कुल दक्षता प्रश्न: ${totalQ}`;
+        document.getElementById("totalQuestionsBadge").innerText = `${labelText} — कुल दक्षता बिंदु: ${totalQ}`;
       }
 
       if (!studentsByClass[classKey] || studentsByClass[classKey].length === 0) {
@@ -1547,7 +1662,8 @@
       if (printSpan) printSpan.innerText = inputEl.value || "—";
     }
 
-    function buildSlideDownWithOther(stu, fieldKey, optionsArray, defaultVal, extraClass = "") {
+    // ब्लॉक और इनलाइन (1-लाइन मेरी अभिलाषा हेतु) स्लाइड-डाउन बिल्डर
+    function buildSlideDownWithOther(stu, fieldKey, optionsArray, defaultVal, isInline = false) {
       const saved = stu.customDropdowns?.[fieldKey];
       const isCustom = saved && saved.mode === "custom";
       const selectedVal = saved ? (isCustom ? "__OTHER__" : saved.value) : defaultVal;
@@ -1555,17 +1671,20 @@
       const currentDisplayText = isCustom ? (customText || "—") : (selectedVal || defaultVal || "—");
 
       const uniqueOpts = Array.from(new Set([defaultVal, ...(optionsArray || [])])).filter(Boolean);
+      const wrapClass = isInline ? "inline-block align-middle mx-1" : "inline-block w-full align-middle relative";
+      const selClass = isInline ? "hpc-select inline-sel no-print" : "hpc-select no-print";
+      const inpClass = isInline ? "hpc-custom-input inline-inp" : "hpc-custom-input";
 
       return `
-        <span class="inline-block w-full align-middle relative">
+        <span class="${wrapClass}">
           <span id="print_val_${stu.id}_${fieldKey}" class="print-only print-pure-text">${currentDisplayText}</span>
-          <select id="select_el_${stu.id}_${fieldKey}" onchange="handleCardSelectChange(this, ${stu.id}, '${fieldKey}')" class="hpc-select no-print ${extraClass} ${isCustom ? 'hidden' : ''}">
+          <select id="select_el_${stu.id}_${fieldKey}" onchange="handleCardSelectChange(this, ${stu.id}, '${fieldKey}')" class="${selClass} ${isCustom ? 'hidden' : ''}">
             ${uniqueOpts.map(opt => `<option value="${opt.replace(/"/g, '&quot;')}" ${opt === selectedVal ? 'selected' : ''}>${opt}</option>`).join("")}
             <option value="__OTHER__" ${isCustom ? 'selected' : ''}>अन्य (स्वयं लिखें...)</option>
           </select>
-          <span id="custom_wrap_${stu.id}_${fieldKey}" class="no-print flex items-center gap-1 ${isCustom ? '' : 'hidden'}">
-            <input type="text" id="custom_inp_${stu.id}_${fieldKey}" value="${customText.replace(/"/g, '&quot;')}" oninput="handleCardCustomInput(this, ${stu.id}, '${fieldKey}')" placeholder="यहाँ टाइप करें..." class="hpc-custom-input">
-            <button type="button" onclick="resetCustomToSelect(${stu.id}, '${fieldKey}')" class="text-[10px] bg-slate-200 hover:bg-slate-300 text-slate-700 px-1.5 py-0.5 rounded font-bold cursor-pointer" title="वापस सूची चुनें">↺</button>
+          <span id="custom_wrap_${stu.id}_${fieldKey}" class="no-print inline-flex items-center gap-1 ${isCustom ? '' : 'hidden'}">
+            <input type="text" id="custom_inp_${stu.id}_${fieldKey}" value="${customText.replace(/"/g, '&quot;')}" oninput="handleCardCustomInput(this, ${stu.id}, '${fieldKey}')" placeholder="यहाँ लिखें..." class="${inpClass}">
+            <button type="button" onclick="resetCustomToSelect(${stu.id}, '${fieldKey}')" class="text-[10px] bg-slate-200 hover:bg-slate-300 text-slate-700 px-1 py-0.5 rounded font-bold cursor-pointer" title="वापस सूची चुनें">↺</button>
           </span>
         </span>
       `;
@@ -1605,6 +1724,7 @@
       renderAllCards();
     }
 
+    // मुख्य A4 कार्ड रेंडरर (Page 1 में अभिलाषा 1-लाइन + नीचे ग्रेडिंग व सरिता/पर्वत/आसमान | Page 2 में 100% फुल-हाइट दक्षताएं)
     function renderAllCards() {
       const container = document.getElementById("printContainer");
       const list = studentsByClass[currentClassKey] || [];
@@ -1713,9 +1833,9 @@
           return `
             <table class="hpc-table ${colorTheme}">
               <colgroup>
-                <col style="width: 68%;">
-                <col style="width: 16%;">
-                <col style="width: 16%;">
+                <col style="width: 70%;">
+                <col style="width: 15%;">
+                <col style="width: 15%;">
               </colgroup>
               <thead>
                 <tr>
@@ -1743,8 +1863,8 @@
           `;
         };
 
-        const p1Class = isUpper ? "hpc-page layout-upper-p1" : "hpc-page layout-primary";
-        const p2Class = isUpper ? "hpc-page layout-upper-p2" : "hpc-page layout-primary";
+        const p1Class = "hpc-page layout-p1-all";
+        const p2Class = isUpper ? "hpc-page layout-upper-p2" : "hpc-page layout-primary-p2";
 
         let likesTableRowsHTML = "";
         if (isUpper) {
@@ -1809,39 +1929,41 @@
           `;
         }
 
+        // 'मेरी अभिलाषा' अब सटीक 1 लाइन प्रति बिंदु (isInline = true)
         let ambitionFourRowsHTML = "";
         if (isMid || isUpper) {
           ambitionFourRowsHTML = `
-            <tr><td class="select-none py-1">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition)}</b> बनना ${verbWant}।</td></tr>
-            <tr><td class="select-none py-1">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.toSee, goalSee)}</b> देखना ${verbWant}।</td></tr>
-            <tr><td class="select-none py-1">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn)}</b> सीखना ${verbWant}।</td></tr>
-            <tr><td class="select-none py-1">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toVisit, goalVisit)}</b> घूमने जाना ${verbWant}।</td></tr>
+            <tr><td class="select-none whitespace-nowrap">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition, true)}</b> बनना ${verbWant}।</td></tr>
+            <tr><td class="select-none whitespace-nowrap">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.toSee, goalSee, true)}</b> देखना ${verbWant}।</td></tr>
+            <tr><td class="select-none whitespace-nowrap">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn, true)}</b> सीखना ${verbWant}।</td></tr>
+            <tr><td class="select-none whitespace-nowrap">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toVisit, goalVisit, true)}</b> घूमने जाना ${verbWant}।</td></tr>
           `;
         } else {
           ambitionFourRowsHTML = `
-            <tr><td class="select-none py-1">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition)}</b> बनना ${verbWant}।</td></tr>
-            <tr><td class="select-none py-1">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.games, favGame)}</b> खेलना ${verbWant}।</td></tr>
-            <tr><td class="select-none py-1">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn)}</b> सीखना ${verbWant}।</td></tr>
-            <tr><td class="select-none py-1">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toMake, goalMake)}</b> बनाना ${verbWant}।</td></tr>
+            <tr><td class="select-none whitespace-nowrap">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition, true)}</b> बनना ${verbWant}।</td></tr>
+            <tr><td class="select-none whitespace-nowrap">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.games, favGame, true)}</b> खेलना ${verbWant}।</td></tr>
+            <tr><td class="select-none whitespace-nowrap">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn, true)}</b> सीखना ${verbWant}।</td></tr>
+            <tr><td class="select-none whitespace-nowrap">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toMake, goalMake, true)}</b> बनाना ${verbWant}।</td></tr>
           `;
         }
 
+        // PAGE 1 (FRONT SIDE): प्रोफाइल + उपस्थिति + रुचि/1-लाइन अभिलाषा + परीक्षा/टिप्पणी + संवाद + नीचे ग्रेडिंग व सरिता/पर्वत/आसमान + कक्षोन्नति
         const page1HTML = `
           <div class="${p1Class}">
-            <div class="flex items-center justify-between bg-blue-50 border-b-2 border-blue-900 px-3 py-1.5 rounded-t">
-              <div class="text-xs font-extrabold text-blue-950">उत्तर प्रदेश सरकार | समग्र शिक्षा</div>
+            <div class="flex items-center justify-between bg-blue-50 border-b-2 border-blue-900 px-3 py-1 rounded-t">
+              <div class="text-[11px] font-extrabold text-blue-950">उत्तर प्रदेश सरकार | समग्र शिक्षा</div>
               <div class="text-center">
-                <h2 class="text-base font-black text-blue-900 uppercase tracking-tight">उ० प्र० बेसिक शिक्षा परिषद् — समग्र प्रगति पत्र (HPC)</h2>
-                <p class="text-[11px] font-bold text-emerald-900">${currentClassSchema.className} | शैक्षिक सत्र : <span>${sessionYear}</span></p>
+                <h2 class="text-sm font-black text-blue-900 uppercase tracking-tight">उ० प्र० बेसिक शिक्षा परिषद् — समग्र प्रगति पत्र (HPC)</h2>
+                <p class="text-[10px] font-bold text-emerald-900">${currentClassSchema.className} | शैक्षिक सत्र : <span>${sessionYear}</span></p>
               </div>
-              <div class="text-xs font-extrabold text-blue-950">UDISE: <span>${udiseCode}</span></div>
+              <div class="text-[11px] font-extrabold text-blue-950">UDISE: <span>${udiseCode}</span></div>
             </div>
 
-            <div class="grid grid-cols-12 gap-2.5 w-full">
+            <div class="grid grid-cols-12 gap-2 w-full">
               <div class="col-span-7 min-w-0">
                 <table class="hpc-table theme-blue">
                   <colgroup>
-                    <col style="width: 25%;"><col style="width: 35%;"><col style="width: 15%;"><col style="width: 25%;">
+                    <col style="width: 24%;"><col style="width: 36%;"><col style="width: 15%;"><col style="width: 25%;">
                   </colgroup>
                   <tr>
                     <th>विद्यार्थी का नाम</th>
@@ -1889,18 +2011,18 @@
                       <td class="font-semibold">ऊँचाई (cm)</td>
                       <td contenteditable="true">${stu.h1} सेमी</td>
                       <td contenteditable="true">${stu.h2} सेमी</td>
-                      <td class="text-left font-semibold"><b>रक्त:</b> ${buildSlideDownWithOther(stu, 'hlt_bg', bloodOptions, stu.bloodGroup || 'B+')}</td>
+                      <td class="text-left font-semibold"><b>रक्त:</b> ${buildSlideDownWithOther(stu, 'hlt_bg', bloodOptions, stu.bloodGroup || 'B+', true)}</td>
                     </tr>
                     <tr>
                       <td class="font-semibold">वजन (kg)</td>
                       <td contenteditable="true">${stu.w1} किग्रा</td>
                       <td contenteditable="true">${stu.w2} किग्रा</td>
-                      <td class="text-left font-semibold"><b>Hb:</b> ${buildSlideDownWithOther(stu, 'hlt_hb', hbOptions, stu.hb || '11.5 gm/dL')}</td>
+                      <td class="text-left font-semibold"><b>Hb:</b> ${buildSlideDownWithOther(stu, 'hlt_hb', hbOptions, stu.hb || '11.5 gm/dL', true)}</td>
                     </tr>
                     <tr>
                       <td class="font-semibold">कृमिनाशक</td>
                       <td>दी गई ☑</td><td>दी गई ☑</td>
-                      <td class="text-left font-semibold"><b>दृष्टि:</b> ${buildSlideDownWithOther(stu, 'hlt_eye', eyeOptions, stu.eyeSight || '6/6 (सामान्य)')}</td>
+                      <td class="text-left font-semibold"><b>दृष्टि:</b> ${buildSlideDownWithOther(stu, 'hlt_eye', eyeOptions, stu.eyeSight || '6/6 (सामान्य)', true)}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1936,7 +2058,7 @@
               </table>
             </div>
 
-            <div class="grid grid-cols-12 gap-2.5 w-full">
+            <div class="grid grid-cols-12 gap-2 w-full">
               <div class="col-span-6 min-w-0">
                 <table class="hpc-table theme-amber">
                   <colgroup>
@@ -1949,13 +2071,13 @@
               <div class="col-span-6 min-w-0">
                 <table class="hpc-table theme-teal">
                   <colgroup><col style="width: 100%;"></colgroup>
-                  <thead><tr><th>मेरी अभिलाषा (4 बिंदु — लक्ष्य निर्धारण)</th></tr></thead>
+                  <thead><tr><th>मेरी अभिलाषा (4 बिंदु — एक-एक पंक्ति में लक्ष्य)</th></tr></thead>
                   <tbody>${ambitionFourRowsHTML}</tbody>
                 </table>
               </div>
             </div>
 
-            <div class="grid grid-cols-12 gap-2.5 w-full">
+            <div class="grid grid-cols-12 gap-2 w-full">
               <div class="col-span-5 min-w-0">
                 <table class="hpc-table theme-purple text-center">
                   <colgroup>
@@ -1991,7 +2113,7 @@
               <div class="col-span-7 min-w-0">
                 <table class="hpc-table theme-orange">
                   <colgroup>
-                    <col style="width: 26%;"><col style="width: 37%;"><col style="width: 37%;">
+                    <col style="width: 24%;"><col style="width: 38%;"><col style="width: 38%;">
                   </colgroup>
                   <thead>
                     <tr>
@@ -2082,7 +2204,37 @@
               </tbody>
             </table>
 
-            <div class="flex items-center justify-between bg-emerald-50 border-t-2 border-emerald-800 px-3 py-1.5 rounded-b text-[10.5px] font-bold">
+            <!-- पेज-1 के निचले हिस्से में ग्रेडिंग एवं सरिता (Stream), पर्वत (Mountain), आसमान (Sky) तालिका -->
+            <div class="select-none">
+              <table class="hpc-table theme-amber">
+                <colgroup><col style="width: 25%;"><col style="width: 75%;"></colgroup>
+                <thead>
+                  <tr>
+                    <th class="text-center">सीखने का स्तर (प्रतीक)</th>
+                    <th class="text-left">प्रत्येक लर्निंग आउटकम के सापेक्ष सीखने के स्तर (सरिता, पर्वत, आसमान) की व्याख्या</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background-color: #f0f9ff !important;">
+                    <td class="font-extrabold text-center text-sky-900">★ स्तर 1 : सरिता / धारा (Stream)</td>
+                    <td class="text-slate-900">यह <b>प्रारम्भिक स्तर</b> है। सीखने की धारा शुरू हो चुकी है, पर अभी गहराई व प्रवाह विकसित होना शेष है। (41% - 60%)</td>
+                  </tr>
+                  <tr style="background-color: #ecfdf5 !important;">
+                    <td class="font-extrabold text-center text-emerald-950">★★ स्तर 2 : पर्वत (Mountain)</td>
+                    <td class="text-slate-900">यह <b>मध्य स्तर</b> है, जहाँ विद्यार्थी स्थिर प्रगति पर है और शिक्षक के हल्के मार्गदर्शन से कार्य कर लेता है। (61% - 80%)</td>
+                  </tr>
+                  <tr style="background-color: #fffbeb !important;">
+                    <td class="font-extrabold text-center text-amber-950">★★★ स्तर 3 : आसमान (Sky)</td>
+                    <td class="text-slate-900">यह कक्षा एवं आयु उपयुक्त <b>उत्कृष्ट (उच्चतम) स्तर</b> है, जहाँ विद्यार्थी स्वतंत्र व आत्मविश्वासी प्रदर्शन करता है। (81% - 100%)</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="text-center text-[8.8px] font-bold bg-indigo-50 border border-indigo-300 px-2 py-0.5 rounded text-indigo-950 mt-0.5">
+                शैक्षिक परीक्षा ग्रेड मानक: A1 (91%-100%) | A2 (81%-90%) | B1 (71%-80%) | B2 (61%-70%) | C1 (51%-60%) | C2 (41%-50%) | D1 (33%-40%) | D2 (32% व कम)
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between bg-emerald-50 border-t-2 border-emerald-800 px-3 py-1 rounded-b text-[10px] font-bold">
               <div class="text-emerald-950 select-none">
                 🎉 शैक्षिक सत्र के लिए <b>${currentClassSchema.promoteTo || 'अगली कक्षा'}</b> में कक्षोन्नति प्रदान की जाती है।
               </div>
@@ -2091,6 +2243,7 @@
           </div>
         `;
 
+        // PAGE 2 (BACK SIDE): 100% फुल-पेज दक्षताएं (कोई खाली जगह नहीं)
         let leftBackSecs = [];
         let rightBackSecs = [];
 
@@ -2107,18 +2260,19 @@
         let backGridHTML = "";
         if (isUpper) {
           backGridHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-2 items-start">
-              <div class="space-y-1">${leftBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}</div>
-              <div class="space-y-1">${rightBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}</div>
+            <div class="p2-two-col-grid">
+              <div class="p2-col-flex">${leftBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}</div>
+              <div class="p2-col-flex">${rightBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}</div>
             </div>
           `;
         } else {
           backGridHTML = `
-            <div class="space-y-1.5">
+            <div class="p2-fill-wrapper">
               ${leftBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}
               ${rightBackSecs.length > 0 ? `
-                <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-1.5">
-                  ${rightBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}
+                <div class="p2-two-col-grid">
+                  <div class="p2-col-flex">${rightBackSecs.slice(0, 2).map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}</div>
+                  <div class="p2-col-flex">${rightBackSecs.slice(2).map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}</div>
                 </div>
               ` : ''}
             </div>
@@ -2127,42 +2281,18 @@
 
         const page2HTML = `
           <div class="${p2Class}">
-            <div>
-              <div class="flex items-center justify-between bg-indigo-50 border-b-2 border-indigo-900 px-3 py-1 mb-1 rounded-t text-xs font-bold">
-                <span class="text-indigo-950">संज्ञानात्मक एवं सह-शैक्षिक विकास — विद्यार्थी: ${stu.name} (${currentClassSchema.className})</span>
-                <span class="text-amber-900">स्तर संकेत: ★ = सरिता (प्रारम्भिक), ★★ = पर्वत (मध्यम), ★★★ = आसमान (उत्कृष्ट)</span>
-              </div>
+            <div class="flex items-center justify-between bg-indigo-50 border-b-2 border-indigo-900 px-3 py-1.5 rounded-t text-xs font-bold shrink-0">
+              <span class="text-indigo-950">संज्ञानात्मक एवं सह-शैक्षिक विकास दक्षताएं — विद्यार्थी: ${stu.name} (${currentClassSchema.className})</span>
+              <span class="text-amber-900">स्तर संकेत: ★ = सरिता (प्रारम्भिक), ★★ = पर्वत (मध्यम), ★★★ = आसमान (उत्कृष्ट)</span>
+            </div>
+
+            <div class="flex-grow flex flex-col justify-between py-1 overflow-hidden">
               ${backGridHTML}
             </div>
 
-            <div class="pt-1 border-t-2 border-indigo-950 select-none">
-              <table class="hpc-table theme-amber mb-1">
-                <colgroup><col style="width: 26%;"><col style="width: 74%;"></colgroup>
-                <thead>
-                  <tr>
-                    <th class="text-center">सीखने का स्तर (स्टार प्रतीक)</th>
-                    <th class="text-left">प्रत्येक लर्निंग आउटकम के सापेक्ष सीखने के स्तर (सरिता, पर्वत, आसमान) की आधिकारिक व्याख्या</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="background-color: #f0f9ff !important;">
-                    <td class="font-extrabold text-center text-sky-900">★ स्तर 1 : सरिता / धारा (Stream)</td>
-                    <td class="text-slate-900">यह <b>प्रारम्भिक स्तर</b> है। सीखने की धारा शुरू हो चुकी है, पर अभी गहराई और प्रवाह विकसित होना शेष है। (41% - 60%)</td>
-                  </tr>
-                  <tr style="background-color: #ecfdf5 !important;">
-                    <td class="font-extrabold text-center text-emerald-950">★★ स्तर 2 : पर्वत (Mountain)</td>
-                    <td class="text-slate-900">यह <b>मध्य स्तर</b> है, जहाँ विद्यार्थी स्थिर और सशक्त प्रगति पर है। वह अवधारणा समझ चुका है और अधिकांश कार्य स्वयं कर लेता है, पर शिक्षक के मार्गदर्शन की जरूरत पड़ती है। (61% - 80%)</td>
-                  </tr>
-                  <tr style="background-color: #fffbeb !important;">
-                    <td class="font-extrabold text-center text-amber-950">★★★ स्तर 3 : आसमान / आकाश (Sky)</td>
-                    <td class="text-slate-900">यह कक्षा एवं आयु उपयुक्त <b>उत्कृष्ट (उच्चतम) स्तर</b> है, जहाँ विद्यार्थी उत्कृष्ट प्रदर्शन करता है। सीखना खुले आसमान की तरह विस्तृत और आत्मविश्वासी होता है। (81% - 100%)</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <div class="text-center text-[9.5px] font-bold bg-indigo-50 border border-indigo-300 px-3 py-0.5 rounded bg-badge text-indigo-950">
-                शैक्षिक परीक्षा ग्रेड मानक: A1 (91% - 100%) | A2 (81% - 90%) | B1 (71% - 80%) | B2 (61% - 70%) | C1 (51% - 60%) | C2 (41% - 50%) | D1 (33% - 40%) | D2 (32% और उससे कम)
-              </div>
+            <div class="flex items-center justify-between bg-slate-100 border-t border-slate-400 px-3 py-1 rounded-b text-[9.5px] font-bold text-slate-800 shrink-0 select-none">
+              <span>नोट: सितम्बर (अर्द्धवार्षिक) एवं मार्च (वार्षिक) आकलन में विद्यार्थी द्वारा प्रदर्शित दक्षता स्तर अंकित है।</span>
+              <span>हस्ताक्षर कक्षा अध्यापक: ....................................</span>
             </div>
           </div>
         `;
@@ -2193,7 +2323,6 @@
       window.print();
     }
 
-    // पेज लोड होने पर इनिशियलाइज़ेशन
     window.addEventListener("DOMContentLoaded", async () => {
       populateDistrictDropdown();
       loadSavedData();
@@ -2216,7 +2345,7 @@
         }
       });
 
-      await loadExternalJsonResources();
+      await loadExternalResources();
       switchClass(currentClassKey || "1");
     });
   </script>
