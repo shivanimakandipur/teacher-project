@@ -3,175 +3,840 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>हॉलिस्टिक रिपोर्ट कार्ड (HPC 1-8) - deshimaster.in</title>
-  <!-- Tailwind CSS CDN -->
+  
+  <!-- Primary SEO Meta Tags for Google Ranking & AdSense Approval -->
+  <title>होलिस्टिक प्रोग्रेस कार्ड (HPC 1-8) जनरेटर | समग्र प्रगति पत्र ऑनलाइन - deshimaster.in</title>
+  <meta name="title" content="होलिस्टिक प्रोग्रेस कार्ड (HPC 1-8) जनरेटर | समग्र प्रगति पत्र ऑनलाइन - deshimaster.in">
+  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा परिषद (NEP-2020 एवं निपुण भारत मिशन) के अंतर्गत बालवाटिका एवं कक्षा 1 से 8 तक का रंगीन समग्र प्रगति पत्र (Holistic Progress Card - HPC) ऑनलाइन तैयार करें। सरिता (Stream), पर्वत (Mountain), आसमान (Sky) रेटिंग और A4 पीडीएफ प्रिंट।">
+  <meta name="keywords" content="holistic progress card up basic shiksha, samagra pragati patra class 1 to 8, hpc report card maker online, nipun bharat report card, stream mountain sky grading, up primary school report card pdf, scert up hpc format, deshimaster">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://deshimaster.in/report-card.html">
+
+  <!-- Open Graph / WhatsApp Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deshimaster.in/report-card.html">
+  <meta property="og:title" content="समग्र प्रगति पत्र (HPC 1-8) स्मार्ट कलर्ड जनरेटर | deshimaster.in">
+  <meta property="og:description" content="परिषदीय विद्यालयों के लिए NEP-2020 आधारित रंगीन होलिस्टिक प्रोग्रेस रिपोर्ट कार्ड (बालवाटिका व कक्षा 1-8) बनाएं और 1 A4 शीट (2 पेज) में प्रिंट निकालें।">
+  <meta property="og:site_name" content="deshimaster.in">
+
+  <!-- Schema.org JSON-LD for Google Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "UP Basic Shiksha Holistic Progress Card (HPC) Generator",
+    "url": "https://deshimaster.in/report-card.html",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "description": "Online tool for Uttar Pradesh Basic Education teachers to generate NEP-2020 compliant colored Holistic Progress Cards (Samagra Pragati Patra) for Balvatika and Classes 1 to 8.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "deshimaster.in",
+      "url": "https://deshimaster.in"
+    }
+  }
+  </script>
+
+  <!-- Tailwind CSS & Font Awesome -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    body { font-family: 'Inter', 'Noto Sans Devanagari', sans-serif; }
     html { scroll-behavior: smooth; }
-    .article-body p { margin-bottom: 1.25rem; line-height: 1.85; text-align: justify; }
-    .article-body h2 { margin-top: 2.2rem; margin-bottom: 1rem; color: #1e1b4b; font-weight: 700; border-bottom: 1px solid #e0e7ff; padding-bottom: 0.5rem; }
-    .article-body h3 { margin-top: 1.4rem; margin-bottom: 0.6rem; color: #312e81; font-weight: 600; }
+    .urdu-text { font-family: 'Noto Nastaliq Urdu', 'Inter', serif; direction: rtl; text-align: right; line-height: 1.5; }
+    
+    /* Visibility Helpers */
+    .print-only { display: none !important; }
+    .hidden { display: none !important; }
+
+    /* On-Screen Select & Input Styling */
+    select.hpc-select {
+      border: 1px solid #94a3b8;
+      border-radius: 4px;
+      background-color: #ffffff;
+      padding: 1px 3px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #0f172a;
+      cursor: pointer;
+      max-width: 100%;
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    select.hpc-select:hover {
+      background-color: #f0fdf4;
+      border-color: #059669;
+    }
+    input.hpc-custom-input {
+      border: 1px dashed #d97706 !important;
+      background-color: #fffbeb !important;
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #78350f;
+      width: 100%;
+      margin-top: 2px;
+      box-sizing: border-box;
+    }
+
+    /* 1★, 2★, 3★ Single-Cell Button Group (कभी नहीं दबेगा) */
+    .star-btn-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      width: 100%;
+    }
+    .star-btn {
+      padding: 1px 3px;
+      border-radius: 3px;
+      font-size: 9.5px;
+      line-height: 1.1;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid #cbd5e1;
+      background-color: #f8fafc;
+      color: #475569;
+      transition: all 0.1s ease;
+    }
+    .star-btn:hover {
+      background-color: #fef3c7;
+      border-color: #f59e0b;
+      transform: scale(1.08);
+    }
+    .star-btn.active {
+      background-color: #fef3c7 !important;
+      border-color: #d97706 !important;
+      color: #b45309 !important;
+      font-weight: 900;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+
+    /* Colored HPC Table Themes */
+    table.hpc-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      margin-bottom: 2px;
+      background-color: #ffffff;
+    }
+    table.hpc-table th, table.hpc-table td {
+      border: 1px solid #475569;
+      padding: 2.2px 3.5px;
+      font-size: 10.5px;
+      vertical-align: middle;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    table.hpc-table th { font-weight: 700; }
+
+    /* Section Themes */
+    .theme-blue th { background-color: #dbeafe !important; color: #1e3a8a !important; border-color: #3b82f6 !important; }
+    .theme-blue td { border-color: #60a5fa !important; }
+
+    .theme-rose th { background-color: #ffe4e6 !important; color: #881337 !important; border-color: #f43f5e !important; }
+    .theme-rose td { border-color: #fb7185 !important; }
+
+    .theme-indigo th { background-color: #e0e7ff !important; color: #1e1b4b !important; border-color: #6366f1 !important; }
+    .theme-indigo td { border-color: #818cf8 !important; }
+
+    .theme-amber th { background-color: #fef3c7 !important; color: #78350f !important; border-color: #f59e0b !important; }
+    .theme-amber td { border-color: #fbbf24 !important; }
+
+    .theme-teal th { background-color: #ccfbf1 !important; color: #134e4a !important; border-color: #14b8a6 !important; }
+    .theme-teal td { border-color: #2dd4bf !important; }
+
+    .theme-emerald th { background-color: #d1fae5 !important; color: #064e3b !important; border-color: #10b981 !important; }
+    .theme-emerald td { border-color: #34d399 !important; }
+
+    .theme-purple th { background-color: #f3e8ff !important; color: #581c87 !important; border-color: #a855f7 !important; }
+    .theme-purple td { border-color: #c084fc !important; }
+
+    .theme-orange th { background-color: #ffedd5 !important; color: #7c2d12 !important; border-color: #f97316 !important; }
+    .theme-orange td { border-color: #fb923c !important; }
+
+    .theme-cyan th { background-color: #cffafe !important; color: #164e63 !important; border-color: #06b6d4 !important; }
+    .theme-cyan td { border-color: #22d3ee !important; }
+
+    /* Screen Card Preview Box */
+    .hpc-page {
+      background: #ffffff;
+      border: 2px solid #1e3a8a;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 5px;
+    }
+
+    /* A4 Exact 2-Page Print Styling (Compact Font on Page 2 for 100% Legend Fitting) */
+    @media print {
+      @page { size: A4 portrait; margin: 4mm; }
+      html, body {
+        background: #fff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        display: block !important;
+      }
+      main {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        display: block !important;
+      }
+      .no-print { display: none !important; }
+      .print-area {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        visibility: visible !important;
+      }
+      
+      /* Print Dual-Rendering */
+      .print-only { display: inline !important; }
+      select.hpc-select, input.hpc-custom-input, select.print-select, .star-btn-group {
+        display: none !important;
+      }
+      .print-pure-text {
+        display: inline !important;
+        font-weight: 700 !important;
+        color: #000 !important;
+        line-height: 1.2 !important;
+      }
+      .print-star-text {
+        display: inline-block !important;
+        color: #b45309 !important;
+        font-size: 11px !important;
+        letter-spacing: 1.5px;
+        font-weight: 900;
+      }
+      td.star-td-cell {
+        background-color: #fffbeb !important;
+      }
+
+      .hpc-page {
+        width: 100% !important;
+        height: 285mm !important;
+        max-height: 285mm !important;
+        padding: 3mm 4mm !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        border: 2px solid #1e3a8a !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        color: #000 !important;
+        background: #fff !important;
+        overflow: hidden !important;
+      }
+      .hpc-page:last-child {
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
+
+      /* Primary Classes (Balvatika & 1-5) Print Sizing */
+      .hpc-page.layout-primary { font-size: 10px; line-height: 1.25; }
+      .hpc-page.layout-primary table.hpc-table th,
+      .hpc-page.layout-primary table.hpc-table td { padding: 2.2px 3.5px; font-size: 9.6px; }
+
+      /* Upper Primary Classes (6-8) Page 1 Print Sizing */
+      .hpc-page.layout-upper-p1 { font-size: 9.5px; line-height: 1.22; }
+      .hpc-page.layout-upper-p1 table.hpc-table th,
+      .hpc-page.layout-upper-p1 table.hpc-table td { padding: 2px 3.2px; font-size: 9.1px; }
+
+      /* Upper Primary Classes (6-8) Page 2 Print Sizing (Compact 8px Font: Legend Fits 100% Without Cutting) */
+      .hpc-page.layout-upper-p2 {
+        font-size: 8.2px;
+        line-height: 1.14;
+        padding: 2.5mm 3.5mm !important;
+      }
+      .hpc-page.layout-upper-p2 table.hpc-table {
+        margin-bottom: 1.2px;
+      }
+      .hpc-page.layout-upper-p2 table.hpc-table th,
+      .hpc-page.layout-upper-p2 table.hpc-table td {
+        padding: 1.1px 2.2px;
+        font-size: 8px;
+      }
+      .hpc-page.layout-upper-p2 .print-star-text {
+        font-size: 9.5px !important;
+        letter-spacing: 0.8px;
+      }
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- Header (आपकी वेबसाइट का मूल डिज़ाइन) -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
-      <!-- Logo Section -->
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs no-print">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
       <a href="index.html" class="flex items-center gap-3 group">
-        <div class="w-11 h-11 bg-emerald-700 text-white rounded-lg flex items-center justify-center font-black text-xl tracking-tight shadow-sm">
-          DM
-        </div>
+        <div class="w-11 h-11 bg-emerald-700 text-white rounded-lg flex items-center justify-center font-black text-xl tracking-tight shadow-sm">DM</div>
         <div>
           <h1 class="text-xl font-bold text-slate-900 leading-tight tracking-tight">deshimaster.in</h1>
-          <p class="text-xs text-slate-500 font-medium">देशी मास्टर - शिक्षक डिजिटल साथी</p>
+          <p class="text-xs text-slate-500 font-medium">समग्र प्रगति पत्र (HPC 1-8) स्मार्ट कलर्ड जनरेटर</p>
         </div>
       </a>
 
-      <!-- Navigation Links -->
-      <nav class="flex items-center gap-4 text-sm font-semibold text-slate-600">
-        <a href="index.html" class="hover:text-emerald-700 transition">होम पोर्टल</a>
-        <a href="shasanadesh.html" class="hover:text-emerald-700 transition">शासनादेश</a>
-        <a href="about.html" class="hover:text-emerald-700 transition">हमारे बारे में</a>
+      <nav class="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-semibold text-slate-600">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-emerald-700 transition">
+          <i class="fa-solid fa-house mr-1"></i> होम पोर्टल
+        </a>
+        <a href="shasanadesh.html" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-emerald-700 transition">
+          <i class="fa-solid fa-file-pdf mr-1"></i> शासनादेश
+        </a>
+        <a href="#hpc-guide-article" class="px-3 py-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition">
+          <i class="fa-solid fa-book-open mr-1"></i> विस्तृत मार्गदर्शिका एवं नियम
+        </a>
       </nav>
     </div>
   </header>
 
-  <!-- Main Container -->
-  <main class="max-w-4xl mx-auto px-4 py-8 space-y-8 w-full flex-1">
-
-    <!-- 1. सबसे पहले: कमिंग सून (Coming Soon) सेक्शन -->
-    <div class="bg-gradient-to-br from-indigo-900 via-indigo-800 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl text-center relative overflow-hidden border border-indigo-700/50">
-      <div class="absolute -right-12 -top-12 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl"></div>
-      <div class="absolute -left-12 -bottom-12 w-48 h-48 bg-amber-500/10 rounded-full blur-2xl"></div>
-
-      <div class="relative z-10 space-y-4 max-w-2xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400 text-indigo-950 font-black text-xs uppercase tracking-widest shadow-md">
-          <i class="fa-solid fa-hourglass-half animate-spin"></i> शीघ्र उपलब्ध (Coming Soon)
+  <!-- Main Workspace -->
+  <main class="max-w-6xl mx-auto px-4 py-6 flex-grow w-full space-y-6">
+    
+    <!-- 1. School Master Configuration -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm no-print">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+        <div>
+          <span id="wdStatusBadge" class="text-[11px] font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">
+            <i class="fa-solid fa-circle-exclamation"></i> पहले माहवार कार्यदिवस सेट करना अनिवार्य है
+          </span>
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mt-1">1. विद्यालय एवं कक्षा-वार कार्यदिवस सेटिंग</h2>
         </div>
-
-        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
-          हॉलिस्टिक रिपोर्ट कार्ड (HPC कक्षा 1-8) जनरेटर
-        </h2>
-
-        <p class="text-indigo-200 text-sm sm:text-base leading-relaxed">
-          राष्ट्रीय शिक्षा नीति (NEP 2020) एवं NCERT 'परख' के दिशा-निर्देशों पर आधारित 360-डिग्री बहुआयामी प्रगति पत्र निर्माण टूल पर तकनीकी कार्य प्रगति पर है। यह डिजिटल टूल शीघ्र ही बेसिक शिक्षकों के लिए लाइव किया जाएगा।
-        </p>
-
-        <div class="pt-4 flex flex-wrap justify-center gap-3 text-xs font-semibold">
-          <span class="bg-white/10 px-3.5 py-1.5 rounded-xl border border-white/15">
-            <i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> 360° बहुआयामी मूल्यांकन
-          </span>
-          <span class="bg-white/10 px-3.5 py-1.5 rounded-xl border border-white/15">
-            <i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> स्व, सहपाठी एवं शिक्षक आकलन
-          </span>
-          <span class="bg-white/10 px-3.5 py-1.5 rounded-xl border border-white/15">
-            <i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> एक-क्लिक पीडीएफ प्रिंट
-          </span>
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="wdMainBtn" onclick="openWorkingDaysModal()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-3.5 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-sm transition animate-pulse">
+            <i class="fa-solid fa-calendar-check"></i> 1. माहवार कार्यदिवस सेट करें (<span id="wdClassLabel">कक्षा 1</span>) *
+          </button>
+          <button onclick="openPrintConfirmModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-4 py-2 rounded-xl text-xs sm:text-sm shadow-sm flex items-center gap-2 cursor-pointer transition">
+            <i class="fa-solid fa-print"></i> रंगीन / B&W 2-पेज प्रिंट निकालें
+          </button>
         </div>
       </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 text-xs">
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">कक्षा चुनें (Class):</label>
+          <select id="classSelect" onchange="switchClass(this.value)" class="w-full border border-slate-300 rounded-lg p-2 bg-emerald-50 font-bold text-emerald-950 focus:ring-2 focus:ring-emerald-600 cursor-pointer">
+            <option value="balvatika">बालवाटिका (Pre-Primary)</option>
+            <option value="1" selected>कक्षा 1</option>
+            <option value="2">कक्षा 2</option>
+            <option value="3">कक्षा 3</option>
+            <option value="4">कक्षा 4</option>
+            <option value="5">कक्षा 5</option>
+            <option value="6">कक्षा 6</option>
+            <option value="7">कक्षा 7</option>
+            <option value="8">कक्षा 8</option>
+          </select>
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">विद्यालय का नाम:</label>
+          <input type="text" id="schoolName" oninput="saveSchoolConfig()" placeholder="उदा. कम्पोजिट विद्यालय..." class="w-full border border-slate-300 rounded-lg p-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">विकासखण्ड (Block):</label>
+          <input type="text" id="blockName" oninput="saveSchoolConfig()" placeholder="उदा. पिसावां" class="w-full border border-slate-300 rounded-lg p-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">जनपद (District):</label>
+          <input type="text" id="districtName" oninput="saveSchoolConfig()" value="सीतापुर" class="w-full border border-slate-300 rounded-lg p-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">यू-डायस कोड & शैक्षिक सत्र:</label>
+          <div class="flex gap-1">
+            <input type="text" id="udiseCode" inputmode="numeric" maxlength="11" oninput="this.value=this.value.replace(/[^0-9]/g,''); saveSchoolConfig()" placeholder="UDISE (अंक)" class="w-3/5 border border-slate-300 rounded-lg p-2 font-semibold">
+            <select id="sessionYear" onchange="saveSchoolConfig()" class="w-2/5 border border-slate-300 rounded-lg p-2 bg-slate-50 font-bold text-slate-900 cursor-pointer">
+              <option value="2024-25">2024-25</option>
+              <option value="2025-26" selected>2025-26</option>
+              <option value="2026-27">2026-27</option>
+              <option value="2027-28">2027-28</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Student Entry Form -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm no-print">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">
+            2. छात्र/छात्रा जोड़ें (नाम केवल अक्षरों में तथा SR व APAAR केवल अंकों में)
+          </h3>
+          <p class="text-[11px] text-slate-500">
+            विज्ञान को अब विभाजित नहीं किया गया है (पूरा विज्ञान एक ही स्थान पर है)। पेज-2 के फॉन्ट को कॉम्पैक्ट किया गया है जिससे सरिता, पर्वत, आसमान तालिका पूरी तरह फिट आती है।
+          </p>
+        </div>
+        <div id="urduToggleContainer" class="hidden items-center gap-2 bg-amber-50 border border-amber-300 px-3 py-1.5 rounded-lg text-xs font-bold text-amber-900">
+          <input type="checkbox" id="globalUrduToggle" onchange="switchClass(currentClassKey)" class="w-4 h-4 accent-emerald-700 cursor-pointer">
+          <label for="globalUrduToggle" class="cursor-pointer">संस्कृत के स्थान पर 'उर्दू (اردو)' लागू करें (कक्षा 6-8)</label>
+        </div>
+      </div>
+
+      <!-- Basic Student Info Row -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-3 text-xs items-end">
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">विद्यार्थी का नाम (अक्षर) *</label>
+          <input type="text" id="stuName" oninput="this.value=this.value.replace(/[0-9]/g,'')" placeholder="केवल अक्षर लिखें" class="w-full border border-slate-300 rounded-lg p-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">लिंग (Slide-Down)</label>
+          <select id="stuGender" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50 font-bold cursor-pointer">
+            <option value="M">बालक (लड़का)</option>
+            <option value="F">बालिका (लड़की)</option>
+          </select>
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">पिता एवं माता का नाम (अक्षर)</label>
+          <div class="flex gap-1">
+            <input type="text" id="stuFather" oninput="this.value=this.value.replace(/[0-9]/g,'')" placeholder="पिता का नाम" class="w-1/2 border border-slate-300 rounded-lg p-2">
+            <input type="text" id="stuMother" oninput="this.value=this.value.replace(/[0-9]/g,'')" placeholder="माता का नाम" class="w-1/2 border border-slate-300 rounded-lg p-2">
+          </div>
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">जन्मतिथि (कैलेंडर)</label>
+          <input type="date" id="stuDob" value="2018-07-15" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50 font-semibold cursor-pointer">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">SR नं. (अंक) / APAAR (अंक)</label>
+          <div class="flex gap-1">
+            <input type="text" id="stuSr" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')" placeholder="SR (अंक)" class="w-2/5 border border-slate-300 rounded-lg p-2 font-semibold">
+            <input type="text" id="stuApaar" inputmode="numeric" maxlength="12" oninput="this.value=this.value.replace(/[^0-9]/g,'')" placeholder="APAAR (12 अंक)" class="w-3/5 border border-slate-300 rounded-lg p-2 font-semibold">
+          </div>
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">ऊँचाई(cm) / वजन(kg)</label>
+          <div class="flex gap-1">
+            <input type="number" id="stuHeight" placeholder="112" class="w-1/2 border border-slate-300 rounded-lg p-2">
+            <input type="number" id="stuWeight" placeholder="18" class="w-1/2 border border-slate-300 rounded-lg p-2">
+          </div>
+        </div>
+      </div>
+
+      <!-- Health + Attendance + Level Row -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs items-end mt-3 pt-3 border-t border-slate-100">
+        <div>
+          <label class="font-bold text-rose-800 block mb-1">ब्लड ग्रुप & हीमोग्लोबिन (Hb):</label>
+          <div class="flex gap-1">
+            <select id="stuBloodGroup" class="w-1/2 border border-rose-300 rounded-lg p-2 bg-rose-50 font-bold text-rose-950 cursor-pointer">
+              <option value="B+" selected>B+</option>
+              <option value="O+">O+</option>
+              <option value="A+">A+</option>
+              <option value="AB+">AB+</option>
+              <option value="B-">B-</option>
+              <option value="O-">O-</option>
+              <option value="A-">A-</option>
+              <option value="AB-">AB-</option>
+              <option value="ज्ञात नहीं">ज्ञात नहीं</option>
+            </select>
+            <select id="stuHb" class="w-1/2 border border-rose-300 rounded-lg p-2 bg-rose-50 font-bold text-rose-950 cursor-pointer">
+              <option value="11.5 gm/dL" selected>Hb: 11.5</option>
+              <option value="12.0 gm/dL">Hb: 12.0</option>
+              <option value="12.5 gm/dL">Hb: 12.5</option>
+              <option value="11.0 gm/dL">Hb: 11.0</option>
+              <option value="10.5 gm/dL">Hb: 10.5</option>
+              <option value="13.0 gm/dL">Hb: 13.0</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">दृष्टि (Eye Sight):</label>
+          <select id="stuEyeSight" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50 font-bold cursor-pointer">
+            <option value="6/6 (सामान्य)" selected>6/6 (सामान्य दृष्टि)</option>
+            <option value="6/9 (सामान्य)">6/9 (सामान्य)</option>
+            <option value="6/12 (चश्मा अपेक्षित)">6/12 (चश्मा अपेक्षित)</option>
+            <option value="चश्मा प्रयोगरत">चश्मा प्रयोगरत</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="font-bold text-indigo-900 block mb-1">उपस्थिति (कार्यदिवस से लिंक्ड):</label>
+          <div class="flex gap-1.5">
+            <select id="stuAttPercent" class="w-3/5 border border-indigo-300 rounded-lg p-2 bg-indigo-50 font-bold text-indigo-950 cursor-pointer">
+              <option value="60">60% उपस्थिति</option>
+              <option value="65">65% उपस्थिति</option>
+              <option value="75">75% उपस्थिति</option>
+              <option value="85" selected>85% उपस्थिति</option>
+              <option value="92">92% उपस्थिति</option>
+            </select>
+            <button type="button" onclick="openAttendanceModalForNew()" class="w-2/5 bg-white hover:bg-indigo-50 text-indigo-800 border border-indigo-300 font-bold rounded-lg px-2 py-2 cursor-pointer transition">
+              <i class="fa-solid fa-sliders"></i> दिन
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="font-bold text-emerald-900 block mb-1">दक्षता स्तर (1 ➔ 2 ➔ 3) व %:</label>
+          <div class="flex gap-1.5">
+            <select id="stuDefaultLevel" onchange="syncLevelToPercent(this.value)" class="w-3/5 border border-emerald-400 rounded-lg p-2 bg-emerald-50 font-bold text-emerald-950 cursor-pointer">
+              <option value="1">★ सरिता / Stream (स्तर 1)</option>
+              <option value="2" selected>★★ पर्वत / Mountain (स्तर 2)</option>
+              <option value="3">★★★ आसमान / Sky (स्तर 3)</option>
+            </select>
+            <div class="relative w-2/5">
+              <input type="number" id="stuPercent" oninput="syncPercentToLevel(this.value)" value="72" min="30" max="100" class="w-full border border-emerald-400 bg-white font-extrabold text-emerald-950 rounded-lg p-2 pr-5 text-center">
+              <span class="absolute right-2 top-2 text-slate-400 font-bold">%</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button onclick="addStudent()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 px-4 rounded-xl shadow-sm cursor-pointer transition flex items-center justify-center gap-1.5 text-sm">
+            <i class="fa-solid fa-user-plus"></i> छात्र कार्ड में जोड़ें
+          </button>
+        </div>
+      </div>
+
+      <!-- Saved Students Interactive Bar -->
+      <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+        <div id="studentListPills" class="flex flex-wrap gap-2 items-center text-xs"></div>
+        <button onclick="clearCurrentClassStudents()" class="text-xs text-red-600 hover:underline font-semibold">
+          <i class="fa-regular fa-trash-can"></i> इस कक्षा की सूची साफ़ करें
+        </button>
+      </div>
+    </section>
+
+    <!-- Helper Banner -->
+    <div class="bg-gradient-to-r from-amber-50 via-emerald-50 to-blue-50 border border-emerald-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 flex flex-wrap items-center justify-between gap-2 no-print">
+      <span>
+        <i class="fa-solid fa-check-circle text-emerald-700 mr-1"></i> <b>लेआउट फिक्स:</b> विज्ञान अब पूरे रूप में एक ही स्थान पर है और पेज-2 पर नीचे की सरिता/पर्वत/आसमान तालिका प्रिंट में बिल्कुल स्पष्ट आ रही है।
+      </span>
+      <span id="totalQuestionsBadge" class="font-bold bg-white px-2.5 py-1 rounded border border-emerald-300">कुल आधिकारिक प्रश्न: लोड हो रहा है...</span>
     </div>
 
-    <!-- 2. इसके बाद: विस्तृत नियमावली एवं विधिक रूपरेखा -->
-    <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200 space-y-6">
+    <!-- 3. Live Printable Report Cards Container -->
+    <div id="printContainer" class="print-area"></div>
+
+    <!-- 4. Comprehensive 1500+ Words SEO & Google AdSense Pillar Article (Strictly No-Print) -->
+    <article id="hpc-guide-article" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-8 no-print mt-12 leading-relaxed text-slate-700">
       
-      <div class="border-b border-slate-100 pb-5">
-        <div class="flex items-center gap-2 text-xs font-semibold text-emerald-700 uppercase tracking-wider mb-1">
-          <i class="fa-solid fa-book-bookmark"></i> शैक्षणिक नियमावली एवं मार्गदर्शिका
-        </div>
-        <h2 class="text-xl sm:text-2xl font-black text-slate-900">
-          हॉलिस्टिक प्रोग्रेस कार्ड (HPC): स्वरूप, मूल्यांकन मानक एवं शिक्षक निर्देश
+      <!-- Article Header -->
+      <div class="border-b border-slate-200 pb-5">
+        <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+          राष्ट्रीय शिक्षा नीति (NEP-2020) • निपुण भारत मिशन • SCERT उत्तर प्रदेश विशेष मार्गदर्शिका
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3 leading-snug">
+          समग्र प्रगति पत्र (Holistic Progress Card - HPC) क्या है? परिषदीय विद्यालयों (बालवाटिका से कक्षा 8) के लिए संपूर्ण मार्गदर्शिका
         </h2>
-        <p class="text-xs text-slate-500 mt-1">
-          राष्ट्रीय शिक्षा नीति 2020, निपुण भारत मिशन एवं SCERT उत्तर प्रदेश के मानकों पर आधारित
+        <p class="text-xs sm:text-sm text-slate-500 mt-2">
+          लेखक एवं संकलन: <strong>deshimaster.in शैक्षिक टीम</strong> | बेसिक शिक्षा विभाग, उत्तर प्रदेश एवं एनसीईआरटी (PARAKH) के नवीनतम मानकों पर आधारित
         </p>
       </div>
 
-      <article class="article-body text-slate-700 text-sm sm:text-base">
-        
-        <h2>1. हॉलिस्टिक प्रोग्रेस कार्ड (HPC) की अवधारणा क्या है?</h2>
+      <!-- Section 1: Introduction & Background -->
+      <div class="space-y-4 text-sm sm:text-base">
+        <h3 class="text-xl font-extrabold text-slate-900 border-l-4 border-emerald-600 pl-3">
+          1. प्रस्तावना: पारंपरिक रिपोर्ट कार्ड से 'समग्र प्रगति पत्र (HPC)' की ओर बदलाव क्यों?
+        </h3>
         <p>
-          पारंपरिक रिपोर्ट कार्ड केवल अंकीय अथवा योगात्मक (Summative) परीक्षा परिणामों पर आधारित होते थे, जिनमें बालक की संज्ञानात्मक स्मृति का ही परीक्षण हो पाता था। राष्ट्रीय शिक्षा नीति (NEP 2020) की धारा 4.35 के अनुपालन में NCERT द्वारा स्थापित राष्ट्रीय मूल्यांकन केंद्र <strong>'परख' (PARAKH - Performance Assessment, Review, and Analysis of Knowledge for Holistic Development)</strong> ने हॉलिस्टिक प्रोग्रेस कार्ड की रूपरेखा तैयार की है।
+          भारतीय शिक्षा व्यवस्था में दशकों से प्रचलित पारंपरिक प्रगति पत्र (Traditional Report Cards) केवल वर्ष के अंत में होने वाली लिखित परीक्षाओं के प्राप्तांकों (Marks) और प्रतिशत (Percentage) तक ही सीमित रहे हैं। इस पुरानी मूल्यांकन प्रणाली में इस बात का कोई उल्लेख नहीं होता था कि एक बच्चे ने पूरे शैक्षिक सत्र के दौरान व्यवहार, स्वच्छता, संवाद कौशल, टीम भावना, जिज्ञासा, खेलकूद और कलात्मक सृजनशीलता के क्षेत्र में क्या प्रगति की है। इसी एकांगी मूल्यांकन को समाप्त करने के लिए <strong>राष्ट्रीय शिक्षा नीति 2020 (National Education Policy - NEP 2020)</strong> के अध्याय 4 (पैरा 4.35) में सभी राज्यों को अपने विद्यालयी रिपोर्ट कार्ड को <strong>360-डिग्री बहुआयामी समग्र प्रगति पत्र (Holistic Progress Card - HPC)</strong> के रूप में पुनः डिज़ाइन करने की संस्तुति की गई।
         </p>
         <p>
-          यह रिपोर्ट कार्ड बालक की केवल किताबी समझ का नहीं, बल्कि उसके <strong>संज्ञानात्मक (Cognitive), सामाजिक-भावनात्मक (Socio-Emotional) और शारीरिक/क्रियात्मक (Psychomotor)</strong> तीनों आयामों का 360-डिग्री समग्र लेखा-जोखा प्रस्तुत करता है।
+          एनसीईआरटी (NCERT), नई दिल्ली की राष्ट्रीय मूल्यांकन इकाई <strong>'परख' (PARAKH - Performance Assessment, Review, and Analysis of Knowledge for Holistic Development)</strong> के दिशा-निर्देशों के क्रम में <strong>राज्य शैक्षिक अनुसंधान और प्रशिक्षण परिषद (SCERT), लखनऊ (उत्तर प्रदेश)</strong> तथा <strong>बेसिक शिक्षा परिषद, प्रयागराज</strong> द्वारा उत्तर प्रदेश के समस्त परिषदीय प्राथमिक, उच्च प्राथमिक एवं कम्पोजिट विद्यालयों के लिए नया रंगीन <strong>समग्र प्रगति पत्र (HPC)</strong> लागू किया गया है। यह प्रगति पत्र बालवाटिका (Pre-Primary) से लेकर कक्षा 8 तक के प्रत्येक विद्यार्थी की सीखने की यात्रा को वैज्ञानिक, सहयोगात्मक और उत्साहवर्धक रूप में प्रस्तुत करता है।
         </p>
+      </div>
 
-        <h2>2. 360-डिग्री बहुआयामी आकलन के चार प्रमुख घटक</h2>
+      <!-- Section 2: Panchakosha & 5 Domains -->
+      <div class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-5 sm:p-6 space-y-4 text-sm sm:text-base">
+        <h3 class="text-xl font-extrabold text-emerald-950 flex items-center gap-2">
+          <i class="fa-solid fa-layer-group text-emerald-700"></i> 2. समग्र प्रगति पत्र के 5 प्रमुख विकास क्षेत्र (Domains of Development)
+        </h3>
         <p>
-          नए हॉलिस्टिक रिपोर्ट कार्ड की सबसे बड़ी विशेषता यह है कि इसमें केवल शिक्षक ही अंक नहीं देता, बल्कि चार स्तरों पर मूल्यांकन दर्ज किया जाता है:
+          राष्ट्रीय पाठ्यचर्या की रूपरेखा (NCF-FS एवं NCF-SE) के अंतर्गत भारतीय दर्शन की <strong>'पंचकोश विकास'</strong> अवधारणा को आधुनिक शिक्षा मनोविज्ञान से जोड़ते हुए समग्र प्रगति पत्र में बच्चे के व्यक्तित्व को निम्नलिखित पाँच प्रमुख क्षेत्रों में आकलित किया जाता है:
         </p>
-        <ul class="list-disc pl-6 space-y-2 mb-4 text-slate-700">
+        <ul class="list-disc pl-6 space-y-2.5 text-slate-800">
           <li>
-            <strong>स्व-मूल्यांकन (Self-Assessment):</strong> विद्यार्थी स्वयं अपनी रुचियों, सीखने की गति, कार्य पूर्णता और प्राथमिकताओं पर अपनी प्रतिक्रिया (चित्रात्मक अथवा संकेतात्मक रूप में) दर्ज करता है।
+            <strong>संज्ञानात्मक एवं विषयगत विकास (Cognitive & Curricular Domain):</strong> इसके अंतर्गत भाषा (हिन्दी, अंग्रेजी, संस्कृत/उर्दू), गणित, पर्यावरण अध्ययन, विज्ञान और सामाजिक विज्ञान की कक्षा-वार निर्धारित <em>निपुण दक्षताओं (Learning Outcomes)</em> का सितंबर (अर्द्धवार्षिक) एवं मार्च (वार्षिक) में आकलन किया जाता है।
           </li>
           <li>
-            <strong>सहपाठी मूल्यांकन (Peer Assessment):</strong> कक्षा के सहपाठी समूह गतिविधियों, सहयोग की भावना, खेलकूद और कक्षा संवाद में साथी छात्र के व्यवहार का आकलन करते हैं।
+            <strong>व्यवहार एवं भावनाएँ (Socio-Emotional & Ethical Domain):</strong> इसमें यह देखा जाता है कि विद्यार्थी सहपाठियों के साथ कैसे संवाद करता है, समूह गतिविधियों में अपनी बारी की प्रतीक्षा करता है या नहीं, दूसरों की भावनाओं के प्रति कितना संवेदनशील और सम्मानजनक है, तथा कठिन परिस्थितियों में धैर्य और संतुलन कैसे बनाए रखता है।
           </li>
           <li>
-            <strong>शिक्षक मूल्यांकन (Teacher Assessment):</strong> शिक्षक दैनिक अवलोकन, प्रोजेक्ट कार्य, पोर्टफोलियो और व्यावहारिक दक्षताओं के आधार पर विकासात्मक स्तर दर्ज करते हैं।
+            <strong>सीखने के प्रति तत्परता एवं जीवन कौशल (Readiness to Learn & Life Skills):</strong> इस भाग में बच्चे की जिज्ञासा, कक्षा में निसंकोच प्रश्न पूछने की आदत, शिक्षक के निर्देशों का पालन, अपनी पसंद-नापसंद व समस्या को स्पष्ट रूप से व्यक्त करने की क्षमता, तथा दैनिक समय प्रबंधन का अवलोकन किया जाता है।
           </li>
           <li>
-            <strong>अभिभावक प्रतिपुष्टि (Parent Feedback):</strong> घर पर बालक के व्यवहार, स्वच्छता की आदतों, जिज्ञासा और गृह-सहयोग पर अभिभावक का अवलोकन इसमें सम्मिलित होता है।
+            <strong>स्वच्छता एवं स्वास्थ्य (Health, Hygiene & Physical Well-being):</strong> इसके अंतर्गत वर्ष में दो बार (अप्रैल एवं जनवरी) बच्चे की <strong>ऊँचाई (सेमी), वजन (किग्रा), ब्लड ग्रुप, हीमोग्लोबिन (Hb), दृष्टि परीक्षण (Eye Sight)</strong> और कृमिनाशक गोली (Albendazole) की स्थिति दर्ज की जाती है। साथ ही व्यक्तिगत स्वच्छता (नाखून, बाल, दांत, स्वच्छ यूनिफॉर्म, साबुन से हाथ धोना) और विद्यालय परिसर की स्वच्छता में सहभागिता का मूल्यांकन होता है।
+          </li>
+          <li>
+            <strong>कलात्मक एवं अन्य रुचियाँ (Aesthetic, Cultural & Co-Curricular Interests):</strong> इसमें चित्रकला, रंग भरना, मिट्टी व कागज के क्राफ्ट, संगीत, सामूहिक गायन, नृत्य, नाटक, बाल-सभा तथा मैदानी खेलकूद में बच्चे की सक्रिय भागीदारी को प्रोत्साहित किया जाता है।
           </li>
         </ul>
+      </div>
 
-        <h2>3. कक्षा-वार स्तर विभाजन (Stage-Wise Structure)</h2>
-        
-        <h3>क. फाउंडेशनल स्टेज (Foundational Stage: कक्षा 1 व 2)</h3>
+      <!-- Section 3: Stream, Mountain, Sky Detailed Table -->
+      <div class="space-y-4 text-sm sm:text-base">
+        <h3 class="text-xl font-extrabold text-slate-900 border-l-4 border-indigo-600 pl-3">
+          3. सीखने के 3 स्तर: सरिता/धारा (Stream), पर्वत (Mountain) और आसमान/आकाश (Sky) का मनोवैज्ञानिक अर्थ
+        </h3>
         <p>
-          इस स्तर पर किसी भी प्रकार की औपचारिक लिखित परीक्षा वर्जित है। मूल्यांकन पूरी तरह खेल-आधारित (Play-based) और गतिविधि-आधारित होता है। इसमें <strong>निपुण भारत मिशन</strong> के तीन मुख्य विकासात्मक लक्ष्यों पर ध्यान केंद्रित रहता है:
+          पारंपरिक रिपोर्ट कार्ड में कम अंक पाने वाले बच्चों को 'फेल', 'कमजोर' या 'C/D ग्रेड' कहकर चिह्नित कर दिया जाता था, जिससे बाल मन में हीनभावना उत्पन्न होती थी। समग्र प्रगति पत्र (HPC) में इस नकारात्मक शब्दावली को हटाकर प्रकृति के तीन सुंदर प्रतीकों—<strong>सरिता/धारा (Stream - ★), पर्वत (Mountain - ★★), और आसमान/आकाश (Sky - ★★★)</strong> का प्रयोग किया गया है। इनका सही आरोही क्रम (1 से 3) नीचे दी गई तालिका में स्पष्ट किया गया है:
         </p>
-        <ol class="list-decimal pl-6 space-y-1 mb-3 text-slate-700">
-          <li><strong>लक्ष्य 1:</strong> बच्चे अच्छा स्वास्थ्य और खुशहाली बनाए रखें (शारीरिक विकास व स्वच्छता)।</li>
-          <li><strong>लक्ष्य 2:</strong> बच्चे प्रभावी संप्रेषक बनें (मौखिक भाषा, पढ़ना व समझना)।</li>
-          <li><strong>लक्ष्य 3:</strong> बच्चे जुड़े हुए शिक्षार्थी बनें (संख्या ज्ञान व तार्किक सोच)।</li>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-xs sm:text-sm bg-white rounded-xl overflow-hidden border border-slate-300">
+            <thead>
+              <tr class="bg-slate-800 text-white text-left">
+                <th class="p-3.5 border border-slate-700 w-52">स्तर एवं स्टार संकेत (सही क्रम)</th>
+                <th class="p-3.5 border border-slate-700">SCERT उत्तर प्रदेश के अनुसार सीखने के स्तर की आधिकारिक व्याख्या</th>
+                <th class="p-3.5 border border-slate-700 w-44">शिक्षक की भूमिका एवं समकक्ष स्तर</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr class="bg-sky-50/60">
+                <td class="p-3.5 font-extrabold text-sky-900 border border-slate-200">
+                  ★ स्तर 1 : सरिता / धारा (Stream)<br>
+                  <span class="text-xs font-normal text-sky-700">(प्रारम्भिक स्तर / Beginner)</span>
+                </td>
+                <td class="p-3.5 border border-slate-200">
+                  यह <strong>प्रारम्भिक स्तर</strong> है। जिस प्रकार पर्वत से निकलने वाली छोटी सी जलधारा अपनी यात्रा शुरू करती है, उसी प्रकार विद्यार्थी के सीखने की धारा शुरू हो चुकी है। वह अवधारणा से परिचित हो रहा है, पर अभी उसमें गहराई, सटीकता और स्वतंत्र प्रवाह विकसित होना शेष है।
+                </td>
+                <td class="p-3.5 font-semibold text-sky-900 border border-slate-200">
+                  नियमित प्रोत्साहन एवं उपचारात्मक शिक्षण अपेक्षित (41% - 60%)
+                </td>
+              </tr>
+              <tr class="bg-emerald-50/60">
+                <td class="p-3.5 font-extrabold text-emerald-900 border border-slate-200">
+                  ★★ स्तर 2 : पर्वत (Mountain)<br>
+                  <span class="text-xs font-normal text-emerald-700">(मध्यम स्तर / Developing)</span>
+                </td>
+                <td class="p-3.5 border border-slate-200">
+                  यह <strong>मध्य स्तर</strong> है, जहाँ विद्यार्थी स्थिर और सशक्त प्रगति पर है। वह मुख्य अवधारणा को समझ चुका है और अधिकांश कार्य स्वयं कर लेता है, लेकिन कहीं-कहीं शिक्षक के मार्गदर्शन की जरूरत पड़ती है।
+                </td>
+                <td class="p-3.5 font-semibold text-emerald-800 border border-slate-200">
+                  नियमित अभ्यास एवं हल्का मार्गदर्शन (61% - 80%)
+                </td>
+              </tr>
+              <tr class="bg-amber-50/60">
+                <td class="p-3.5 font-extrabold text-amber-900 border border-slate-200">
+                  ★★★ स्तर 3 : आसमान / आकाश (Sky)<br>
+                  <span class="text-xs font-normal text-amber-700">(उत्कृष्ट स्तर / Proficient)</span>
+                </td>
+                <td class="p-3.5 border border-slate-200">
+                  यह कक्षा एवं आयु उपयुक्त <strong>उच्चतम (उत्कृष्ट) स्तर</strong> है, जहाँ विद्यार्थी स्वतंत्र रूप से उत्कृष्ट प्रदर्शन करता है। सीखना खुले आसमान की तरह विस्तृत और आत्मविश्वासी होता है।
+                </td>
+                <td class="p-3.5 font-semibold text-amber-900 border border-slate-200">
+                  स्वतंत्र एवं निपुण स्तर (81% - 100%)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Section 4: Class-wise Structure -->
+      <div class="space-y-4 text-sm sm:text-base">
+        <h3 class="text-xl font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
+          4. बालवाटिका से कक्षा 8 तक का चरणबद्ध ढांचा (Stage-Wise Structure of HPC)
+        </h3>
+        <p>
+          उत्तर प्रदेश बेसिक शिक्षा परिषद में संचालित विभिन्न कक्षाओं की आयु और पाठ्यक्रम की प्रकृति अलग-अलग होने के कारण समग्र प्रगति पत्र को चार विशिष्ट वर्गों में बाँटा गया है:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h4 class="font-extrabold text-slate-900 text-base mb-1">क. बालवाटिका (Pre-Primary / आँगनबाड़ी समन्वित)</h4>
+            <p class="text-xs sm:text-sm text-slate-600">
+              बालवाटिका में कोई लिखित परीक्षा नहीं होती। इसमें बच्चे का मूल्यांकन खेल-आधारित गतिविधियों एवं अवलोकन के माध्यम से 5 विकासात्मक क्षेत्रों के अंतर्गत कुल 20 संकेतकों पर किया जाता है।
+            </p>
+          </div>
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h4 class="font-extrabold text-slate-900 text-base mb-1">ख. बुनियादी स्तर: कक्षा 1 एवं कक्षा 2 (NIPUN Foundational Stage)</h4>
+            <p class="text-xs sm:text-sm text-slate-600">
+              कक्षा 1 व 2 में <strong>निपुण भारत मिशन (FLN)</strong> की मूलभूत दक्षताओं पर केंद्रित आकलन होता है। इसमें हिन्दी, गणित तथा अंग्रेजी के साथ 14 सह-शैक्षिक संकेतकों का मूल्यांकन किया जाता है।
+            </p>
+          </div>
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h4 class="font-extrabold text-slate-900 text-base mb-1">ग. प्रारंभिक स्तर: कक्षा 3, 4 एवं 5 (Preparatory Stage)</h4>
+            <p class="text-xs sm:text-sm text-slate-600">
+              कक्षा 3 से 5 में भाषा और गणित के उच्च चिंतन कौशल के साथ <strong>पर्यावरण अध्ययन (हमारा परिवेश)</strong> जुड़ जाता है। साथ ही प्रथम सत्र, अर्द्धवार्षिक, द्वितीय सत्र एवं वार्षिक परीक्षाओं में सभी विषयों की ग्रेडिंग दर्ज की जाती है।
+            </p>
+          </div>
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+            <h4 class="font-extrabold text-slate-900 text-base mb-1">घ. उच्च प्राथमिक स्तर: कक्षा 6, 7 एवं 8 (Middle Stage)</h4>
+            <p class="text-xs sm:text-sm text-slate-600">
+              उच्च प्राथमिक स्तर पर हिन्दी, गणित, अंग्रेजी के साथ <strong>विज्ञान</strong>, <strong>सामाजिक विज्ञान</strong> तथा <strong>संस्कृत अथवा उर्दू (اردو)</strong> का आकलन किया जाता है। इसके अतिरिक्त <strong>'विद्यार्थी स्व-आकलन'</strong> का विशेष खंड भी होता है।
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: 8-Point Grading Scale -->
+      <div class="space-y-3 text-sm sm:text-base">
+        <h3 class="text-xl font-extrabold text-slate-900 border-l-4 border-blue-600 pl-3">
+          5. शैक्षिक परीक्षा परिणाम: 8-बिंदु ग्रेडिंग प्रणाली (A1 से D2 मानक तालिका)
+        </h3>
+        <p>
+          सत्र परीक्षाओं तथा अर्द्धवार्षिक और वार्षिक परीक्षाओं में विद्यार्थी द्वारा प्राप्त अंकों के प्रतिशत को 8-पॉइंट ग्रेडिंग स्केल में प्रदर्शित किया जाता है:
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs sm:text-sm text-center font-bold">
+          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-950">A1 : 91% से 100% (सर्वोच्च)</div>
+          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900">A2 : 81% से 90% (उत्कृष्ट)</div>
+          <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-950">B1 : 71% से 80% (अति उत्तम)</div>
+          <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-900">B2 : 61% से 70% (उत्तम)</div>
+          <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-950">C1 : 51% से 60% (संतोषजनक)</div>
+          <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900">C2 : 41% से 50% (औसत)</div>
+          <div class="p-3 rounded-xl bg-orange-50 border border-orange-200 text-orange-950">D1 : 33% से 40% (प्रयास अपेक्षित)</div>
+          <div class="p-3 rounded-xl bg-red-50 border border-red-200 text-red-900">D2 : 32% व कम (विशेष सहयोग)</div>
+        </div>
+      </div>
+
+      <!-- Section 6: How to Use This Online Tool -->
+      <div class="space-y-4 text-sm sm:text-base">
+        <h3 class="text-xl font-extrabold text-slate-900 border-l-4 border-emerald-600 pl-3">
+          6. deshimaster.in के स्मार्ट HPC जनरेटर से 2 मिनट में पूरी कक्षा का रंगीन कार्ड कैसे तैयार करें?
+        </h3>
+        <ol class="list-decimal pl-6 space-y-2 text-slate-700">
+          <li>
+            <strong>चरण 1 — विद्यालय विवरण एवं माहवार कार्यदिवस कन्फर्म करें:</strong> सबसे पहले कक्षा चुनें, विद्यालय विवरण और सत्र भरें, और कार्यदिवस सेट करके सेव कर लें।
+          </li>
+          <li>
+            <strong>चरण 2 — विद्यार्थी का विवरण जोड़ें:</strong> छात्र का नाम, लिंग, अभिभावक, जन्मतिथि, SR नंबर या APAAR ID, स्वास्थ्य विवरण और अनुमानित स्तर चुनकर छात्र जोड़ें।
+          </li>
+          <li>
+            <strong>चरण 3 — स्लाइड-डाउन एवं स्टार (★) से कस्टमाइज़ करें:</strong> कार्ड में किसी भी प्रश्न के सामने दिए गए <code>1★</code>, <code>2★</code> या <code>3★</code> पर क्लिक करके स्तर बदलें।
+          </li>
+          <li>
+            <strong>चरण 4 — 1 A4 शीट (आगे-पीछे 2 पेज) में रंगीन या B&W प्रिंट निकालें:</strong> प्रिंट बटन पर क्लिक करें और बिना किसी अतिरिक्त खाली पन्ने के सटीक 2 पेज में प्रिंट निकालें।
+          </li>
         </ol>
+      </div>
 
-        <h3>ख. प्रिपरेटरी स्टेज (Preparatory Stage: कक्षा 3 से 5)</h3>
-        <p>
-          इस चरण में बुनियादी साक्षरता और संख्या ज्ञान (FLN) के सुदृढ़ीकरण के साथ-साथ अवलोकन, पर्यावरण अध्ययन, तार्किक चिंतन और समूह-कार्य की क्षमताओं का क्रमिक मूल्यांकन किया जाता है।
-        </p>
+      <!-- Section 7: FAQs -->
+      <div class="space-y-4 pt-2 border-t border-slate-200 text-sm sm:text-base">
+        <h3 class="text-xl font-extrabold text-slate-900">
+          7. अक्सर पूछे जाने वाले प्रश्न (FAQs on Holistic Progress Card UP)
+        </h3>
+        <div class="space-y-3">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <h4 class="font-bold text-slate-900">प्रश्न 1: शिक्षक-अभिभावक संवाद के हस्ताक्षर कहाँ होते हैं?</h4>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1">
+              <strong>उत्तर:</strong> समग्र प्रगति पत्र के प्रथम पृष्ठ (Page 1) पर 'अभिभावक प्रतिपुष्टि' खंड में प्रथम संवाद (सितम्बर) एवं द्वितीय संवाद (मार्च) के लिए स्पष्ट रूप से अभिभावक और शिक्षक के हस्ताक्षर कॉलम दिए गए हैं।
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <h4 class="font-bold text-slate-900">प्रश्न 2: क्या इस रंगीन कार्ड को सामान्य ब्लैक एंड व्हाइट प्रिंटर से भी निकाला जा सकता है?</h4>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1">
+              <strong>उत्तर:</strong> जी हाँ! इस कार्ड में हल्के पेस्टल बैकग्राउंड के साथ गहरे अक्षरों का प्रयोग किया गया है। B&W प्रिंटर से भी प्रत्येक शब्द और स्टार एकदम स्पष्ट और गहरा छपेगा।
+            </p>
+          </div>
+        </div>
+      </div>
 
-        <h3>ग. मिडिल स्टेज (Middle Stage: कक्षा 6 से 8)</h3>
-        <p>
-          उच्च प्राथमिक स्तर पर विषय-विशिष्ट दक्षताओं (भाषा, गणित, विज्ञान, सामाजिक विज्ञान), प्रायोगिक गतिविधियों, व्यावसायिक कौशलों (Vocational Crafts), वैज्ञानिक दृष्टिकोण और तार्किक विश्लेषण का समग्र मूल्यांकन किया जाता है।
-        </p>
-
-        <h2>4. शिक्षक साथियों के लिए महत्वपूर्ण दिशा-निर्देश</h2>
-        <p>
-          हॉलिस्टिक रिपोर्ट कार्ड तैयार करते समय परिषदीय प्राथमिक एवं उच्च प्राथमिक शिक्षकों को निम्नलिखित बिंदुओं का विशेष ध्यान रखना चाहिए:
-        </p>
-        <ul class="list-disc pl-6 space-y-2 mb-4 text-slate-700">
-          <li><strong>तुलना निषेध:</strong> किसी भी स्थिति में दो बच्चों के प्रदर्शन की आपस में तुलना नहीं की जाएगी। प्रत्येक बच्चे की प्रगति का आकलन उसके अपने पूर्व स्तर के सापेक्ष किया जाना अनिवार्य है।</li>
-          <li><strong>सकारात्मक टिप्पणियां:</strong> शिक्षक की टिप्पणी सुधारात्मक और उत्साहवर्धक होनी चाहिए, न कि नकारात्मक या निराशाजनक।</li>
-          <li><strong>दक्षता-आधारित रिकॉर्ड:</strong> केवल अंकों के स्थान पर बालक द्वारा अर्जित विशेष दक्षताओं (Learning Outcomes) का स्पष्ट उल्लेख होना चाहिए।</li>
-        </ul>
-
-        <h2>5. deshimaster.in पर शीघ्र क्या उपलब्ध होगा?</h2>
-        <p>
-          हमारी टीम बेसिक शिक्षा विभाग उत्तर प्रदेश के नवीनतम प्रारूपों के अनुसार इस टूल को अंतिम रूप दे रही है। इसके प्रारंभ होने पर शिक्षक:
-        </p>
-        <ul class="list-disc pl-6 space-y-1.5 mb-2 text-slate-700">
-          <li>विद्यार्थी का नाम, एसआर नंबर व कक्षा दर्ज करके सीधे दक्षताओं का चयन कर सकेंगे।</li>
-          <li>स्व, सहपाठी एवं शिक्षक मूल्यांकन के चेकबॉक्स एक क्लिक में भर सकेंगे।</li>
-          <li>कक्षा 1 से 8 तक के प्रत्येक छात्र का पूर्ण सुसज्जित, रंगीन एवं प्रिंट योग्य <strong>360° HPC पीडीएफ कार्ड</strong> तुरंत डाउनलोड कर सकेंगे।</li>
-        </ul>
-
-      </article>
-
-    </div>
-
+    </article>
   </main>
 
-  <!-- Footer (आपकी वेबसाइट के हूबहू स्वरूप और वास्तविक फाइल लिंक्स के साथ) -->
-  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+  <!-- MODAL 1: Mandatory Month-Wise Class Working Days Configuration Modal -->
+  <div id="workingDaysModal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center z-50 p-4 no-print">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div>
+          <h3 class="text-lg font-extrabold text-slate-900">माहवार कुल कार्यदिवस सेटिंग (<span id="modalWdClassTitle" class="text-emerald-700">कक्षा 1</span>)</h3>
+          <p class="text-xs text-slate-500">यहाँ कार्यदिवस सेव करने के बाद यह कार्ड की उपस्थिति तालिका में दिखेगा और इससे अधिक उपस्थिति दर्ज नहीं हो सकेगी।</p>
+        </div>
+        <button onclick="closeWorkingDaysModal()" class="text-slate-400 hover:text-slate-700 text-xl font-bold cursor-pointer">&times;</button>
+      </div>
+
+      <div id="wdInputsGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-3 text-xs"></div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-200">
+        <div class="flex flex-wrap gap-1.5">
+          <button onclick="copyWorkingDaysToGroup(['balvatika','1','2','3','4','5'])" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold cursor-pointer">
+            प्राथमिक (बालवाटिका व 1-5) में लागू करें
+          </button>
+          <button onclick="copyWorkingDaysToGroup(['6','7','8'])" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold cursor-pointer">
+            जूनियर (6-8) में लागू करें
+          </button>
+        </div>
+        <button onclick="saveWorkingDaysFromModal()" class="px-5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow-sm cursor-pointer">
+          <i class="fa-solid fa-check mr-1"></i> कार्यदिवस कन्फर्म व सेव करें
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Student Attendance Popup Modal -->
+  <div id="attendanceModal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center z-50 p-4 no-print">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div>
+          <h3 class="text-lg font-extrabold text-slate-900">छात्र उपस्थिति निर्धारण — <span id="attModalStuName" class="text-indigo-700">छात्र</span></h3>
+          <p class="text-xs text-slate-500">नोट: किसी भी माह में निर्धारित कार्यदिवस से अधिक उपस्थिति अपने-आप रोक दी जाएगी।</p>
+        </div>
+        <button onclick="closeAttendanceModal()" class="text-slate-400 hover:text-slate-700 text-xl font-bold cursor-pointer">&times;</button>
+      </div>
+
+      <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <span class="font-bold text-indigo-950"><i class="fa-solid fa-calculator mr-1"></i> उपस्थिति प्रतिशत से ऑटो-सेट करें:</span>
+        <div class="flex items-center gap-1.5">
+          <button type="button" onclick="applyPercentToAttendanceModal(60)" class="px-2.5 py-1 bg-white border border-indigo-300 rounded font-bold hover:bg-indigo-100 cursor-pointer">60%</button>
+          <button type="button" onclick="applyPercentToAttendanceModal(70)" class="px-2.5 py-1 bg-white border border-indigo-300 rounded font-bold hover:bg-indigo-100 cursor-pointer">70%</button>
+          <button type="button" onclick="applyPercentToAttendanceModal(75)" class="px-2.5 py-1 bg-white border border-indigo-300 rounded font-bold hover:bg-indigo-100 cursor-pointer">75%</button>
+          <button type="button" onclick="applyPercentToAttendanceModal(85)" class="px-2.5 py-1 bg-white border border-indigo-300 rounded font-bold hover:bg-indigo-100 cursor-pointer">85%</button>
+          <button type="button" onclick="applyPercentToAttendanceModal(92)" class="px-2.5 py-1 bg-white border border-indigo-300 rounded font-bold hover:bg-indigo-100 cursor-pointer">92%</button>
+          <input type="number" id="customAttPctInput" placeholder="%" min="10" max="100" oninput="applyPercentToAttendanceModal(this.value)" class="w-14 border border-indigo-400 rounded p-1 text-center font-bold bg-white">
+        </div>
+      </div>
+
+      <div id="attModalMonthsGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-3 text-xs"></div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-200 text-xs">
+        <div id="attModalSummary" class="font-bold text-slate-700">कुल उपस्थिति: 0 / 0 दिन</div>
+        <div class="flex gap-2">
+          <button onclick="closeAttendanceModal()" class="px-4 py-2 border border-slate-300 rounded-xl font-bold text-slate-600 hover:bg-slate-100 cursor-pointer">रद्द करें</button>
+          <button onclick="saveAttendanceFromModal()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow-sm cursor-pointer">
+            <i class="fa-solid fa-check mr-1"></i> उपस्थिति लागू करें
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: Print Verification Modal -->
+  <div id="printModal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center z-50 p-4 no-print">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-4">
+      <div class="flex items-center gap-3 text-emerald-700">
+        <i class="fa-solid fa-print text-2xl"></i>
+        <h3 class="text-lg font-extrabold text-slate-900">रंगीन / B&W 2-पेज प्रिंट के लिए तैयार!</h3>
+      </div>
+      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+        प्रत्येक छात्र का रिपोर्ट कार्ड सटीक <b>2 पेज (1 A4 शीट आगे-पीछे)</b> में सेट है। रंगीन प्रिंट के लिए प्रिंट डायलॉग में <b>Background Graphics: Checked (✔)</b> रखें। यदि ब्लैक एंड व्हाइट निकालना हो तो सीधे B&W / Grayscale चुनें।
+      </p>
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button onclick="closePrintConfirmModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-100 cursor-pointer">
+          अभी सुधार करें
+        </button>
+        <button onclick="proceedToPrint()" class="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold shadow-sm cursor-pointer flex items-center gap-1.5">
+          <i class="fa-solid fa-print"></i> सीधा प्रिंट / PDF निकालें
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500 no-print">
     <div class="max-w-4xl mx-auto px-4 space-y-2">
-      <!-- Direct HTML File Links -->
       <div class="flex flex-wrap justify-center items-center gap-x-3 text-sm font-semibold text-blue-600">
         <a href="about.html" class="hover:underline">About Us</a>
         <span class="text-slate-300">|</span>
@@ -179,15 +844,2077 @@
         <span class="text-slate-300">|</span>
         <a href="disclaimer.html" class="hover:underline">Disclaimer</a>
         <span class="text-slate-300">|</span>
-        <a href="terms.html" class="hover:underline">Contact Us</a>
+        <a href="terms.html" class="hover:underline">Terms & Conditions</a>
       </div>
-      
-      <!-- Copyright text as shown in screenshot -->
-      <p class="text-slate-400 text-xs">
-        © deshimaster.in. All Rights Reserved.
-      </p>
+      <p class="text-slate-400 text-xs">© deshimaster.in. All Rights Reserved.</p>
     </div>
   </footer>
+  <!-- Complete JavaScript Engine (Part 2 of 3): ऑल क्लास स्कीमा, रैंडम पूल एवं अटेंडेंस/वर्किंग डेज लॉजिक -->
+  <script>
+    const MONTHS_HI = [
+      "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर",
+      "अक्टूबर", "नवम्बर", "दिसम्बर", "जनवरी", "फरवरी", "मार्च"
+    ];
+    const DEFAULT_WORKING_DAYS = [24, 15, 0, 26, 24, 24, 21, 23, 25, 18, 22, 23];
 
+    // Helper Functions
+    function pickVariant(pool, seed, offset = 0) {
+      if (!pool || pool.length === 0) return "";
+      return pool[(Math.abs(Number(seed) || 1) + offset) % pool.length];
+    }
+
+    function applyGenderText(text, gender) {
+      if (!text) return "";
+      const idx = gender === "F" ? 1 : 0;
+      return text.replace(/([^\s\/]+)\/([^\s\/।,]+)/g, (match, mWord, fWord) => idx === 1 ? fWord : mWord);
+    }
+
+    function getGradeFromPercent(pct) {
+      const p = Number(pct) || 70;
+      if (p >= 91) return "A1";
+      if (p >= 81) return "A2";
+      if (p >= 71) return "B1";
+      if (p >= 61) return "B2";
+      if (p >= 51) return "C1";
+      if (p >= 41) return "C2";
+      if (p >= 33) return "D1";
+      return "D2";
+    }
+
+    function getLevelFromGradeOrPct(pct) {
+      const p = Number(pct) || 70;
+      if (p >= 78) return 3; // आसमान / Sky (उत्कृष्ट)
+      if (p >= 52) return 2; // पर्वत / Mountain (मध्यम)
+      return 1;              // सरिता / Stream (प्रारम्भिक)
+    }
+
+    function syncLevelToPercent(lvl) {
+      const pctInput = document.getElementById("stuPercent");
+      if (lvl == "1") pctInput.value = 48;
+      else if (lvl == "2") pctInput.value = 72;
+      else pctInput.value = 86;
+    }
+
+    function syncPercentToLevel(pct) {
+      const p = Number(pct) || 72;
+      const lvlSelect = document.getElementById("stuDefaultLevel");
+      if (p >= 78) lvlSelect.value = "3";
+      else if (p >= 52) lvlSelect.value = "2";
+      else lvlSelect.value = "1";
+    }
+
+    function formatDateToDDMMYYYY(isoDate) {
+      if (!isoDate) return "15/07/2018";
+      if (isoDate.includes("/")) return isoDate;
+      const parts = isoDate.split("-");
+      if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
+      return isoDate;
+    }
+
+    const RANDOM_POOLS = {
+      festivals: ["दीपावली", "होली", "रक्षाबंधन", "दशहरा", "नवरात्रि", "मकर संक्रांति", "जन्माष्टमी", "नागपंचमी", "बसंत पंचमी", "15 अगस्त"],
+      foods: ["पूड़ी-सब्ज़ी", "हलवा-पूड़ी", "दाल-चावल", "कढ़ी-चावल", "आलू-कचौड़ी", "खीर", "समोसा", "तहरी", "रोटी-सब्ज़ी", "छोला-चावल"],
+      games: ["खो-खो", "कबड्डी", "बैडमिंटन", "छुपन-छुपाई", "फुटबॉल", "क्रिकेट", "पकड़म-पकड़ाई", "कैरम", "लूडो", "दौड़"],
+      animals: ["गाय", "खरगोश", "तोता", "बछड़ा", "गिलहरी", "हिरण", "मोर", "कबूतर", "कोयल", "बकरी"],
+      flowers: ["गेंदा", "गुलाब", "कमल", "सूरजमुखी", "चमेली", "गुड़हल", "सदाबहार", "हरसिंगार", "बेला", "कनेर"],
+      subjects: ["गणित", "हिन्दी", "चित्रकला", "अंग्रेजी", "विज्ञान", "हमारा परिवेश", "संस्कृत", "खेल", "संगीत", "सामाजिक विषय"],
+      gardening: ["पौधे लगाना", "पानी देना", "तुलसी व गेंदा उगाना", "किचन गार्डन बनाना", "गमले सजाना", "नीम लगाना", "सूखी पत्तियाँ हटाना", "बीज बोना"],
+      books: ["पंचतंत्र कथाएं", "बालहंस", "अकबर-बीरबल", "विज्ञान की बातें", "महापुरुषों की जीवनी", "तेनालीराम कथाएं", "चंदामामा", "नैतिक शिक्षा"],
+      friendsM: ["अमन", "रोहित", "अंकित", "सुमित", "विकास", "राहुल", "शिवम", "सूरज", "अनुराग", "आयुष"],
+      friendsF: ["खुशी", "पूजा", "अंजलि", "प्रिया", "रोशनी", "शिवानी", "आरती", "स्नेहा", "मुस्कान", "प्रीति"],
+      ambitionM: ["फ़ौजी (सैनिक)", "शिक्षक", "डॉक्टर", "पुलिस अधिकारी", "इंजीनियर", "वैज्ञानिक", "पायलट", "दरोगा", "खिलाड़ी", "वकील"],
+      ambitionF: ["शिक्षिका", "डॉक्टर", "पुलिस अधिकारी", "नर्स", "वैज्ञानिक", "पायलट", "प्रशासनिक अधिकारी (SDM)", "खिलाड़ी", "वकील", "बैंक मैनेजर"],
+      toSee: ["चिड़ियाघर", "ताजमहल", "लाल किला", "मेट्रो ट्रेन", "हवाई जहाज", "विज्ञान प्रदर्शनी", "बड़ा मेला", "सर्कस", "झरना", "संसद भवन"],
+      toLearn: ["कंप्यूटर चलाना", "चित्र बनाना", "साइकिल चलाना", "अंग्रेजी बोलना", "तैराकी करना", "गायन", "विज्ञान प्रयोग", "क्राफ्ट बनाना"],
+      toVisit: ["अयोध्या धाम", "लखनऊ", "आगरा", "दिल्ली", "नैनीताल", "वाराणसी", "मामा का घर", "नानी का घर", "प्रयागराज", "मथुरा"],
+      toMake: ["मिट्टी के खिलौने", "कागज की नाव", "घर का चित्र", "रंगोली", "फूलों की माला", "गुल्लक", "बधाई कार्ड", "पतंग", "तिरंगा झंडा"],
+      selfImprove6to8: [
+        "गणित के सूत्रों और कठिन सवालों के नियमित अभ्यास में",
+        "अंग्रेजी वाचन, सही उच्चारण और शब्दकोश बढ़ाने में",
+        "कक्षा में बिना झिझक खुलकर अपने प्रश्न पूछने में",
+        "पढ़ाई और खेलकूद के बीच सही समय प्रबंधन करने में",
+        "अपनी लिखावट (हस्तलेख) को और अधिक सुंदर व स्पष्ट बनाने में",
+        "विज्ञान के प्रयोगों और रासायनिक सूत्रों को गहराई से समझने में",
+        "सामाजिक विज्ञान में मानचित्र कार्य और तिथियों को याद रखने में",
+        "घर पर प्रतिदिन स्वयं अध्ययन (Self-Study) का नियम निभाने में"
+      ],
+      parentInterest: [
+        "खेलकूद, दौड़-भाग और साथियों के साथ समूह में खेलने में",
+        "सुंदर चित्र बनाने, रंग भरने और कागज की आकृतियाँ बनाने में",
+        "कहानियों की रोचक पुस्तकें पढ़ने और नई बातें जानने में",
+        "गणितीय पहेलियाँ सुलझाने और गिनती संबंधी खेलों में",
+        "घर और बागवानी के छोटे कार्यों में बड़ों का हाथ बंटाने में",
+        "बाल कविताएं सुनाने, गीत-संगीत और अभिनय करने में",
+        "विद्यालय में सीखी गई बातों को घर आकर सुनाने में"
+      ],
+      parentExpectation: [
+        "बुनियादी भाषा ज्ञान और गणितीय कौशल को और मजबूत किया जाए।",
+        "बच्चे की झिझक दूर कर मंच पर बोलने का आत्मविश्वास बढ़ाया जाए।",
+        "पढ़ाई के साथ-साथ खेलकूद और सामान्य ज्ञान में भी आगे बढ़ाया जाए।",
+        "कक्षा में अधिक से अधिक बोलने व प्रश्न पूछने का अवसर मिले।",
+        "अंग्रेजी के सरल शब्दों और उच्चारण के अभ्यास पर ध्यान दिया जाए।",
+        "लिखावट (राइटिंग) और शुद्ध वर्तनी में निरंतर सुधार कराया जाए।",
+        "कमजोर विषयों में अतिरिक्त अभ्यास द्वारा मार्गदर्शन दिया जाए।"
+      ],
+      behavPos: [
+        "सहपाठियों के साथ मिल-जुलकर रहता/रहती है एवं सहयोग करता/करती है।",
+        "कक्षा में शांत, शिष्ट और अनुशासित व्यवहार प्रदर्शित करता/करती है।",
+        "विद्यालयी नियमों व शिक्षकों के निर्देशों का आदरपूर्वक पालन करता/करती है।",
+        "समूह गतिविधियों में अपनी बारी की धैर्यपूर्वक प्रतीक्षा करता/करती है।",
+        "दूसरों की भावनाओं का सम्मान करता/करती है और विनम्र भाषा बोलता/बोलती है।"
+      ],
+      behavCor: [
+        "खेल व गतिविधि के दौरान अपनी बारी की प्रतीक्षा करने का धैर्य बढ़ाएं।",
+        "समूह कार्यों में साथियों के साथ और अधिक सामंजस्य स्थापित करें।",
+        "कक्षा में अपनी बात और समस्या बिना संकोच स्पष्ट रूप से रखें।",
+        "अपनी शिक्षण सामग्री व पुस्तकों के रख-रखाव पर थोड़ा और ध्यान दें।"
+      ],
+      skillPos: [
+        "दिए गए गृहकार्य व कक्षा-कार्य को समय पर पूरा करता/करती है।",
+        "नई चीजें सीखने के प्रति सदैव उत्सुक और जिज्ञासु रहता/रहती है।",
+        "अपनी समझ बढ़ाने के लिए शिक्षक से निसंकोच प्रश्न पूछता/पूछती है।",
+        "दैनिक दिनचर्या और समय-सारणी का जिम्मेदारी से पालन करता/करती है।"
+      ],
+      skillCor: [
+        "गृहकार्य को प्रतिदिन निर्धारित समय पर पूरा करने की आदत डालें।",
+        "कठिनाई आने पर संकोच न करें और शिक्षक से तुरंत मार्गदर्शन लें।",
+        "अपने बस्ते व कॉपियों को अधिक व्यवस्थित रखने का अभ्यास करें।",
+        "घर पर पढ़ाई और खेल के लिए समय-सारणी बनाकर पालन करें।"
+      ],
+      healthPos: [
+        "प्रतिदिन स्वच्छ यूनिफॉर्म पहनकर साफ-सुथरे रूप में विद्यालय आता/आती है।",
+        "व्यक्तिगत स्वच्छता (नाखून, बाल, दांत) का पूरा ध्यान रखता/रखती है।",
+        "भोजन से पूर्व व शौच के बाद साबुन से हाथ धोने का नियम निभाता/निभाती है।",
+        "कक्षा और विद्यालय परिसर को स्वच्छ रखने में सक्रिय सहयोग देता/देती है।"
+      ],
+      healthCor: [
+        "नाखूनों को नियमित रूप से काटने और साफ रखने पर ध्यान दें।",
+        "दांतों और बालों की दैनिक सफाई के प्रति और अधिक सजग रहें।",
+        "विद्यालय यूनिफॉर्म को प्रतिदिन साफ-सुथरा रखने का प्रयास करें।",
+        "भोजन से पहले साबुन से अच्छी तरह हाथ धोने की आदत पक्की करें।"
+      ],
+      artPos: [
+        "चित्रकला, रंग भरने व क्राफ्ट कार्यों में गहरी रुचि लेता/लेती है।",
+        "सांस्कृतिक कार्यक्रमों व बाल-सभा में उत्साहपूर्वक भाग लेता/लेती है।",
+        "प्रार्थना, राष्ट्रगान व बाल-गीतों के सामूहिक गायन में सक्रिय रहता/रहती है।",
+        "मैदानी खेलकूद व शारीरिक व्यायाम में ऊर्जावान सहभागिता करता/करती है।"
+      ],
+      artCor: [
+        "पाठ्येतर व सांस्कृतिक गतिविधियों में संकोच छोड़कर प्रतिभाग करें।",
+        "चित्रकला में रेखाओं की स्पष्टता और रंग भरने के अभ्यास पर ध्यान दें।",
+        "बाल-सभा में मंच पर आकर कविता या कहानी सुनाने का साहस बढ़ाएं।",
+        "सामूहिक गायन और खेलकूद में अपनी सक्रियता और अधिक बढ़ाएं।"
+      ]
+    };
+
+    const DEFAULT_HW = {
+      "balvatika": { h1: 104, w1: 15 },
+      "1": { h1: 112, w1: 18 },
+      "2": { h1: 118, w1: 20 },
+      "3": { h1: 124, w1: 23 },
+      "4": { h1: 130, w1: 26 },
+      "5": { h1: 135, w1: 29 },
+      "6": { h1: 141, w1: 33 },
+      "7": { h1: 147, w1: 37 },
+      "8": { h1: 152, w1: 41 }
+    };
+
+    const CO_SCHOLASTIC_1_TO_5 = [
+      {
+        name: "व्यवहार एवं भावनाएँ",
+        indicators: [
+          "विद्यार्थी गतिविधियों के दौरान अपने क्रम (बारी) का इंतजार करता है एवं प्रक्रिया का पालन करता है।",
+          "विद्यार्थी सामाजिक एवं भावनात्मक गतिविधियों में सक्रिय प्रतिभाग करता है।",
+          "विद्यार्थी सहपाठियों के साथ सम्मानजनक भाषा में बात करता है।",
+          "विद्यार्थी अपने सहपाठियों की भावनाओं को समझता और सम्मान देता है।"
+        ]
+      },
+      {
+        name: "सीखने के प्रति तत्परता एवं जीवन कौशल",
+        indicators: [
+          "विद्यार्थी निर्देशों को ध्यान से सुनता और उनका पालन करता है।",
+          "विद्यार्थी अपनी पसंद नापसंद के बारे में बता पाता है।",
+          "विद्यार्थी अपनी आवश्यकता एवं समस्या के बारे में बता पाता है।",
+          "विद्यार्थी अपनी समझ बढ़ाने के लिए प्रश्न पूछता है।"
+        ]
+      },
+      {
+        name: "स्वच्छता एवं स्वास्थ्य",
+        indicators: [
+          "विद्यार्थी अपने नाखून, बाल और दांतों की साफ-सफाई का ध्यान रखता है।",
+          "विद्यार्थी स्वच्छता एवं साफ-सफाई के प्रति जागरूक है।",
+          "विद्यार्थी विद्यालय को स्वच्छ रखने संबंधी गतिविधियों में रुचि लेता है।"
+        ]
+      },
+      {
+        name: "कलात्मक एवं अन्य रुचियाँ",
+        indicators: [
+          "विद्यार्थी सांस्कृतिक गतिविधियों में प्रतिभाग करता है।",
+          "विद्यार्थी चित्रकला / रंग भरने / संगीत / क्राफ्ट गतिविधियों में रुचि लेता है।",
+          "विद्यार्थी नृत्य, गायन एवं खेल-कूद में रुचि लेता है।"
+        ]
+      }
+    ];
+
+    const BUILTIN_SCHEMAS = {
+      "balvatika": {
+        className: "कक्षा : बालवाटिका - 3", promoteTo: "कक्षा - 1",
+        examSubjects: ["ध्वनि एवं भाषा (मौखिक)", "संज्ञानात्मक व गणना (मौखिक)", "सौंदर्यबोध एवं खेल"],
+        subjects: [
+          { name: "सामाजिक, भावनात्मक एवं नैतिक विकास", indicators: [
+            "विद्यार्थी समूह के अन्य विद्यार्थियों के साथ वस्तुएँ साझा करता है एवं मिल-जुलकर खेलता है।",
+            "विद्यार्थी स्वयं के एवं विद्यालय के सामान की देखभाल करता है।",
+            "विद्यार्थी स्वयं एवं सहपाठियों की खुशी, उदासी, नाराजगी, क्रोध जैसी भावनाओं को पहचानता है।",
+            "विद्यार्थी परिचित व्यक्तियों/सहयोगियों से सहजता से वार्तालाप करता है।"
+          ]},
+          { name: "ध्वनि एवं भाषा विकास", indicators: [
+            "विद्यार्थी सरल निर्देशों को समझकर प्रतिक्रिया दे पाता है।",
+            "विद्यार्थी सुनी गयी कहानी / घटना को अपने शब्दों में व्यक्त करता है एवं उस पर आधारित प्रश्नों के उत्तर मौखिक रूप से दे पाता है।",
+            "विद्यार्थी सिखाए वर्ण/अक्षरों व उनकी संगत ध्वनियों को पहचानता एवं लिखने का प्रयास करता है।",
+            "विद्यार्थी दो-तीन अक्षर वाले सरल शब्दों को पढ़ पाता है।",
+            "विद्यार्थी अपना नाम पहचान व लिख पाता है।"
+          ]},
+          { name: "संज्ञानात्मक विकास", indicators: [
+            "विद्यार्थी वस्तुओं के संदर्भ में तुलनात्मक शब्दावली का प्रयोग करता है एवं लम्बा-उससे लम्बा, छोटा-उससे छोटा पहचानता है।",
+            "विद्यार्थी किसी वस्तु / घटना को क्रम में लगा एवं बोल पाता है।",
+            "विद्यार्थी वस्तुओं को उनके रंग, आकार एवं माप के आधार पर वर्गीकरण कर पाता है।",
+            "विद्यार्थी 9 तक की वस्तुओं को गिन पाता है एवं संख्या 9 तक के अंकों को पहचान व लिख पाता है।",
+            "विद्यार्थी सरल पैटर्न पहचान कर उसे आगे बढ़ा पाता है।"
+          ]},
+          { name: "सौंदर्यबोध विकास", indicators: [
+            "विद्यार्थी कल्पना के आधार पर चित्र बना एवं रंग भर पाता है।",
+            "विद्यार्थी सांस्कृतिक गतिविधियों में प्रतिभाग करता है।",
+            "विद्यार्थी आस-पास की ध्वनियों की पहचान एवं उसकी नकल करता है।"
+          ]},
+          { name: "शारीरिक विकास", indicators: [
+            "विद्यार्थी पेंसिल को सही ढंग से पकड़ पाता है।",
+            "विद्यार्थी अपने शरीर के अंगों को पहचानता और उन पर बात कर पाता है।",
+            "विद्यार्थी निर्देशों के अनुसार दौड़ता, गेंद फेंकता, पकड़ता, कूदता, आगे-पीछे या किनारे पर चल पाता है।"
+          ]}
+        ],
+        coScholastic: [],
+        cognitivePos: [
+          "मित्रों एवं शिक्षकों से सहजता व आत्मविश्वास से बातचीत कर लेता/लेती है।",
+          "सुनी हुई कविता या बालगीत की चार पंक्तियाँ हाव-भाव से सुनाता/सुनाती है।",
+          "2 से 3 अक्षर वाले सरल शब्दों को पहचानकर पढ़ लेता/लेती है।",
+          "9 तक की वस्तुओं को सही गिन लेता/लेती है और अंकों को लिख लेता/लेती है।"
+        ],
+        cognitiveCor: [
+          "अक्षरों की संगत ध्वनियों को पहचानकर बोलने के निरंतर अभ्यास की आवश्यकता है।",
+          "2-3 अक्षर वाले सरल शब्दों को जोड़कर पढ़ने में अतिरिक्त अभ्यास अपेक्षित है।",
+          "1 से 9 तक के अंकों की पहचान व लेखन को और सुदृढ़ करने की जरूरत है।"
+        ]
+      },
+
+      "1": {
+        className: "कक्षा : 1", promoteTo: "कक्षा - 2",
+        examSubjects: ["हिन्दी (मौखिक)", "गणित (मौखिक)", "अंग्रेजी (मौखिक)"],
+        subjects: [
+          { name: "हिन्दी", indicators: [
+            "विद्यार्थी परिवेशीय / सुनी हुई कविता या गीत की चार पंक्तियाँ हाव-भाव के साथ सुना लेता है।",
+            "विद्यार्थी 4 से 5 सरल शब्दों से बने हुए 4 वाक्यों को पढ़ लेता है।",
+            "विद्यार्थी 5 सरल शब्दों से बने हुए 2 वाक्यों को सुनकर लिख लेता है।"
+          ]},
+          { name: "गणित", indicators: [
+            "विद्यार्थी 20 तक के अंकों की गिनती एवं पहचान कर लेता है।",
+            "विद्यार्थी वस्तुओं या चित्रों के माध्यम से 9 तक की संख्या का जोड़ एवं घटाव (जिसका योग 20 से अधिक न हो) कर लेता है।",
+            "विद्यार्थी ₹20 तक की भारतीय मुद्रा के नोट एवं सिक्कों की पहचान कर लेता है।",
+            "विद्यार्थी चित्र एवं संख्या के सरल पैटर्न की पहचान कर लेता है एवं उसे आगे बढ़ा लेता है।"
+          ]},
+          { name: "अंग्रेजी", indicators: [
+            "Student can understand verbal instructions and respond accordingly.",
+            "Student can sing rhymes with actions.",
+            "Student can write capital letters of all alphabets."
+          ]}
+        ],
+        coScholastic: CO_SCHOLASTIC_1_TO_5,
+        cognitivePos: [
+          "परिवेशीय कविता/गीत की 4 पंक्तियाँ पूरे हाव-भाव से सुना लेता/लेती है।",
+          "4 से 5 सरल शब्दों से बने 4 वाक्यों को उचित प्रवाह से पढ़ लेता/लेती है।",
+          "20 तक के अंकों की गिनती व 9 तक का जोड़-घटाव सही करता/करती है।",
+          "₹20 तक के भारतीय नोटों व सिक्कों की सही पहचान कर लेता/लेती है।"
+        ],
+        cognitiveCor: [
+          "4-5 शब्दों वाले सरल वाक्यों के नियमित पठन अभ्यास की आवश्यकता है।",
+          "सुनकर वाक्य लिखने (इमला) में मात्राओं पर थोड़ा ध्यान दें।",
+          "11 से 20 तक की संख्याओं की पहचान और क्रम पर अभ्यास करें।"
+        ]
+      },
+
+      "2": {
+        className: "कक्षा : 2", promoteTo: "कक्षा - 3",
+        examSubjects: ["हिन्दी", "गणित", "अंग्रेजी"],
+        subjects: [
+          { name: "हिन्दी", indicators: [
+            "विद्यार्थी परिवेशीय / सुनी हुई कविता या गीत की 6 पंक्तियाँ हाव-भाव के साथ सुना लेता है।",
+            "विद्यार्थी सरल शब्दों से बने 6 से 8 वाक्यों के अज्ञात अनुच्छेद को उचित प्रवाह, स्पष्टता से पढ़ लेता है तथा 3 तथ्यात्मक एवं 1 उच्च स्तरीय प्रश्न का उत्तर दे लेता है।",
+            "विद्यार्थी 5 सरल शब्दों से बने हुए 4 वाक्यों को सुनकर लिख लेता है।"
+          ]},
+          { name: "गणित", indicators: [
+            "विद्यार्थी 99 तक की संख्या की गिनती, पहचान एवं तुलना कर लेता है।",
+            "विद्यार्थी 99 तक की संख्याओं का जोड़ एवं घटाव (हासिल और बिना हासिल वाले सवाल) कर लेता है।",
+            "विद्यार्थी सरल जोड़ के माध्यम से गुणा और समान वितरण/बँटवारे के रूप में भाग के प्रश्नों को हल कर लेता है।",
+            "विद्यार्थी ₹100 तक की भारतीय मुद्रा के प्रयोग से सरल लेन-देन संबंधी सवाल हल कर लेता है।",
+            "विद्यार्थी चित्र एवं संख्या के पैटर्न की पहचान एवं निर्माण कर लेता है।"
+          ]},
+          { name: "अंग्रेजी", indicators: [
+            "Student can understand verbal instructions and respond accordingly.",
+            "Student can sing rhymes with actions.",
+            "Student can identify word related to parts of body, colours, shapes and fruits.",
+            "Student can write dictation 2-3 letter words.",
+            "Student can tell about herself/himself."
+          ]}
+        ],
+        coScholastic: CO_SCHOLASTIC_1_TO_5,
+        cognitivePos: [
+          "6 से 8 वाक्यों के अज्ञात अनुच्छेद को प्रवाह से पढ़कर प्रश्नों के उत्तर दे लेता/लेती है।",
+          "99 तक की संख्याओं के हासिल वाले जोड़ व घटाव सही ढंग से हल कर लेता/लेती है।",
+          "₹100 तक की भारतीय मुद्रा से सरल लेन-देन के सवाल हल कर लेता/लेती है।"
+        ],
+        cognitiveCor: [
+          "हासिल वाले जोड़ और उधार वाले घटाव की संक्रियाओं में निरंतर अभ्यास की आवश्यकता है।",
+          "सुनकर लिखते समय पूर्णविराम और मात्राओं की शुद्धता पर ध्यान दें।"
+        ]
+      },
+
+      "3": {
+        className: "कक्षा : 3", promoteTo: "कक्षा - 4",
+        examSubjects: ["हिन्दी", "गणित", "अंग्रेजी", "सामाजिक विषय", "संस्कृत / उर्दू", "कला / संगीत", "कार्यानुभव / नैतिक शिक्षा"],
+        subjects: [
+          { name: "हिन्दी", indicators: [
+            "विद्यार्थी कविता या कहानी से जुड़े 4-5 तथ्यात्मक एवं 2-3 उच्च स्तरीय चिंतन कौशल के प्रश्नों के उत्तर स्थानीय भाषा में दे लेता है।",
+            "विद्यार्थी चित्रों के माध्यम से किसी कहानी को स्थानीय भाषा में हाव-भाव के साथ 6-8 वाक्यों में सुना लेता है।",
+            "विद्यार्थी आयु उपयुक्त अज्ञात पाठ को उचित प्रवाह एवं स्पष्टता के साथ पढ़ लेता है।",
+            "विद्यार्थी आयु उपयुक्त 8 से 12 वाक्यों के अज्ञात अनुच्छेद को पढ़कर 4 में से 3 प्रश्नों का उत्तर दे लेता है।",
+            "विद्यार्थी व्याकरण की दृष्टि से सटीक वर्तनी के साथ सही वाक्यों का प्रयोग करके स्वयं छोटे अनुच्छेद और कहानी 3-4 वाक्यों में लिख लेता है।"
+          ]},
+          { name: "गणित", indicators: [
+            "विद्यार्थी चार अंकों तक की संख्याओं की मात्रा, प्रतीक व उनके स्थानीय मान को समझ व लिख लेता है एवं उनकी तुलना कर लेता है।",
+            "विद्यार्थी तीन अंकों की संख्याओं का जोड़ व घटाव कर लेता है एवं शून्य के साथ एक अंक का जोड़, घटाव व गुणा कर लेता है।",
+            "विद्यार्थी 2 से 10 तक की संख्या के गुणन तथ्यों (तालिकाओं) का निर्माण एवं उपयोग कर लेता है तथा दो अंकों तक की संख्या का एक अंकीय संख्या से भाग कर लेता है।",
+            "विद्यार्थी मानक इकाइयों जैसे मीटर, कि०मी०, ग्राम, कि०ग्रा०, लीटर आदि का उपयोग करके लम्बाई/दूरी, वजन और क्षमता का अनुमान लगा लेता है एवं मापन कर लेता है।",
+            "विद्यार्थी घंटे और आधे घंटे में घड़ी पर समय पढ़ लेता है एवं कैलेंडर में तिथि व दिन की पहचान कर लेता है।"
+          ]},
+          { name: "अंग्रेजी", indicators: [
+            "Student can respond verbally to questions based on day-to-day life.",
+            "Student can use dictionary to find out spellings and meanings.",
+            "Student can write dictation of simple sentences (three to four words).",
+            "Student can identify noun in a given sentences.",
+            "Student can introduce himself/herself in three to four sentences."
+          ]},
+          { name: "पर्यावरण अध्ययन", indicators: [
+            "विद्यार्थी समुदाय में उपलब्ध विभिन्न व्यवसायों के बारे में बता लेता है।",
+            "विद्यार्थी परिवेश की वस्तुओं एवं जीव-जंतुओं को उनकी विशेषता के आधार पर वर्गीकृत कर पाता है।",
+            "विद्यार्थी परिवेश में उपलब्ध यातायात के साधन बता पाता है।",
+            "विद्यार्थी उत्तर प्रदेश से संबंधित सामान्य जानकारियाँ बता पाता है।",
+            "विद्यार्थी पर्यावरण संरक्षण संबंधी प्रयासों में प्रतिभाग करता है।"
+          ]}
+        ],
+        coScholastic: CO_SCHOLASTIC_1_TO_5,
+        cognitivePos: [
+          "तीन अंकीय संख्याओं के जोड़-घटाव व दो अंकीय गुणा सही हल कर लेता/लेती है।",
+          "दैनिक जीवन में कैलेंडर देखकर तिथि और घड़ी में सही समय पढ़ लेता/लेती है।",
+          "अज्ञात पाठ को धाराप्रवाह पढ़कर पूछे गए प्रश्नों के सटीक उत्तर देता/देती है।"
+        ],
+        cognitiveCor: [
+          "तीन अंकीय हासिल वाले घटाव और भाग के सवालों में नियमित अभ्यास की आवश्यकता है।",
+          "स्वयं से 3-4 वाक्य लिखते समय सही विराम चिह्नों व मात्राओं का प्रयोग करें।"
+        ]
+      },
+
+      "4": {
+        className: "कक्षा : 4", promoteTo: "कक्षा - 5",
+        examSubjects: ["हिन्दी", "गणित", "अंग्रेजी", "सामाजिक विषय", "संस्कृत / उर्दू", "कला / संगीत", "कार्यानुभव / नैतिक शिक्षा"],
+        subjects: [
+          { name: "हिन्दी", indicators: [
+            "विद्यार्थी कविता या कहानी से जुड़े 4-5 तथ्यात्मक एवं 3-4 उच्च स्तरीय चिंतन कौशल के प्रश्नों के उत्तर स्थानीय भाषा में दे लेता है।",
+            "विद्यार्थी कविता या कहानी को सुनकर उसे स्थानीय भाषा में हाव-भाव के साथ अपने शब्दों में सुना लेता है एवं अपनी प्रतिक्रिया व्यक्त कर लेता है।",
+            "विद्यार्थी आयु उपयुक्त पाठ को उतार-चढ़ाव, शुद्धता एवं गति के साथ पढ़ लेता है।",
+            "विद्यार्थी 4-6 सरल शब्दों का उपयोग करते हुए सटीक वर्तनी एवं विराम चिह्नों के प्रयोग के साथ सही वाक्य लिख लेता है।",
+            "विद्यार्थी किसी वाक्य में संज्ञा, सर्वनाम, क्रिया एवं विशेषण को पहचान कर बोलने व लिखने में प्रयोग कर लेता है।"
+          ]},
+          { name: "गणित", indicators: [
+            "विद्यार्थी 6 अंकों की संख्याओं का जोड़ एवं घटाव (हासिल के साथ) कर लेता है तथा जोड़-घटाव के व्यवहारिक सवाल को बना व हल कर लेता है।",
+            "विद्यार्थी दो और तीन अंकों की संख्याओं में परस्पर गुणा कर लेता है एवं उन पर आधारित व्यवहारिक सवालों को हल कर लेता है।",
+            "विद्यार्थी दो अंकों की संख्याओं में 1 से 9 तक की एक अंकीय संख्याओं से भाग कर लेता है।",
+            "विद्यार्थी दो अंकों वाली दो संख्याओं का लघुत्तम समापवर्तक एवं महत्तम समापवर्तक ज्ञात कर लेता है।",
+            "विद्यार्थी त्रिभुज, चतुर्भुज, आयत एवं वर्ग की अवधारणा को बता लेता है एवं उनकी आकृतियों का परिमाप ज्ञात कर लेता है।",
+            "विद्यार्थी भिन्न को चित्र में प्रदर्शित कर लेता है तथा सरल भिन्न को जोड़ व घटा लेता है।"
+          ]},
+          { name: "अंग्रेजी", indicators: [
+            "Student can respond to simple instructions.",
+            "Student can read aloud textbook with appropriate pronunciation.",
+            "Student can use vocabulary related to objects in surroundings.",
+            "Student can write dictation of three and four letter words.",
+            "Student can speak 2-3 sentences on a given topic."
+          ]},
+          { name: "पर्यावरण अध्ययन", indicators: [
+            "विद्यार्थी परिवार के सदस्यों के साथ अपने संबंध को बता पाता है।",
+            "विद्यार्थी परिवेश की वस्तुओं एवं जीव-जंतुओं को उनकी विशेषताओं के आधार पर पहचान पाता है।",
+            "विद्यार्थी संतुलित आहार / जंक फूड / पौष्टिक आहार में अंतर कर पाता है।",
+            "विद्यार्थी स्वच्छता संबंधी कार्यों में प्रतिभाग करता है।",
+            "विद्यार्थी पर्यावरण संरक्षण के प्रति संवेदनशीलता दिखाता है।"
+          ]}
+        ],
+        coScholastic: CO_SCHOLASTIC_1_TO_5,
+        cognitivePos: [
+          "तीन अंकीय संख्याओं में दो अंकीय संख्याओं से गुणा व भाग कुशलता से कर लेता/लेती है।",
+          "त्रिभुज, आयत और वर्ग की आकृतियों का परिमाप सही ज्ञात कर लेता/लेती है।"
+        ],
+        cognitiveCor: [
+          "ल०स०, म०स० और भिन्नों के जोड़-घटाव में निरंतर अभ्यास की आवश्यकता है।",
+          "वाक्यों में विशेषण और क्रिया शब्दों की पहचान में थोड़ा मार्गदर्शन अपेक्षित है।"
+        ]
+      },
+
+      "5": {
+        className: "कक्षा : 5", promoteTo: "कक्षा - 6",
+        examSubjects: ["हिन्दी", "गणित", "अंग्रेजी", "सामाजिक विषय", "संस्कृत / उर्दू", "कला / संगीत", "कार्यानुभव / नैतिक शिक्षा"],
+        subjects: [
+          { name: "हिन्दी", indicators: [
+            "विद्यार्थी सुनी/पढ़ी/देखी हुई रचनाओं/घटनाओं/चित्रों एवं पात्रों आदि के विषय में बातचीत के दौरान प्रश्न पूछता है एवं अपनी राय व्यक्त कर लेता है।",
+            "विद्यार्थी कविता या कहानी से जुड़े मुख्य भाव को मानक भाषा में बता पाता है एवं संबंधित प्रश्नों के उत्तर दे लेता है।",
+            "विद्यार्थी संज्ञा, सर्वनाम और विशेषण, क्रिया एवं कारक-चिह्नों आदि को वाक्यों में पहचान एवं प्रयोग कर पाता है।",
+            "विद्यार्थी पाठ का सारांश/भाव/शीर्षक लिख लेता है एवं पाठ से जुड़े प्रश्नों के उत्तर कम से कम 4-5 वाक्यों में क्रम से लिख लेता है।",
+            "विद्यार्थी समानार्थी-विपरीतार्थक, एकवचन-बहुवचन एवं तुकांत शब्दों का उपयोग कर लेता है।",
+            "विद्यार्थी त्यौहार/यात्रा/मेला/घटना/दृश्य का विवरण/अनुभव/संदेश/पत्र/प्रार्थना पत्र पर आधारित कम से कम 5-7 वाक्यों में लिख लेता है।"
+          ]},
+          { name: "गणित", indicators: [
+            "विद्यार्थी 8 अंकों तक की संख्याओं की पहचान एवं जोड़, घटाव (हासिल सहित), गुणा, भाग के व्यवहारिक सवाल बनाकर हल कर लेता है।",
+            "विद्यार्थी दशमलव वाली संख्याओं का तीन स्थानों तक जोड़ एवं घटाव कर लेता है।",
+            "विद्यार्थी त्रिभुज (शीर्ष, भुजा, कोण) को समझकर भुजा एवं कोण के आधार पर त्रिभुज के प्रकार बता लेता है।",
+            "विद्यार्थी प्रतिशत की अवधारणा को समझकर किसी संख्या के प्रतिशत की गणना कर लेता है।",
+            "विद्यार्थी क्रय व विक्रय मूल्य को समझकर लाभ-हानि के सवालों को हल कर लेता है।"
+          ]},
+          { name: "अंग्रेजी", indicators: [
+            "Student can respond verbally to questions based on day-to-day life.",
+            "Student can describe orally about the events, places and experiences in 2-3 sentences.",
+            "Student can use dictionary to find out spellings and meanings.",
+            "Student can identify noun and verb in speech and writing."
+          ]},
+          { name: "पर्यावरण अध्ययन", indicators: [
+            "विद्यार्थी इंडोर-आउटडोर खेलों का वर्गीकरण एवं संबंधित जानकारी बता पाता है।",
+            "विद्यार्थी को भोजन संरक्षण का बोध है।",
+            "विद्यार्थी प्राकृतिक एवं मानव निर्मित आपदाओं का वर्गीकरण कर पाता है।",
+            "विद्यार्थी भारत से संबंधित भौगोलिक एवं सामान्य जानकारी बता लेता है।",
+            "विद्यार्थी को फसल चक्र का बोध है।"
+          ]}
+        ],
+        coScholastic: CO_SCHOLASTIC_1_TO_5,
+        cognitivePos: [
+          "भिन्नों के जोड़-घटाव, प्रतिशत तथा लाभ-हानि के सवाल कुशलता से हल करता/करती है।",
+          "ज्यामितीय आकृतियों (त्रिभुज के प्रकार) में भुजा व कोण की पहचान सही कर लेता/लेती है।"
+        ],
+        cognitiveCor: [
+          "दशमलव संख्याओं के जोड़-घटाव और लाभ-हानि के प्रश्नों में अतिरिक्त अभ्यास करें।",
+          "प्रार्थना-पत्र के औपचारिक प्रारूप और शुद्ध वर्तनी के अभ्यास पर ध्यान दें।"
+        ]
+      },
+
+      "6": {
+        className: "कक्षा : 6", promoteTo: "कक्षा - 7",
+        examSubjects: ["हिन्दी", "गणित", "अंग्रेजी", "विज्ञान", "सामाजिक विज्ञान", "संस्कृत / उर्दू", "कला / संगीत", "खेल एवं शारीरिक शिक्षा", "पर्यावरण"],
+        subjects: [
+          { name: "हिन्दी", indicators: [
+            "विद्यार्थी रेडियो, टीवी, मोबाइल, इंटरनेट आदि पर सुनी-देखी गई सामग्री को समझते हुए अपने शब्दों में मौखिक रूप से व्यक्त कर लेता है।",
+            "विद्यार्थी बाल श्रम, अशिक्षा, स्वच्छता आदि सामाजिक मुद्दों पर अपने विचार व्यक्त कर लेता है तथा संबंधित मुद्दों पर प्रश्न एवं तर्क भी कर लेता है।",
+            "विद्यार्थी विविध विधाओं की रचनाओं को उचित प्रवाह, हाव-भाव, आरोह-अवरोह व विराम आदि के अनुसार समझते हुए पढ़कर संदर्भानुसार अर्थ व्यक्त कर लेता है।",
+            "विद्यार्थी किसी सुनी या देखी हुई घटना, दृश्य, कार्यक्रम का विवरण, अपने या दूसरों द्वारा बताए गए अनुभव अपने शब्दों में क्रमबद्ध रूप से लिख लेता है।",
+            "विद्यार्थी पाठ्यपुस्तकों सहित अन्य पुस्तकों, पत्र-पत्रिकाओं और इंटरनेट पर उपलब्ध सामग्री को पढ़कर अपनी पसंद/नापसंद के अनुसार टिप्पणी लिख लेता है।",
+            "विद्यार्थी स्तरानुकूल सामग्री को पढ़कर एवं समझकर शुद्ध वर्तनी के साथ अर्थ लिख लेता है एवं लेखन में संज्ञा, सर्वनाम, विशेषण को समझते हुए उचित रूप से वाक्य में प्रयोग कर लेता है।",
+            "विद्यार्थी लय, तुक, मुहावरा, रस, छंद, अलंकार जैसे भाषागत सौंदर्य को पहचानकर बता लेता है एवं उनका प्रयोग करके विभिन्न प्रकार की वाक्य संरचना कर लेता है।"
+          ]},
+          { name: "गणित", indicators: [
+            "विद्यार्थी संख्या में अंकों का स्थानीय मान बता लेता है।",
+            "विद्यार्थी पूर्णांकों के जोड़ व घटाने का प्रदर्शन संख्या रेखा पर कर लेता है।",
+            "विद्यार्थी BODMAS की अवधारणा का प्रयोग कर विभिन्न गणितीय संक्रियाएँ कर लेता है।",
+            "विद्यार्थी सजातीय एवं विजातीय पदों का ध्यान रखते हुए एकपदीय, द्विपदीय व त्रिपदीय व्यंजकों का जोड़ व घटाव कर लेता है।",
+            "विद्यार्थी विभिन्न कोणों का निर्माण करके उनमें अंतर स्पष्ट कर लेता है तथा शीर्षाभिमुख कोण, संगत कोण एवं एकांतर कोणों में सह-संबंध स्थापित कर लेता है।",
+            "विद्यार्थी ल०स० एवं म०स० की अवधारणा को जानता है एवं दैनिक जीवन में इसका प्रयोग कर लेता है।",
+            "विद्यार्थी क्रय-विक्रय, लाभ-हानि और साधारण ब्याज की अवधारणा को जानता है और दैनिक जीवन में इनका प्रयोग कर लेता है।",
+            "विद्यार्थी त्रिभुजों का उनकी भुजाओं व कोणों के आधार पर वर्गीकरण कर लेता है।"
+          ]},
+          { name: "अंग्रेजी", indicators: [
+            "Student can write words/phrases, simple sentences and short paragraphs as dictated by the teacher.",
+            "Student can speak and write a few sentences on the given topic correctly.",
+            "Student can read and comprehend the text and answer the questions based on the text.",
+            "Student can use the dictionary to check the meaning and spellings of difficult words.",
+            "Student can converse with his/her peers and family members in simple and short sentences and familiar with the parts of Speech (Noun, Pronoun, Adjectives etc.) and can identify them correctly.",
+            "Student can give/write short answers for questions beginning with What/Who/Where/When/How etc.",
+            "Student can complete stories with the help of pictures and able to write leave application, short and simple compositions or process writing."
+          ]},
+          { name: "विज्ञान", indicators: [
+            "विद्यार्थी भोजन, कृषि, यातायात, मनोरंजन, संचार, चिकित्सा, शिक्षा और अंतरिक्ष के क्षेत्र में विज्ञान के कारणों से उत्पन्न समस्याओं को बता लेता है।",
+            "विद्यार्थी पृथक्करण की विभिन्न विधियों जैसे- थ्रेशिंग, बीनना, चालना, ऊर्ध्वपातन, तलछटीकरण, अपकेन्द्रण, वाष्पन तथा आसवन को प्रयोग द्वारा प्रदर्शित कर लेता है।",
+            "विद्यार्थी परिवेश में हो रहे विभिन्न प्रकार के परिवर्तनों को उदाहरण सहित बता लेता है एवं परिवर्तन के लिए ऊर्जा की आवश्यकता को प्रयोग द्वारा प्रदर्शित कर लेता है।",
+            "विद्यार्थी वृक्ष, झाड़ी तथा शाकीय पौधों में अंतर उदाहरण सहित स्पष्ट कर लेता है तथा पौधे के विभिन्न भागों के कार्य बता लेता है।",
+            "विद्यार्थी मानव शरीर के विभिन्न अंगों व उनके कार्यों तथा संधियों एवं उपास्थियों के कार्यों को बता लेता है।",
+            "विद्यार्थी संतुलित आहार की अवधारणा को समझते हुए पिरामिड द्वारा प्रदर्शित कर लेता है एवं भोजन के विभिन्न पोषक तत्वों के प्रकार एवं स्रोत तथा उनकी कमी से होने वाले रोगों की सूची बना लेता है।",
+            "विद्यार्थी दीप्त, अदीप्त, पारदर्शी, अर्द्ध पारदर्शी, अपारदर्शी वस्तुओं में अंतर बता लेता है।",
+            "विद्यार्थी वायु के संघटन एवं उसके गुणों व उपयोगिता को दैनिक जीवन से जोड़ कर बता लेता है तथा जल के स्रोत एवं भौतिक व रासायनिक गुण बता लेता है।",
+            "विद्यार्थी कंप्यूटर के विभिन्न भागों एवं कार्यों को बता लेता है।"
+          ]},
+          { name: "सामाजिक विज्ञान", indicators: [
+            "विद्यार्थी इतिहास के अध्ययन के महत्व एवं इतिहास की जानकारी हेतु पुरातात्विक एवं साहित्यिक स्रोत की आवश्यकताओं पर चर्चा कर लेता है।",
+            "विद्यार्थी पाषाण कालीन मानव के रहन-सहन की विशेषताओं का वर्णन कर लेता है तथा प्रमुख नदी घाटी सभ्यताओं की विशेषताओं की तुलना कर लेता है।",
+            "विद्यार्थी वैदिक कालीन सामाजिक व्यवस्था की विशेषता बताता है तथा बौद्ध एवं जैन धर्म की शिक्षा पर चर्चा कर लेता है।",
+            "विद्यार्थी अपने देश भारत की विभिन्न बोलियों, रीति-रिवाजों, खान-पान, रहन-सहन, खेल आदि के बारे में बता लेता है और अपने देश की एकता एवं अखंडता के महत्व पर अपने विचार व्यक्त कर लेता है।",
+            "विद्यार्थी ग्लोब पर अक्षांश, देशांतर, भूमध्य, कर्क एवं मकर रेखा की पहचान कर बता लेता है।",
+            "विद्यार्थी पृथ्वी की गतियाँ एवं उनके प्रभावों जैसे दिन-रात का होना, मौसम परिवर्तन एवं ग्रहण जैसी भौगोलिक प्रक्रियाओं को स्वयं के अनुभव से जोड़कर बता लेता है।",
+            "विद्यार्थी भारत के प्राकृतिक विभागों का जलवायु, वनस्पति एवं वन्य जीवों के आधार पर वर्गीकरण की समझ बनाकर चर्चा कर लेता है।"
+          ]},
+          { name: "संस्कृत", indicators: [
+            "विद्यार्थी सरल संस्कृत शब्दों, वाक्यों और निर्देशों को सुनकर एवं पढ़कर उनका सामान्य अर्थ समझ लेता है।",
+            "विद्यार्थी छोटे एवं सरल वाक्यों में अपने विचार व्यक्त कर लेता है तथा दैनिक जीवन से जुड़े संवाद बोल और लिख लेता है।",
+            "विद्यार्थी बुनियादी व्याकरण (लिंग, वचन, सरल धातु) और सामान्य शब्दावली का सही प्रयोग कर लेता है।",
+            "विद्यार्थी सरल गद्य/पद्य का अर्थ समझकर उससे संबंधित प्रश्नों के उत्तर दे लेता है।"
+          ]},
+          { name: "उर्दू", isUrdu: true, indicators: [
+            "طالب علم آسان الفاظ، جملوں اور ہدایات کو سن کر اور پڑھ کر اس کا معنی اور مفہوم سمجھ لیتا ہے۔",
+            "طالب علم چھوٹے اور آسان جملوں में अपने خیالات का اظہار सही تلفظ के साथ कर लेता है और تحریر भी कर लेता ہے۔",
+            "طالب علم آسان نثر و نظم के معنی و مفہوم समझ कर उस पर مبنی सवालों के जवाब दे लेता ہے۔"
+          ]}
+        ],
+        coScholastic: [
+          { name: "व्यवहार एवं भावनाएँ", indicators: [
+            "विद्यार्थी अपने विचारों और भावनाओं को स्पष्ट और सम्मानपूर्वक तरीके से व्यक्त कर लेता है।",
+            "विद्यार्थी दूसरों की भावनाओं को समझ कर उनके प्रति सहानुभूति और सम्मान दिखा लेता है।",
+            "विद्यार्थी साथियों के साथ मिलकर कार्य कर लेता है और पारस्परिक सामंजस्य बना लेता है।",
+            "विद्यार्थी सही-गलत का विचार कर जिम्मेदारी से निर्णय लेता है और अपने कार्यों की जिम्मेदारी स्वीकार कर लेता है।"
+          ]},
+          { name: "स्वच्छता एवं स्वास्थ्य", indicators: [
+            "विद्यार्थी व्यक्तिगत स्वच्छता (हाथ धोना, दांत साफ करना, साफ कपड़े पहनना) का पालन कर लेता है।",
+            "विद्यार्थी बीमारियों से बचाव के सामान्य तरीकों को जानता है तथा दैनिक जीवन में प्रयोग कर लेता है।",
+            "विद्यार्थी विद्यालय को स्वच्छ रखने संबंधी गतिविधियों में रुचि लेता है।"
+          ]},
+          { name: "सीखने के प्रति तत्परता एवं जीवन कौशल", indicators: [
+            "विद्यार्थी सीखने के प्रति रुचि दिखाता है और नई चीजें जानने का प्रयास करता है।",
+            "विद्यार्थी अनुभव एवं विषय की सीख का प्रयोग दैनिक जीवन में कर लेता है।",
+            "विद्यार्थी दैनिक जीवन की सरल समस्याओं को हल करने का प्रयास करता है।",
+            "विद्यार्थी विद्यालय के विविध गतिविधियों से संबंधित छोटे-छोटे निर्णय ले पाता है।"
+          ]},
+          { name: "कलात्मक एवं अन्य रुचियाँ", indicators: [
+            "विद्यार्थी चित्रकला / संगीत / नृत्य / अन्य गतिविधियों में रुचि दिखाता है।",
+            "विद्यार्थी कलात्मक गतिविधियों में भाग लेकर अपनी अभिव्यक्ति कर पाता है।",
+            "विद्यार्थी अलग-अलग गतिविधियों को आजमाने का प्रयास करता है।"
+          ]}
+        ],
+        cognitivePos: [
+          "गणित: BODMAS नियम, पूर्णांकों व बीजीय व्यंजकों के सवाल हल करने में दक्ष है।",
+          "विज्ञान: पृथक्करण की विधियों व संतुलित आहार के पोषक तत्वों की अच्छी समझ है।",
+          "हिन्दी: सामाजिक मुद्दों पर विचार व्यक्त करता/करती व मुहावरों का सही प्रयोग करता/करती है।"
+        ],
+        cognitiveCor: [
+          "गणित: बीजीय व्यंजकों में सजातीय-विजातीय पदों की पहचान सुदृढ़ करें।",
+          "अंग्रेजी: 'Wh-' प्रश्नों के उत्तर व स्पेलिंग अभ्यास पर थोड़ा ध्यान दें।"
+        ]
+      },
+
+      "7": {
+        className: "कक्षा : 7", promoteTo: "कक्षा - 8",
+        examSubjects: ["हिन्दी", "गणित", "अंग्रेजी", "विज्ञान", "सामाजिक विज्ञान", "संस्कृत / उर्दू", "कला / संगीत", "खेल एवं शारीरिक शिक्षा", "पर्यावरण अध्ययन"],
+        subjects: [
+          { name: "हिन्दी", indicators: [
+            "विद्यार्थी गद्य और पद्य को उचित गति, हाव-भाव, उतार-चढ़ाव के साथ पढ़ लेता है एवं उसमें निहित विचार/भाव को अपने अनुभव के साथ जोड़कर सहमति एवं असहमति व्यक्त कर लेता है।",
+            "विद्यार्थी स्थानीय घटनाओं, चित्रों, दृश्यों पर अपने अनुभव मौखिक, लिखित एवं सांकेतिक भाषा में व्यक्त कर लेता है।",
+            "विद्यार्थी सामाजिक सरोकारों, रीति-रिवाजों, लोक कथाओं, लोकगीतों तथा रेडियो, टीवी, मोबाइल आदि पर सुने-देखे कार्यक्रमों के बारे में अपने विचार व्यक्त कर लेता है एवं प्रश्न और तर्क कर लेता है।",
+            "विद्यार्थी विभिन्न विधाओं की पाठ्य सामग्री को पढ़कर संदर्भानुसार अर्थ ग्रहण करने के लिए शब्दकोष, मानचित्र आदि की सहायता तथा अनुमान लगाते हुए निष्कर्ष निकाल लेता है।",
+            "विद्यार्थी विभिन्न विषयों या उद्देश्यों के लिए लिखते समय शब्द-विन्यास, वाक्य संरचना, विराम चिह्न तथा भाषा के अन्य पदों, काल, क्रिया, विशेषण, शब्द-युग्म आदि का समुचित प्रयोग कर लेता है।",
+            "विद्यार्थी विभक्ति, कारक, लिंग और वचन को समझकर वाक्य रचना में शुद्ध वर्तनी व सही व्याकरण चिह्नों का समुचित प्रयोग कर लेता है तथा सरल, मिश्रित एवं संयुक्त वाक्य में अंतर कर लेता है।",
+            "विद्यार्थी सोशल मीडिया, नोटबुक, डायरी या संपादक के नाम पत्र आदि पर विभिन्न शैलियों में अपनी बात प्रभावशाली ढंग से लिख लेता है तथा इंटरनेट पर उपलब्ध सामग्री को पढ़कर उसकी उपयोगिता बता लेता है।"
+          ]},
+          { name: "गणित", indicators: [
+            "विद्यार्थी संख्या रेखा पर परिमेय संख्या को प्रदर्शित कर लेता है तथा उनका दैनिक जीवन की समस्याओं से सह-सम्बन्ध स्थापित कर लेता है।",
+            "विद्यार्थी आधार व घातांक में अंतर करते हुए संख्याओं को घातांक रूप में व्यक्त कर लेता है तथा समान आधार वाली घातांकीय संख्याओं का गुणा व भाग कर लेता है।",
+            "विद्यार्थी त्रिभुज की माध्यिका, केन्द्रक, परिकेन्द्र, लम्ब केन्द्र एवं अन्तःकेन्द्र का निर्धारण कर लेता है तथा दैनिक जीवन पर आधारित प्रश्नों में पाइथागोरस प्रमेय का प्रयोग कर लेता है।",
+            "विद्यार्थी लाभ-हानि, बट्टा, आयकर, बिक्रीकर व साधारण ब्याज में प्रतिशत का प्रयोग करते हुए दैनिक जीवन के प्रश्नों को हल कर लेता है।",
+            "विद्यार्थी सूत्र व ऐकिक नियम का प्रयोग करते हुए चक्रवृद्धि ब्याज व मिश्रधन ज्ञात कर लेता है।",
+            "विद्यार्थी चतुर्भुज एवं इनके विभिन्न अंग जैसे-शीर्ष, भुजाएँ, विकर्ण, कोण आदि को पहचान कर चतुर्भुज के प्रकार बताते हुए इनके गुणों का सत्यापन कर लेता है।",
+            "विद्यार्थी त्रिभुज एवं चतुर्भुज से बनी आकृतियों का क्षेत्रफल ज्ञात कर लेता है तथा घन और घनाभ का सम्पूर्ण पृष्ठ ज्ञात कर लेता है।"
+          ]},
+          { name: "अंग्रेजी", indicators: [
+            "Student can recite poems with proper rhythm and intonation and also take dictation and can write words/sentences correctly.",
+            "Student can frame negative/interrogative sentences correctly and frame questions beginning with Do/Does/Did/Can/Could/Is/Are etc.",
+            "Student can read stories and other text and infer meaning of unfamiliar words.",
+            "Student can frame simple/complex sentences using adjectives, has/have, rhyming words, synonyms, antonyms, homophones and punctuation marks.",
+            "Student can express his/her ideas on moral values, environment, village, town, scientists, inventions and traffic rules etc.",
+            "Student can write letters, compositions, birthday invitations etc. using proper format and grammar in writing and speaking.",
+            "Student can solve Crosswords and is able to describe the differences among pictures."
+          ]},
+          { name: "विज्ञान", indicators: [
+            "विद्यार्थी विज्ञान एवं प्रौद्योगिकी के द्वारा मानव जीवन में आए विभिन्न क्रांतिकारी परिवर्तन, उनके महत्व एवं दुष्परिणामों को सूचीबद्ध कर लेता है।",
+            "विद्यार्थी अम्ल, क्षार, लवण की पहचान कर उदाहरण व गुण बता लेता है एवम् भौतिक व रासायनिक परिवर्तन उदाहरण सहित स्पष्ट कर लेता है तथा दैनिक जीवन में घटित भौतिक एवं रासायनिक परिवर्तन को बता लेता है।",
+            "विद्यार्थी पौधों में पोषण की विभिन्न विधियों को बताने के साथ-साथ प्रकाश संश्लेषण प्रक्रिया व उसकी परिस्थितियों को जानते हुए समीकरण लिख लेता है।",
+            "विद्यार्थी मानव व सूक्ष्मजीव (अमीबा व हाइड्रा) के शरीर में होने वाली पाचन प्रक्रिया को बता लेता है।",
+            "विद्यार्थी ध्वनि की उत्पत्ति एवं गुण (तारत्व, आयाम, आवृत्ति, तीव्रता) व संचरण को उदाहरण सहित बता लेता है। ध्वनि का परावर्तन, प्रतिध्वनि, गूंज, सुस्वर, शोर में अंतर बता लेता है।",
+            "विद्यार्थी स्थितिज ऊर्जा, गतिज ऊर्जा, यांत्रिक ऊर्जा एवं विद्युत ऊर्जा के उपयोग को दैनिक जीवन से जोड़ते हुए ऊर्जा के विभिन्न रूपान्तरणों का वर्णन कर लेता है।",
+            "विद्यार्थी बल की अवधारणा को प्रयोग द्वारा बताता है तथा पेशीय, गुरुत्वीय, चुंबकीय, विद्युतीय एवं घर्षण बल को उदाहरण सहित स्पष्ट कर लेता है और मशीनों की उपयोगिता बता लेता है।",
+            "विद्यार्थी जल के भौतिक एवं रासायनिक गुणों को बताते हुए जल की कठोरता व जल संरक्षण के महत्व को बता लेता है।",
+            "विद्यार्थी वायु के घटक एवं उनका उपयोग, वायु प्रदूषण, हरित गृह प्रभाव एवं अम्लीय वर्षा को बता लेता है।",
+            "विद्यार्थी इनपुट एवं आउटपुट डिवाइस पहचानकर प्रयोग कर लेता है।"
+          ]},
+          { name: "सामाजिक विज्ञान", indicators: [
+            "विद्यार्थी तैमूर व उसके आक्रमण, तैमूर के समकालीन भारतीय शासकों, लोदी वंश की स्थापना, सल्तनत कालीन प्रमुख सांस्कृतिक धरोहरों, उनके कार्यों एवं भक्ति आंदोलन से संबंधित संतों आदि पर चर्चा कर लेता है।",
+            "विद्यार्थी मध्यकालीन प्रमुख दक्षिण भारतीय राज्यों, उनके शासकों, उनसे जुड़े युद्ध तथा दक्षिण भारतीय एवं उत्तर भारतीय राज्यों की सामाजिक, सांस्कृतिक व प्रशासनिक व्यवस्था पर चर्चा कर लेता है।",
+            "विद्यार्थी मुगल काल के प्रमुख शासकों, उनके कार्यों, मुगल कालीन समाज एवं संस्कृति की विशेषताएं, मुगल काल के प्रमुख संत, उनकी शिक्षा, मुगल काल की स्थापत्य कला, चित्रकारी एवं मुगल काल के पतन के कारण बता लेता है।",
+            "विद्यार्थी भारतीय संविधान, इसके महत्व एवं विशेषताओं जैसे- मौलिक अधिकार, मूल कर्त्तव्य एवं नीति निदेशक तत्वों को बताता है तथा राज्य व संघीय सरकार की अवधारणा को स्पष्ट कर लेता है।",
+            "विद्यार्थी वायुमंडल, वायुमंडल की विभिन्न परतों, तत्वों (वायुदाब, तापमान), पवन के प्रकारों, चक्रवात एवं प्रतिचक्रवात, मौसम एवं जलवायु के बारे में बताते हुए उसके प्रभावों पर चर्चा कर लेता है।",
+            "विद्यार्थी ग्लोब पर विभिन्न प्राकृतिक प्रदेशों जैसे-शीत कटिबंधीय प्रदेश, शीतोष्ण कटिबंधीय, उष्ण कटिबंधीय, मरुस्थलीय प्रदेश, विषुवत व भूमध्य रेखीय प्रदेश आदि की विशेषता बताते हुए मानचित्र पर चिह्नित कर लेता है।"
+          ]},
+          { name: "संस्कृत", indicators: [
+            "विद्यार्थी दैनिक जीवन से जुड़े विषयों पर सरल संस्कृत में बोल और लिख लेता है।",
+            "विद्यार्थी मूल व्याकरण संबंधित अवधारणाओं (संज्ञा, सर्वनाम, धातु, लकार, विभक्ति आदि) का संदर्भानुसार प्रयोग कर लेता है।",
+            "विद्यार्थी सरल वाक्यों का संस्कृत से हिन्दी तथा हिन्दी से संस्कृत में अनुवाद कर लेता है।",
+            "विद्यार्थी संस्कृत के श्लोकों, सूक्तियों एवं सांस्कृतिक तत्त्वों को समझता और उनसे जुड़ाव प्रदर्शित कर लेता है।"
+          ]},
+          { name: "उर्दू", isUrdu: true, indicators: [
+            "طالب علم روزمرہ के معاملات से जुड़े जुमलों को آسانی से बोल और लिख लेता है।",
+            "طالب علم اردو के ابتدائی قواعد (اسم، ضمیر، صفت، فعل وغیرہ) की समझ रखता है और उसका जुमलों में सही इस्तेमाल कर लेता है।",
+            "طالب علم نظم، نثر، محاوروں، خطوط، درخواست وغیرہ की عام समझ रखता है।"
+          ]}
+        ],
+        coScholastic: [
+          { name: "व्यवहार एवं भावनाएँ", indicators: [
+            "विद्यार्थी साथियों के साथ मिलकर कार्य कर लेता है और सकारात्मक संबंध बना पाता है।",
+            "विद्यार्थी दूसरों की भावनाओं को समझ कर उनके प्रति सहानुभूति और सम्मान दिखा लेता है।",
+            "विद्यार्थी अपने विचारों और भावनाओं को स्पष्ट और सम्मानपूर्वक व्यक्त कर पाता है।",
+            "विद्यार्थी सही-गलत का विचार कर जिम्मेदारी से निर्णय लेता है और अपने कार्यों की जिम्मेदारी स्वीकार कर लेता है।"
+          ]},
+          { name: "स्वच्छता एवं स्वास्थ्य", indicators: [
+            "विद्यार्थी व्यक्तिगत स्वच्छता (हाथ धोना, नहाना, दांत साफ करना, साफ कपड़े पहनना) का पालन कर लेता है।",
+            "विद्यार्थी बीमारियों से बचाव के सामान्य तरीकों (हाथ धोना, साफ-सफाई) को समझ लेता है।",
+            "विद्यार्थी विद्यालय को स्वच्छ रखने संबंधी गतिविधियों में रुचि लेता है।"
+          ]},
+          { name: "सीखने के प्रति तत्परता एवं जीवन कौशल", indicators: [
+            "विद्यार्थी सीखने के प्रति रुचि दिखाता है और नई चीजें जानने का प्रयास करता है।",
+            "विद्यार्थी अपनी पसंद नापसंद के बारे में बता पाता है।",
+            "विद्यार्थी सीखने में आने वाली कठिनाइयों के बारे में सहायता माँग लेता है।",
+            "विद्यार्थी अपनी दैनिक दिनचर्या को व्यवस्थित रखने का प्रयास करता है।"
+          ]},
+          { name: "कलात्मक एवं अन्य रुचियाँ", indicators: [
+            "विद्यार्थी चित्रकला, संगीत, नृत्य या अन्य गतिविधियों में रुचि दिखाता है।",
+            "विद्यार्थी कलात्मक गतिविधियों में भाग लेकर अपनी अभिव्यक्ति कर पाता है।",
+            "विद्यार्थी नई-नई गतिविधियों को आजमाने का प्रयास करता है।"
+          ]}
+        ],
+        cognitivePos: [
+          "गणित: परिमेय संख्याओं, घातांक व पाइथागोरस प्रमेय का सटीक प्रयोग करता/करती है।",
+          "विज्ञान: अम्ल, क्षार, लवण व प्रकाश संश्लेषण समीकरण स्पष्ट समझता/समझती है।",
+          "हिन्दी: सरल, संयुक्त व मिश्रित वाक्यों का सही निर्माण करता/करती है।"
+        ],
+        cognitiveCor: [
+          "गणित: चक्रवृद्धि ब्याज व क्षेत्रमिति के सूत्रों का नियमित अभ्यास करें।",
+          "अंग्रेजी: Negative व Interrogative वाक्य निर्माण में अभ्यास बढ़ाएं।"
+        ]
+      },
+
+      "8": {
+        className: "कक्षा : 8", promoteTo: "कक्षा - 9",
+        examSubjects: ["हिन्दी", "गणित", "अंग्रेजी", "विज्ञान", "सामाजिक विज्ञान", "संस्कृत / उर्दू", "कला / संगीत", "खेल एवं शारीरिक शिक्षा", "पर्यावरण अध्ययन"],
+        subjects: [
+          { name: "हिन्दी", indicators: [
+            "विद्यार्थी किसी संदर्भ में पढ़ी गई लोक कथाओं, पाठों और घटनाओं को समझकर उनसे जुड़े सामाजिक मुद्दों एवं मूल्यों पर चर्चा कर लेता है, पाठ्य सामग्री पर प्रश्न पूछ लेता है तथा अपने विचार व्यक्त कर लेता है।",
+            "विद्यार्थी पाठ्य सामग्री में प्रयुक्त लोकोक्तियों, विभिन्न रूपों, नए शब्दों, मुहावरों एवं व्याकरण (संज्ञा, सर्वनाम, क्रिया, संधि, समास, उपसर्ग, प्रत्यय आदि) का सही प्रयोग कर लेता है तथा उन्हें अपने लेखन और बोलचाल में लागू करता है।",
+            "विद्यार्थी स्थानीय मेलों, पर्व-त्योहारों तथा सामाजिक मुद्दों (धर्म, जाति, रूढ़ियाँ, अंधविश्वास आदि) पर चर्चा कर लेता है और प्रश्न पूछते हुए तार्किक आधार पर अपने विचार व्यक्त कर लेता है।",
+            "विद्यार्थी विभिन्न पाठ्य स्रोतों (पुस्तक, अखबार, इंटरनेट, पोस्टर आदि) और विधाओं (कहानी, कविता, रिपोर्ट आदि) को समझकर पढ़ लेता है, अपनी टिप्पणियाँ और निष्कर्ष व्यक्त करता है तथा उनका विश्लेषण कर लेता है।",
+            "विद्यार्थी घटनाओं और परिस्थितियों की कल्पना करता है तथा अपने विचारों को मौखिक, लिखित और सांकेतिक रूप में रचनात्मक ढंग से व्यक्त कर लेता है।",
+            "विद्यार्थी गद्य एवं पद्य की विभिन्न विधाओं और शैलियों को पहचान लेता है, उनमें अंतर करता है तथा भाषागत विशेषताओं, शिल्प और सौंदर्य की सराहना करते हुए अपने विचारों को लिखित, मौखिक और सांकेतिक रूप में व्यक्त कर लेता है।",
+            "विद्यार्थी विभिन्न प्रकार के लेखन (कहानी, पत्र, रिपोर्ताज, संवाद, सोशल मीडिया, मेला/बाजार का वर्णन, प्रार्थना आदि) को उद्देश्य के अनुसार स्पष्ट, सुसंगत और रचनात्मक ढंग से लिख लेता है।"
+          ]},
+          { name: "गणित", indicators: [
+            "विद्यार्थी वर्ग, वर्गमूल, घन एवं घनमूल की अवधारणाओं को समझते हुए, सर्वसमिका की सहायता से घन ज्ञात कर लेता है तथा इनका दैनिक जीवन में प्रयोग कर लेता है।",
+            "विद्यार्थी बीजीय व्यंजकों का गुणनखण्ड कर लेता है तथा युगपत समीकरणों पर आधारित दैनिक जीवन की समस्याओं का समाधान कर लेता है।",
+            "विद्यार्थी पटरी और परकार का प्रयोग करके विभिन्न चतुर्भुजों की रचना कर लेता है, वृत्त की विभिन्न जीवाओं के बीच संबंध स्थापित करता है तथा चक्रीय चतुर्भुज के गुणों को समझ लेता है।",
+            "विद्यार्थी बैंकिंग एवं चक्रवृद्धि ब्याज की अवधारणा को समझता है तथा उसकी गणना कर लेता है।",
+            "विद्यार्थी ग्राफ और कार्तीय तल पर किसी बिंदु की स्थिति को प्रदर्शित कर लेता है तथा उसे पढ़कर समझ लेता है।",
+            "विद्यार्थी दैनिक जीवन से जुड़े साधारण आँकड़ों के लिए माध्यिका और बहुलक की गणना कर लेता है।",
+            "विद्यार्थी घन, घनाभ, बेलन और शंकु के आयतन एवं क्षेत्रफल की गणना कर लेता है।"
+          ]},
+          { name: "अंग्रेजी", indicators: [
+            "Student can listen, understand and respond appropriately to oral instructions in different situations and able to write simple sentences through dictation using correct punctuation.",
+            "Student can read, understand and express his/her ideas on different text and situations such as (Prose, poetry, content words, phrases) texts with proper pronunciation, stress and intonation.",
+            "Student can find new words on dictionary and use appropriate vocabulary in his/her communication or while speaking about familiar objects and events.",
+            "Student can form grammatically correct sentences using proper words and verbs.",
+            "Student can write contextual composition, familiar topics, short paragraphs or about famous personalities using proper format and grammar (degree, adjective, adverb).",
+            "Student can read, understand and express their thoughts on different types of stories (adventure stories, science fiction, fairy tale, customs, cultures, traditions) and develop imagination and interest in reading.",
+            "Student can participate in group discussions that help in developing a sense of nationalism/patriotism and pride for the national flag and great leaders."
+          ]},
+          { name: "विज्ञान", indicators: [
+            "विद्यार्थी मानव निर्मित वस्तुओं (संश्लेषित रेशों, प्लास्टिक, काँच, मृत्तिका एवं साबुन) के गुण एवं दैनिक उपयोग को उदाहरण सहित बता लेता है।",
+            "विद्यार्थी परमाणु के मूल कणों व उनके आवेश, विभिन्न परमाणु मॉडलों, अणु, तत्व एवं कार्बन, कार्बन के अपररूप, संतृप्त व असंतृप्त यौगिकों की मूल अवधारणाओं को समझता है और उनके आणविक सूत्र लिख लेता है।",
+            "विद्यार्थी खनिज-अयस्क व धातु-अधातु का अर्थ व अंतर, उसके विभिन्न अयस्कों का नाम, प्राप्ति स्थान, उनके रासायनिक गुणों, उपयोग, धातुओं का संरक्षण व मिश्र धातु के बारे में लिख व बता लेता है।",
+            "विद्यार्थी पादप एवं जंतु कोशिका तथा ऊतकों के प्रकारों को समझता है, जन्तुओं में जनन के अर्थ एवं लैंगिक तथा अलैंगिक विधियों के प्रकारों का वर्णन कर पाता है तथा पौधों में समन्वय स्थापित करने वाले तंत्रों के नाम पहचानकर उन्हें लिख पाता है।",
+            "विद्यार्थी सूक्ष्मजीवों के अर्थ, वर्गीकरण, रोग एवं बचाव को समझता है; किशोरावस्था के शारीरिक बदलावों और लिंग निर्धारण की प्रक्रिया का वर्णन करता है; साथ ही जनसंख्या वृद्धि के कारणों, कुप्रभावों एवं परिवार कल्याण कार्यक्रमों को बताता है।",
+            "विद्यार्थी बल (उत्प्लावन बल, दाब एवं उनका मापन), प्रकाश (अपवर्तन के नियम, प्रिज्म द्वारा वर्णक्रम, उत्तल-अवतल लेंस तथा मानव नेत्र की संरचना), विद्युत (धारा, विभवांतर, प्रतिरोध) एवं चुंबक (प्रकार, गुण, रख-रखाव एवं चुम्बकीय बल) के सिद्धांतों तथा उनके दैनिक जीवन में उपयोग को समझता है।",
+            "विद्यार्थी ऊर्जा स्रोत, तकनीक, इंटरनेट एवं सामाजिक जिम्मेदारी को समझकर व्यवहार में लागू करता है तथा राष्ट्रीय एवं अंतर्राष्ट्रीय स्तर पर विज्ञान और तकनीक के क्षेत्र में हुए नवीनतम प्रगति को बता लेता है।",
+            "विद्यार्थी दैनिक जीवन में इंटरनेट का प्रयोग तथा संबंधित शब्दावली के बारे में बता लेता है।"
+          ]},
+          { name: "सामाजिक विज्ञान", indicators: [
+            "विद्यार्थी भारत में यूरोपीय व्यापारिक कंपनियों के आगमन, विस्तार और ईस्ट इंडिया कंपनी द्वारा किए गए समझौतों व युद्धों के परिणामों को समझता है। साथ ही वह प्रथम स्वतंत्रता संग्राम से लेकर स्वतंत्र भारत तक के सेनानियों और समाज सुधारकों के योगदान की व्याख्या कर सकता है।",
+            "विद्यार्थी भारत विभाजन के कारणों, उससे उत्पन्न समस्याओं के समाधान और आजादी के बाद देश के विकास के लिए बनाई गई प्रमुख योजनाओं से अभिज्ञ है। विद्यार्थी वर्तमान समाज की कुरीतियों को पहचानकर उन्हें दूर करने के सुझाव देने में भी सक्षम है।",
+            "विद्यार्थी स्वतंत्र न्यायपालिका की आवश्यकता, लोकतंत्र के सामाजिक मुद्दों और स्थानीय स्तर से लेकर राष्ट्रीय स्तर तक की चुनाव प्रक्रिया को समझता है। इसके साथ ही वह देश की सैन्य व्यवस्था और सुरक्षा में सेना के योगदान का वर्णन कर सकता है।",
+            "विद्यार्थी मानचित्र पर स्वतंत्रता संग्राम के स्थलों, खनिजों, प्रमुख उद्योगों, राष्ट्रीय राजमार्गों और बंदरगाहों को अंकित कर सकता है। उसे देश के विभिन्न क्षेत्रों में पाए जाने वाले खनिजों और संसाधनों के वितरण की पूरी समझ है।",
+            "विद्यार्थी भारत की प्रमुख फसलों, हरित क्रांति, सिंचाई के साधनों और चकबंदी जैसी अवधारणाओं को स्पष्ट कर लेता है। इसके अतिरिक्त विद्यार्थी लघु व बड़े उद्योगों, आयात-निर्यात की आवश्यकताओं और जनसंख्या वृद्धि व प्रतिकूल लिंगानुपात जैसे मानव संसाधन के मुद्दों का विश्लेषण कर सकता है।"
+          ]},
+          { name: "संस्कृत", indicators: [
+            "विद्यार्थी सरल संस्कृत गद्य एवं पद्य को शुद्ध उच्चारण के साथ पढ़कर उसका अर्थ समझता है और मुख्य भाव को अपने शब्दों में व्यक्त कर लेता है।",
+            "विद्यार्थी सुनी या पढ़ी गई संस्कृत सामग्री के आधार पर प्रश्नों के उत्तर देता है तथा उचित लय और स्वर के साथ वाचन कर लेता है।",
+            "विद्यार्थी मूल व्याकरण संबंधी अवधारणाओं (संज्ञा, सर्वनाम, लकार, विभक्ति, धातु, उपसर्ग, प्रत्यय आदि) की पहचान करता है और उनका वाक्यों में सही प्रयोग कर लेता है।",
+            "विद्यार्थी सरल संस्कृत वाक्य, अनुच्छेद, संवाद और पत्र लिखता है तथा संस्कृत से हिंदी और हिन्दी से संस्कृत के बीच सरल अनुवाद कर लेता है।"
+          ]},
+          { name: "उर्दू", isUrdu: true, indicators: [
+            "طالب علم آسان نظم و نثر کو صحیح تلفظ के साथ पढ़ कर उसका معنی و مفہوم समझ लेता है और उसे अपने الفاظ में बयान भी कर लेता ہے۔",
+            "طالب علم لکھے या پڑھے गए जुमलों पर مبنی सवालों के जवाब दे लेता ہے۔",
+            "طالب علم اردو زبان के बुनियादी قواعد के अहम جز، لفظ، جملہ، مذکر-مونث، واحد-جمع और محاوروں को जानता है और जुमले में सही इस्तेमाल कर लेता ہے۔",
+            "طالب علم اردو زبان के آسان جملے، مکالمے، خطوط और درخواست लिख लेता है। साथ ही आसान उर्दू से हिन्दी और आसान हिन्दी से उर्दू में तरजुमा कर लेता ہے۔"
+          ]}
+        ],
+        coScholastic: [
+          { name: "व्यवहार एवं भावनाएँ", indicators: [
+            "विद्यार्थी अपनी भावनाओं को पहचानता है, उन्हें उचित तरीके से व्यक्त करता है तथा विभिन्न परिस्थितियों में उनका संतुलन बनाए रख पाता है।",
+            "विद्यार्थी दूसरों की भावनाओं को समझता है, सहानुभूति प्रदर्शित करता है तथा सकारात्मक संबंध स्थापित कर पाता है।",
+            "विद्यार्थी विभिन्न सामाजिक परिस्थितियों में जिम्मेदार एवं सम्मानजनक व्यवहार करता है तथा विविधता को स्वीकार कर पाता है।",
+            "विद्यार्थी तनावपूर्ण या चुनौतीपूर्ण परिस्थितियों में धैर्य, लचीलापन (resilience) और सकारात्मक दृष्टिकोण बनाए रखता है।"
+          ]},
+          { name: "स्वच्छता एवं स्वास्थ्य", indicators: [
+            "विद्यार्थी अपने परिवेश (घर, विद्यालय, समुदाय) की स्वच्छता बनाए रखने में सक्रिय भागीदारी कर लेता है।",
+            "विद्यार्थी सामान्य बीमारियों, उनके कारणों और रोकथाम के उपायों को समझता है तथा आवश्यक सावधानियाँ अपना लेता है।",
+            "विद्यार्थी स्वच्छता और स्वास्थ्य से जुड़े सामाजिक व्यवहार (जैसे कचरा प्रबंधन, खुले में शौच से बचाव आदि) को अपनाता है और दूसरों को भी प्रेरित कर लेता है।"
+          ]},
+          { name: "सीखने के प्रति तत्परता एवं जीवन कौशल", indicators: [
+            "विद्यार्थी अपने सीखने के लक्ष्य निर्धारित करता है, योजना बनाता है तथा उन्हें प्राप्त करने के लिए प्रयास करता है।",
+            "विद्यार्थी समय प्रबंधन, आत्म-अनुशासन और जिम्मेदारी का पालन करते हुए कार्यों को समय पर पूरा करता है।",
+            "विद्यार्थी संचार कौशल का प्रभावी उपयोग करते हुए अपने विचार स्पष्ट रूप से व्यक्त करता है और दूसरों की बातों को ध्यान से सुनता है।",
+            "विद्यार्थी बदलती परिस्थितियों में अनुकूलन (adaptability), पहल (initiative) और आत्म-प्रेरणा (self-motivation) का प्रदर्शन करता है।"
+          ]},
+          { name: "कलात्मक एवं अन्य रुचियाँ", indicators: [
+            "विद्यार्थी चित्रकला, संगीत, नृत्य या अन्य गतिविधियों में रुचि दिखाता है।",
+            "विद्यार्थी कलात्मक गतिविधियों में भाग लेकर अपनी अभिव्यक्ति कर पाता है।",
+            "विद्यार्थी नई-नई गतिविधियों को आजमाने का प्रयास करता है।"
+          ]}
+        ],
+        cognitivePos: [
+          "गणित: वर्गमूल, घनमूल, गुणनखण्ड व युगपत समीकरण कुशलता से हल करता/करती है।",
+          "विज्ञान: परमाणु संरचना, रासायनिक सूत्र, लेंस व विद्युत के नियम जानता/जानती है।",
+          "हिन्दी: संधि, समास, उपसर्ग, प्रत्यय व मुहावरों का लेखन में सटीक प्रयोग करता/करती है।"
+        ],
+        cognitiveCor: [
+          "गणित: बेलन व शंकु के आयतन तथा सम्पूर्ण पृष्ठ के सूत्रों का दोहराव करें।",
+          "विज्ञान: रासायनिक यौगिकों के आणविक सूत्र व संयोजकता का अभ्यास करें।"
+        ]
+      }
+    };
+
+    // State Management & Persistence
+    let currentClassKey = "1";
+    let currentClassSchema = BUILTIN_SCHEMAS["1"];
+    let studentsByClass = {};
+    let workingDaysByClass = {};
+    let workingDaysConfirmedByClass = {};
+    let pendingNewStudentAttendance = null;
+    let activeAttendanceStudentId = null;
+
+    function getClassWorkingDays(classKey) {
+      if (!workingDaysByClass[classKey] || workingDaysByClass[classKey].length !== 12) {
+        workingDaysByClass[classKey] = [...DEFAULT_WORKING_DAYS];
+      }
+      return workingDaysByClass[classKey];
+    }
+
+    function updateWorkingDaysStatusUI() {
+      const isConfirmed = !!workingDaysConfirmedByClass[currentClassKey];
+      const badge = document.getElementById("wdStatusBadge");
+      const btn = document.getElementById("wdMainBtn");
+      const labelText = currentClassKey === "balvatika" ? "बालवाटिका" : `कक्षा ${currentClassKey}`;
+
+      if (isConfirmed) {
+        const totalWd = getClassWorkingDays(currentClassKey).reduce((a, b) => a + b, 0);
+        badge.className = "text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-300";
+        badge.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${labelText} के माहवार कार्यदिवस कन्फर्म हैं (कुल ${totalWd} दिन)`;
+        btn.className = "bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-300 font-bold px-3.5 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer transition";
+      } else {
+        badge.className = "text-[11px] font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-300";
+        badge.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> पहले ${labelText} के माहवार कार्यदिवस सेट व कन्फर्म करना अनिवार्य है`;
+        btn.className = "bg-amber-500 hover:bg-amber-600 text-white font-bold px-3.5 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-sm transition animate-pulse";
+      }
+    }
+
+    function generateMonthlyAttendance(workingDaysArr, targetPct, seed = 1) {
+      const pct = Math.min(100, Math.max(10, Number(targetPct) || 85));
+      return workingDaysArr.map((wd, mIdx) => {
+        const maxWd = Math.max(0, Number(wd) || 0);
+        if (maxWd === 0) return 0;
+        const variation = ((mIdx + seed) % 3 === 0) ? 1 : (((mIdx + seed) % 2 === 0) ? -1 : 0);
+        let pres = Math.round((maxWd * pct) / 100) + variation;
+        if (pres > maxWd) pres = maxWd;
+        if (pres < 1 && maxWd > 0) pres = 1;
+        return pres;
+      });
+    }
+
+    function clampAttendanceToWorkingDays(attArr, wdArr) {
+      return wdArr.map((wd, i) => {
+        const maxD = Math.max(0, Number(wd) || 0);
+        const curP = Math.max(0, Number(attArr?.[i]) || 0);
+        return Math.min(maxD, curP);
+      });
+    }
+
+    function loadSavedData() {
+      try {
+        const savedConfig = localStorage.getItem("dm_hpc_school_config_v11");
+        if (savedConfig) {
+          const cfg = JSON.parse(savedConfig);
+          document.getElementById("schoolName").value = cfg.schoolName || "";
+          document.getElementById("blockName").value = cfg.blockName || "";
+          document.getElementById("districtName").value = cfg.districtName || "सीतापुर";
+          document.getElementById("udiseCode").value = cfg.udiseCode || "";
+          if (cfg.sessionYear) document.getElementById("sessionYear").value = cfg.sessionYear;
+        }
+        const savedWd = localStorage.getItem("dm_hpc_working_days_v11");
+        if (savedWd) workingDaysByClass = JSON.parse(savedWd);
+
+        const savedWdConf = localStorage.getItem("dm_hpc_wd_confirmed_v11");
+        if (savedWdConf) workingDaysConfirmedByClass = JSON.parse(savedWdConf);
+
+        const savedStudents = localStorage.getItem("dm_hpc_students_v11");
+        if (savedStudents) studentsByClass = JSON.parse(savedStudents);
+      } catch (e) {
+        console.warn("LocalStorage load warning:", e);
+      }
+    }
+
+    function saveSchoolConfig() {
+      const cfg = {
+        schoolName: document.getElementById("schoolName").value,
+        blockName: document.getElementById("blockName").value,
+        districtName: document.getElementById("districtName").value,
+        udiseCode: document.getElementById("udiseCode").value,
+        sessionYear: document.getElementById("sessionYear").value
+      };
+      localStorage.setItem("dm_hpc_school_config_v11", JSON.stringify(cfg));
+      renderAllCards();
+    }
+
+    function saveWorkingDaysToMobile() {
+      localStorage.setItem("dm_hpc_working_days_v11", JSON.stringify(workingDaysByClass));
+      localStorage.setItem("dm_hpc_wd_confirmed_v11", JSON.stringify(workingDaysConfirmedByClass));
+    }
+
+    function saveStudentsToMobile() {
+      localStorage.setItem("dm_hpc_students_v11", JSON.stringify(studentsByClass));
+    }
+
+    function switchClass(classKey) {
+      currentClassKey = classKey;
+      currentClassSchema = BUILTIN_SCHEMAS[classKey] || BUILTIN_SCHEMAS["1"];
+
+      const urduBox = document.getElementById("urduToggleContainer");
+      if (["6", "7", "8"].includes(classKey)) {
+        urduBox.classList.remove("hidden");
+        urduBox.classList.add("flex");
+      } else {
+        urduBox.classList.add("hidden");
+        urduBox.classList.remove("flex");
+      }
+
+      const hw = DEFAULT_HW[classKey] || DEFAULT_HW["1"];
+      document.getElementById("stuHeight").placeholder = hw.h1;
+      document.getElementById("stuWeight").placeholder = hw.w1;
+
+      const labelText = classKey === "balvatika" ? "बालवाटिका" : `कक्षा ${classKey}`;
+      document.getElementById("wdClassLabel").innerText = labelText;
+
+      const useUrdu = document.getElementById("globalUrduToggle")?.checked || false;
+      let totalQ = 0;
+      (currentClassSchema.subjects || []).forEach(s => {
+        if (["6", "7", "8"].includes(classKey)) {
+          if (useUrdu && s.name === "संस्कृत") return;
+          if (!useUrdu && s.name === "उर्दू") return;
+        }
+        totalQ += (s.indicators || []).length;
+      });
+      (currentClassSchema.coScholastic || []).forEach(c => totalQ += (c.indicators || []).length);
+      document.getElementById("totalQuestionsBadge").innerText = `${labelText} — कुल आधिकारिक दक्षता प्रश्न: ${totalQ}`;
+
+      if (!studentsByClass[classKey] || studentsByClass[classKey].length === 0) {
+        studentsByClass[classKey] = [
+          createStudentObject("आदर्श कुमार", "M", "राम कुमार", "सीता देवी", "2018-07-15", "101", "", hw.h1, hw.w1, 2, 74, 85, null, 1)
+        ];
+        saveStudentsToMobile();
+      }
+
+      updateWorkingDaysStatusUI();
+      renderStudentPills();
+      renderAllCards();
+    }
+
+    function createStudentObject(name, gender, father, mother, dob, sr, apaar, h, w, level, percent, attPct, customAttArr, seedIndex) {
+      const hw = DEFAULT_HW[currentClassKey] || DEFAULT_HW["1"];
+      const baseH = Number(h) || hw.h1 + (seedIndex % 4);
+      const baseW = Number(w) || hw.w1 + (seedIndex % 3);
+      const wdArr = getClassWorkingDays(currentClassKey);
+      const rawAtt = (customAttArr && customAttArr.length === 12)
+        ? [...customAttArr]
+        : generateMonthlyAttendance(wdArr, attPct || 85, seedIndex);
+
+      return {
+        id: Date.now() + Math.floor(Math.random() * 10000),
+        seed: seedIndex,
+        name: (name || "छात्र का नाम").replace(/[0-9]/g, ""),
+        gender: gender || "M",
+        father: (father || "पिता का नाम").replace(/[0-9]/g, ""),
+        mother: (mother || "माता का नाम").replace(/[0-9]/g, ""),
+        dob: formatDateToDDMMYYYY(dob),
+        sr: (sr || "").replace(/[^0-9]/g, ""),
+        apaar: (apaar || "").replace(/[^0-9]/g, ""),
+        h1: baseH,
+        w1: baseW,
+        h2: baseH + 2,
+        w2: +(baseW + 1.2).toFixed(1),
+        bloodGroup: document.getElementById("stuBloodGroup")?.value || "B+",
+        hb: document.getElementById("stuHb")?.value || "11.5 gm/dL",
+        eyeSight: document.getElementById("stuEyeSight")?.value || "6/6 (सामान्य)",
+        defaultLevel: Number(level) || 2,
+        percent: Number(percent) || 72,
+        attPercent: Number(attPct) || 85,
+        attendance: clampAttendanceToWorkingDays(rawAtt, wdArr),
+        customStars: {},
+        customDropdowns: {}
+      };
+    }
+
+    function addStudent() {
+      if (!workingDaysConfirmedByClass[currentClassKey]) {
+        alert("कृपया छात्र जोड़ने से पहले इस कक्षा के 'माहवार कार्यदिवस' की जाँच कर उसे कन्फर्म व सेव करें।");
+        openWorkingDaysModal();
+        return;
+      }
+
+      const name = document.getElementById("stuName").value.replace(/[0-9]/g, "").trim();
+      if (!name) {
+        alert("कृपया विद्यार्थी का नाम (केवल अक्षरों में) दर्ज करें।");
+        return;
+      }
+      const gender = document.getElementById("stuGender").value;
+      const father = document.getElementById("stuFather").value.replace(/[0-9]/g, "").trim();
+      const mother = document.getElementById("stuMother").value.replace(/[0-9]/g, "").trim();
+      const dob = document.getElementById("stuDob").value;
+      const sr = document.getElementById("stuSr").value.replace(/[^0-9]/g, "").trim();
+      const apaar = document.getElementById("stuApaar").value.replace(/[^0-9]/g, "").trim();
+      const h = document.getElementById("stuHeight").value;
+      const w = document.getElementById("stuWeight").value;
+      const level = document.getElementById("stuDefaultLevel").value;
+      const percent = document.getElementById("stuPercent").value;
+      const attPct = document.getElementById("stuAttPercent").value;
+
+      if (!studentsByClass[currentClassKey]) studentsByClass[currentClassKey] = [];
+      const seedIndex = studentsByClass[currentClassKey].length + 1;
+
+      studentsByClass[currentClassKey].push(
+        createStudentObject(name, gender, father, mother, dob, sr, apaar, h, w, level, percent, attPct, pendingNewStudentAttendance, seedIndex)
+      );
+
+      pendingNewStudentAttendance = null;
+      saveStudentsToMobile();
+      document.getElementById("stuName").value = "";
+      document.getElementById("stuFather").value = "";
+      document.getElementById("stuMother").value = "";
+      document.getElementById("stuSr").value = "";
+      document.getElementById("stuApaar").value = "";
+      renderStudentPills();
+      renderAllCards();
+    }
+
+    function removeStudent(id) {
+      studentsByClass[currentClassKey] = (studentsByClass[currentClassKey] || []).filter(s => s.id !== id);
+      saveStudentsToMobile();
+      renderStudentPills();
+      renderAllCards();
+    }
+
+    function clearCurrentClassStudents() {
+      if (confirm("क्या आप इस कक्षा के सभी सेव किए गए छात्रों की सूची साफ़ करना चाहते हैं?")) {
+        studentsByClass[currentClassKey] = [];
+        saveStudentsToMobile();
+        renderStudentPills();
+        renderAllCards();
+      }
+    }
+
+    function changeStudentPercent(id, newPct) {
+      const list = studentsByClass[currentClassKey] || [];
+      const stu = list.find(s => s.id === id);
+      if (stu) {
+        const p = Math.min(100, Math.max(30, Number(newPct) || 72));
+        stu.percent = p;
+        stu.defaultLevel = getLevelFromGradeOrPct(p);
+        stu.customStars = {};
+        saveStudentsToMobile();
+        renderStudentPills();
+        renderAllCards();
+      }
+    }
+
+    function changeStudentGender(id, newGender) {
+      const list = studentsByClass[currentClassKey] || [];
+      const stu = list.find(s => s.id === id);
+      if (stu) {
+        stu.gender = newGender;
+        saveStudentsToMobile();
+        renderStudentPills();
+        renderAllCards();
+      }
+    }
+
+    function renderStudentPills() {
+      const container = document.getElementById("studentListPills");
+      const list = studentsByClass[currentClassKey] || [];
+      if (list.length === 0) {
+        container.innerHTML = `<span class="text-slate-400">अभी कोई छात्र नहीं जोड़ा गया है।</span>`;
+        return;
+      }
+      container.innerHTML = `<span class="font-bold text-slate-700 mr-1">सेव छात्र (${list.length}):</span>` +
+        list.map((s, idx) => `
+          <div class="inline-flex items-center gap-1.5 bg-slate-100 border border-slate-300 text-slate-800 px-2.5 py-1 rounded-xl font-semibold">
+            <span>${idx + 1}. ${s.name}</span>
+            <select onchange="changeStudentGender(${s.id}, this.value)" class="bg-white border border-slate-300 rounded px-1 py-0.5 text-[11px] font-bold cursor-pointer" title="लिंग बदलें">
+              <option value="M" ${s.gender === 'M' ? 'selected' : ''}>बालक</option>
+              <option value="F" ${s.gender === 'F' ? 'selected' : ''}>बालिका</option>
+            </select>
+            <input type="number" value="${s.percent || 72}" onchange="changeStudentPercent(${s.id}, this.value)" title="प्राप्तांक प्रतिशत बदलें" class="w-12 text-center bg-white border border-emerald-400 rounded px-1 py-0.5 text-[11px] font-bold text-emerald-900">%
+            <button onclick="openAttendanceModalForStudent(${s.id})" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded px-1.5 py-0.5 text-[11px] font-bold cursor-pointer" title="माहवार उपस्थिति बदलें">
+              📅 उपस्थिति
+            </button>
+            <button onclick="removeStudent(${s.id})" class="text-red-500 hover:text-red-700 cursor-pointer font-bold px-1" title="हटाएं">&times;</button>
+          </div>
+        `).join("");
+    }
+
+    function openWorkingDaysModal() {
+      const wdArr = getClassWorkingDays(currentClassKey);
+      const labelText = currentClassKey === "balvatika" ? "बालवाटिका" : `कक्षा ${currentClassKey}`;
+      document.getElementById("modalWdClassTitle").innerText = labelText;
+
+      const grid = document.getElementById("wdInputsGrid");
+      grid.innerHTML = MONTHS_HI.map((mName, idx) => `
+        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+          <label class="font-bold text-slate-700 block mb-1">${idx + 1}. ${mName}</label>
+          <input type="number" id="wd_month_${idx}" value="${wdArr[idx]}" min="0" max="31" oninput="if(this.value>31)this.value=31;if(this.value<0)this.value=0;" class="w-full border border-slate-300 rounded-lg p-1.5 text-center font-bold bg-white">
+        </div>
+      `).join("");
+
+      const modal = document.getElementById("workingDaysModal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeWorkingDaysModal() {
+      const modal = document.getElementById("workingDaysModal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function readWorkingDaysFromModalInputs() {
+      return MONTHS_HI.map((_, idx) => {
+        const val = Number(document.getElementById(`wd_month_${idx}`)?.value || 0);
+        return Math.min(31, Math.max(0, val));
+      });
+    }
+
+    function saveWorkingDaysFromModal() {
+      const updatedWd = readWorkingDaysFromModalInputs();
+      workingDaysByClass[currentClassKey] = updatedWd;
+      workingDaysConfirmedByClass[currentClassKey] = true;
+
+      (studentsByClass[currentClassKey] || []).forEach(stu => {
+        stu.attendance = clampAttendanceToWorkingDays(
+          generateMonthlyAttendance(updatedWd, stu.attPercent || 85, stu.seed || 1),
+          updatedWd
+        );
+      });
+
+      saveWorkingDaysToMobile();
+      saveStudentsToMobile();
+      updateWorkingDaysStatusUI();
+      closeWorkingDaysModal();
+      renderAllCards();
+    }
+
+    function copyWorkingDaysToGroup(classList) {
+      const updatedWd = readWorkingDaysFromModalInputs();
+      classList.forEach(cKey => {
+        workingDaysByClass[cKey] = [...updatedWd];
+        workingDaysConfirmedByClass[cKey] = true;
+        (studentsByClass[cKey] || []).forEach(stu => {
+          stu.attendance = clampAttendanceToWorkingDays(
+            generateMonthlyAttendance(updatedWd, stu.attPercent || 85, stu.seed || 1),
+            updatedWd
+          );
+        });
+      });
+      saveWorkingDaysToMobile();
+      saveStudentsToMobile();
+      updateWorkingDaysStatusUI();
+      closeWorkingDaysModal();
+      renderAllCards();
+    }
+
+    function openAttendanceModalForNew() {
+      if (!workingDaysConfirmedByClass[currentClassKey]) {
+        alert("कृपया उपस्थिति दिन चुनने से पहले इस कक्षा के 'माहवार कार्यदिवस' कन्फर्म कर लें।");
+        openWorkingDaysModal();
+        return;
+      }
+      activeAttendanceStudentId = null;
+      const stuName = document.getElementById("stuName").value.trim() || "नया छात्र";
+      document.getElementById("attModalStuName").innerText = stuName;
+      const wdArr = getClassWorkingDays(currentClassKey);
+      const targetPct = Number(document.getElementById("stuAttPercent").value) || 85;
+      const attArr = pendingNewStudentAttendance || generateMonthlyAttendance(wdArr, targetPct, 1);
+      renderAttendanceModalInputs(wdArr, attArr);
+
+      const modal = document.getElementById("attendanceModal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function openAttendanceModalForStudent(stuId) {
+      if (!workingDaysConfirmedByClass[currentClassKey]) {
+        alert("कृपया छात्र की उपस्थिति बदलने से पहले इस कक्षा के 'माहवार कार्यदिवस' कन्फर्म कर लें।");
+        openWorkingDaysModal();
+        return;
+      }
+      const list = studentsByClass[currentClassKey] || [];
+      const stu = list.find(s => s.id === stuId);
+      if (!stu) return;
+      activeAttendanceStudentId = stuId;
+      document.getElementById("attModalStuName").innerText = stu.name;
+      const wdArr = getClassWorkingDays(currentClassKey);
+      const attArr = (stu.attendance && stu.attendance.length === 12)
+        ? clampAttendanceToWorkingDays(stu.attendance, wdArr)
+        : generateMonthlyAttendance(wdArr, stu.attPercent || 85, stu.seed || 1);
+      renderAttendanceModalInputs(wdArr, attArr);
+
+      const modal = document.getElementById("attendanceModal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function enforceMaxWorkingDayOnInput(inputEl, maxWd, monthName) {
+      let val = Number(inputEl.value);
+      if (val > maxWd) {
+        inputEl.value = maxWd;
+        alert(`${monthName} माह में कुल कार्यदिवस ${maxWd} हैं। उपस्थिति ${maxWd} से अधिक नहीं हो सकती!`);
+      } else if (val < 0 || isNaN(val)) {
+        inputEl.value = 0;
+      }
+      updateAttendanceModalSummary();
+    }
+
+    function renderAttendanceModalInputs(wdArr, attArr) {
+      const grid = document.getElementById("attModalMonthsGrid");
+      grid.innerHTML = MONTHS_HI.map((mName, idx) => {
+        const maxD = wdArr[idx] || 0;
+        const curP = Math.min(maxD, attArr[idx] || 0);
+        return `
+          <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-slate-700">${mName}</span>
+              <span class="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-1.5 rounded">अधिकतम: ${maxD}</span>
+            </div>
+            <input type="number" id="att_month_${idx}" value="${curP}" min="0" max="${maxD}" ${maxD === 0 ? 'disabled' : ''} oninput="enforceMaxWorkingDayOnInput(this, ${maxD}, '${mName}')" class="w-full border border-indigo-300 rounded-lg p-1.5 text-center font-bold bg-white text-indigo-950 disabled:bg-slate-200">
+          </div>
+        `;
+      }).join("");
+      updateAttendanceModalSummary();
+    }
+
+    function applyPercentToAttendanceModal(pct) {
+      const p = Number(pct);
+      if (!p || p < 5 || p > 100) return;
+      const wdArr = getClassWorkingDays(currentClassKey);
+      const calcArr = generateMonthlyAttendance(wdArr, p, 2);
+      MONTHS_HI.forEach((_, idx) => {
+        const inp = document.getElementById(`att_month_${idx}`);
+        if (inp) inp.value = Math.min(wdArr[idx], calcArr[idx]);
+      });
+      updateAttendanceModalSummary();
+    }
+
+    function updateAttendanceModalSummary() {
+      const wdArr = getClassWorkingDays(currentClassKey);
+      let totalWd = 0;
+      let totalPres = 0;
+      MONTHS_HI.forEach((_, idx) => {
+        const wd = wdArr[idx] || 0;
+        let pres = Number(document.getElementById(`att_month_${idx}`)?.value || 0);
+        if (pres > wd) pres = wd;
+        totalWd += wd;
+        totalPres += pres;
+      });
+      const pct = totalWd > 0 ? Math.round((totalPres / totalWd) * 100) : 0;
+      document.getElementById("attModalSummary").innerText = `कुल उपस्थिति: ${totalPres} दिन (कुल कार्यदिवस ${totalWd} का ${pct}%)`;
+    }
+
+    function saveAttendanceFromModal() {
+      const wdArr = getClassWorkingDays(currentClassKey);
+      let totalWd = 0, totalPres = 0;
+      const customArr = MONTHS_HI.map((_, idx) => {
+        const wd = wdArr[idx] || 0;
+        let pres = Number(document.getElementById(`att_month_${idx}`)?.value || 0);
+        if (pres > wd) pres = wd;
+        if (pres < 0) pres = 0;
+        totalWd += wd;
+        totalPres += pres;
+        return pres;
+      });
+      const calcPct = totalWd > 0 ? Math.round((totalPres / totalWd) * 100) : 85;
+
+      if (activeAttendanceStudentId !== null) {
+        const list = studentsByClass[currentClassKey] || [];
+        const stu = list.find(s => s.id === activeAttendanceStudentId);
+        if (stu) {
+          stu.attendance = customArr;
+          stu.attPercent = calcPct;
+          saveStudentsToMobile();
+          renderAllCards();
+        }
+      } else {
+        pendingNewStudentAttendance = customArr;
+      }
+      closeAttendanceModal();
+    }
+
+    function closeAttendanceModal() {
+      const modal = document.getElementById("attendanceModal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+    // =========================================================================
+    // PART 3 OF 3: मुख्य कार्ड रेंडरर, कॉम्पैक्ट फॉन्ट व संपूर्ण प्रिंट इंजन
+    // (इसे Part 2 के closeAttendanceModal() के ठीक नीचे पेस्ट करें)
+    // =========================================================================
+
+    // कार्ड की तालिका में सीधे उपस्थिति एडिट करने पर कार्यदिवस की अधिकतम सीमा (Cap) लागू करना
+    function validateInlineAttendanceEdit(el, stuId, monthIdx) {
+      const wdArr = getClassWorkingDays(currentClassKey);
+      const maxWd = wdArr[monthIdx] || 0;
+      let val = parseInt(el.innerText.replace(/[^0-9]/g, ""), 10);
+      if (isNaN(val) || val < 0) val = 0;
+      if (val > maxWd) {
+        alert(`${MONTHS_HI[monthIdx]} माह में कार्यदिवस (${maxWd}) से अधिक उपस्थिति दर्ज नहीं की जा सकती!`);
+        val = maxWd;
+      }
+      el.innerText = val;
+
+      const list = studentsByClass[currentClassKey] || [];
+      const stu = list.find(s => s.id === stuId);
+      if (stu) {
+        if (!stu.attendance || stu.attendance.length !== 12) {
+          stu.attendance = generateMonthlyAttendance(wdArr, stu.attPercent || 85, stu.seed || 1);
+        }
+        stu.attendance[monthIdx] = val;
+        saveStudentsToMobile();
+        const totalEl = document.getElementById(`total_att_${stu.id}`);
+        if (totalEl) {
+          totalEl.innerText = stu.attendance.reduce((a, b) => a + b, 0);
+        }
+      }
+    }
+
+    // स्लाइड-डाउन (Dropdown) एवं 'अन्य' (Custom Input) का कंट्रोलर
+    function handleCardSelectChange(selectEl, stuId, fieldKey) {
+      const val = selectEl.value;
+      const customWrap = document.getElementById(`custom_wrap_${stuId}_${fieldKey}`);
+      const customInp = document.getElementById(`custom_inp_${stuId}_${fieldKey}`);
+      const printSpan = document.getElementById(`print_val_${stuId}_${fieldKey}`);
+
+      const list = studentsByClass[currentClassKey] || [];
+      const stu = list.find(s => s.id === stuId);
+      if (!stu) return;
+      if (!stu.customDropdowns) stu.customDropdowns = {};
+
+      if (val === "__OTHER__") {
+        selectEl.classList.add("hidden");
+        if (customWrap) customWrap.classList.remove("hidden");
+        if (customInp) {
+          customInp.focus();
+          const curText = customInp.value || "";
+          stu.customDropdowns[fieldKey] = { mode: "custom", value: curText };
+          if (printSpan) printSpan.innerText = curText || "—";
+        }
+      } else {
+        selectEl.classList.remove("hidden");
+        if (customWrap) customWrap.classList.add("hidden");
+        stu.customDropdowns[fieldKey] = { mode: "select", value: val };
+        if (printSpan) printSpan.innerText = val || "—";
+      }
+      saveStudentsToMobile();
+    }
+
+    // 'अन्य' चुनने के बाद वापस ड्रॉपडाउन की सूची पर लौटने का बटन
+    function resetCustomToSelect(stuId, fieldKey) {
+      const selectEl = document.getElementById(`select_el_${stuId}_${fieldKey}`);
+      const customWrap = document.getElementById(`custom_wrap_${stuId}_${fieldKey}`);
+      const printSpan = document.getElementById(`print_val_${stuId}_${fieldKey}`);
+
+      const list = studentsByClass[currentClassKey] || [];
+      const stu = list.find(s => s.id === stuId);
+      if (!stu) return;
+
+      if (selectEl) {
+        selectEl.classList.remove("hidden");
+        selectEl.selectedIndex = 0;
+        const firstVal = selectEl.options[0]?.value || "";
+        if (!stu.customDropdowns) stu.customDropdowns = {};
+        stu.customDropdowns[fieldKey] = { mode: "select", value: firstVal };
+        if (printSpan) printSpan.innerText = firstVal;
+      }
+      if (customWrap) customWrap.classList.add("hidden");
+      saveStudentsToMobile();
+    }
+
+    // कस्टम इनपुट बॉक्स में टाइप करते समय डेटा और प्रिंट-टेक्स्ट को तुरंत अपडेट करना
+    function handleCardCustomInput(inputEl, stuId, fieldKey) {
+      const list = studentsByClass[currentClassKey] || [];
+      const stu = list.find(s => s.id === stuId);
+      if (!stu) return;
+      if (!stu.customDropdowns) stu.customDropdowns = {};
+      stu.customDropdowns[fieldKey] = { mode: "custom", value: inputEl.value };
+      saveStudentsToMobile();
+      const printSpan = document.getElementById(`print_val_${stuId}_${fieldKey}`);
+      if (printSpan) printSpan.innerText = inputEl.value || "—";
+    }
+
+    // स्मार्ट स्लाइड-डाउन + 'अन्य' (प्रिंट में केवल शुद्ध टेक्स्ट छपेगा)
+    function buildSlideDownWithOther(stu, fieldKey, optionsArray, defaultVal, extraClass = "") {
+      const saved = stu.customDropdowns?.[fieldKey];
+      const isCustom = saved && saved.mode === "custom";
+      const selectedVal = saved ? (isCustom ? "__OTHER__" : saved.value) : defaultVal;
+      const customText = isCustom ? (saved.value || "") : "";
+      const currentDisplayText = isCustom ? (customText || "—") : (selectedVal || defaultVal || "—");
+
+      const uniqueOpts = Array.from(new Set([defaultVal, ...(optionsArray || [])])).filter(Boolean);
+
+      return `
+        <span class="inline-block w-full align-middle relative">
+          <span id="print_val_${stu.id}_${fieldKey}" class="print-only print-pure-text">${currentDisplayText}</span>
+          <select id="select_el_${stu.id}_${fieldKey}" onchange="handleCardSelectChange(this, ${stu.id}, '${fieldKey}')" class="hpc-select no-print ${extraClass} ${isCustom ? 'hidden' : ''}">
+            ${uniqueOpts.map(opt => `<option value="${opt.replace(/"/g, '&quot;')}" ${opt === selectedVal ? 'selected' : ''}>${opt}</option>`).join("")}
+            <option value="__OTHER__" ${isCustom ? 'selected' : ''}>अन्य (स्वयं लिखें...)</option>
+          </select>
+          <span id="custom_wrap_${stu.id}_${fieldKey}" class="no-print flex items-center gap-1 ${isCustom ? '' : 'hidden'}">
+            <input type="text" id="custom_inp_${stu.id}_${fieldKey}" value="${customText.replace(/"/g, '&quot;')}" oninput="handleCardCustomInput(this, ${stu.id}, '${fieldKey}')" placeholder="यहाँ टाइप करें..." class="hpc-custom-input">
+            <button type="button" onclick="resetCustomToSelect(${stu.id}, '${fieldKey}')" class="text-[10px] bg-slate-200 hover:bg-slate-300 text-slate-700 px-1.5 py-0.5 rounded font-bold cursor-pointer" title="वापस सूची चुनें">↺</button>
+          </span>
+        </span>
+      `;
+    }
+
+    // परीक्षा ग्रेड (A1 से D2) के लिए स्लाइड-डाउन जनरेटर
+    const ALL_GRADES_LIST = ["A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2"];
+    function buildGradeSelect(stu, fieldKey, defaultGrade, colorClass = "") {
+      const saved = stu.customDropdowns?.[fieldKey];
+      const currentGrade = (saved && saved.value) ? saved.value : defaultGrade;
+      return `
+        <span class="inline-block w-full text-center">
+          <span id="print_val_${stu.id}_${fieldKey}" class="print-only print-pure-text ${colorClass}">${currentGrade}</span>
+          <select onchange="handleCardSelectChange(this, ${stu.id}, '${fieldKey}')" class="hpc-select no-print text-center font-bold ${colorClass}">
+            ${ALL_GRADES_LIST.map(g => `<option value="${g}" ${g === currentGrade ? 'selected' : ''}>${g}</option>`).join("")}
+          </select>
+        </span>
+      `;
+    }
+
+    // कार्ड पर स्टार (1★, 2★, 3★) पर क्लिक करने पर रेटिंग अपडेट होना
+    function toggleStarRow(stuId, starKey, chosenLevel) {
+      const list = studentsByClass[currentClassKey] || [];
+      const stu = list.find(s => s.id === stuId);
+      if (!stu) return;
+      if (!stu.customStars) stu.customStars = {};
+      stu.customStars[starKey] = chosenLevel;
+
+      const starValues = Object.values(stu.customStars);
+      if (starValues.length > 0) {
+        const avgStar = starValues.reduce((a, b) => a + b, 0) / starValues.length;
+        if (avgStar >= 2.6) stu.percent = Math.max(stu.percent, 85);
+        else if (avgStar >= 1.8) stu.percent = Math.min(80, Math.max(64, stu.percent));
+        else stu.percent = Math.min(56, stu.percent);
+      }
+
+      saveStudentsToMobile();
+      renderStudentPills();
+      renderAllCards();
+    }
+
+    // मुख्य A4 कार्ड रेंडरर (कॉम्पैक्ट फॉन्ट एवं संतुलित 2-कॉलम लेआउट)
+    function renderAllCards() {
+      const container = document.getElementById("printContainer");
+      const list = studentsByClass[currentClassKey] || [];
+      if (!currentClassSchema || list.length === 0) {
+        container.innerHTML = `<div class="bg-white p-8 rounded-2xl text-center text-slate-400 border border-slate-200">ऊपर फॉर्म से छात्र जोड़ें, कार्ड यहाँ तुरंत तैयार हो जाएगा।</div>`;
+        return;
+      }
+
+      const schoolName = document.getElementById("schoolName").value || "कम्पोजिट / प्राथमिक विद्यालय ......................";
+      const blockName = document.getElementById("blockName").value || "......................";
+      const districtName = document.getElementById("districtName").value || "सीतापुर";
+      const udiseCode = document.getElementById("udiseCode").value || "0914..............";
+      const sessionYear = document.getElementById("sessionYear").value || "2025-26";
+      const useUrdu = document.getElementById("globalUrduToggle")?.checked || false;
+      const wdArr = getClassWorkingDays(currentClassKey);
+      const totalWdYear = wdArr.reduce((a, b) => a + b, 0);
+
+      const isUpper = ["6", "7", "8"].includes(currentClassKey);
+      const isMid = ["3", "4", "5"].includes(currentClassKey);
+      const isBalvatika = currentClassKey === "balvatika";
+
+      const bloodOptions = ["B+", "O+", "A+", "AB+", "B-", "O-", "A-", "AB-", "ज्ञात नहीं"];
+      const hbOptions = ["11.5 gm/dL", "12.0 gm/dL", "12.5 gm/dL", "11.0 gm/dL", "10.5 gm/dL", "13.0 gm/dL"];
+      const eyeOptions = ["6/6 (सामान्य)", "6/9 (सामान्य)", "6/12 (चश्मा अपेक्षित)", "चश्मा प्रयोगरत"];
+
+      const subjectThemes = ["theme-blue", "theme-purple", "theme-teal", "theme-rose", "theme-indigo", "theme-emerald", "theme-orange", "theme-cyan"];
+
+      container.innerHTML = list.map((stu, idx) => {
+        const seed = stu.seed || (idx + 1);
+        const isGirl = stu.gender === "F";
+        const verbWant = isGirl ? "चाहती हूँ" : "चाहता हूँ";
+        const basePct = Number(stu.percent) || 72;
+
+        let srApaarDisplay = "";
+        if (stu.sr && stu.apaar) srApaarDisplay = `SR: ${stu.sr} | APAAR: ${stu.apaar}`;
+        else if (stu.sr) srApaarDisplay = `${stu.sr}`;
+        else if (stu.apaar) srApaarDisplay = `${stu.apaar}`;
+        else srApaarDisplay = `${100 + seed}`;
+
+        const stuAttArr = clampAttendanceToWorkingDays(
+          (stu.attendance && stu.attendance.length === 12)
+            ? stu.attendance
+            : generateMonthlyAttendance(wdArr, stu.attPercent || 85, seed),
+          wdArr
+        );
+        const totalPresYear = stuAttArr.reduce((a, b) => a + b, 0);
+
+        const friendPool = isGirl ? RANDOM_POOLS.friendsF : RANDOM_POOLS.friendsM;
+        const ambitionPool = isGirl ? RANDOM_POOLS.ambitionF : RANDOM_POOLS.ambitionM;
+
+        const favFestival = pickVariant(RANDOM_POOLS.festivals, seed, 1);
+        const favFriend = pickVariant(friendPool, seed, 2);
+        const favFood = pickVariant(RANDOM_POOLS.foods, seed, 3);
+        const favAnimal = pickVariant(RANDOM_POOLS.animals, seed, 4);
+        const favFlower = pickVariant(RANDOM_POOLS.flowers, seed, 5);
+        const favSubject = pickVariant(RANDOM_POOLS.subjects, seed, 6);
+        const favGarden = pickVariant(RANDOM_POOLS.gardening, seed, 7);
+        const favBook = pickVariant(RANDOM_POOLS.books, seed, 8);
+        const favGame = pickVariant(RANDOM_POOLS.games, seed, 9);
+
+        const goalAmbition = pickVariant(ambitionPool, seed, 2);
+        const goalSee = pickVariant(RANDOM_POOLS.toSee, seed, 3);
+        const goalLearn = pickVariant(RANDOM_POOLS.toLearn, seed, 4);
+        const goalVisit = pickVariant(RANDOM_POOLS.toVisit, seed, 5);
+        const goalMake = pickVariant(RANDOM_POOLS.toMake, seed, 6);
+
+        const cogPosList = (currentClassSchema.cognitivePos || []).map(t => applyGenderText(t, stu.gender));
+        const cogCorList = (currentClassSchema.cognitiveCor || []).map(t => applyGenderText(t, stu.gender));
+        const behPosList = RANDOM_POOLS.behavPos.map(t => applyGenderText(t, stu.gender));
+        const behCorList = RANDOM_POOLS.behavCor.map(t => applyGenderText(t, stu.gender));
+        const sklPosList = RANDOM_POOLS.skillPos.map(t => applyGenderText(t, stu.gender));
+        const sklCorList = RANDOM_POOLS.skillCor.map(t => applyGenderText(t, stu.gender));
+        const hltPosList = RANDOM_POOLS.healthPos.map(t => applyGenderText(t, stu.gender));
+        const hltCorList = RANDOM_POOLS.healthCor.map(t => applyGenderText(t, stu.gender));
+        const artPosList = RANDOM_POOLS.artPos.map(t => applyGenderText(t, stu.gender));
+        const artCorList = RANDOM_POOLS.artCor.map(t => applyGenderText(t, stu.gender));
+
+        let activeSubjects = [...(currentClassSchema.subjects || [])];
+        if (isUpper) {
+          activeSubjects = activeSubjects.filter(sub => {
+            if (useUrdu && sub.name === "संस्कृत") return false;
+            if (!useUrdu && sub.name === "उर्दू") return false;
+            return true;
+          });
+        }
+        const activeCoScholastic = currentClassSchema.coScholastic || [];
+
+        // ★ स्टार सेल रेंडरर (एक ही सेल में 1★, 2★, 3★ बटन)
+        const renderStarCell = (starKey, defaultLvl) => {
+          const activeLvl = (stu.customStars && stu.customStars[starKey]) ? stu.customStars[starKey] : defaultLvl;
+          const pureStarsForPrint = "★".repeat(activeLvl);
+          return `
+            <td class="star-td-cell text-center align-middle">
+              <span class="print-only print-star-text">${pureStarsForPrint}</span>
+              <div class="star-btn-group no-print">
+                ${[1, 2, 3].map(lvl => {
+                  const isSel = (lvl === activeLvl);
+                  return `<button type="button" onclick="toggleStarRow(${stu.id}, '${starKey}', ${lvl})" class="star-btn ${isSel ? 'active' : ''}">${lvl}★</button>`;
+                }).join("")}
+              </div>
+            </td>
+          `;
+        };
+
+        // दक्षता तालिका (सटीक 3 कॉलम)
+        const renderSectionTable = (secObj, secIndexPrefix, themeIdx = 0) => {
+          const colorTheme = subjectThemes[themeIdx % subjectThemes.length];
+          return `
+            <table class="hpc-table ${colorTheme}">
+              <colgroup>
+                <col style="width: 68%;">
+                <col style="width: 16%;">
+                <col style="width: 16%;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="text-left">${secIndexPrefix} ${secObj.name} — दक्षता / लर्निंग आउटकम</th>
+                  <th class="text-center">सितम्बर</th>
+                  <th class="text-center">मार्च</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${(secObj.indicators || []).map((ind, iIdx) => {
+                  const defaultSept = stu.defaultLevel;
+                  const defaultMarch = (stu.defaultLevel === 2 && (iIdx + seed) % 2 === 0) ? 3 : (stu.defaultLevel === 1 ? 2 : stu.defaultLevel);
+                  const keySept = `${secObj.name}_S_${iIdx}`;
+                  const keyMarch = `${secObj.name}_M_${iIdx}`;
+                  return `
+                    <tr>
+                      <td class="select-none ${secObj.isUrdu ? 'urdu-text' : ''}">${ind}</td>
+                      ${renderStarCell(keySept, defaultSept)}
+                      ${renderStarCell(keyMarch, defaultMarch)}
+                    </tr>
+                  `;
+                }).join("")}
+              </tbody>
+            </table>
+          `;
+        };
+
+        const p1Class = isUpper ? "hpc-page layout-upper-p1" : "hpc-page layout-primary";
+        const p2Class = isUpper ? "hpc-page layout-upper-p2" : "hpc-page layout-primary";
+
+        // 'मुझे पसंद है'
+        let likesTableRowsHTML = "";
+        if (isUpper) {
+          likesTableRowsHTML = `
+            <tr>
+              <th>त्यौहार</th><td>${buildSlideDownWithOther(stu, 'like_fest', RANDOM_POOLS.festivals, favFestival)}</td>
+              <th>मित्र</th><td>${buildSlideDownWithOther(stu, 'like_friend', friendPool, favFriend)}</td>
+            </tr>
+            <tr>
+              <th>भोजन</th><td>${buildSlideDownWithOther(stu, 'like_food', RANDOM_POOLS.foods, favFood)}</td>
+              <th>बागवानी</th><td>${buildSlideDownWithOther(stu, 'like_garden', RANDOM_POOLS.gardening, favGarden)}</td>
+            </tr>
+            <tr>
+              <th>किताब</th><td>${buildSlideDownWithOther(stu, 'like_book', RANDOM_POOLS.books, favBook)}</td>
+              <th>अन्य/खेल</th><td>${buildSlideDownWithOther(stu, 'like_game', RANDOM_POOLS.games, favGame)}</td>
+            </tr>
+          `;
+        } else if (isBalvatika) {
+          likesTableRowsHTML = `
+            <tr>
+              <th>खेल</th><td>${buildSlideDownWithOther(stu, 'like_game', RANDOM_POOLS.games, favGame)}</td>
+              <th>मित्र</th><td>${buildSlideDownWithOther(stu, 'like_friend', friendPool, favFriend)}</td>
+            </tr>
+            <tr>
+              <th>भोजन</th><td>${buildSlideDownWithOther(stu, 'like_food', RANDOM_POOLS.foods, favFood)}</td>
+              <th>जानवर</th><td>${buildSlideDownWithOther(stu, 'like_animal', RANDOM_POOLS.animals, favAnimal)}</td>
+            </tr>
+            <tr>
+              <th>फूल</th><td>${buildSlideDownWithOther(stu, 'like_flower', RANDOM_POOLS.flowers, favFlower)}</td>
+              <th>शिक्षक</th><td>${buildSlideDownWithOther(stu, 'like_teacher', ["कक्षा अध्यापक", "प्रधानाध्यापक", "आँगनबाड़ी कार्यकर्त्री", "सभी शिक्षक"], "कक्षा अध्यापक")}</td>
+            </tr>
+          `;
+        } else if (isMid) {
+          likesTableRowsHTML = `
+            <tr>
+              <th>त्यौहार</th><td>${buildSlideDownWithOther(stu, 'like_fest', RANDOM_POOLS.festivals, favFestival)}</td>
+              <th>खेल</th><td>${buildSlideDownWithOther(stu, 'like_game', RANDOM_POOLS.games, favGame)}</td>
+            </tr>
+            <tr>
+              <th>भोजन</th><td>${buildSlideDownWithOther(stu, 'like_food', RANDOM_POOLS.foods, favFood)}</td>
+              <th>जानवर</th><td>${buildSlideDownWithOther(stu, 'like_animal', RANDOM_POOLS.animals, favAnimal)}</td>
+            </tr>
+            <tr>
+              <th>फूल</th><td>${buildSlideDownWithOther(stu, 'like_flower', RANDOM_POOLS.flowers, favFlower)}</td>
+              <th>विषय</th><td>${buildSlideDownWithOther(stu, 'like_sub', RANDOM_POOLS.subjects, favSubject)}</td>
+            </tr>
+          `;
+        } else {
+          likesTableRowsHTML = `
+            <tr>
+              <th>त्यौहार</th><td>${buildSlideDownWithOther(stu, 'like_fest', RANDOM_POOLS.festivals, favFestival)}</td>
+              <th>मित्र</th><td>${buildSlideDownWithOther(stu, 'like_friend', friendPool, favFriend)}</td>
+            </tr>
+            <tr>
+              <th>भोजन</th><td>${buildSlideDownWithOther(stu, 'like_food', RANDOM_POOLS.foods, favFood)}</td>
+              <th>जानवर</th><td>${buildSlideDownWithOther(stu, 'like_animal', RANDOM_POOLS.animals, favAnimal)}</td>
+            </tr>
+            <tr>
+              <th>फूल</th><td>${buildSlideDownWithOther(stu, 'like_flower', RANDOM_POOLS.flowers, favFlower)}</td>
+              <th>खेल</th><td>${buildSlideDownWithOther(stu, 'like_game', RANDOM_POOLS.games, favGame)}</td>
+            </tr>
+          `;
+        }
+
+        // 'मेरी अभिलाषा' के 4 बिंदु
+        let ambitionFourRowsHTML = "";
+        if (isMid || isUpper) {
+          ambitionFourRowsHTML = `
+            <tr><td class="select-none py-1">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition)}</b> बनना ${verbWant}।</td></tr>
+            <tr><td class="select-none py-1">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.toSee, goalSee)}</b> देखना ${verbWant}।</td></tr>
+            <tr><td class="select-none py-1">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn)}</b> सीखना ${verbWant}।</td></tr>
+            <tr><td class="select-none py-1">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toVisit, goalVisit)}</b> घूमने जाना ${verbWant}।</td></tr>
+          `;
+        } else {
+          ambitionFourRowsHTML = `
+            <tr><td class="select-none py-1">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition)}</b> बनना ${verbWant}।</td></tr>
+            <tr><td class="select-none py-1">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.games, favGame)}</b> खेलना ${verbWant}।</td></tr>
+            <tr><td class="select-none py-1">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn)}</b> सीखना ${verbWant}।</td></tr>
+            <tr><td class="select-none py-1">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toMake, goalMake)}</b> बनाना ${verbWant}।</td></tr>
+          `;
+        }
+
+        // PAGE 1 (FRONT SIDE)
+        const page1HTML = `
+          <div class="${p1Class}">
+            <!-- Top Banner Header -->
+            <div class="flex items-center justify-between bg-blue-50 border-b-2 border-blue-900 px-3 py-1.5 rounded-t">
+              <div class="text-xs font-extrabold text-blue-950">उत्तर प्रदेश सरकार | समग्र शिक्षा</div>
+              <div class="text-center">
+                <h2 class="text-base font-black text-blue-900 uppercase tracking-tight">उ० प्र० बेसिक शिक्षा परिषद् — समग्र प्रगति पत्र (HPC)</h2>
+                <p class="text-[11px] font-bold text-emerald-900">${currentClassSchema.className} | शैक्षिक सत्र : <span>${sessionYear}</span></p>
+              </div>
+              <div class="text-xs font-extrabold text-blue-950">UDISE: <span>${udiseCode}</span></div>
+            </div>
+
+            <!-- Student Profile & Health Table -->
+            <div class="grid grid-cols-12 gap-2.5 w-full">
+              <div class="col-span-7 min-w-0">
+                <table class="hpc-table theme-blue">
+                  <colgroup>
+                    <col style="width: 25%;">
+                    <col style="width: 35%;">
+                    <col style="width: 15%;">
+                    <col style="width: 25%;">
+                  </colgroup>
+                  <tr>
+                    <th>विद्यार्थी का नाम</th>
+                    <td contenteditable="true" oninput="this.innerText=this.innerText.replace(/[0-9]/g,'')" class="font-bold text-slate-900">${stu.name}</td>
+                    <th>लिंग</th>
+                    <td>
+                      <span class="print-only print-pure-text">${!isGirl ? 'बालक' : 'बालिका'}</span>
+                      <select onchange="changeStudentGender(${stu.id}, this.value)" class="print-select no-print font-bold text-slate-900 cursor-pointer">
+                        <option value="M" ${!isGirl ? 'selected' : ''}>बालक</option>
+                        <option value="F" ${isGirl ? 'selected' : ''}>बालिका</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>पिता का नाम</th>
+                    <td contenteditable="true" oninput="this.innerText=this.innerText.replace(/[0-9]/g,'')">${stu.father}</td>
+                    <th>माता का नाम</th>
+                    <td contenteditable="true" oninput="this.innerText=this.innerText.replace(/[0-9]/g,'')">${stu.mother}</td>
+                  </tr>
+                  <tr>
+                    <th>जन्मतिथि</th>
+                    <td class="font-semibold">${stu.dob}</td>
+                    <th>SR / APAAR</th>
+                    <td class="font-semibold">${srApaarDisplay}</td>
+                  </tr>
+                  <tr>
+                    <th>विद्यालय</th>
+                    <td colspan="3" class="font-semibold">${schoolName}, ब्लॉक- ${blockName}, जनपद- ${districtName}</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="col-span-5 min-w-0">
+                <table class="hpc-table theme-rose text-center">
+                  <colgroup>
+                    <col style="width: 27%;">
+                    <col style="width: 21%;">
+                    <col style="width: 21%;">
+                    <col style="width: 31%;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>स्वास्थ्य मापदंड</th>
+                      <th>अप्रैल</th>
+                      <th>जनवरी</th>
+                      <th>रक्त एवं दृष्टि</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-semibold">ऊँचाई (cm)</td>
+                      <td contenteditable="true">${stu.h1} सेमी</td>
+                      <td contenteditable="true">${stu.h2} सेमी</td>
+                      <td class="text-left font-semibold"><b>रक्त:</b> ${buildSlideDownWithOther(stu, 'hlt_bg', bloodOptions, stu.bloodGroup || 'B+')}</td>
+                    </tr>
+                    <tr>
+                      <td class="font-semibold">वजन (kg)</td>
+                      <td contenteditable="true">${stu.w1} किग्रा</td>
+                      <td contenteditable="true">${stu.w2} किग्रा</td>
+                      <td class="text-left font-semibold"><b>Hb:</b> ${buildSlideDownWithOther(stu, 'hlt_hb', hbOptions, stu.hb || '11.5 gm/dL')}</td>
+                    </tr>
+                    <tr>
+                      <td class="font-semibold">कृमिनाशक</td>
+                      <td>दी गई ☑</td>
+                      <td>दी गई ☑</td>
+                      <td class="text-left font-semibold"><b>दृष्टि:</b> ${buildSlideDownWithOther(stu, 'hlt_eye', eyeOptions, stu.eyeSight || '6/6 (सामान्य)')}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- 12 Months Attendance Table -->
+            <div class="w-full">
+              <table class="hpc-table theme-indigo text-center">
+                <colgroup>
+                  <col style="width: 19%;">
+                  ${MONTHS_HI.map(() => `<col style="width: 6.2%;">`).join("")}
+                  <col style="width: 6.6%;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>माहवार उपस्थिति विवरण</th>
+                    ${MONTHS_HI.map(m => `<th>${m}</th>`).join("")}
+                    <th>वार्षिक योग</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="font-bold bg-indigo-50/70">कुल कार्यदिवस</td>
+                    ${wdArr.map(d => `<td class="font-bold text-slate-800 bg-indigo-50/70">${d}</td>`).join("")}
+                    <td class="font-bold text-slate-950 bg-indigo-50/70">${totalWdYear}</td>
+                  </tr>
+                  <tr>
+                    <td class="font-bold">मेरी उपस्थिति (दिन)</td>
+                    ${stuAttArr.map((p, mIdx) => `<td contenteditable="true" onblur="validateInlineAttendanceEdit(this, ${stu.id}, ${mIdx})" class="font-bold text-indigo-950" title="अधिकतम कार्यदिवस: ${wdArr[mIdx]}">${p}</td>`).join("")}
+                    <td id="total_att_${stu.id}" class="font-extrabold text-emerald-900">${totalPresYear}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- मुझे पसंद है & मेरी अभिलाषा -->
+            <div class="grid grid-cols-12 gap-2.5 w-full">
+              <div class="col-span-6 min-w-0">
+                <table class="hpc-table theme-amber">
+                  <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 30%;">
+                    <col style="width: 20%;">
+                    <col style="width: 30%;">
+                  </colgroup>
+                  <thead><tr><th colspan="4">मुझे पसंद है... (विद्यार्थी की रुचियाँ)</th></tr></thead>
+                  <tbody>
+                    ${likesTableRowsHTML}
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-span-6 min-w-0">
+                <table class="hpc-table theme-teal">
+                  <colgroup><col style="width: 100%;"></colgroup>
+                  <thead><tr><th>मेरी अभिलाषा (4 बिंदु — लक्ष्य निर्धारण)</th></tr></thead>
+                  <tbody>
+                    ${ambitionFourRowsHTML}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- शैक्षिक परीक्षा परिणाम & विद्यार्थी के बारे में -->
+            <div class="grid grid-cols-12 gap-2.5 w-full">
+              <div class="col-span-5 min-w-0">
+                <table class="hpc-table theme-purple text-center">
+                  <colgroup>
+                    <col style="width: 36%;">
+                    <col style="width: 16%;">
+                    <col style="width: 16%;">
+                    <col style="width: 16%;">
+                    <col style="width: 16%;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th class="text-left">शैक्षिक विषय</th>
+                      <th>सत्र-1</th><th>अर्द्धवार्षिक</th><th>सत्र-2</th><th>वार्षिक</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${(currentClassSchema.examSubjects || ["हिन्दी", "गणित", "अंग्रेजी"]).map((sub, subIdx) => {
+                      const subjectOffset = ((subIdx + seed) % 3 === 0) ? 4 : (((subIdx + seed) % 2 === 0) ? -3 : 2);
+                      const gTerm1 = getGradeFromPercent(basePct + subjectOffset - 2);
+                      const gHalf  = getGradeFromPercent(basePct + subjectOffset);
+                      const gTerm2 = getGradeFromPercent(basePct + subjectOffset + 3);
+                      const gFinal = getGradeFromPercent(Math.min(96, basePct + subjectOffset + 6));
+                      return `
+                        <tr>
+                          <td class="text-left font-semibold select-none">${useUrdu && sub.includes("संस्कृत") ? "उर्दू (اردو)" : sub}</td>
+                          <td>${buildGradeSelect(stu, `grd_${subIdx}_t1`, gTerm1)}</td>
+                          <td>${buildGradeSelect(stu, `grd_${subIdx}_hf`, gHalf)}</td>
+                          <td>${buildGradeSelect(stu, `grd_${subIdx}_t2`, gTerm2, 'text-indigo-900')}</td>
+                          <td>${buildGradeSelect(stu, `grd_${subIdx}_fn`, gFinal, 'text-emerald-900')}</td>
+                        </tr>
+                      `;
+                    }).join("")}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col-span-7 min-w-0">
+                <table class="hpc-table theme-orange">
+                  <colgroup>
+                    <col style="width: 26%;">
+                    <col style="width: 37%;">
+                    <col style="width: 37%;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>विकास क्षेत्र</th>
+                      <th>सकारात्मक पक्ष (Positive)</th>
+                      <th>सुधारात्मक पक्ष (Corrective)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-bold select-none">संज्ञानात्मक</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_cog_pos', cogPosList, pickVariant(cogPosList, seed, 1))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_cog_cor', cogCorList, pickVariant(cogCorList, seed, 2))}</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold select-none">व्यवहार व भावना</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_beh_pos', behPosList, pickVariant(behPosList, seed, 3))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_beh_cor', behCorList, pickVariant(behCorList, seed, 4))}</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold select-none">जीवन कौशल</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_skl_pos', sklPosList, pickVariant(sklPosList, seed, 5))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_skl_cor', sklCorList, pickVariant(sklCorList, seed, 6))}</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold select-none">स्वास्थ्य व सफाई</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_hlt_pos', hltPosList, pickVariant(hltPosList, seed, 7))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_hlt_cor', hltCorList, pickVariant(hltCorList, seed, 8))}</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold select-none">कलात्मक रुचि</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_art_pos', artPosList, pickVariant(artPosList, seed, 9))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_art_cor', artCorList, pickVariant(artCorList, seed, 10))}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- विद्यार्थी स्व-आकलन (कक्षा 6-8) -->
+            ${isUpper ? `
+              <table class="hpc-table theme-cyan">
+                <colgroup>
+                  <col style="width: 35%;">
+                  <col style="width: 35%;">
+                  <col style="width: 30%;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>विद्यार्थी स्व-आकलन (सितम्बर एवं मार्च)</th>
+                    <th>संतुलन व जिम्मेदारी</th>
+                    <th>सुधार हेतु संकल्प</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="select-none">1. सीख को जोड़ना: <b>हाँ ☑</b> | 2. प्रश्न पूछना: <b>हाँ ☑</b></td>
+                    <td class="select-none">3. चुनौतियाँ हल करना: <b>हाँ ☑</b> | 4. संतुलन: <b>हाँ ☑</b></td>
+                    <td>${buildSlideDownWithOther(stu, 'self_imp_68', RANDOM_POOLS.selfImprove6to8, pickVariant(RANDOM_POOLS.selfImprove6to8, seed, 1))}</td>
+                  </tr>
+                </tbody>
+              </table>
+            ` : ''}
+
+            <!-- शिक्षक-अभिभावक संवाद (सत्र में 2 बार हस्ताक्षर केवल पेज-1 में) -->
+            <table class="hpc-table theme-emerald">
+              <colgroup>
+                <col style="width: 24%;">
+                <col style="width: 26%;">
+                <col style="width: 25%;">
+                <col style="width: 25%;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>अभिभावक प्रतिपुष्टि (संवाद बिंदु)</th>
+                  <th>रुचि एवं विद्यालय से अपेक्षा</th>
+                  <th>प्रथम संवाद (सितम्बर) हस्ताक्षर</th>
+                  <th>द्वितीय संवाद (मार्च) हस्ताक्षर</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="select-none">
+                    1. विद्यालय आने को उत्सुक: <b>हाँ ☑</b><br>
+                    2. स्वच्छता व जिम्मेदार व्यवहार: <b>हाँ ☑</b>
+                  </td>
+                  <td>
+                    <b>रुचि:</b> ${buildSlideDownWithOther(stu, 'par_int', RANDOM_POOLS.parentInterest, pickVariant(RANDOM_POOLS.parentInterest, seed, 2))}
+                  </td>
+                  <td class="text-left font-semibold text-slate-800 select-none">
+                    अभिभावक: ......................<br>
+                    शिक्षक: .........................
+                  </td>
+                  <td class="text-left font-semibold text-slate-800 select-none">
+                    अभिभावक: ......................<br>
+                    शिक्षक: .........................
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Promotion Footer -->
+            <div class="flex items-center justify-between bg-emerald-50 border-t-2 border-emerald-800 px-3 py-1.5 rounded-b text-[10.5px] font-bold">
+              <div class="text-emerald-950 select-none">
+                🎉 शैक्षिक सत्र के लिए <b>${currentClassSchema.promoteTo || 'अगली कक्षा'}</b> में कक्षोन्नति प्रदान की जाती है।
+              </div>
+              <div class="text-slate-900 select-none">हस्ताक्षर प्रधानाध्यापक (मुहर सहित): ....................................</div>
+            </div>
+          </div>
+        `;
+
+        // PAGE 2 (BACK SIDE): विज्ञान पूरा एक साथ बाएँ कॉलम में (कोई दोहराव नहीं)
+        let leftBackSecs = [];
+        let rightBackSecs = [];
+
+        if (isUpper) {
+          // बाएँ कॉलम में 4 पूर्ण विषय: 1. हिन्दी, 2. गणित, 3. अंग्रेजी, 4. विज्ञान
+          leftBackSecs = activeSubjects.slice(0, 4).map((s, i) => ({
+            ...s,
+            prefix: `${i + 1}.`,
+            tIdx: i
+          }));
+
+          // दाएँ कॉलम में: 5. सामाजिक विज्ञान, 6. संस्कृत/उर्दू + 4 सह-शैक्षिक क्षेत्र
+          const remSubjects = activeSubjects.slice(4).map((s, i) => ({
+            ...s,
+            prefix: `${i + 5}.`,
+            tIdx: i + 4
+          }));
+          const rightCo = activeCoScholastic.map((c, i) => ({
+            ...c,
+            prefix: `सह-${i + 1}.`,
+            tIdx: i + 6
+          }));
+
+          rightBackSecs = [...remSubjects, ...rightCo];
+        } else {
+          leftBackSecs = activeSubjects.map((s, i) => ({
+            ...s,
+            prefix: `${i + 1}.`,
+            tIdx: i
+          }));
+          rightBackSecs = activeCoScholastic.map((c, i) => ({
+            ...c,
+            prefix: `सह-${i + 1}.`,
+            tIdx: i + 4
+          }));
+        }
+
+        let backGridHTML = "";
+        if (isUpper) {
+          backGridHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-2 items-start">
+              <div class="space-y-1">${leftBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}</div>
+              <div class="space-y-1">${rightBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}</div>
+            </div>
+          `;
+        } else {
+          backGridHTML = `
+            <div class="space-y-1.5">
+              ${leftBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}
+              ${rightBackSecs.length > 0 ? `
+                <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-1.5">
+                  ${rightBackSecs.map(sec => renderSectionTable(sec, sec.prefix, sec.tIdx)).join("")}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }
+
+        const page2HTML = `
+          <div class="${p2Class}">
+            <div>
+              <div class="flex items-center justify-between bg-indigo-50 border-b-2 border-indigo-900 px-3 py-1 mb-1 rounded-t text-xs font-bold">
+                <span class="text-indigo-950">संज्ञानात्मक एवं सह-शैक्षिक विकास — विद्यार्थी: ${stu.name} (${currentClassSchema.className})</span>
+                <span class="text-amber-900">स्तर संकेत: ★ = सरिता (प्रारम्भिक), ★★ = पर्वत (मध्यम), ★★★ = आसमान (उत्कृष्ट)</span>
+              </div>
+              ${backGridHTML}
+            </div>
+
+            <!-- नीचे के हिस्से में ★ सरिता (Stream), ★★ पर्वत (Mountain), ★★★ आसमान (Sky) एवं केवल ग्रेड मानक (कोई हस्ताक्षर नहीं) -->
+            <div class="pt-1 border-t-2 border-indigo-950 select-none">
+              <table class="hpc-table theme-amber mb-1">
+                <colgroup>
+                  <col style="width: 26%;">
+                  <col style="width: 74%;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th class="text-center">सीखने का स्तर (स्टार प्रतीक)</th>
+                    <th class="text-left">प्रत्येक लर्निंग आउटकम के सापेक्ष सीखने के स्तर (सरिता, पर्वत, आसमान) की आधिकारिक व्याख्या</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background-color: #f0f9ff !important;">
+                    <td class="font-extrabold text-center text-sky-900">★ स्तर 1 : सरिता / धारा (Stream)</td>
+                    <td class="text-slate-900">यह <b>प्रारम्भिक स्तर</b> है। सीखने की धारा शुरू हो चुकी है, पर अभी गहराई और प्रवाह विकसित होना शेष है। (41% - 60%)</td>
+                  </tr>
+                  <tr style="background-color: #ecfdf5 !important;">
+                    <td class="font-extrabold text-center text-emerald-950">★★ स्तर 2 : पर्वत (Mountain)</td>
+                    <td class="text-slate-900">यह <b>मध्य स्तर</b> है, जहाँ विद्यार्थी स्थिर और सशक्त प्रगति पर है। वह अवधारणा समझ चुका है और अधिकांश कार्य स्वयं कर लेता है, पर शिक्षक के मार्गदर्शन की जरूरत पड़ती है। (61% - 80%)</td>
+                  </tr>
+                  <tr style="background-color: #fffbeb !important;">
+                    <td class="font-extrabold text-center text-amber-950">★★★ स्तर 3 : आसमान / आकाश (Sky)</td>
+                    <td class="text-slate-900">यह कक्षा एवं आयु उपयुक्त <b>उत्कृष्ट (उच्चतम) स्तर</b> है, जहाँ विद्यार्थी उत्कृष्ट प्रदर्शन करता है। सीखना खुले आसमान की तरह विस्तृत और आत्मविश्वासी होता है। (81% - 100%)</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="text-center text-[9.5px] font-bold bg-indigo-50 border border-indigo-300 px-3 py-0.5 rounded bg-badge text-indigo-950">
+                शैक्षिक परीक्षा ग्रेड मानक: A1 (91% - 100%) | A2 (81% - 90%) | B1 (71% - 80%) | B2 (61% - 70%) | C1 (51% - 60%) | C2 (41% - 50%) | D1 (33% - 40%) | D2 (32% और उससे कम)
+              </div>
+            </div>
+          </div>
+        `;
+
+        return page1HTML + page2HTML;
+      }).join("");
+    }
+
+    // 11. प्रिंट पॉप-अप मोडल फंक्शन्स
+    function openPrintConfirmModal() {
+      if (!workingDaysConfirmedByClass[currentClassKey]) {
+        alert("प्रिंट निकालने से पहले कृपया एक बार इस कक्षा के 'माहवार कार्यदिवस' की जाँच कर उसे कन्फर्म कर दें।");
+        openWorkingDaysModal();
+        return;
+      }
+      const m = document.getElementById("printModal");
+      m.classList.remove("hidden");
+      m.classList.add("flex");
+    }
+    function closePrintConfirmModal() {
+      const m = document.getElementById("printModal");
+      m.classList.add("hidden");
+      m.classList.remove("flex");
+    }
+    function proceedToPrint() {
+      closePrintConfirmModal();
+      window.print();
+    }
+
+    // पेज लोड होने पर इनिशियलाइज़ेशन
+    window.addEventListener("DOMContentLoaded", () => {
+      loadSavedData();
+      switchClass("1");
+    });
+  </script>
 </body>
 </html>
