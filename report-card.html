@@ -724,7 +724,7 @@
       <p class="text-slate-400 text-xs">© deshimaster.in. All Rights Reserved.</p>
     </div>
   </footer>
-  <!-- Complete JavaScript Engine (Part 2 of 2) -->
+  <!-- JavaScript Engine: Part 2A (Data, JSON Loader, Modals & Helper Functions) -->
   <script>
     const MONTHS_HI = [
       "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर",
@@ -896,7 +896,19 @@
       }
     ];
 
+    // यदि किसी कारण JSON फाइल न खुले तो भी सभी कक्षाएं (बालवाटिका से 8) बिना रुके चलेंगी
     const FALLBACK_SCHEMAS = {
+      "balvatika": {
+        className: "कक्षा : बालवाटिका - 3", promoteTo: "कक्षा - 1", hasExamTable: false, examSubjects: [],
+        subjects: [
+          { name: "सामाजिक, भावनात्मक एवं नैतिक विकास", indicators: ["विद्यार्थी समूह के अन्य विद्यार्थियों के साथ वस्तुएँ साझा करता है एवं मिल-जुलकर खेलता है।", "विद्यार्थी स्वयं के एवं विद्यालय के सामान की देखभाल करता है।", "विद्यार्थी स्वयं एवं सहपाठियों की खुशी, उदासी, नाराजगी, क्रोध जैसी भावनाओं को पहचानता है।", "विद्यार्थी परिचित व्यक्तियों/सहयोगियों से सहजता से वार्तालाप करता है।"] },
+          { name: "ध्वनि एवं भाषा विकास", indicators: ["विद्यार्थी सरल निर्देशों को समझकर प्रतिक्रिया दे पाता है।", "विद्यार्थी सुनी गयी कहानी / घटना को अपने शब्दों में व्यक्त करता है एवं उस पर आधारित प्रश्नों के उत्तर मौखिक रूप से दे पाता है।", "विद्यार्थी सिखाए वर्ण/अक्षरों व उनकी संगत ध्वनियों को पहचानता एवं लिखने का प्रयास करता है।", "विद्यार्थी दो-तीन अक्षर वाले सरल शब्दों को पढ़ पाता है।", "विद्यार्थी अपना नाम पहचान व लिख पाता है।"] },
+          { name: "संज्ञानात्मक विकास", indicators: ["विद्यार्थी वस्तुओं के संदर्भ में तुलनात्मक शब्दावली का प्रयोग करता है एवं लम्बा-छोटा पहचानता है।", "विद्यार्थी किसी वस्तु / घटना को क्रम में लगा एवं बोल पाता है।", "विद्यार्थी वस्तुओं को उनके रंग, आकार एवं माप के आधार पर वर्गीकरण कर पाता है।", "विद्यार्थी 9 तक की वस्तुओं को गिन पाता है एवं संख्या 9 तक के अंकों को पहचान व लिख पाता है।", "विद्यार्थी सरल पैटर्न पहचान कर उसे आगे बढ़ा पाता है।"] },
+          { name: "सौंदर्यबोध विकास", indicators: ["विद्यार्थी कल्पना के आधार पर चित्र बना एवं रंग भर पाता है।", "विद्यार्थी सांस्कृतिक गतिविधियों में प्रतिभाग करता है।", "विद्यार्थी आस-पास की ध्वनियों की पहचान एवं उसकी नकल करता है।"] },
+          { name: "शारीरिक विकास", indicators: ["विद्यार्थी पेंसिल को सही ढंग से पकड़ पाता है।", "विद्यार्थी अपने शरीर के अंगों को पहचानता और उन पर बात कर पाता है।", "विद्यार्थी निर्देशों के अनुसार दौड़ता, गेंद फेंकता, पकड़ता, कूदता, आगे-पीछे या किनारे पर चल पाता है।"] }
+        ],
+        coScholastic: []
+      },
       "1": {
         className: "कक्षा : 1", promoteTo: "कक्षा - 2", hasExamTable: true,
         examSubjects: ["हिन्दी (मौखिक)", "गणित (मौखिक)", "अंग्रेजी (मौखिक)"],
@@ -932,8 +944,10 @@
           fetch("hpc-upper.json").catch(() => null)
         ]);
 
-        let primaryData = primaryRes && primaryRes.ok ? await primaryRes.json() : null;
-        let upperData = upperRes && upperRes.ok ? await upperRes.json() : null;
+        let primaryData = null;
+        let upperData = null;
+        try { if (primaryRes && primaryRes.ok) primaryData = await primaryRes.json(); } catch (e) { console.error("hpc-primary.json syntax error:", e); }
+        try { if (upperRes && upperRes.ok) upperData = await upperRes.json(); } catch (e) { console.error("hpc-upper.json syntax error:", e); }
 
         if (primaryData && primaryData.randomPools) {
           RANDOM_POOLS = Object.assign({}, FALLBACK_POOLS, primaryData.randomPools);
@@ -950,19 +964,19 @@
 
         const coScholastic1to5 = (primaryData && primaryData.coScholastic1to5) ? primaryData.coScholastic1to5 : CO_SCHOLASTIC_FALLBACK;
 
-        let mergedSchemas = {};
+        let mergedSchemas = Object.assign({}, FALLBACK_SCHEMAS);
         if (primaryData && primaryData.schemas) Object.assign(mergedSchemas, primaryData.schemas);
         if (upperData && upperData.schemas) Object.assign(mergedSchemas, upperData.schemas);
 
-        if (Object.keys(mergedSchemas).length > 0) {
-          ["1", "2", "3", "4", "5"].forEach(cKey => {
-            if (mergedSchemas[cKey] && (!mergedSchemas[cKey].coScholastic || mergedSchemas[cKey].coScholastic.length === 0)) {
-              mergedSchemas[cKey].coScholastic = coScholastic1to5;
-            }
-          });
-          BUILTIN_SCHEMAS = mergedSchemas;
-        }
-      } catch (err) {}
+        ["1", "2", "3", "4", "5"].forEach(cKey => {
+          if (mergedSchemas[cKey] && (!mergedSchemas[cKey].coScholastic || mergedSchemas[cKey].coScholastic.length === 0)) {
+            mergedSchemas[cKey].coScholastic = coScholastic1to5;
+          }
+        });
+        BUILTIN_SCHEMAS = mergedSchemas;
+      } catch (err) {
+        console.error("Resource load error:", err);
+      }
 
       fetch("hpc-article.json")
         .then(r => r.ok ? r.json() : null)
@@ -1011,17 +1025,28 @@
       return text.replace(/([^\s\/]+)\/([^\s\/।,]+)/g, (match, mWord, fWord) => idx === 1 ? fWord : mWord);
     }
 
-    // 3 अलग-अलग शिक्षकों के नाम प्राप्त करने का फंक्शन
+    // तीनों शिक्षक इनपुट बॉक्स से नाम लेने और छात्रों के कार्ड में सिंक करने का फंक्शन
     function getSchoolTeachersPool() {
-      const t1 = document.getElementById("teacherName1")?.value.trim();
-      const t2 = document.getElementById("teacherName2")?.value.trim();
-      const t3 = document.getElementById("teacherName3")?.value.trim();
-      let custom = [t1, t2, t3].filter(Boolean);
+      const t1 = document.getElementById("teacherName1")?.value.trim() || "";
+      const t2 = document.getElementById("teacherName2")?.value.trim() || "";
+      const t3 = document.getElementById("teacherName3")?.value.trim() || "";
+      const custom = [t1, t2, t3].filter(Boolean);
       if (custom.length > 0) return custom;
       return RANDOM_POOLS.teachers || ["कक्षा अध्यापक", "प्रधानाध्यापक", "भाषा शिक्षक"];
     }
 
     function updateTeachersAndSyncCards() {
+      // जब शिक्षक ऊपर नाम लिखें तो छात्रों के पुराने डिफ़ॉल्ट ड्रॉपडाउन कैश से हटाएं ताकि नया नाम तुरंत छपे
+      Object.keys(studentsByClass).forEach(cKey => {
+        (studentsByClass[cKey] || []).forEach(stu => {
+          if (stu.customDropdowns) {
+            delete stu.customDropdowns["like_2_b_1"];
+            delete stu.customDropdowns["like_2_b_2"];
+            delete stu.customDropdowns["like_2_b_3"];
+          }
+        });
+      });
+      saveStudentsToMobile();
       saveSchoolConfig();
     }
 
@@ -1193,7 +1218,7 @@
     function saveStudentsToMobile() {
       localStorage.setItem("dm_hpc_students_v12", JSON.stringify(studentsByClass));
     }
-
+    // Part 2B: Class Switcher, Modals, 3-Teacher Sync & Full Card Renderer
     function switchClass(classKey) {
       currentClassKey = classKey;
       currentClassSchema = (BUILTIN_SCHEMAS && BUILTIN_SCHEMAS[classKey]) ? BUILTIN_SCHEMAS[classKey] : FALLBACK_SCHEMAS["1"];
@@ -1693,7 +1718,7 @@
     function buildSlideDownWithOther(stu, fieldKey, optionsArray, defaultVal, isInline = false) {
       const saved = stu.customDropdowns?.[fieldKey];
       const isCustom = saved && saved.mode === "custom";
-      const selectedVal = saved ? (isCustom ? "__OTHER__" : saved.value) : defaultVal;
+      const selectedVal = (saved && saved.value) ? (isCustom ? "__OTHER__" : saved.value) : defaultVal;
       const customText = isCustom ? (saved.value || "") : "";
       const currentDisplayText = isCustom ? (customText || "—") : (selectedVal || defaultVal || "—");
 
@@ -1706,11 +1731,11 @@
         <span class="${wrapClass}">
           <span id="print_val_${stu.id}_${fieldKey}" class="print-only print-pure-text">${currentDisplayText}</span>
           <select id="select_el_${stu.id}_${fieldKey}" onchange="handleCardSelectChange(this, ${stu.id}, '${fieldKey}')" class="${selClass} ${isCustom ? 'hidden' : ''}">
-            ${uniqueOpts.map(opt => `<option value="${opt.replace(/"/g, '&quot;')}" ${opt === selectedVal ? 'selected' : ''}>${opt}</option>`).join("")}
+            ${uniqueOpts.map(opt => `<option value="${String(opt).replace(/"/g, '&quot;')}" ${opt === selectedVal ? 'selected' : ''}>${opt}</option>`).join("")}
             <option value="__OTHER__" ${isCustom ? 'selected' : ''}>अन्य (लिखें...)</option>
           </select>
           <span id="custom_wrap_${stu.id}_${fieldKey}" class="no-print inline-flex items-center gap-0.5 ${isCustom ? '' : 'hidden'}">
-            <input type="text" id="custom_inp_${stu.id}_${fieldKey}" value="${customText.replace(/"/g, '&quot;')}" oninput="handleCardCustomInput(this, ${stu.id}, '${fieldKey}')" placeholder="लिखें..." class="${inpClass}">
+            <input type="text" id="custom_inp_${stu.id}_${fieldKey}" value="${String(customText).replace(/"/g, '&quot;')}" oninput="handleCardCustomInput(this, ${stu.id}, '${fieldKey}')" placeholder="लिखें..." class="${inpClass}">
             <button type="button" onclick="resetCustomToSelect(${stu.id}, '${fieldKey}')" class="text-[9px] bg-slate-200 hover:bg-slate-300 text-slate-700 px-1 rounded font-bold cursor-pointer" title="वापस सूची चुनें">↺</button>
           </span>
         </span>
@@ -1774,8 +1799,28 @@
       renderAllCards();
     }
 
-    function buildThreeLikesCells(stu, baseKey, pool, seed, offsetBase) {
+    // यदि शिक्षक श्रेणी है, तो सीधे कॉलम 1 में शिक्षक-1, कॉलम 2 में शिक्षक-2 और कॉलम 3 में शिक्षक-3 सेट करें
+    function buildThreeLikesCells(stu, baseKey, pool, seed, offsetBase, isTeacherCat = false) {
       const safePool = (pool && pool.length > 0) ? pool : ["—"];
+
+      if (isTeacherCat) {
+        const t1 = document.getElementById("teacherName1")?.value.trim() || "";
+        const t2 = document.getElementById("teacherName2")?.value.trim() || "";
+        const t3 = document.getElementById("teacherName3")?.value.trim() || "";
+        const hasAnyCustom = !!(t1 || t2 || t3);
+
+        const def1 = hasAnyCustom ? (t1 || "—") : (safePool[0] || "कक्षा अध्यापक");
+        const def2 = hasAnyCustom ? (t2 || t1 || "—") : (safePool[1] || safePool[0] || "प्रधानाध्यापक");
+        const def3 = hasAnyCustom ? (t3 || t2 || t1 || "—") : (safePool[2] || safePool[0] || "भाषा शिक्षक");
+
+        const teacherOpts = Array.from(new Set([t1, t2, t3, "—", ...safePool])).filter(Boolean);
+        return `
+          <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_1', teacherOpts, def1)}</td>
+          <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_2', teacherOpts, def2)}</td>
+          <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_3', teacherOpts, def3)}</td>
+        `;
+      }
+
       const v1 = pickVariant(safePool, seed, offsetBase);
       let v2 = pickVariant(safePool, seed, offsetBase + 1);
       if (v2 === v1 && safePool.length > 1) v2 = pickVariant(safePool, seed, offsetBase + 2);
@@ -1794,7 +1839,7 @@
       if (poolKey === "friends") return (isGirl ? RANDOM_POOLS.friendsF : RANDOM_POOLS.friendsM) || [];
       if (poolKey === "ambition") return (isGirl ? RANDOM_POOLS.ambitionF : RANDOM_POOLS.ambitionM) || [];
       if (poolKey === "teachers") return teacherMasterList;
-      if (currentClassSchema && currentClassSchema[poolKey]) return currentClassSchema[poolKey];
+      if (currentClassSchema && Array.isArray(currentClassSchema[poolKey])) return currentClassSchema[poolKey];
       return RANDOM_POOLS[poolKey] || [];
     }
 
@@ -1830,6 +1875,7 @@
 
       container.innerHTML = list.map((stu, idx) => {
         const seed = stu.seed || (idx + 1);
+        const isGirl = stu.gender === "F";
         const basePct = Number(stu.percent) || 72;
 
         let srApaarDisplay = "";
@@ -1846,26 +1892,28 @@
         );
         const totalPresYear = stuAttArr.reduce((a, b) => a + b, 0);
 
-        // 1. मुझे पसंद है
-        const defaultLikesCats = (isBalvatika || currentClassKey === "1")
-          ? [
-              { label: "खेल", poolKey: "games" }, { label: "मित्र", poolKey: "friends" },
-              { label: "भोजन", poolKey: "foods" }, { label: "जानवर", poolKey: "animals" },
-              { label: "फूल", poolKey: "flowers" }, { label: "शिक्षक", poolKey: "teachers" }
-            ]
-          : (isUpper
-              ? [
-                  { label: "त्यौहार", poolKey: "festivals" }, { label: "मित्र", poolKey: "friends" },
-                  { label: "भोजन", poolKey: "foods" }, { label: "बागवानी", poolKey: "gardening" },
-                  { label: "किताब", poolKey: "books" }, { label: "अन्य", poolKey: "otherLikes" }
-                ]
-              : [
-                  { label: "त्यौहार", poolKey: "festivals" }, { label: "मित्र", poolKey: "friends" },
-                  { label: "भोजन", poolKey: "foods" }, { label: "जानवर", poolKey: "animals" },
-                  { label: "फूल", poolKey: "flowers" }, { label: "विषय", poolKey: "subjects" }
-                ]);
+        // 1. मुझे पसंद है (बालवाटिका व कक्षा 1 में 'शिक्षक' अनिवार्य, बाकी में शासनादेश अनुसार)
+        let likesCats = [];
+        if (isBalvatika || currentClassKey === "1") {
+          likesCats = [
+            { label: "खेल", poolKey: "games" }, { label: "मित्र", poolKey: "friends" },
+            { label: "भोजन", poolKey: "foods" }, { label: "जानवर", poolKey: "animals" },
+            { label: "फूल", poolKey: "flowers" }, { label: "शिक्षक", poolKey: "teachers" }
+          ];
+        } else if (isUpper) {
+          likesCats = [
+            { label: "त्यौहार", poolKey: "festivals" }, { label: "मित्र", poolKey: "friends" },
+            { label: "भोजन", poolKey: "foods" }, { label: "बागवानी", poolKey: "gardening" },
+            { label: "किताब", poolKey: "books" }, { label: "अन्य", poolKey: "otherLikes" }
+          ];
+        } else {
+          likesCats = [
+            { label: "त्यौहार", poolKey: "festivals" }, { label: "मित्र", poolKey: "friends" },
+            { label: "भोजन", poolKey: "foods" }, { label: "जानवर", poolKey: "animals" },
+            { label: "फूल", poolKey: "flowers" }, { label: "विषय", poolKey: "subjects" }
+          ];
+        }
 
-        const likesCats = currentClassSchema.likesCategories || defaultLikesCats;
         let likesTableRowsHTML = "";
         for (let r = 0; r < 3; r++) {
           const c1 = likesCats[r * 2] || { label: "—", poolKey: "games" };
@@ -1874,8 +1922,8 @@
           const p2 = getPoolByKey(c2.poolKey, stu, teacherMasterList);
           likesTableRowsHTML += `
             <tr>
-              <th>${c1.label}</th>${buildThreeLikesCells(stu, `like_${r}_a`, p1, seed, r * 2 + 1)}
-              <th>${c2.label}</th>${buildThreeLikesCells(stu, `like_${r}_b`, p2, seed, r * 2 + 2)}
+              <th>${c1.label}</th>${buildThreeLikesCells(stu, `like_${r}_a`, p1, seed, r * 2 + 1, c1.poolKey === "teachers")}
+              <th>${c2.label}</th>${buildThreeLikesCells(stu, `like_${r}_b`, p2, seed, r * 2 + 2, c2.poolKey === "teachers")}
             </tr>
           `;
         }
@@ -1908,7 +1956,7 @@
           `;
         }).join("");
 
-        // 3. विद्यार्थी के बारे में (सकारात्मक व सुधारात्मक) — क्रैश-प्रूफ फॉलबैक के साथ
+        // 3. विद्यार्थी के बारे में (सकारात्मक एवं सुधारात्मक)
         const defaultRemarkDomains = isBalvatika
           ? [
               { label: "सामाजिक, भावनात्मक एवं नैतिक विकास", posKey: "balSocialPos", corKey: "balSocialCor" },
@@ -1917,21 +1965,28 @@
               { label: "सौंदर्यबोध विकास", posKey: "balAesPos", corKey: "balAesCor" },
               { label: "शारीरिक विकास", posKey: "balPhyPos", corKey: "balPhyCor" }
             ]
-          : [
-              { label: "संज्ञानात्मक विकास", posKey: "cognitivePos", corKey: "cognitiveCor" },
-              { label: "व्यवहार एवं भावनाएँ", posKey: "behavPos", corKey: "behavCor" },
-              { label: "सीखने के प्रति तत्परता एवं जीवन कौशल", posKey: "skillPos", corKey: "skillCor" },
-              { label: "स्वच्छता एवं स्वास्थ्य", posKey: "healthPos", corKey: "healthCor" },
-              { label: "कलात्मक एवं अन्य रुचियाँ", posKey: "artPos", corKey: "artCor" }
-            ];
+          : (isUpper
+              ? [
+                  { label: "संज्ञानात्मक विकास", posKey: "cognitivePos", corKey: "cognitiveCor" },
+                  { label: "व्यवहार एवं भावनात्मक", posKey: "behavPos", corKey: "behavCor" },
+                  { label: "स्वच्छता एवं स्वास्थ्य", posKey: "healthPos", corKey: "healthCor" },
+                  { label: "सीखने के प्रति तत्परता एवं जीवन कौशल", posKey: "skillPos", corKey: "skillCor" },
+                  { label: "कलात्मक एवं अन्य रुचियाँ", posKey: "artPos", corKey: "artCor" }
+                ]
+              : [
+                  { label: "संज्ञानात्मक विकास", posKey: "cognitivePos", corKey: "cognitiveCor" },
+                  { label: "व्यवहार एवं भावनाएँ", posKey: "behavPos", corKey: "behavCor" },
+                  { label: "सीखने के प्रति तत्परता एवं जीवन कौशल", posKey: "skillPos", corKey: "skillCor" },
+                  { label: "स्वच्छता एवं स्वास्थ्य", posKey: "healthPos", corKey: "healthCor" },
+                  { label: "कलात्मक एवं अन्य रुचियाँ", posKey: "artPos", corKey: "artCor" }
+                ]);
 
-        // यदि JSON में remarkDomains न मिले तो सुरक्षित फॉलबैक प्रयोग करें
         const remarkDomains = (currentClassSchema && currentClassSchema.remarkDomains) ? currentClassSchema.remarkDomains : defaultRemarkDomains;
         const remarkRowsHTML = remarkDomains.map((dom, dIdx) => {
           const rawPosPool = getPoolByKey(dom.posKey, stu, teacherMasterList);
           const rawCorPool = getPoolByKey(dom.corKey, stu, teacherMasterList);
-          const posPool = (rawPosPool && rawPosPool.length > 0) ? rawPosPool.map(t => applyGenderText(t, stu.gender)) : ["नियमित अभ्यास अपेक्षित है।"];
-          const corPool = (rawCorPool && rawCorPool.length > 0) ? rawCorPool.map(t => applyGenderText(t, stu.gender)) : ["निरंतर पठन व लेखन अभ्यास करें।"];
+          const posPool = (rawPosPool && rawPosPool.length > 0) ? rawPosPool.map(t => applyGenderText(t, stu.gender)) : ["नियमित अभ्यास करता है।"];
+          const corPool = (rawCorPool && rawCorPool.length > 0) ? rawCorPool.map(t => applyGenderText(t, stu.gender)) : ["निरंतर पठन अभ्यास करें।"];
           return `
             <tr>
               <td class="font-bold select-none">${dom.label}</td>
@@ -2018,9 +2073,10 @@
         const p1Class = isUpper ? "hpc-page layout-p1-all p1-upper-mode" : "hpc-page layout-p1-all";
         const p2Class = isUpper ? "hpc-page layout-upper-p2" : "hpc-page layout-primary-p2";
 
+        // PAGE 1 HTML (p1-grow-grid और p1-grow-sec क्लासेस से पूरा पेज बिना खाली जगह के संतुलित रहेगा)
         const page1HTML = `
           <div class="${p1Class}">
-            <div class="flex items-center justify-between bg-blue-50 border-b-2 border-blue-900 px-3 py-1 rounded-t">
+            <div class="flex items-center justify-between bg-blue-50 border-b-2 border-blue-900 px-3 py-1 rounded-t shrink-0">
               <div class="text-[11px] font-extrabold text-blue-950">उत्तर प्रदेश सरकार | समग्र शिक्षा</div>
               <div class="text-center">
                 <h2 class="text-sm font-black text-blue-900 uppercase tracking-tight">उ० प्र० बेसिक शिक्षा परिषद् — समग्र प्रगति पत्र (HPC)</h2>
@@ -2029,8 +2085,8 @@
               <div class="text-[11px] font-extrabold text-blue-950">UDISE: <span>${udiseCode}</span></div>
             </div>
 
-            <!-- प्रोफाइल एवं स्वास्थ्य -->
-            <div class="grid grid-cols-12 gap-2 w-full">
+            <!-- 1. प्रोफाइल एवं स्वास्थ्य -->
+            <div class="grid grid-cols-12 gap-2 w-full p1-grow-grid">
               <div class="col-span-7 min-w-0">
                 <table class="hpc-table theme-blue">
                   <colgroup>
@@ -2100,8 +2156,8 @@
               </div>
             </div>
 
-            <!-- मेरी उपस्थिति -->
-            <div class="w-full">
+            <!-- 2. मेरी उपस्थिति -->
+            <div class="w-full p1-grow-sec">
               <table class="hpc-table theme-indigo text-center">
                 <colgroup>
                   <col style="width: 19%;">
@@ -2130,8 +2186,8 @@
               </table>
             </div>
 
-            <!-- मुझे पसंद है एवं मेरी अभिलाषा -->
-            <div class="grid grid-cols-12 gap-2 w-full">
+            <!-- 3. मुझे पसंद है एवं मेरी अभिलाषा -->
+            <div class="grid grid-cols-12 gap-2 w-full p1-grow-grid">
               <div class="col-span-7 min-w-0">
                 <table class="hpc-table theme-amber">
                   <colgroup>
@@ -2157,8 +2213,8 @@
               </div>
             </div>
 
-            <!-- शैक्षिक परीक्षा एवं विद्यार्थी के बारे में -->
-            <div class="grid grid-cols-12 gap-2 w-full">
+            <!-- 4. शैक्षिक परीक्षा एवं विद्यार्थी के बारे में -->
+            <div class="grid grid-cols-12 gap-2 w-full p1-grow-grid">
               ${hasExamTable ? `
                 <div class="col-span-5 min-w-0">
                   <table class="hpc-table theme-purple text-center">
@@ -2213,7 +2269,7 @@
             </div>
 
             ${isUpper ? `
-              <div class="w-full">
+              <div class="w-full p1-grow-sec">
                 <table class="hpc-table theme-cyan">
                   <colgroup>
                     <col style="width: 58%;"><col style="width: 21%;"><col style="width: 21%;">
@@ -2243,8 +2299,8 @@
               </div>
             ` : ''}
 
-            <!-- अभिभावक प्रतिपुष्टि एवं हस्ताक्षर -->
-            <div class="grid grid-cols-12 gap-2 w-full">
+            <!-- 5. अभिभावक प्रतिपुष्टि एवं हस्ताक्षर -->
+            <div class="grid grid-cols-12 gap-2 w-full p1-grow-grid">
               <div class="col-span-8 min-w-0">
                 <table class="hpc-table theme-emerald">
                   <colgroup>
@@ -2306,8 +2362,8 @@
               </div>
             </div>
 
-            <!-- स्तर (Sky, Mountain, Stream) -->
-            <div class="w-full select-none">
+            <!-- 6. स्तर (Sky, Mountain, Stream) -->
+            <div class="w-full select-none p1-grow-sec">
               <table class="hpc-table theme-amber">
                 <colgroup><col style="width: 25%;"><col style="width: 75%;"></colgroup>
                 <thead>
@@ -2332,13 +2388,13 @@
                 </tbody>
               </table>
               ${hasExamTable ? `
-                <div class="text-center text-[8.2px] font-bold bg-indigo-50 border border-indigo-300 px-2 py-0.5 rounded text-indigo-950 mt-0.5">
+                <div class="text-center text-[8.2px] font-bold bg-indigo-50 border border-indigo-300 px-2 py-0.5 rounded text-indigo-950 mt-0.5 shrink-0">
                   शैक्षिक परीक्षा परिणाम ग्रेड: A1 (91-100%) | A2 (81-90%) | B1 (71-80%) | B2 (61-70%) | C1 (51-60%) | C2 (41-50%) | D1 (33-40%) | D2 (32% और उससे कम)
                 </div>
               ` : ''}
             </div>
 
-            <div class="flex items-center justify-between bg-emerald-50 border-t-2 border-emerald-800 px-3 py-1 rounded-b text-[9.5px] font-bold">
+            <div class="flex items-center justify-between bg-emerald-50 border-t-2 border-emerald-800 px-3 py-1 rounded-b text-[9.5px] font-bold shrink-0">
               <div class="text-emerald-950 select-none">
                 🎉 शैक्षिक सत्र <b>${sessionYear}</b> के लिए <b>${currentClassSchema.promoteTo || 'अगली कक्षा'}</b> में कक्षोन्नति प्रदान की जाती है।
               </div>
