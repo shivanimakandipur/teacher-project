@@ -28,13 +28,12 @@
     .print-only { display: none !important; }
     .hidden { display: none !important; }
 
-    /* स्क्रीन पर दिखने वाले ड्रॉपडाउन (बिना !important के ताकि प्रिंट में 100% छुप सकें) */
     select.hpc-select {
       border: 1px solid #94a3b8;
-      border-radius: 4px;
+      border-radius: 3px;
       background-color: #ffffff;
-      padding: 1px 3px;
-      font-size: 10px;
+      padding: 1px 2px;
+      font-size: 9.2px;
       font-weight: 600;
       color: #0f172a;
       cursor: pointer;
@@ -46,12 +45,12 @@
     }
     select.hpc-select.inline-sel {
       width: auto;
-      min-width: 80px;
-      max-width: 145px;
+      min-width: 75px;
+      max-width: 135px;
       display: inline-block;
       vertical-align: middle;
       margin: 0 2px;
-      padding: 0px 3px;
+      padding: 0px 2px;
     }
     select.hpc-select:hover {
       background-color: #f0fdf4;
@@ -60,16 +59,16 @@
     input.hpc-custom-input {
       border: 1px dashed #d97706;
       background-color: #fffbeb;
-      border-radius: 4px;
-      padding: 1px 4px;
-      font-size: 10px;
+      border-radius: 3px;
+      padding: 1px 3px;
+      font-size: 9.2px;
       font-weight: 700;
       color: #78350f;
       width: 100%;
       box-sizing: border-box;
     }
     input.hpc-custom-input.inline-inp {
-      width: 110px;
+      width: 95px;
       display: inline-block;
     }
 
@@ -83,19 +82,17 @@
     .star-btn {
       padding: 1px 3px;
       border-radius: 3px;
-      font-size: 9.5px;
+      font-size: 9px;
       line-height: 1.1;
       cursor: pointer;
       user-select: none;
       border: 1px solid #cbd5e1;
       background-color: #f8fafc;
       color: #475569;
-      transition: all 0.1s ease;
     }
     .star-btn:hover {
       background-color: #fef3c7;
       border-color: #f59e0b;
-      transform: scale(1.06);
     }
     .star-btn.active {
       background-color: #fef3c7 !important;
@@ -113,8 +110,8 @@
     }
     table.hpc-table th, table.hpc-table td {
       border: 1px solid #475569;
-      padding: 2.5px 4px;
-      font-size: 10px;
+      padding: 2px 3.5px;
+      font-size: 9.5px;
       vertical-align: middle;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -153,6 +150,7 @@
       gap: 4px;
     }
 
+    /* Page 2 Auto-Stretch */
     .p2-fill-wrapper {
       display: flex;
       flex-direction: column;
@@ -186,7 +184,7 @@
     }
 
     @media print {
-      @page { size: A4 portrait; margin: 4mm; }
+      @page { size: A4 portrait; margin: 3.5mm; }
       html, body {
         background: #fff !important;
         margin: 0 !important;
@@ -203,7 +201,6 @@
         display: block !important;
       }
       
-      /* प्रिंट में सभी स्लाइड-डाउन (select), इनपुट और बटन 100% गायब रहेंगे */
       .no-print,
       select,
       select.hpc-select,
@@ -237,7 +234,7 @@
       .print-star-text {
         display: inline-block !important;
         color: #b45309 !important;
-        font-size: 10.5px !important;
+        font-size: 10px !important;
         letter-spacing: 1.2px;
         font-weight: 900;
       }
@@ -245,8 +242,8 @@
 
       .hpc-page {
         width: 100% !important;
-        height: 286mm !important;
-        max-height: 286mm !important;
+        height: 287mm !important;
+        max-height: 287mm !important;
         padding: 3mm 4mm !important;
         margin: 0 auto !important;
         box-sizing: border-box !important;
@@ -269,30 +266,30 @@
         break-after: auto !important;
       }
 
-      /* Page 1 Print Balance: टेबल्स अपने-आप पूरे पेज की ऊँचाई को भरेंगी */
+      /* Page 1: किसी एक टेबल को खींचने के बजाय सभी सेक्शन को बराबर और संतुलित ऊँचाई देना */
       .hpc-page.layout-p1-all {
         font-size: 9.5px;
-        line-height: 1.22;
-        gap: 3px !important;
+        line-height: 1.25;
+        justify-content: space-between !important;
       }
       .hpc-page.layout-p1-all > div.grid {
-        flex-grow: 1;
         align-items: stretch;
       }
       .hpc-page.layout-p1-all > div.grid > div {
         display: flex;
         flex-direction: column;
       }
-      .hpc-page.layout-p1-all table.hpc-table {
+      .hpc-page.layout-p1-all > div.grid > div > table.hpc-table {
         flex-grow: 1;
         height: 100%;
       }
       .hpc-page.layout-p1-all table.hpc-table th,
       .hpc-page.layout-p1-all table.hpc-table td {
-        padding: 2.2px 3.5px;
+        padding: 3.2px 4px;
         font-size: 9.2px;
       }
 
+      /* Page 2 Primary & Upper Print Sizing */
       .hpc-page.layout-primary-p2 { font-size: 10px; line-height: 1.28; }
       .hpc-page.layout-primary-p2 table.hpc-table th,
       .hpc-page.layout-primary-p2 table.hpc-table td { padding: 2.8px 3.8px; font-size: 9.6px; }
@@ -1717,6 +1714,23 @@
     }
 
     function renderAllCards() {
+      // प्रत्येक रुचि (त्यौहार, मित्र, भोजन, जानवर, फूल, खेल आदि) के लिए 3-3 विकल्प बनाने वाला फंक्शन
+    function buildThreeLikesCells(stu, baseKey, pool, seed, offsetBase) {
+      const safePool = (pool && pool.length > 0) ? pool : ["—"];
+      const v1 = pickVariant(safePool, seed, offsetBase);
+      let v2 = pickVariant(safePool, seed, offsetBase + 2);
+      if (v2 === v1 && safePool.length > 1) v2 = pickVariant(safePool, seed, offsetBase + 3);
+      let v3 = pickVariant(safePool, seed, offsetBase + 4);
+      if ((v3 === v1 || v3 === v2) && safePool.length > 2) v3 = pickVariant(safePool, seed, offsetBase + 5);
+
+      return `
+        <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_1', safePool, v1)}</td>
+        <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_2', safePool, v2)}</td>
+        <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_3', safePool, v3)}</td>
+      `;
+    }
+
+    function renderAllCards() {
       const container = document.getElementById("printContainer");
       const list = studentsByClass[currentClassKey] || [];
       if (!currentClassSchema) return;
@@ -1765,17 +1779,9 @@
 
         const friendPool = (isGirl ? RANDOM_POOLS.friendsF : RANDOM_POOLS.friendsM) || [];
         const ambitionPool = (isGirl ? RANDOM_POOLS.ambitionF : RANDOM_POOLS.ambitionM) || [];
+        const teacherPool = ["कक्षा अध्यापक", "प्रधानाध्यापक", "आँगनबाड़ी कार्यकर्त्री", "गणित शिक्षक", "भाषा शिक्षक", "सभी शिक्षक"];
 
-        const favFestival = pickVariant(RANDOM_POOLS.festivals, seed, 1);
-        const favFriend = pickVariant(friendPool, seed, 2);
-        const favFood = pickVariant(RANDOM_POOLS.foods, seed, 3);
-        const favAnimal = pickVariant(RANDOM_POOLS.animals, seed, 4);
-        const favFlower = pickVariant(RANDOM_POOLS.flowers, seed, 5);
-        const favSubject = pickVariant(RANDOM_POOLS.subjects, seed, 6);
-        const favGarden = pickVariant(RANDOM_POOLS.gardening, seed, 7);
-        const favBook = pickVariant(RANDOM_POOLS.books, seed, 8);
         const favGame = pickVariant(RANDOM_POOLS.games, seed, 9);
-
         const goalAmbition = pickVariant(ambitionPool, seed, 2);
         const goalSee = pickVariant(RANDOM_POOLS.toSee, seed, 3);
         const goalLearn = pickVariant(RANDOM_POOLS.toLearn, seed, 4);
@@ -1857,65 +1863,66 @@
         const p1Class = "hpc-page layout-p1-all";
         const p2Class = isUpper ? "hpc-page layout-upper-p2" : "hpc-page layout-primary-p2";
 
+        // आधिकारिक आदेशानुसार 'मुझे पसंद है' में प्रत्येक बिंदु के लिए 3-3 विकल्प (8 कॉलम की तालिका)
         let likesTableRowsHTML = "";
         if (isUpper) {
           likesTableRowsHTML = `
             <tr>
-              <th>त्यौहार</th><td>${buildSlideDownWithOther(stu, 'like_fest', RANDOM_POOLS.festivals, favFestival, true)}</td>
-              <th>मित्र</th><td>${buildSlideDownWithOther(stu, 'like_friend', friendPool, favFriend, true)}</td>
+              <th>त्यौहार</th>${buildThreeLikesCells(stu, 'like_fest', RANDOM_POOLS.festivals, seed, 1)}
+              <th>मित्र</th>${buildThreeLikesCells(stu, 'like_friend', friendPool, seed, 2)}
             </tr>
             <tr>
-              <th>भोजन</th><td>${buildSlideDownWithOther(stu, 'like_food', RANDOM_POOLS.foods, favFood, true)}</td>
-              <th>बागवानी</th><td>${buildSlideDownWithOther(stu, 'like_garden', RANDOM_POOLS.gardening, favGarden, true)}</td>
+              <th>भोजन</th>${buildThreeLikesCells(stu, 'like_food', RANDOM_POOLS.foods, seed, 3)}
+              <th>बागवानी</th>${buildThreeLikesCells(stu, 'like_garden', RANDOM_POOLS.gardening, seed, 4)}
             </tr>
             <tr>
-              <th>किताब</th><td>${buildSlideDownWithOther(stu, 'like_book', RANDOM_POOLS.books, favBook, true)}</td>
-              <th>अन्य/खेल</th><td>${buildSlideDownWithOther(stu, 'like_game', RANDOM_POOLS.games, favGame, true)}</td>
+              <th>किताब</th>${buildThreeLikesCells(stu, 'like_book', RANDOM_POOLS.books, seed, 5)}
+              <th>खेल/अन्य</th>${buildThreeLikesCells(stu, 'like_game', RANDOM_POOLS.games, seed, 6)}
             </tr>
           `;
         } else if (isBalvatika) {
           likesTableRowsHTML = `
             <tr>
-              <th>खेल</th><td>${buildSlideDownWithOther(stu, 'like_game', RANDOM_POOLS.games, favGame, true)}</td>
-              <th>मित्र</th><td>${buildSlideDownWithOther(stu, 'like_friend', friendPool, favFriend, true)}</td>
+              <th>खेल</th>${buildThreeLikesCells(stu, 'like_game', RANDOM_POOLS.games, seed, 1)}
+              <th>मित्र</th>${buildThreeLikesCells(stu, 'like_friend', friendPool, seed, 2)}
             </tr>
             <tr>
-              <th>भोजन</th><td>${buildSlideDownWithOther(stu, 'like_food', RANDOM_POOLS.foods, favFood, true)}</td>
-              <th>जानवर</th><td>${buildSlideDownWithOther(stu, 'like_animal', RANDOM_POOLS.animals, favAnimal, true)}</td>
+              <th>भोजन</th>${buildThreeLikesCells(stu, 'like_food', RANDOM_POOLS.foods, seed, 3)}
+              <th>जानवर</th>${buildThreeLikesCells(stu, 'like_animal', RANDOM_POOLS.animals, seed, 4)}
             </tr>
             <tr>
-              <th>फूल</th><td>${buildSlideDownWithOther(stu, 'like_flower', RANDOM_POOLS.flowers, favFlower, true)}</td>
-              <th>शिक्षक</th><td>${buildSlideDownWithOther(stu, 'like_teacher', ["कक्षा अध्यापक", "प्रधानाध्यापक", "आँगनबाड़ी कार्यकर्त्री", "सभी शिक्षक"], "कक्षा अध्यापक", true)}</td>
+              <th>फूल</th>${buildThreeLikesCells(stu, 'like_flower', RANDOM_POOLS.flowers, seed, 5)}
+              <th>शिक्षक</th>${buildThreeLikesCells(stu, 'like_teacher', teacherPool, seed, 6)}
             </tr>
           `;
         } else if (isMid) {
           likesTableRowsHTML = `
             <tr>
-              <th>त्यौहार</th><td>${buildSlideDownWithOther(stu, 'like_fest', RANDOM_POOLS.festivals, favFestival, true)}</td>
-              <th>खेल</th><td>${buildSlideDownWithOther(stu, 'like_game', RANDOM_POOLS.games, favGame, true)}</td>
+              <th>त्यौहार</th>${buildThreeLikesCells(stu, 'like_fest', RANDOM_POOLS.festivals, seed, 1)}
+              <th>खेल</th>${buildThreeLikesCells(stu, 'like_game', RANDOM_POOLS.games, seed, 2)}
             </tr>
             <tr>
-              <th>भोजन</th><td>${buildSlideDownWithOther(stu, 'like_food', RANDOM_POOLS.foods, favFood, true)}</td>
-              <th>जानवर</th><td>${buildSlideDownWithOther(stu, 'like_animal', RANDOM_POOLS.animals, favAnimal, true)}</td>
+              <th>भोजन</th>${buildThreeLikesCells(stu, 'like_food', RANDOM_POOLS.foods, seed, 3)}
+              <th>जानवर</th>${buildThreeLikesCells(stu, 'like_animal', RANDOM_POOLS.animals, seed, 4)}
             </tr>
             <tr>
-              <th>फूल</th><td>${buildSlideDownWithOther(stu, 'like_flower', RANDOM_POOLS.flowers, favFlower, true)}</td>
-              <th>विषय</th><td>${buildSlideDownWithOther(stu, 'like_sub', RANDOM_POOLS.subjects, favSubject, true)}</td>
+              <th>फूल</th>${buildThreeLikesCells(stu, 'like_flower', RANDOM_POOLS.flowers, seed, 5)}
+              <th>विषय</th>${buildThreeLikesCells(stu, 'like_sub', RANDOM_POOLS.subjects, seed, 6)}
             </tr>
           `;
         } else {
           likesTableRowsHTML = `
             <tr>
-              <th>त्यौहार</th><td>${buildSlideDownWithOther(stu, 'like_fest', RANDOM_POOLS.festivals, favFestival, true)}</td>
-              <th>मित्र</th><td>${buildSlideDownWithOther(stu, 'like_friend', friendPool, favFriend, true)}</td>
+              <th>त्यौहार</th>${buildThreeLikesCells(stu, 'like_fest', RANDOM_POOLS.festivals, seed, 1)}
+              <th>मित्र</th>${buildThreeLikesCells(stu, 'like_friend', friendPool, seed, 2)}
             </tr>
             <tr>
-              <th>भोजन</th><td>${buildSlideDownWithOther(stu, 'like_food', RANDOM_POOLS.foods, favFood, true)}</td>
-              <th>जानवर</th><td>${buildSlideDownWithOther(stu, 'like_animal', RANDOM_POOLS.animals, favAnimal, true)}</td>
+              <th>भोजन</th>${buildThreeLikesCells(stu, 'like_food', RANDOM_POOLS.foods, seed, 3)}
+              <th>जानवर</th>${buildThreeLikesCells(stu, 'like_animal', RANDOM_POOLS.animals, seed, 4)}
             </tr>
             <tr>
-              <th>फूल</th><td>${buildSlideDownWithOther(stu, 'like_flower', RANDOM_POOLS.flowers, favFlower, true)}</td>
-              <th>खेल</th><td>${buildSlideDownWithOther(stu, 'like_game', RANDOM_POOLS.games, favGame, true)}</td>
+              <th>फूल</th>${buildThreeLikesCells(stu, 'like_flower', RANDOM_POOLS.flowers, seed, 5)}
+              <th>खेल</th>${buildThreeLikesCells(stu, 'like_game', RANDOM_POOLS.games, seed, 6)}
             </tr>
           `;
         }
@@ -1923,17 +1930,17 @@
         let ambitionFourRowsHTML = "";
         if (isMid || isUpper) {
           ambitionFourRowsHTML = `
-            <tr><td class="select-none whitespace-nowrap">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition, true)}</b> बनना ${verbWant}।</td></tr>
-            <tr><td class="select-none whitespace-nowrap">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.toSee, goalSee, true)}</b> देखना ${verbWant}।</td></tr>
-            <tr><td class="select-none whitespace-nowrap">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn, true)}</b> सीखना ${verbWant}।</td></tr>
-            <tr><td class="select-none whitespace-nowrap">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toVisit, goalVisit, true)}</b> घूमने जाना ${verbWant}।</td></tr>
+            <tr><td class="select-none">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition, true)}</b> बनना ${verbWant}।</td></tr>
+            <tr><td class="select-none">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.toSee, goalSee, true)}</b> देखना ${verbWant}।</td></tr>
+            <tr><td class="select-none">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn, true)}</b> सीखना ${verbWant}।</td></tr>
+            <tr><td class="select-none">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toVisit, goalVisit, true)}</b> घूमने जाना ${verbWant}।</td></tr>
           `;
         } else {
           ambitionFourRowsHTML = `
-            <tr><td class="select-none whitespace-nowrap">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition, true)}</b> बनना ${verbWant}।</td></tr>
-            <tr><td class="select-none whitespace-nowrap">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.games, favGame, true)}</b> खेलना ${verbWant}।</td></tr>
-            <tr><td class="select-none whitespace-nowrap">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn, true)}</b> सीखना ${verbWant}।</td></tr>
-            <tr><td class="select-none whitespace-nowrap">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toMake, goalMake, true)}</b> बनाना ${verbWant}।</td></tr>
+            <tr><td class="select-none">1. मैं बड़े होकर <b>${buildSlideDownWithOther(stu, 'amb_1', ambitionPool, goalAmbition, true)}</b> बनना ${verbWant}।</td></tr>
+            <tr><td class="select-none">2. मैं <b>${buildSlideDownWithOther(stu, 'amb_2', RANDOM_POOLS.games, favGame, true)}</b> खेलना ${verbWant}।</td></tr>
+            <tr><td class="select-none">3. मैं <b>${buildSlideDownWithOther(stu, 'amb_3', RANDOM_POOLS.toLearn, goalLearn, true)}</b> सीखना ${verbWant}।</td></tr>
+            <tr><td class="select-none">4. मैं <b>${buildSlideDownWithOther(stu, 'amb_4', RANDOM_POOLS.toMake, goalMake, true)}</b> बनाना ${verbWant}।</td></tr>
           `;
         }
 
@@ -2047,21 +2054,28 @@
               </table>
             </div>
 
-            <!-- 'मुझे पसंद है' और 'मेरी अभिलाषा' अब आमने-सामने (Side-by-Side) संतुलित रूप में -->
+            <!-- मुझे पसंद है (प्रत्येक के लिए 3-3 विकल्प = 7 कॉलम चौड़ाई) और मेरी अभिलाषा (5 कॉलम चौड़ाई) -->
             <div class="grid grid-cols-12 gap-2 w-full">
-              <div class="col-span-6 min-w-0">
+              <div class="col-span-7 min-w-0">
                 <table class="hpc-table theme-amber">
                   <colgroup>
-                    <col style="width: 25%;"><col style="width: 25%;"><col style="width: 25%;"><col style="width: 25%;">
+                    <col style="width: 11%;">
+                    <col style="width: 13%;"><col style="width: 13%;"><col style="width: 13%;">
+                    <col style="width: 11%;">
+                    <col style="width: 13%;"><col style="width: 13%;"><col style="width: 13%;">
                   </colgroup>
-                  <thead><tr><th colspan="4">मुझे पसंद है... (विद्यार्थी की रुचियाँ)</th></tr></thead>
+                  <thead>
+                    <tr>
+                      <th colspan="8" class="text-center">मुझे पसंद है... (प्रत्येक श्रेणी में विद्यार्थी की 3-3 पसंद)</th>
+                    </tr>
+                  </thead>
                   <tbody>${likesTableRowsHTML}</tbody>
                 </table>
               </div>
-              <div class="col-span-6 min-w-0">
+              <div class="col-span-5 min-w-0">
                 <table class="hpc-table theme-teal">
                   <colgroup><col style="width: 100%;"></colgroup>
-                  <thead><tr><th>मेरी अभिलाषा (4 बिंदु — एक-एक पंक्ति में लक्ष्य)</th></tr></thead>
+                  <thead><tr><th>मेरी अभिलाषा (लक्ष्य निर्धारण — 4 बिंदु)</th></tr></thead>
                   <tbody>${ambitionFourRowsHTML}</tbody>
                 </table>
               </div>
@@ -2113,28 +2127,28 @@
                   <tbody>
                     <tr>
                       <td class="font-bold select-none">संज्ञानात्मक</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_cog_pos', cogPosList, pickVariant(cogPosList, seed, 1), true)}</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_cog_cor', cogCorList, pickVariant(cogCorList, seed, 2), true)}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_cog_pos', cogPosList, pickVariant(cogPosList, seed, 1))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_cog_cor', cogCorList, pickVariant(cogCorList, seed, 2))}</td>
                     </tr>
                     <tr>
                       <td class="font-bold select-none">व्यवहार व भावना</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_beh_pos', behPosList, pickVariant(behPosList, seed, 3), true)}</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_beh_cor', behCorList, pickVariant(behCorList, seed, 4), true)}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_beh_pos', behPosList, pickVariant(behPosList, seed, 3))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_beh_cor', behCorList, pickVariant(behCorList, seed, 4))}</td>
                     </tr>
                     <tr>
                       <td class="font-bold select-none">जीवन कौशल</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_skl_pos', sklPosList, pickVariant(sklPosList, seed, 5), true)}</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_skl_cor', sklCorList, pickVariant(sklCorList, seed, 6), true)}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_skl_pos', sklPosList, pickVariant(sklPosList, seed, 5))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_skl_cor', sklCorList, pickVariant(sklCorList, seed, 6))}</td>
                     </tr>
                     <tr>
                       <td class="font-bold select-none">स्वास्थ्य व सफाई</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_hlt_pos', hltPosList, pickVariant(hltPosList, seed, 7), true)}</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_hlt_cor', hltCorList, pickVariant(hltCorList, seed, 8), true)}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_hlt_pos', hltPosList, pickVariant(hltPosList, seed, 7))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_hlt_cor', hltCorList, pickVariant(hltCorList, seed, 8))}</td>
                     </tr>
                     <tr>
                       <td class="font-bold select-none">कलात्मक रुचि</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_art_pos', artPosList, pickVariant(artPosList, seed, 9), true)}</td>
-                      <td>${buildSlideDownWithOther(stu, 'rem_art_cor', artCorList, pickVariant(artCorList, seed, 10), true)}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_art_pos', artPosList, pickVariant(artPosList, seed, 9))}</td>
+                      <td>${buildSlideDownWithOther(stu, 'rem_art_cor', artCorList, pickVariant(artCorList, seed, 10))}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -2142,60 +2156,64 @@
             </div>
 
             ${isUpper ? `
-              <table class="hpc-table theme-cyan">
+              <div class="w-full">
+                <table class="hpc-table theme-cyan">
+                  <colgroup>
+                    <col style="width: 35%;"><col style="width: 35%;"><col style="width: 30%;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>विद्यार्थी स्व-आकलन (सितम्बर एवं मार्च)</th>
+                      <th>संतुलन व जिम्मेदारी</th>
+                      <th>सुधार हेतु संकल्प</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="select-none">1. सीख को जोड़ना: <b>हाँ ☑</b> | 2. प्रश्न पूछना: <b>हाँ ☑</b></td>
+                      <td class="select-none">3. चुनौतियाँ हल करना: <b>हाँ ☑</b> | 4. संतुलन: <b>हाँ ☑</b></td>
+                      <td>${buildSlideDownWithOther(stu, 'self_imp_68', RANDOM_POOLS.selfImprove6to8, pickVariant(RANDOM_POOLS.selfImprove6to8, seed, 1))}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            ` : ''}
+
+            <!-- अभिभावक संवाद तालिका (अब div के अंदर सुरक्षित ताकि फालतू बड़ी न हो) -->
+            <div class="w-full">
+              <table class="hpc-table theme-emerald">
                 <colgroup>
-                  <col style="width: 35%;"><col style="width: 35%;"><col style="width: 30%;">
+                  <col style="width: 24%;"><col style="width: 28%;"><col style="width: 24%;"><col style="width: 24%;">
                 </colgroup>
                 <thead>
                   <tr>
-                    <th>विद्यार्थी स्व-आकलन (सितम्बर एवं मार्च)</th>
-                    <th>संतुलन व जिम्मेदारी</th>
-                    <th>सुधार हेतु संकल्प</th>
+                    <th>अभिभावक प्रतिपुष्टि (संवाद बिंदु)</th>
+                    <th>रुचि एवं विद्यालय से अपेक्षा</th>
+                    <th>प्रथम संवाद (सितम्बर) हस्ताक्षर</th>
+                    <th>द्वितीय संवाद (मार्च) हस्ताक्षर</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="select-none">1. सीख को जोड़ना: <b>हाँ ☑</b> | 2. प्रश्न पूछना: <b>हाँ ☑</b></td>
-                    <td class="select-none">3. चुनौतियाँ हल करना: <b>हाँ ☑</b> | 4. संतुलन: <b>हाँ ☑</b></td>
-                    <td>${buildSlideDownWithOther(stu, 'self_imp_68', RANDOM_POOLS.selfImprove6to8, pickVariant(RANDOM_POOLS.selfImprove6to8, seed, 1), true)}</td>
+                    <td class="select-none">
+                      1. विद्यालय आने को उत्सुक: <b>हाँ ☑</b><br>
+                      2. स्वच्छता व जिम्मेदार व्यवहार: <b>हाँ ☑</b>
+                    </td>
+                    <td>
+                      <b>रुचि:</b> ${buildSlideDownWithOther(stu, 'par_int', RANDOM_POOLS.parentInterest, pickVariant(RANDOM_POOLS.parentInterest, seed, 2))}
+                    </td>
+                    <td class="text-left font-semibold text-slate-800 select-none">
+                      अभिभावक: ......................<br>शिक्षक: .........................
+                    </td>
+                    <td class="text-left font-semibold text-slate-800 select-none">
+                      अभिभावक: ......................<br>शिक्षक: .........................
+                    </td>
                   </tr>
                 </tbody>
               </table>
-            ` : ''}
+            </div>
 
-            <table class="hpc-table theme-emerald">
-              <colgroup>
-                <col style="width: 24%;"><col style="width: 26%;"><col style="width: 25%;"><col style="width: 25%;">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th>अभिभावक प्रतिपुष्टि (संवाद बिंदु)</th>
-                  <th>रुचि एवं विद्यालय से अपेक्षा</th>
-                  <th>प्रथम संवाद (सितम्बर) हस्ताक्षर</th>
-                  <th>द्वितीय संवाद (मार्च) हस्ताक्षर</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="select-none">
-                    1. विद्यालय आने को उत्सुक: <b>हाँ ☑</b><br>
-                    2. स्वच्छता व जिम्मेदार व्यवहार: <b>हाँ ☑</b>
-                  </td>
-                  <td>
-                    <b>रुचि:</b> ${buildSlideDownWithOther(stu, 'par_int', RANDOM_POOLS.parentInterest, pickVariant(RANDOM_POOLS.parentInterest, seed, 2), true)}
-                  </td>
-                  <td class="text-left font-semibold text-slate-800 select-none">
-                    अभिभावक: ......................<br>शिक्षक: .........................
-                  </td>
-                  <td class="text-left font-semibold text-slate-800 select-none">
-                    अभिभावक: ......................<br>शिक्षक: .........................
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- पेज-1 के निचले हिस्से में ग्रेडिंग एवं सरिता/पर्वत/आसमान मानक -->
-            <div class="select-none">
+            <div class="w-full select-none">
               <table class="hpc-table theme-amber">
                 <colgroup><col style="width: 25%;"><col style="width: 75%;"></colgroup>
                 <thead>
@@ -2224,7 +2242,7 @@
               </div>
             </div>
 
-            <div class="flex items-center justify-between bg-emerald-50 border-t-2 border-emerald-800 px-3 py-1 rounded-b text-[10px] font-bold">
+            <div class="flex items-center justify-between bg-emerald-50 border-t-2 border-emerald-800 px-3 py-1.5 rounded-b text-[10px] font-bold">
               <div class="text-emerald-950 select-none">
                 🎉 शैक्षिक सत्र के लिए <b>${currentClassSchema.promoteTo || 'अगली कक्षा'}</b> में कक्षोन्नति प्रदान की जाती है।
               </div>
@@ -2233,7 +2251,6 @@
           </div>
         `;
 
-        // PAGE 2 (BACK SIDE): केवल दक्षताएं (फुटर पूरी तरह हटाया गया ताकि कुछ भी न कटे)
         let leftBackSecs = [];
         let rightBackSecs = [];
 
@@ -2285,7 +2302,6 @@
         return page1HTML + page2HTML;
       }).join("");
     }
-
     function openPrintConfirmModal() {
       if (!workingDaysConfirmedByClass[currentClassKey]) {
         alert("प्रिंट निकालने से पहले कृपया एक बार इस कक्षा के 'माहवार कार्यदिवस' की जाँच कर उसे कन्फर्म कर दें।");
