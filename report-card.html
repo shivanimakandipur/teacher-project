@@ -28,6 +28,7 @@
     .print-only { display: none !important; }
     .hidden { display: none !important; }
 
+    /* स्क्रीन पर दिखने वाले ड्रॉपडाउन (बिना !important के ताकि प्रिंट में 100% छुप सकें) */
     select.hpc-select {
       border: 1px solid #94a3b8;
       border-radius: 4px;
@@ -44,10 +45,10 @@
       overflow: hidden;
     }
     select.hpc-select.inline-sel {
-      width: auto !important;
-      min-width: 85px;
-      max-width: 150px;
-      display: inline-block !important;
+      width: auto;
+      min-width: 80px;
+      max-width: 145px;
+      display: inline-block;
       vertical-align: middle;
       margin: 0 2px;
       padding: 0px 3px;
@@ -57,8 +58,8 @@
       border-color: #059669;
     }
     input.hpc-custom-input {
-      border: 1px dashed #d97706 !important;
-      background-color: #fffbeb !important;
+      border: 1px dashed #d97706;
+      background-color: #fffbeb;
       border-radius: 4px;
       padding: 1px 4px;
       font-size: 10px;
@@ -68,8 +69,8 @@
       box-sizing: border-box;
     }
     input.hpc-custom-input.inline-inp {
-      width: 110px !important;
-      display: inline-block !important;
+      width: 110px;
+      display: inline-block;
     }
 
     .star-btn-group {
@@ -107,12 +108,12 @@
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
-      margin-bottom: 2px;
+      margin-bottom: 0;
       background-color: #ffffff;
     }
     table.hpc-table th, table.hpc-table td {
       border: 1px solid #475569;
-      padding: 2px 3.2px;
+      padding: 2.5px 4px;
       font-size: 10px;
       vertical-align: middle;
       overflow-wrap: break-word;
@@ -149,7 +150,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 3px;
+      gap: 4px;
     }
 
     .p2-fill-wrapper {
@@ -201,7 +202,23 @@
         width: 100% !important;
         display: block !important;
       }
-      .no-print { display: none !important; }
+      
+      /* प्रिंट में सभी स्लाइड-डाउन (select), इनपुट और बटन 100% गायब रहेंगे */
+      .no-print,
+      select,
+      select.hpc-select,
+      select.hpc-select.inline-sel,
+      select.print-select,
+      input.hpc-custom-input,
+      input.hpc-custom-input.inline-inp,
+      .star-btn-group {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        visibility: hidden !important;
+      }
+
       .print-area {
         display: block !important;
         width: 100% !important;
@@ -211,14 +228,11 @@
       }
       
       .print-only { display: inline !important; }
-      select.hpc-select, input.hpc-custom-input, select.print-select, .star-btn-group {
-        display: none !important;
-      }
       .print-pure-text {
         display: inline !important;
         font-weight: 700 !important;
         color: #000 !important;
-        line-height: 1.15 !important;
+        line-height: 1.2 !important;
       }
       .print-star-text {
         display: inline-block !important;
@@ -233,7 +247,7 @@
         width: 100% !important;
         height: 286mm !important;
         max-height: 286mm !important;
-        padding: 2.5mm 3.5mm !important;
+        padding: 3mm 4mm !important;
         margin: 0 auto !important;
         box-sizing: border-box !important;
         page-break-after: always !important;
@@ -255,9 +269,29 @@
         break-after: auto !important;
       }
 
-      .hpc-page.layout-p1-all { font-size: 8.8px; line-height: 1.12; }
+      /* Page 1 Print Balance: टेबल्स अपने-आप पूरे पेज की ऊँचाई को भरेंगी */
+      .hpc-page.layout-p1-all {
+        font-size: 9.5px;
+        line-height: 1.22;
+        gap: 3px !important;
+      }
+      .hpc-page.layout-p1-all > div.grid {
+        flex-grow: 1;
+        align-items: stretch;
+      }
+      .hpc-page.layout-p1-all > div.grid > div {
+        display: flex;
+        flex-direction: column;
+      }
+      .hpc-page.layout-p1-all table.hpc-table {
+        flex-grow: 1;
+        height: 100%;
+      }
       .hpc-page.layout-p1-all table.hpc-table th,
-      .hpc-page.layout-p1-all table.hpc-table td { padding: 1.2px 2.5px; font-size: 8.4px; }
+      .hpc-page.layout-p1-all table.hpc-table td {
+        padding: 2.2px 3.5px;
+        font-size: 9.2px;
+      }
 
       .hpc-page.layout-primary-p2 { font-size: 10px; line-height: 1.28; }
       .hpc-page.layout-primary-p2 table.hpc-table th,
