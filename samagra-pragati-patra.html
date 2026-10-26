@@ -3,25 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>समग्र प्रगति पत्र (आंगनबाड़ी स्तर) - deshimaster.in</title>
+  <title>समग्र प्रगति पत्र जनरेटर (बालवाटिका 1, 2, 3) - deshimaster.in</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts Noto Sans Devanagari -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    body { font-family: 'Noto Sans Devanagari', sans-serif; }
     html { scroll-behavior: smooth; }
-    .article-body p { margin-bottom: 1.25rem; line-height: 1.85; text-align: justify; }
-    .article-body h2 { margin-top: 2.2rem; margin-bottom: 1rem; color: #1e1b4b; font-weight: 700; border-bottom: 1px solid #fee2e2; padding-bottom: 0.5rem; }
-    .article-body h3 { margin-top: 1.4rem; margin-bottom: 0.6rem; color: #991b1b; font-weight: 600; }
+    .article-body p { margin-bottom: 1rem; line-height: 1.8; text-align: justify; }
+    .article-body h2 { margin-top: 1.8rem; margin-bottom: 0.8rem; color: #1e1b4b; font-weight: 700; border-bottom: 2px solid #ffe4e6; padding-bottom: 0.4rem; font-size: 1.2rem; }
+
+    /* Print Sheet Styling (A4 Landscape 2-Page Booklet) */
+    .print-sheet {
+      width: 297mm;
+      height: 210mm;
+      background: #fffdf9;
+      margin: 0 auto 20px auto;
+      padding: 6mm;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      font-size: 10.5px;
+      line-height: 1.28;
+      color: #1e293b;
+      position: relative;
+    }
+
+    .booklet-panel {
+      border: 2px solid #94a3b8;
+      border-radius: 10px;
+      padding: 4.5mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hpc-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hpc-table th, .hpc-table td {
+      border: 1px solid #64748b;
+      padding: 2.5px 4px;
+    }
+
+    .star-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 15px;
+      height: 15px;
+      font-size: 11px;
+      border-radius: 3px;
+    }
+
+    /* Responsive Preview Scaling on Mobile/Laptop */
+    .preview-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 12px;
+    }
+
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+      body {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-sheet {
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        width: 297mm !important;
+        height: 210mm !important;
+        page-break-after: always;
+        break-after: page;
+      }
+      .print-sheet:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col justify-between">
 
-  <!-- Header (आपकी वेबसाइट का मूल डिज़ाइन) -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
-      <!-- Logo Section -->
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs no-print">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
       <a href="index.html" class="flex items-center gap-3 group">
         <div class="w-11 h-11 bg-emerald-700 text-white rounded-lg flex items-center justify-center font-black text-xl tracking-tight shadow-sm">
           DM
@@ -31,8 +119,6 @@
           <p class="text-xs text-slate-500 font-medium">देशी मास्टर - शिक्षक डिजिटल साथी</p>
         </div>
       </a>
-
-      <!-- Navigation Links -->
       <nav class="flex items-center gap-4 text-sm font-semibold text-slate-600">
         <a href="index.html" class="hover:text-emerald-700 transition">होम पोर्टल</a>
         <a href="shasanadesh.html" class="hover:text-emerald-700 transition">शासनादेश</a>
@@ -41,133 +127,185 @@
     </div>
   </header>
 
-  <!-- Main Container -->
-  <main class="max-w-4xl mx-auto px-4 py-8 space-y-8 w-full flex-1">
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-3 sm:px-4 py-6 space-y-8 w-full flex-1">
 
-    <!-- 1. सबसे पहले: कमिंग सून (Coming Soon) सेक्शन -->
-    <div class="bg-gradient-to-br from-rose-900 via-rose-800 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl text-center relative overflow-hidden border border-rose-700/50">
-      <div class="absolute -right-12 -top-12 w-48 h-48 bg-amber-500/10 rounded-full blur-2xl"></div>
-      <div class="absolute -left-12 -bottom-12 w-48 h-48 bg-rose-500/15 rounded-full blur-2xl"></div>
-
-      <div class="relative z-10 space-y-4 max-w-2xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400 text-rose-950 font-black text-xs uppercase tracking-widest shadow-md">
-          <i class="fa-solid fa-hourglass-half animate-spin"></i> शीघ्र उपलब्ध (Coming Soon)
+    <!-- Top Banner & Level Selector (No Print) -->
+    <section class="no-print bg-gradient-to-r from-indigo-900 via-blue-900 to-emerald-900 rounded-2xl p-6 text-white shadow-lg">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+          <span class="inline-block bg-amber-400 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+            बेसिक शिक्षा परिषद्, उत्तर प्रदेश
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold">समग्र प्रगति पत्र जनरेटर (बालवाटिका 1, 2 एवं 3)</h2>
+          <p class="text-blue-100 text-xs sm:text-sm mt-1">
+            3-4 वर्ष, 4-5 वर्ष एवं 5-6 वर्ष के विद्यार्थियों हेतु आधिकारिक 2-पेज बुकलेट (A4 Landscape) प्रारूप
+          </p>
         </div>
-
-        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
-          समग्र प्रगति पत्र जनरेटर (आंगनबाड़ी / बालवाटिका 3-6 वर्ष)
-        </h2>
-
-        <p class="text-rose-100 text-sm sm:text-base leading-relaxed">
-          राष्ट्रीय पाठ्यचर्या रूपरेखा (NCF-FS 2022) एवं महिला एवं बाल विकास विभाग / बेसिक शिक्षा विभाग के मानकों पर आधारित विकासात्मक डोमेन प्रगति पत्र निर्माण टूल पर कार्य प्रगति पर है। यह डिजिटल टूल शीघ्र ही आंगनबाड़ी कार्यकत्रियों एवं बेसिक शिक्षकों हेतु लाइव किया जाएगा।
-        </p>
-
-        <div class="pt-4 flex flex-wrap justify-center gap-3 text-xs font-semibold">
-          <span class="bg-white/10 px-3.5 py-1.5 rounded-xl border border-white/15">
-            <i class="fa-solid fa-check text-amber-300 mr-1.5"></i> 5 विकासात्मक डोमेन मूल्यांकन
-          </span>
-          <span class="bg-white/10 px-3.5 py-1.5 rounded-xl border border-white/15">
-            <i class="fa-solid fa-check text-amber-300 mr-1.5"></i> आयु-वार विकासात्मक संकेतक
-          </span>
-          <span class="bg-white/10 px-3.5 py-1.5 rounded-xl border border-white/15">
-            <i class="fa-solid fa-check text-amber-300 mr-1.5"></i> एक-क्लिक रंगीन प्रिंट
-          </span>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="selectLevel('bv1')" id="btn-bv1" class="px-4 py-2.5 rounded-xl font-bold text-sm transition shadow-sm bg-amber-400 text-slate-950">
+            बालवाटिका-1 (3-4 वर्ष)
+          </button>
+          <button onclick="selectLevel('bv2')" id="btn-bv2" class="px-4 py-2.5 rounded-xl font-bold text-sm transition shadow-sm bg-white/15 hover:bg-white/25 text-white">
+            बालवाटिका-2 (4-5 वर्ष)
+          </button>
+          <button onclick="selectLevel('bv3')" id="btn-bv3" class="px-4 py-2.5 rounded-xl font-bold text-sm transition shadow-sm bg-white/15 hover:bg-white/25 text-white">
+            बालवाटिका-3 (5-6 वर्ष)
+          </button>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- 2. इसके बाद: विस्तृत नियमावली एवं विधिक रूपरेखा -->
-    <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200 space-y-6">
-      
-      <div class="border-b border-slate-100 pb-5">
+    <!-- Interactive Input Form (No Print) -->
+    <section class="no-print bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 space-y-6">
+      <div class="flex flex-wrap justify-between items-center gap-3 border-b border-slate-200 pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-pen-to-square text-emerald-600"></i>
+            <span id="form-level-title">बालवाटिका-1 (3-4 वर्ष) - विवरण एवं मूल्यांकन प्रपत्र</span>
+          </h3>
+          <p class="text-xs text-slate-500">नीचे विवरण भरें या सीधे खाली/भरा हुआ प्रारूप प्रिंट करें</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="autoFillDemo()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-xs font-bold border border-indigo-200 transition">
+            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> डेमो ऑटो-फिल (Auto-Fill)
+          </button>
+          <button onclick="clearForm()" class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl text-xs font-bold border border-rose-200 transition">
+            <i class="fa-solid fa-rotate-left mr-1"></i> खाली प्रारूप (Blank Reset)
+          </button>
+          <button onclick="window.print()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-sm transition">
+            <i class="fa-solid fa-print mr-1.5"></i> A4 प्रिंट / PDF सेव करें
+          </button>
+        </div>
+      </div>
+
+      <!-- 1. सामान्य प्रोफाइल एवं स्वास्थ्य माप -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">शैक्षिक सत्र</label>
+          <input type="text" id="inp-session" value="2026-27" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">विद्यार्थी का नाम</label>
+          <input type="text" id="inp-name" placeholder="विद्यार्थी का नाम" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">लिंग (बालक/बालिका)</label>
+          <select id="inp-gender" onchange="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+            <option value="">-- चुनें --</option>
+            <option value="M">बालक</option>
+            <option value="F">बालिका</option>
+          </select>
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">जन्मतिथि</label>
+          <input type="text" id="inp-dob" placeholder="DD/MM/YYYY" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div class="sm:col-span-2">
+          <label class="font-bold text-slate-700 block mb-1">विद्यालय का नाम</label>
+          <input type="text" id="inp-school" placeholder="प्राथमिक/कम्पोजिट विद्यालय..." oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">ब्लॉक</label>
+          <input type="text" id="inp-block" placeholder="विकास खण्ड" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">जनपद</label>
+          <input type="text" id="inp-district" placeholder="जनपद" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">यू-डायस कोड</label>
+          <input type="text" id="inp-udise" placeholder="11 अंकों का कोड" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">पेन (PEN) / APAAR आईडी</label>
+          <input type="text" id="inp-apaar" placeholder="PEN / APAAR ID" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">पहचान संख्या (वैकल्पिक)</label>
+          <input type="text" id="inp-uid" placeholder="XXXX-XXXX-XXXX" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">अभिभावक का मोबाइल नंबर</label>
+          <input type="text" id="inp-mobile" placeholder="10 अंकों का नंबर" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">माता का नाम</label>
+          <input type="text" id="inp-mother" placeholder="माता का नाम" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">पिता का नाम</label>
+          <input type="text" id="inp-father" placeholder="पिता का नाम" oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">घर का पता</label>
+          <input type="text" id="inp-address" placeholder="ग्राम / पोस्ट..." oninput="renderPrintCard()" class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">विद्यार्थी का फोटो अपलोड (वैकल्पिक)</label>
+          <input type="file" accept="image/*" onchange="handlePhotoUpload(event)" class="w-full text-xs border border-slate-300 rounded-lg p-1.5">
+        </div>
+      </div>
+
+      <!-- 2. स्वास्थ्य, मुझे पसंद है, एवं त्वरित रेटिंग टूल -->
+      <details class="border border-slate-200 rounded-xl p-3 bg-slate-50">
+        <summary class="font-bold text-sm text-indigo-900 cursor-pointer flex items-center justify-between">
+          <span><i class="fa-solid fa-heart-pulse mr-1.5 text-rose-600"></i> स्वास्थ्य माप (ऊँचाई/वजन) एवं 'मुझे पसंद है' विवरण खोलें</span>
+          <span class="text-xs text-slate-500">क्लिक करें</span>
+        </summary>
+        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2 mt-3 text-xs">
+          <input type="text" id="h-sep" placeholder="ऊँचाई सितम्बर (सेमी)" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="h-mar" placeholder="ऊँचाई मार्च (सेमी)" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="w-sep" placeholder="वजन सितम्बर (किग्रा)" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="w-mar" placeholder="वजन मार्च (किग्रा)" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="bmi-sep" placeholder="BMI / Hb (सितम्बर)" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="eye-mar" placeholder="दाँत / Eye Sight" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2 mt-3 text-xs">
+          <input type="text" id="fav-game" placeholder="पसंदीदा खेल" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="fav-friend" placeholder="पसंदीदा मित्र" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="fav-food" placeholder="पसंदीदा भोजन" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="fav-animal" placeholder="पसंदीदा जानवर" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="fav-flower" placeholder="पसंदीदा फूल" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+          <input type="text" id="fav-teacher" placeholder="पसंदीदा शिक्षक" oninput="renderPrintCard()" class="border rounded px-2 py-1.5 bg-white">
+        </div>
+      </details>
+
+      <!-- 3. दक्षता मूल्यांकन (सितम्बर एवं मार्च स्टार चयन) -->
+      <details class="border border-slate-200 rounded-xl p-3 bg-slate-50" open>
+        <summary class="font-bold text-sm text-emerald-900 cursor-pointer flex items-center justify-between">
+          <span><i class="fa-solid fa-star mr-1.5 text-amber-500"></i> विकासात्मक दक्षताएं रेटिंग (सितम्बर एवं मार्च) एवं शिक्षक टिप्पणी</span>
+          <div class="flex gap-2" onclick="event.stopPropagation()">
+            <button onclick="bulkSetStars('sep', 2)" class="px-2 py-1 bg-amber-100 text-amber-900 rounded text-xs font-bold">सितम्बर: सब 2★</button>
+            <button onclick="bulkSetStars('mar', 3)" class="px-2 py-1 bg-emerald-100 text-emerald-900 rounded text-xs font-bold">मार्च: सब 3★</button>
+          </div>
+        </summary>
+        <div id="competency-inputs-container" class="mt-3 space-y-4"></div>
+      </details>
+    </section>
+
+    <!-- LIVE A4 BOOKLET PRINT PREVIEW (2 SHEETS: SHEET 1 = FRONT & BACK COVER, SHEET 2 = INSIDE SPREAD) -->
+    <section class="preview-wrapper">
+      <div id="print-area"></div>
+    </section>
+
+    <!-- DYNAMIC ARTICLE SECTION LOADED FROM balvatika-article.json (No Print) -->
+    <section class="no-print bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200 space-y-5">
+      <div class="border-b border-slate-100 pb-4">
         <div class="flex items-center gap-2 text-xs font-semibold text-rose-700 uppercase tracking-wider mb-1">
-          <i class="fa-solid fa-shapes"></i> ECCE एवं NCF-FS मार्गदर्शिका
+          <i class="fa-solid fa-shapes"></i> <span id="art-badge">ECCE एवं NCF-FS मार्गदर्शिका</span>
         </div>
-        <h2 class="text-xl sm:text-2xl font-black text-slate-900">
-          समग्र प्रगति पत्र (ECCE 3-6 वर्ष): स्वरूप, विकासात्मक डोमेन एवं आकलन नियमावली
-        </h2>
-        <p class="text-xs text-slate-500 mt-1">
-          प्रारंभिक बाल्यावस्था देखभाल एवं शिक्षा (ECCE), निपुण भारत बालवाटिका एवं 'पोषण भी पढ़ाई भी' के आधार पर
-        </p>
+        <h2 id="art-title" class="text-xl sm:text-2xl font-black text-slate-900"></h2>
+        <p id="art-subtitle" class="text-xs text-slate-500 mt-1"></p>
       </div>
-
-      <article class="article-body text-slate-700 text-sm sm:text-base">
-        
-        <h2>1. प्रारंभिक बाल्यावस्था देखभाल एवं शिक्षा (ECCE) में मूल्यांकन की अवधारणा</h2>
-        <p>
-          3 से 6 वर्ष की आयु वर्ग के नौनिहालों के मस्तिष्क का लगभग 85% विकास इसी प्रारंभिक काल में होता है। राष्ट्रीय शिक्षा नीति (NEP 2020) तथा <strong>नेशनल करिकुलम फ्रेमवर्क फॉर फाउंडेशनल स्टेज (NCF-FS 2022)</strong> के अनुसार, इस आयु वर्ग के बच्चों का मूल्यांकन किसी औपचारिक परीक्षा, अंक-प्रणाली या रैंकिंग के माध्यम से कदापि नहीं किया जा सकता।
-        </p>
-        <p>
-          आंगनबाड़ी केंद्रों तथा प्राथमिक विद्यालयों से सम्बद्ध बालवाटिका/को-लोकेटेड आंगनबाड़ी केंद्रों में <strong>समग्र प्रगति पत्र</strong> का उद्देश्य बच्चे की तुलना दूसरों से करना नहीं, बल्कि उसकी स्वाभाविक वृद्धि, सीखने की गति, रुचियों तथा विकासात्मक मील के पत्थरों (Developmental Milestones) का नियमित अवलोकन दर्ज करना है।
-        </p>
-
-        <h2>2. पंचकोशीय विकास एवं 5 प्रमुख विकासात्मक डोमेन (Developmental Domains)</h2>
-        <p>
-          भारतीय ज्ञान परंपरा के 'पंचकोश' सिद्धांत और आधुनिक बाल मनोविज्ञान के समन्वय से आंगनबाड़ी स्तर पर समग्र प्रगति पत्र 5 प्रमुख डोमेन में विभाजित है:
-        </p>
-        <ul class="list-disc pl-6 space-y-2.5 mb-4 text-slate-700">
-          <li>
-            <strong>1. शारीरिक एवं गत्यात्मक विकास (Physical & Motor Development - अन्नमय कोश):</strong>
-            स्थूल गत्यात्मक कौशल (Gross Motor - दौड़ना, कूदना, संतुलन बनाना) एवं सूक्ष्म गत्यात्मक कौशल (Fine Motor - पेंसिल/क्रेयॉन पकड़ना, कागज मोड़ना, मोतियों को पिरोना) तथा दैनिक व्यक्तिगत स्वच्छता की आदतें।
-          </li>
-          <li>
-            <strong>2. सामाजिक एवं भावनात्मक विकास (Socio-Emotional & Ethical Development - प्राणमय एवं मनोमय कोश):</strong>
-            अपनी भावनाओं को व्यक्त करना, साथियों के साथ साझा करना (Sharing), बारी की प्रतीक्षा करना, सहानुभूति एवं समूह गतिविधियों में सक्रिय सहभागिता।
-          </li>
-          <li>
-            <strong>3. संज्ञानात्मक विकास (Cognitive Development - विज्ञानमय कोश):</strong>
-            वस्तुओं का मिलान, वर्गीकरण, क्रमबद्धता (Seriation), रंग-आकार-आकृति की पहचान, समस्या समाधान, जिज्ञासा तथा कारण-प्रभाव का प्रारंभिक बोध।
-          </li>
-          <li>
-            <strong>4. भाषा एवं साक्षरता विकास (Language & Literacy Development):</strong>
-            मौखिक अभिव्यक्ति, तुकांत कविताएं सुनना/गाना, चित्रों के माध्यम से कहानी समझना, चित्रात्मक पठन (Print Awareness) और ध्वन्यात्मक जागरूकता।
-          </li>
-          <li>
-            <strong>5. सौंदर्यपरक एवं सांस्कृतिक विकास (Aesthetic & Cultural Development - आनंदमय कोश):</strong>
-            चित्रकला, रंग भरना, मिट्टी के खिलौने बनाना, संगीत, लय, नाटक एवं मुक्त खेल (Free Play) में आनंद की अनुभूति।
-          </li>
-        </ul>
-
-        <h2>3. आयु-आधारित तीन-स्तरीय समूहीकरण (Age-Appropriate Stages)</h2>
-        <p>
-          आंगनबाड़ी एवं बालवाटिका स्तर पर समग्र प्रगति पत्र तीन उप-स्तरों में संचालित होता है:
-        </p>
-        <ol class="list-decimal pl-6 space-y-2 mb-3 text-slate-700">
-          <li><strong>स्तर 1 (आयु 3 से 4 वर्ष - आंगनबाड़ी स्तर):</strong> इंद्रिय-आधारित अनुभव, परिचित वस्तुओं की पहचान तथा मुक्त खेल।</li>
-          <li><strong>स्तर 2 (आयु 4 से 5 वर्ष - आंगनबाड़ी स्तर):</strong> निर्देशित खेल, सरल वर्गीकरण तथा वाक्य निर्माण।</li>
-          <li><strong>स्तर 3 (आयु 5 से 6 वर्ष - बालवाटिका स्तर):</strong> औपचारिक प्राथमिक विद्यालय (कक्षा 1) में प्रवेश की पूर्व-तैयारी (School Readiness), जिसमें बुनियादी साक्षरता एवं संख्या ज्ञान (FLN) का प्रारंभिक आधार निर्मित होता है।</li>
-        </ol>
-
-        <h2>4. आंगनबाड़ी कार्यकत्री एवं शिक्षक साथियों के लिए महत्वपूर्ण अवलोकन निर्देश</h2>
-        <p>
-          समग्र प्रगति पत्र भरते समय निम्नलिखित नियमों का कड़ाई से पालन किया जाना अनिवार्य है:
-        </p>
-        <ul class="list-disc pl-6 space-y-2 mb-4 text-slate-700">
-          <li><strong>पास/फेल का कोई प्रावधान नहीं:</strong> बच्चे को कभी भी 'अनुत्तीर्ण' या 'कमजोर' के रूप में चिन्हित नहीं किया जाएगा।</li>
-          <li><strong>त्रि-स्तरीय सांकेतिक प्रगति:</strong> सामान्यतः 3 स्तरों में प्रगति दर्ज होती है—<em>'स्वयं करता है'</em>, <em>'सहयोग से करता है'</em>, अथवा <em>'अधिक अभ्यास की आवश्यकता है'</em> (स्माइली अथवा रंगीन प्रतीकों के माध्यम से)।</li>
-          <li><strong>पोर्टफोलियो संधारण:</strong> प्रगति पत्र के साथ बच्चे द्वारा बनाए गए चित्र, वर्कशीट्स और कलाकृतियों का एक पोर्टफोलियो बैग अवश्य संलग्न रखा जाए।</li>
-        </ul>
-
-        <h2>5. deshimaster.in पर शीघ्र क्या उपलब्ध होगा?</h2>
-        <p>
-          आंगनबाड़ी कार्यकत्रियों और प्राथमिक शिक्षकों की सुविधा के लिए इस मॉड्यूल को अत्यंत सरल बनाया जा रहा है:
-        </p>
-        <ul class="list-disc pl-6 space-y-1.5 mb-2 text-slate-700">
-          <li>बच्चे का नाम, माता-पिता का नाम, आयु समूह (3-4, 4-5 या 5-6 वर्ष) चुनते ही स्वचालित प्रारूप लोड होगा।</li>
-          <li>सांकेतिक चेकबॉक्स टिक करके तुरंत समग्र प्रगति पत्र तैयार किया जा सकेगा।</li>
-          <li>आंगनबाड़ी केंद्र एवं प्राथमिक विद्यालय के नाम सहित सुंदर, रंगीन और प्रिंट-योग्य <strong>A4 पीडीएफ प्रगति पत्र</strong> एक क्लिक में डाउनलोड होगा।</li>
-        </ul>
-
-      </article>
-
-    </div>
+      <article id="art-body" class="article-body text-slate-700 text-sm sm:text-base"></article>
+    </section>
 
   </main>
 
-  <!-- Footer (आपकी वेबसाइट के हूबहू स्वरूप और वास्तविक फाइल लिंक्स के साथ) -->
-  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500 no-print">
     <div class="max-w-4xl mx-auto px-4 space-y-2">
-      <!-- Direct HTML File Links -->
       <div class="flex flex-wrap justify-center items-center gap-x-3 text-sm font-semibold text-blue-600">
         <a href="about.html" class="hover:underline">About Us</a>
         <span class="text-slate-300">|</span>
@@ -177,13 +315,635 @@
         <span class="text-slate-300">|</span>
         <a href="terms.html" class="hover:underline">Terms & Conditions</a>
       </div>
-      
-      <!-- Copyright text as shown in screenshot -->
-      <p class="text-slate-400 text-xs">
-        © deshimaster.in. All Rights Reserved.
-      </p>
+      <p class="text-slate-400 text-xs">© deshimaster.in. All Rights Reserved.</p>
     </div>
   </footer>
 
+  <!-- Application Script -->
+  <script>
+    let hpcData = null;
+    let articleData = null;
+    let currentLevel = 'bv1';
+    let studentPhotoDataUrl = '';
+
+    // State for ratings and remarks
+    const state = {
+      ratings: {}, // key: `${domainId}_${idx}_sep` or `_mar` -> 0, 1, 2, 3
+      remarksPos: {},
+      remarksImp: {},
+      parentFeedback: {
+        0: { sep: '', mar: '' },
+        1: { sep: '', mar: '' },
+        2: { sep: '', mar: '' },
+        3: { sep: '', mar: '' }
+      },
+      parentExpectation: '',
+      attendanceWork: Array(12).fill(''),
+      attendancePres: Array(12).fill(''),
+      aspirations: ['', '', '']
+    };
+
+    // Load both JSON files
+    async function initApp() {
+      try {
+        const [hpcRes, artRes] = await Promise.all([
+          fetch('hpc-balvatika.json'),
+          fetch('balvatika-article.json')
+        ]);
+        hpcData = await hpcRes.json();
+        articleData = await artRes.json();
+        renderArticle();
+        selectLevel('bv1');
+      } catch (err) {
+        console.error('JSON लोड करने में त्रुटि:', err);
+      }
+    }
+
+    function renderArticle() {
+      if (!articleData) return;
+      document.getElementById('art-badge').textContent = articleData.badge;
+      document.getElementById('art-title').textContent = articleData.mainTitle;
+      document.getElementById('art-subtitle').textContent = articleData.subtitle;
+
+      const bodyEl = document.getElementById('art-body');
+      bodyEl.innerHTML = articleData.sections.map(sec => {
+        const paras = (sec.paragraphs || []).map(p => `<p>${p}</p>`).join('');
+        let listHtml = '';
+        if (sec.listItems && sec.listItems.length) {
+          const tag = sec.listType === 'ol' ? 'ol' : 'ul';
+          const cls = sec.listType === 'ol' ? 'list-decimal pl-6 space-y-2 mb-4' : 'list-disc pl-6 space-y-2 mb-4';
+          listHtml = `<${tag} class="${cls}">${sec.listItems.map(li => `<li>${li}</li>`).join('')}</${tag}>`;
+        }
+        return `<h2>${sec.heading}</h2>${paras}${listHtml}`;
+      }).join('');
+    }
+
+    function selectLevel(lvl) {
+      currentLevel = lvl;
+      ['bv1', 'bv2', 'bv3'].forEach(id => {
+        const btn = document.getElementById(`btn-${id}`);
+        if (id === lvl) {
+          btn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm transition shadow-sm bg-amber-400 text-slate-950';
+        } else {
+          btn.className = 'px-4 py-2.5 rounded-xl font-bold text-sm transition shadow-sm bg-white/15 hover:bg-white/25 text-white';
+        }
+      });
+
+      if (hpcData && hpcData.levels[lvl]) {
+        document.getElementById('form-level-title').textContent = `${hpcData.levels[lvl].name} - विवरण एवं मूल्यांकन प्रपत्र`;
+        buildCompetencyInputs();
+        renderPrintCard();
+      }
+    }
+
+    function buildCompetencyInputs() {
+      const lvlObj = hpcData.levels[currentLevel];
+      const container = document.getElementById('competency-inputs-container');
+      container.innerHTML = lvlObj.domains.map(dom => {
+        const posVal = state.remarksPos[dom.id] || '';
+        const impVal = state.remarksImp[dom.id] || '';
+        const rows = dom.competencies.map((comp, idx) => {
+          const kSep = `${currentLevel}_${dom.id}_${idx}_sep`;
+          const kMar = `${currentLevel}_${dom.id}_${idx}_mar`;
+          const vSep = state.ratings[kSep] || 0;
+          const vMar = state.ratings[kMar] || 0;
+          return `
+            <tr class="border-b border-slate-200 text-xs">
+              <td class="py-1.5 pr-2 text-slate-700">${idx + 1}. ${comp}</td>
+              <td class="py-1.5 px-2 whitespace-nowrap">
+                <select onchange="setRating('${kSep}', this.value)" class="border rounded px-1.5 py-1 bg-white">
+                  <option value="0" ${vSep == 0 ? 'selected' : ''}>खाली</option>
+                  <option value="1" ${vSep == 1 ? 'selected' : ''}>1★ Stream</option>
+                  <option value="2" ${vSep == 2 ? 'selected' : ''}>2★ Mountain</option>
+                  <option value="3" ${vSep == 3 ? 'selected' : ''}>3★ Sky</option>
+                </select>
+              </td>
+              <td class="py-1.5 px-2 whitespace-nowrap">
+                <select onchange="setRating('${kMar}', this.value)" class="border rounded px-1.5 py-1 bg-white">
+                  <option value="0" ${vMar == 0 ? 'selected' : ''}>खाली</option>
+                  <option value="1" ${vMar == 1 ? 'selected' : ''}>1★ Stream</option>
+                  <option value="2" ${vMar == 2 ? 'selected' : ''}>2★ Mountain</option>
+                  <option value="3" ${vMar == 3 ? 'selected' : ''}>3★ Sky</option>
+                </select>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        return `
+          <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-2">
+            <div class="font-bold text-xs text-indigo-950 flex flex-wrap justify-between items-center gap-2">
+              <span>${dom.title}</span>
+              <div class="flex gap-2 w-full sm:w-auto">
+                <input type="text" placeholder="सकारात्मक टिप्पणी..." value="${posVal}" oninput="setRemark('${dom.id}', 'pos', this.value)" class="border rounded px-2 py-1 text-xs font-normal flex-1">
+                <input type="text" placeholder="सुधारात्मक टिप्पणी..." value="${impVal}" oninput="setRemark('${dom.id}', 'imp', this.value)" class="border rounded px-2 py-1 text-xs font-normal flex-1">
+              </div>
+            </div>
+            <table class="w-full">
+              <thead>
+                <tr class="text-left text-[11px] text-slate-500 border-b">
+                  <th class="pb-1">दक्षता</th>
+                  <th class="pb-1 px-2">सितम्बर</th>
+                  <th class="pb-1 px-2">मार्च</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setRating(key, val) {
+      state.ratings[key] = parseInt(val, 10);
+      renderPrintCard();
+    }
+
+    function setRemark(domId, type, val) {
+      if (type === 'pos') state.remarksPos[domId] = val;
+      else state.remarksImp[domId] = val;
+      renderPrintCard();
+    }
+
+    function bulkSetStars(term, stars) {
+      const lvlObj = hpcData.levels[currentLevel];
+      lvlObj.domains.forEach(dom => {
+        dom.competencies.forEach((_, idx) => {
+          state.ratings[`${currentLevel}_${dom.id}_${idx}_${term}`] = stars;
+        });
+      });
+      buildCompetencyInputs();
+      renderPrintCard();
+    }
+
+    function handlePhotoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        studentPhotoDataUrl = evt.target.result;
+        renderPrintCard();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function autoFillDemo() {
+      document.getElementById('inp-name').value = 'आरव कुमार';
+      document.getElementById('inp-gender').value = 'M';
+      document.getElementById('inp-dob').value = '14/05/2021';
+      document.getElementById('inp-school').value = 'कम्पोजिट विद्यालय मोहरनिया';
+      document.getElementById('inp-block').value = 'पिसावां';
+      document.getElementById('inp-district').value = 'सीतापुर';
+      document.getElementById('inp-udise').value = '09241504201';
+      document.getElementById('inp-apaar').value = '21828790123';
+      document.getElementById('inp-uid').value = 'XXXX-XXXX-4582';
+      document.getElementById('inp-mother').value = 'श्रीमती सुमन देवी';
+      document.getElementById('inp-father').value = 'श्री राजेश कुमार';
+      document.getElementById('inp-address').value = 'ग्राम मोहरनिया, पिसावां, सीतापुर';
+      document.getElementById('inp-mobile').value = '9876543210';
+
+      document.getElementById('h-sep').value = '98';
+      document.getElementById('h-mar').value = '101';
+      document.getElementById('w-sep').value = '14.5';
+      document.getElementById('w-mar').value = '15.8';
+      document.getElementById('bmi-sep').value = '15.1';
+      document.getElementById('eye-mar').value = 'सामान्य (6/6)';
+
+      document.getElementById('fav-game').value = 'गेंद और दौड़';
+      document.getElementById('fav-friend').value = 'अंशुल';
+      document.getElementById('fav-food').value = 'दाल-चावल, खीर';
+      document.getElementById('fav-animal').value = 'गाय और खरगोश';
+      document.getElementById('fav-flower').value = 'गुलाब';
+      document.getElementById('fav-teacher').value = 'दीपक सर';
+
+      state.remarksPos = {
+        socio: 'समूह में मित्रों के साथ खुशी से खेलता है।',
+        language: 'कविताएं हाव-भाव के साथ सुनाता है।',
+        cognitive: 'रंगों और आकारों की सही पहचान करता है।',
+        aesthetic: 'चित्रों में रंग भरने में विशेष रुचि लेता है।',
+        physical: 'दौड़ और संतुलन के खेलों में सक्रिय है।'
+      };
+      state.remarksImp = {
+        socio: 'बारी की प्रतीक्षा करने का अभ्यास जारी रखें।',
+        language: 'स्पष्ट उच्चारण हेतु घर पर कहानी सुनाएं।',
+        cognitive: 'संख्या बोध का नियमित अभ्यास कराएं।',
+        aesthetic: 'मुक्त चित्रकारी के अवसर दें।',
+        physical: 'पेंसिल पकड़ने का सूक्ष्म अभ्यास कराएं।'
+      };
+
+      state.parentFeedback = {
+        0: { sep: 'Y', mar: 'Y' },
+        1: { sep: 'Y', mar: 'Y' },
+        2: { sep: 'Y', mar: 'Y' },
+        3: { sep: 'Y', mar: 'Y' }
+      };
+      state.parentExpectation = 'बच्चे को खेल-खेल में अक्षर एवं संख्या ज्ञान कराया जाए।';
+      state.attendanceWork = ['24', '15', '0', '26', '24', '25', '22', '23', '25', '22', '23', '24'];
+      state.attendancePres = ['22', '14', '0', '24', '23', '24', '20', '22', '24', '21', '22', '23'];
+      state.aspirations = ['शिक्षक', 'चित्रकारी', 'देश की सेवा'];
+
+      bulkSetStars('sep', 2);
+      bulkSetStars('mar', 3);
+    }
+
+    function clearForm() {
+      ['inp-name','inp-dob','inp-school','inp-block','inp-district','inp-udise','inp-apaar','inp-uid','inp-mother','inp-father','inp-address','inp-mobile','h-sep','h-mar','w-sep','w-mar','bmi-sep','eye-mar','fav-game','fav-friend','fav-food','fav-animal','fav-flower','fav-teacher'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('inp-gender').value = '';
+      state.ratings = {};
+      state.remarksPos = {};
+      state.remarksImp = {};
+      state.parentFeedback = { 0:{sep:'',mar:''}, 1:{sep:'',mar:''}, 2:{sep:'',mar:''}, 3:{sep:'',mar:''} };
+      state.parentExpectation = '';
+      state.attendanceWork = Array(12).fill('');
+      state.attendancePres = Array(12).fill('');
+      state.aspirations = ['', '', ''];
+      studentPhotoDataUrl = '';
+      buildCompetencyInputs();
+      renderPrintCard();
+    }
+
+    function renderStarsHTML(count) {
+      let html = '<div class="flex items-center justify-center gap-1">';
+      for (let i = 1; i <= 3; i++) {
+        const filled = i <= count;
+        html += `<span class="star-box ${filled ? 'text-amber-500 font-black' : 'text-slate-400'}">${filled ? '★' : '☆'}</span>`;
+      }
+      html += '</div>';
+      return html;
+    }
+
+    function val(id) {
+      const el = document.getElementById(id);
+      return el ? el.value : '';
+    }
+
+    function renderPrintCard() {
+      if (!hpcData) return;
+      const lvl = hpcData.levels[currentLevel];
+      const gender = val('inp-gender');
+
+      // Parent feedback rows
+      const pfRows = hpcData.parentFeedbackQuestions.map((q, idx) => {
+        const s = state.parentFeedback[idx]?.sep;
+        const m = state.parentFeedback[idx]?.mar;
+        return `
+          <tr>
+            <td class="py-1 pr-1 text-[10px]">${q}</td>
+            <td class="text-center whitespace-nowrap text-[9.5px] px-1">
+              हाँ <span class="inline-block w-3 h-3 border border-slate-700 rounded-full text-center leading-3">${s === 'Y' ? '✓' : ''}</span>
+              नहीं <span class="inline-block w-3 h-3 border border-slate-700 rounded-full text-center leading-3">${s === 'N' ? '✓' : ''}</span>
+            </td>
+            <td class="text-center whitespace-nowrap text-[9.5px] px-1">
+              हाँ <span class="inline-block w-3 h-3 border border-slate-700 rounded-full text-center leading-3">${m === 'Y' ? '✓' : ''}</span>
+              नहीं <span class="inline-block w-3 h-3 border border-slate-700 rounded-full text-center leading-3">${m === 'N' ? '✓' : ''}</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      // Teacher Remarks rows
+      const remarkRows = lvl.domains.map(d => `
+        <tr>
+          <td class="font-semibold text-[10px] py-1">${d.title}</td>
+          <td class="text-[9.5px] text-emerald-900">${state.remarksPos[d.id] || ''}</td>
+          <td class="text-[9.5px] text-indigo-900">${state.remarksImp[d.id] || ''}</td>
+        </tr>
+      `).join('');
+
+      // Rubric rows
+      const rubricRows = hpcData.ratingRubric.map(r => `
+        <tr>
+          <td class="font-bold text-center whitespace-nowrap text-[10px] bg-indigo-50/50">
+            <span class="text-amber-500">★</span> ${r.level}
+          </td>
+          <td class="text-[9px] leading-tight">${r.description}</td>
+        </tr>
+      `).join('');
+
+      // Helper to render a domain table on Page 2
+      const renderDomainBox = (dom) => {
+        const rows = dom.competencies.map((comp, idx) => {
+          const s = state.ratings[`${currentLevel}_${dom.id}_${idx}_sep`] || 0;
+          const m = state.ratings[`${currentLevel}_${dom.id}_${idx}_mar`] || 0;
+          return `
+            <tr>
+              <td class="text-[9.8px] leading-snug py-1">${comp}</td>
+              <td class="w-16 text-center">${renderStarsHTML(s)}</td>
+              <td class="w-16 text-center">${renderStarsHTML(m)}</td>
+            </tr>
+          `;
+        }).join('');
+        return `
+          <div class="border border-slate-400 rounded-lg overflow-hidden bg-white">
+            <div class="bg-amber-50 border-b border-slate-400 px-2 py-1 font-extrabold text-indigo-950 text-[11px] flex justify-between items-center">
+              <span>${dom.title}</span>
+            </div>
+            <table class="hpc-table">
+              <thead>
+                <tr class="bg-slate-100 text-[9.5px] text-slate-700">
+                  <th class="text-left">दक्षता</th>
+                  <th class="w-16 text-center">सितम्बर</th>
+                  <th class="w-16 text-center">मार्च</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
+        `;
+      };
+
+      const leftDomainsHtml = lvl.domains.slice(0, 3).map(renderDomainBox).join('');
+      const rightDomainsHtml = lvl.domains.slice(3, 5).map(renderDomainBox).join('');
+
+      // Attendance table
+      const monthHeaders = hpcData.months.map(m => `<th class="text-[8.5px] text-center">${m}</th>`).join('');
+      const workCells = state.attendanceWork.map(w => `<td class="text-center text-[9px] h-4">${w}</td>`).join('');
+      const presCells = state.attendancePres.map(p => `<td class="text-center text-[9px] h-4 font-bold">${p}</td>`).join('');
+
+      // Favourites boxes
+      const favBoxes = hpcData.favourites.map(f => {
+        const fv = val(`fav-${f.key}`);
+        return `
+          <div class="border border-slate-400 rounded flex flex-col justify-between h-14 overflow-hidden">
+            <div class="text-[9.5px] p-1 text-center font-semibold text-slate-800 flex-1 flex items-center justify-center">${fv}</div>
+            <div class="text-white text-[9px] font-bold text-center py-0.5" style="background:${f.color}">${f.label}</div>
+          </div>
+        `;
+      }).join('');
+
+      // Aspirations
+      const aspHtml = lvl.aspirations.map((line, i) => {
+        const filled = state.aspirations[i]
+          ? line.replace('..........................', `<span class="underline font-bold px-2">${state.aspirations[i]}</span>`)
+          : line;
+        return `<div class="text-[10px] font-semibold text-slate-800">${filled}</div>`;
+      }).join('');
+
+      const printArea = document.getElementById('print-area');
+      printArea.innerHTML = `
+        <!-- SHEET 1: OUTSIDE SPREAD (LEFT = BACK PAGE, RIGHT = FRONT COVER) -->
+        <div class="print-sheet">
+          
+          <!-- LEFT PANEL: शिक्षकों एवं अभिभावकों के लिए -->
+          <div class="booklet-panel">
+            <div class="space-y-2">
+              <div class="text-center">
+                <span class="inline-block bg-indigo-900 text-white font-bold text-xs px-4 py-1 rounded-full">
+                  शिक्षकों एवं अभिभावकों के लिए
+                </span>
+              </div>
+
+              <!-- अभिभावक प्रतिपुष्टि -->
+              <div class="bg-emerald-50/70 border border-emerald-300 rounded-lg p-2">
+                <div class="font-bold text-center text-indigo-950 text-[11px] mb-1">अभिभावक प्रतिपुष्टि</div>
+                <table class="hpc-table bg-white">
+                  <thead>
+                    <tr class="bg-emerald-100/70 text-[9.5px]">
+                      <th class="text-left">अवलोकन बिंदु</th>
+                      <th class="w-20 text-center">सितम्बर</th>
+                      <th class="w-20 text-center">मार्च</th>
+                    </tr>
+                  </thead>
+                  <tbody>${pfRows}</tbody>
+                </table>
+                <div class="mt-1.5 text-[9.5px]">
+                  <span class="font-semibold">विद्यार्थी की प्रगति के संबंध में विद्यालय से अपेक्षा:</span>
+                  <div class="border-b border-dotted border-slate-500 min-h-[16px] text-slate-800 font-medium">${state.parentExpectation}</div>
+                </div>
+              </div>
+
+              <!-- विद्यार्थी के बारे में -->
+              <div class="bg-emerald-50/70 border border-emerald-300 rounded-lg p-2">
+                <div class="font-bold text-center text-indigo-950 text-[11px] mb-1">विद्यार्थी के बारे में...</div>
+                <table class="hpc-table bg-white">
+                  <thead>
+                    <tr class="bg-emerald-100/70 text-[9.5px]">
+                      <th class="w-40 text-left">विकासात्मक क्षेत्र</th>
+                      <th class="text-center">सकारात्मक</th>
+                      <th class="text-center">सुधारात्मक</th>
+                    </tr>
+                  </thead>
+                  <tbody>${remarkRows}</tbody>
+                </table>
+                <div class="text-[8.5px] text-slate-600 mt-1 text-center">
+                  शिक्षकों के लिए - विद्यार्थी के सर्वाधिक अनूठे विशेष कौशलों/दक्षताओं को यहाँ दर्ज करें।
+                </div>
+              </div>
+
+              <!-- अभिभावक-शिक्षक संवाद -->
+              <div class="border border-slate-300 rounded-lg p-1.5 bg-slate-50">
+                <div class="font-bold text-indigo-950 text-[10px] mb-1">अभिभावक-शिक्षक संवाद</div>
+                <table class="hpc-table bg-white text-[9.5px]">
+                  <thead>
+                    <tr class="bg-slate-100">
+                      <th class="w-20">माह</th>
+                      <th>आंगनबाड़ी कार्यकत्री / शिक्षक का हस्ताक्षर</th>
+                      <th>अभिभावक का हस्ताक्षर</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="font-semibold text-center">सितम्बर</td><td></td><td></td></tr>
+                    <tr><td class="font-semibold text-center">मार्च</td><td></td><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- महत्वपूर्ण जानकारियाँ एवं स्टार रूब्रिक -->
+            <div class="space-y-1">
+              <div class="text-[8.8px] text-slate-700 leading-tight">
+                <span class="bg-emerald-700 text-white px-2 py-0.5 rounded font-bold">महत्वपूर्ण जानकारियाँ</span>
+                <ul class="list-disc pl-4 mt-1 space-y-0.5">
+                  <li>अभिभावक द्वारा प्रगति पत्र के प्राप्त होने पर शिक्षक के साथ विद्यार्थी की प्रगति के विषय में चर्चा करें।</li>
+                  <li>यह प्रगति पत्र बच्चे के समग्र विकास को दर्शाता है। प्रत्येक बच्चे के सीखने की गति अलग होती है।</li>
+                </ul>
+              </div>
+              <table class="hpc-table">
+                <thead>
+                  <tr class="bg-indigo-100 text-[9px]">
+                    <th class="w-20">स्तर</th>
+                    <th>सीखने का स्तर</th>
+                  </tr>
+                </thead>
+                <tbody>${rubricRows}</tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- RIGHT PANEL: FRONT COVER (बेसिक शिक्षा परिषद्, उत्तर प्रदेश) -->
+          <div class="booklet-panel bg-gradient-to-b from-amber-50/40 via-white to-emerald-50/50">
+            <div>
+              <!-- Top Logos & Title -->
+              <div class="flex justify-between items-center border-b-2 border-indigo-900 pb-2">
+                <div class="text-[10px] font-bold text-slate-700">उ०प्र० सरकार</div>
+                <div class="text-center">
+                  <div class="bg-indigo-900 text-white px-4 py-1 rounded-full font-extrabold text-sm tracking-wide">
+                    बेसिक शिक्षा परिषद्, उत्तर प्रदेश
+                  </div>
+                  <div class="font-black text-indigo-950 text-base mt-1">समग्र प्रगति पत्र</div>
+                  <div class="font-bold text-rose-800 text-xs">कक्षा : ${lvl.name}</div>
+                  <div class="font-semibold text-slate-700 text-[11px]">शैक्षिक सत्र : <span class="underline">${val('inp-session')}</span></div>
+                </div>
+                <div class="text-[10px] font-bold text-emerald-800 text-right">समग्र शिक्षा<br>NIPUN BHARAT</div>
+              </div>
+
+              <!-- Student Profile + Photo + Health Table -->
+              <div class="grid grid-cols-12 gap-2 mt-3 items-start">
+                <!-- Left: Health Table + Photo -->
+                <div class="col-span-5 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <div class="w-20 h-24 border-2 border-slate-400 rounded bg-slate-50 flex items-center justify-center overflow-hidden">
+                      ${studentPhotoDataUrl ? `<img src="${studentPhotoDataUrl}" class="w-full h-full object-cover">` : `<span class="text-slate-400 text-[10px] font-bold">फोटो</span>`}
+                    </div>
+                    <div class="text-[10px] space-y-1">
+                      <div><span class="inline-block w-3.5 h-3.5 border border-slate-700 text-center leading-3">${gender === 'M' ? '✓' : ''}</span> बालक</div>
+                      <div><span class="inline-block w-3.5 h-3.5 border border-slate-700 text-center leading-3">${gender === 'F' ? '✓' : ''}</span> बालिका</div>
+                    </div>
+                  </div>
+
+                  <table class="hpc-table text-[9.5px] bg-white">
+                    <thead>
+                      <tr class="bg-indigo-50">
+                        <th>स्वास्थ्य माप</th>
+                        <th class="text-center">सितम्बर</th>
+                        <th class="text-center">मार्च</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="font-semibold">ऊँचाई (सेमी)</td>
+                        <td class="text-center">${val('h-sep')}</td>
+                        <td class="text-center">${val('h-mar')}</td>
+                      </tr>
+                      <tr>
+                        <td class="font-semibold">वजन (किग्रा)</td>
+                        <td class="text-center">${val('w-sep')}</td>
+                        <td class="text-center">${val('w-mar')}</td>
+                      </tr>
+                      <tr>
+                        <td class="font-semibold">बीएमआई (BMI)</td>
+                        <td class="text-center">${val('bmi-sep')}</td>
+                        <td class="text-center"></td>
+                      </tr>
+                      <tr>
+                        <td class="font-semibold">हीमोग्लोबिन</td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                      </tr>
+                      <tr>
+                        <td class="font-semibold">दाँत / Eye Sight</td>
+                        <td class="text-center" colspan="2">${val('eye-mar')}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Right: Student Bio Lines -->
+                <div class="col-span-7 space-y-1.5 text-[10.5px]">
+                  <div class="flex"><span class="font-bold w-36">विद्यार्थी का नाम :</span><span class="border-b border-dotted border-slate-600 flex-1 font-bold text-indigo-950">${val('inp-name')}</span></div>
+                  <div class="flex"><span class="font-bold w-36">विद्यालय का नाम :</span><span class="border-b border-dotted border-slate-600 flex-1">${val('inp-school')}</span></div>
+                  <div class="flex gap-2">
+                    <div class="flex flex-1"><span class="font-bold">ब्लॉक :</span><span class="border-b border-dotted border-slate-600 flex-1 ml-1">${val('inp-block')}</span></div>
+                    <div class="flex flex-1"><span class="font-bold">जनपद :</span><span class="border-b border-dotted border-slate-600 flex-1 ml-1">${val('inp-district')}</span></div>
+                  </div>
+                  <div class="flex"><span class="font-bold w-36">यू-डायस कोड :</span><span class="border-b border-dotted border-slate-600 flex-1">${val('inp-udise')}</span></div>
+                  <div class="flex"><span class="font-bold w-36">पेन/APAAR आईडी :</span><span class="border-b border-dotted border-slate-600 flex-1">${val('inp-apaar')}</span></div>
+                  <div class="flex"><span class="font-bold w-36">आधार कार्ड संख्या :</span><span class="border-b border-dotted border-slate-600 flex-1">${val('inp-uid')}</span></div>
+                  <div class="flex"><span class="font-bold w-36">जन्मतिथि :</span><span class="border-b border-dotted border-slate-600 flex-1">${val('inp-dob')}</span></div>
+                  <div class="flex"><span class="font-bold w-36">माता का नाम :</span><span class="border-b border-dotted border-slate-600 flex-1">${val('inp-mother')}</span></div>
+                  <div class="flex"><span class="font-bold w-36">पिता का नाम :</span><span class="border-b border-dotted border-slate-600 flex-1">${val('inp-father')}</span></div>
+                  <div class="flex"><span class="font-bold w-36">घर का पता :</span><span class="border-b border-dotted border-slate-600 flex-1">${val('inp-address')}</span></div>
+                  <div class="flex"><span class="font-bold w-36">अभिभावक मोबाइल :</span><span class="border-b border-dotted border-slate-600 flex-1">${val('inp-mobile')}</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Section: अभिभावक क्या करें? -->
+            <div class="bg-emerald-100/80 border border-emerald-400 rounded-xl p-2.5 text-center space-y-1.5">
+              <div class="font-extrabold text-indigo-950 text-xs">अभिभावक क्या करें?</div>
+              <div class="grid grid-cols-4 gap-1.5 text-[9.5px] font-semibold text-slate-800">
+                <div class="bg-white p-1.5 rounded border border-emerald-200">बच्चे को प्रतिदिन समय पर विद्यालय भेजें</div>
+                <div class="bg-white p-1.5 rounded border border-emerald-200">बच्चे से विद्यालय गतिविधियों पर चर्चा करें</div>
+                <div class="bg-white p-1.5 rounded border border-emerald-200">प्रतिदिन बच्चे को कहानी सुनाएं व सुनें</div>
+                <div class="bg-white p-1.5 rounded border border-emerald-200">शिक्षक-अभिभावक बैठक में प्रतिभाग करें</div>
+              </div>
+              <div class="bg-white border border-amber-400 rounded-lg py-1 px-3 inline-block font-black text-indigo-950 text-xs shadow-2xs">
+                “घर और विद्यालय की साझेदारी से बच्चे बेहतर सीखते हैं।”
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SHEET 2: INSIDE SPREAD (ALL 5 DEVELOPMENTAL DOMAINS + ATTENDANCE + FAVOURITES) -->
+        <div class="print-sheet">
+          
+          <!-- INSIDE LEFT PANEL (3 DOMAINS) -->
+          <div class="booklet-panel">
+            <div class="space-y-2">
+              ${leftDomainsHtml}
+            </div>
+            <div class="text-[9.5px] font-bold text-slate-700 pt-1 border-t border-slate-300 flex justify-between items-center">
+              <span>शिक्षकों के लिए - उचित तारे में सही का चिह्न (✓) लगायें या रंग भरें।</span>
+              <span class="text-indigo-900">${lvl.shortName}</span>
+            </div>
+          </div>
+
+          <!-- INSIDE RIGHT PANEL (2 DOMAINS + ATTENDANCE + FAVOURITES) -->
+          <div class="booklet-panel">
+            <div class="space-y-2">
+              ${rightDomainsHtml}
+
+              <!-- मेरी उपस्थिति -->
+              <div class="border border-amber-700/50 rounded-lg overflow-hidden bg-amber-50/30">
+                <div class="bg-amber-100/80 text-center font-extrabold text-amber-950 text-[10.5px] py-0.5 border-b border-amber-700/40">
+                  मेरी उपस्थिति
+                </div>
+                <table class="hpc-table bg-white">
+                  <thead>
+                    <tr class="bg-slate-100">
+                      <th class="text-[8.5px] w-14">माह</th>
+                      ${monthHeaders}
+                      <th class="text-[8.5px] w-10">योग</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-[8.5px] font-semibold">कुल कार्य दिवस</td>
+                      ${workCells}
+                      <td class="text-center text-[9px] font-bold"></td>
+                    </tr>
+                    <tr>
+                      <td class="text-[8.5px] font-semibold">उपस्थिति</td>
+                      ${presCells}
+                      <td class="text-center text-[9px] font-bold"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- मुझे पसंद है... -->
+              <div class="space-y-1.5 pt-1">
+                <div class="text-center font-extrabold text-rose-800 text-xs">मुझे पसंद है...</div>
+                <div class="grid grid-cols-6 gap-1.5">
+                  ${favBoxes}
+                </div>
+              </div>
+            </div>
+
+            <!-- मैं बनना/सीखना चाहता हूँ -->
+            <div class="pt-1.5 border-t border-slate-300 flex flex-wrap justify-between items-center gap-2">
+              ${aspHtml}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
 </body>
 </html>
