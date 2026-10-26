@@ -724,7 +724,7 @@
       <p class="text-slate-400 text-xs">© deshimaster.in. All Rights Reserved.</p>
     </div>
   </footer>
-  <!-- JavaScript Engine: Part 2A (Data, JSON Loader, Modals & Helper Functions) -->
+  <!-- JavaScript Engine: Part 2A (Data, Complete Article Renderer & Helper Functions) -->
   <script>
     const MONTHS_HI = [
       "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर",
@@ -761,7 +761,7 @@
       games: ["खो-खो", "कबड्डी", "बैडमिंटन", "छुपन-छुपाई", "फुटबॉल", "क्रिकेट", "पकड़म-पकड़ाई", "कैरम", "लूडो", "दौड़"],
       animals: ["गाय", "खरगोश", "तोता", "बछड़ा", "गिलहरी", "हिरण", "मोर", "कबूतर", "कोयल", "बकरी"],
       flowers: ["गेंदा", "गुलाब", "कमल", "सूरजमुखी", "चमेली", "गुड़हल", "सदाबहार", "हरसिंगार", "बेला"],
-      subjects: ["गणित", "हिन्दी", "चित्रकला", "अंग्रेजी", "पर्यावरण अध्ययन", "संस्कृत", "खेल", "संगीत"],
+      subjects: ["गणित", "हिन्दी", "चित्रकला", "अंग्रेजी", "पर्यावरण अध्ययन", "संस्कृत", "खेल", "संगीत", "कहानी पठन"],
       teachers: ["कक्षा अध्यापक", "प्रधानाध्यापक", "भाषा शिक्षक", "गणित शिक्षक", "आँगनबाड़ी कार्यकर्त्री", "सभी शिक्षक"],
       gardening: ["पौधे लगाना", "पानी देना", "तुलसी व गेंदा उगाना", "किचन गार्डन बनाना", "गमले सजाना", "नीम लगाना"],
       books: ["पंचतंत्र कथाएं", "बालहंस", "अकबर-बीरबल", "विज्ञान की बातें", "महापुरुषों की जीवनी", "तेनालीराम कथाएं"],
@@ -786,12 +786,14 @@
         "खेलकूद, दौड़-भाग और साथियों के साथ समूह में खेलने में",
         "सुंदर चित्र बनाने, रंग भरने और कागज की आकृतियाँ बनाने में",
         "कहानियों की रोचक पुस्तकें पढ़ने और नई बातें जानने में",
-        "गणितीय पहेलियाँ सुलझाने और गिनती संबंधी खेलों में"
+        "गणितीय पहेलियाँ सुलझाने और गिनती संबंधी खेलों में",
+        "बाल कविताएं सुनाने, गीत-संगीत और अभिनय करने में"
       ],
       parentExpectation: [
         "बुनियादी भाषा ज्ञान और गणितीय कौशल को और मजबूत किया जाए।",
         "बच्चे की झिझक दूर कर मंच पर बोलने का आत्मविश्वास बढ़ाया जाए।",
         "पढ़ाई के साथ-साथ खेलकूद और सामान्य ज्ञान में भी आगे बढ़ाया जाए।",
+        "अंग्रेजी के सरल शब्दों और उच्चारण के अभ्यास पर ध्यान दिया जाए।",
         "लिखावट (राइटिंग) और शुद्ध वर्तनी में निरंतर सुधार कराया जाए।"
       ],
       balSocialPos: ["सहपाठियों के साथ वस्तुएँ साझा करता/करती है एवं मिल-जुलकर खेलता/खेलती है।"],
@@ -896,7 +898,6 @@
       }
     ];
 
-    // यदि किसी कारण JSON फाइल न खुले तो भी सभी कक्षाएं (बालवाटिका से 8) बिना रुके चलेंगी
     const FALLBACK_SCHEMAS = {
       "balvatika": {
         className: "कक्षा : बालवाटिका - 3", promoteTo: "कक्षा - 1", hasExamTable: false, examSubjects: [],
@@ -946,8 +947,8 @@
 
         let primaryData = null;
         let upperData = null;
-        try { if (primaryRes && primaryRes.ok) primaryData = await primaryRes.json(); } catch (e) { console.error("hpc-primary.json syntax error:", e); }
-        try { if (upperRes && upperRes.ok) upperData = await upperRes.json(); } catch (e) { console.error("hpc-upper.json syntax error:", e); }
+        try { if (primaryRes && primaryRes.ok) primaryData = await primaryRes.json(); } catch (e) {}
+        try { if (upperRes && upperRes.ok) upperData = await upperRes.json(); } catch (e) {}
 
         if (primaryData && primaryData.randomPools) {
           RANDOM_POOLS = Object.assign({}, FALLBACK_POOLS, primaryData.randomPools);
@@ -974,10 +975,9 @@
           }
         });
         BUILTIN_SCHEMAS = mergedSchemas;
-      } catch (err) {
-        console.error("Resource load error:", err);
-      }
+      } catch (err) {}
 
+      // hpc-article.json को पूरा लोड और रेंडर करने का कोड
       fetch("hpc-article.json")
         .then(r => r.ok ? r.json() : null)
         .then(artData => { if (artData) renderSeoArticle(artData); })
@@ -987,10 +987,119 @@
     function renderSeoArticle(data) {
       const container = document.getElementById("hpc-guide-article");
       if (!container || !data) return;
+
       if (data.html) {
         container.innerHTML = data.html;
         return;
       }
+
+      let html = `
+        <div class="border-b border-slate-200 pb-5">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+            ${data.badge || 'विस्तृत मार्गदर्शिका'}
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3 leading-snug">
+            ${data.title || 'समग्र प्रगति पत्र (HPC) मार्गदर्शिका'}
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-2">${data.authorLine || ''}</p>
+        </div>
+      `;
+
+      (data.sections || []).forEach(sec => {
+        if (sec.type === "paragraphs") {
+          html += `
+            <div class="space-y-4 text-sm sm:text-base">
+              <h3 class="text-xl font-extrabold text-slate-900 border-l-4 ${sec.borderColor || 'border-emerald-600'} pl-3">${sec.heading}</h3>
+              ${(sec.paragraphs || []).map(p => `<p>${p}</p>`).join("")}
+            </div>
+          `;
+        } else if (sec.type === "highlight_list") {
+          html += `
+            <div class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-5 sm:p-6 space-y-4 text-sm sm:text-base">
+              <h3 class="text-xl font-extrabold text-emerald-950 flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-emerald-700"></i> ${sec.heading}
+              </h3>
+              ${sec.intro ? `<p>${sec.intro}</p>` : ''}
+              <ul class="list-disc pl-6 space-y-2.5 text-slate-800">
+                ${(sec.items || []).map(item => `<li>${item}</li>`).join("")}
+              </ul>
+            </div>
+          `;
+        } else if (sec.type === "table") {
+          html += `
+            <div class="space-y-4 text-sm sm:text-base">
+              <h3 class="text-xl font-extrabold text-slate-900 border-l-4 border-indigo-600 pl-3">${sec.heading}</h3>
+              ${sec.intro ? `<p>${sec.intro}</p>` : ''}
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse text-xs sm:text-sm bg-white rounded-xl overflow-hidden border border-slate-300">
+                  <thead>
+                    <tr class="bg-slate-800 text-white text-left">
+                      ${(sec.headers || []).map(h => `<th class="p-3.5 border border-slate-700">${h}</th>`).join("")}
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200">
+                    ${(sec.rows || []).map(r => `
+                      <tr class="${r.rowClass || ''}">
+                        ${(r.cells || []).map((c, idx) => `<td class="p-3.5 border border-slate-200 ${idx === 0 ? 'font-extrabold' : ''}">${c}</td>`).join("")}
+                      </tr>
+                    `).join("")}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        } else if (sec.type === "cards_grid") {
+          html += `
+            <div class="space-y-4 text-sm sm:text-base">
+              <h3 class="text-xl font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">${sec.heading}</h3>
+              ${sec.intro ? `<p>${sec.intro}</p>` : ''}
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                ${(sec.cards || []).map(c => `
+                  <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                    <h4 class="font-extrabold text-slate-900 text-base mb-1">${c.title}</h4>
+                    <p class="text-xs sm:text-sm text-slate-600">${c.desc}</p>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          `;
+        } else if (sec.type === "badges_grid") {
+          html += `
+            <div class="space-y-3 text-sm sm:text-base">
+              <h3 class="text-xl font-extrabold text-slate-900 border-l-4 border-blue-600 pl-3">${sec.heading}</h3>
+              ${sec.intro ? `<p>${sec.intro}</p>` : ''}
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs sm:text-sm text-center font-bold">
+                ${(sec.badges || []).map(b => `<div class="p-3 rounded-xl border ${b.classes}">${b.text}</div>`).join("")}
+              </div>
+            </div>
+          `;
+        } else if (sec.type === "ordered_list") {
+          html += `
+            <div class="space-y-4 text-sm sm:text-base">
+              <h3 class="text-xl font-extrabold text-slate-900 border-l-4 border-emerald-600 pl-3">${sec.heading}</h3>
+              <ol class="list-decimal pl-6 space-y-2 text-slate-700">
+                ${(sec.steps || []).map(s => `<li>${s}</li>`).join("")}
+              </ol>
+            </div>
+          `;
+        } else if (sec.type === "faqs") {
+          html += `
+            <div class="space-y-4 pt-2 border-t border-slate-200 text-sm sm:text-base">
+              <h3 class="text-xl font-extrabold text-slate-900">${sec.heading}</h3>
+              <div class="space-y-3">
+                ${(sec.questions || []).map(item => `
+                  <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <h4 class="font-bold text-slate-900">${item.q}</h4>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1">${item.a}</p>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      container.innerHTML = html;
     }
 
     function populateDistrictDropdown() {
@@ -1025,7 +1134,6 @@
       return text.replace(/([^\s\/]+)\/([^\s\/।,]+)/g, (match, mWord, fWord) => idx === 1 ? fWord : mWord);
     }
 
-    // तीनों शिक्षक इनपुट बॉक्स से नाम लेने और छात्रों के कार्ड में सिंक करने का फंक्शन
     function getSchoolTeachersPool() {
       const t1 = document.getElementById("teacherName1")?.value.trim() || "";
       const t2 = document.getElementById("teacherName2")?.value.trim() || "";
@@ -1036,7 +1144,6 @@
     }
 
     function updateTeachersAndSyncCards() {
-      // जब शिक्षक ऊपर नाम लिखें तो छात्रों के पुराने डिफ़ॉल्ट ड्रॉपडाउन कैश से हटाएं ताकि नया नाम तुरंत छपे
       Object.keys(studentsByClass).forEach(cKey => {
         (studentsByClass[cKey] || []).forEach(stu => {
           if (stu.customDropdowns) {
@@ -1218,7 +1325,7 @@
     function saveStudentsToMobile() {
       localStorage.setItem("dm_hpc_students_v12", JSON.stringify(studentsByClass));
     }
-    // Part 2B: Class Switcher, Modals, 3-Teacher Sync & Full Card Renderer
+    // Part 2B: Class Switcher, Modals, Subject/Teacher Pool Fix & Dual Expectation Renderer
     function switchClass(classKey) {
       currentClassKey = classKey;
       currentClassSchema = (BUILTIN_SCHEMAS && BUILTIN_SCHEMAS[classKey]) ? BUILTIN_SCHEMAS[classKey] : FALLBACK_SCHEMAS["1"];
@@ -1715,14 +1822,20 @@
       if (printSpan) printSpan.innerText = inputEl.value || "—";
     }
 
+    // किसी भी संभावित पुराने [object Object] मान को अनदेखा कर स्वच्छ स्ट्रिंग दिखाने का सुरक्षित फंक्शन
     function buildSlideDownWithOther(stu, fieldKey, optionsArray, defaultVal, isInline = false) {
-      const saved = stu.customDropdowns?.[fieldKey];
+      let saved = stu.customDropdowns?.[fieldKey];
+      if (saved && typeof saved.value === "string" && saved.value.includes("[object")) {
+        saved = null;
+      }
+      const cleanDefault = (typeof defaultVal === "string" && !defaultVal.includes("[object")) ? defaultVal : "—";
       const isCustom = saved && saved.mode === "custom";
-      const selectedVal = (saved && saved.value) ? (isCustom ? "__OTHER__" : saved.value) : defaultVal;
+      const selectedVal = (saved && saved.value) ? (isCustom ? "__OTHER__" : saved.value) : cleanDefault;
       const customText = isCustom ? (saved.value || "") : "";
-      const currentDisplayText = isCustom ? (customText || "—") : (selectedVal || defaultVal || "—");
+      const currentDisplayText = isCustom ? (customText || "—") : (selectedVal || cleanDefault || "—");
 
-      const uniqueOpts = Array.from(new Set([defaultVal, ...(optionsArray || [])])).filter(Boolean);
+      const cleanPool = (optionsArray || []).filter(item => typeof item === "string" && !item.includes("[object"));
+      const uniqueOpts = Array.from(new Set([cleanDefault, ...cleanPool])).filter(Boolean);
       const wrapClass = isInline ? "inline-block align-middle mx-0.5" : "inline-block w-full align-middle relative";
       const selClass = isInline ? "hpc-select inline-sel no-print" : "hpc-select no-print";
       const inpClass = isInline ? "hpc-custom-input inline-inp" : "hpc-custom-input";
@@ -1799,9 +1912,9 @@
       renderAllCards();
     }
 
-    // यदि शिक्षक श्रेणी है, तो सीधे कॉलम 1 में शिक्षक-1, कॉलम 2 में शिक्षक-2 और कॉलम 3 में शिक्षक-3 सेट करें
+    // सुधार 1: विषय के नाम अपने-आप लोड होंगे, और जब शिक्षक का नाम ऊपर लिखा जाएगा तो तुरंत शिक्षक का नाम लोड होगा
     function buildThreeLikesCells(stu, baseKey, pool, seed, offsetBase, isTeacherCat = false) {
-      const safePool = (pool && pool.length > 0) ? pool : ["—"];
+      const safePool = (pool && pool.length > 0) ? pool.filter(x => typeof x === "string") : ["—"];
 
       if (isTeacherCat) {
         const t1 = document.getElementById("teacherName1")?.value.trim() || "";
@@ -1809,11 +1922,11 @@
         const t3 = document.getElementById("teacherName3")?.value.trim() || "";
         const hasAnyCustom = !!(t1 || t2 || t3);
 
-        const def1 = hasAnyCustom ? (t1 || "—") : (safePool[0] || "कक्षा अध्यापक");
-        const def2 = hasAnyCustom ? (t2 || t1 || "—") : (safePool[1] || safePool[0] || "प्रधानाध्यापक");
-        const def3 = hasAnyCustom ? (t3 || t2 || t1 || "—") : (safePool[2] || safePool[0] || "भाषा शिक्षक");
+        const def1 = hasAnyCustom ? (t1 || "कक्षा अध्यापक") : (safePool[0] || "कक्षा अध्यापक");
+        const def2 = hasAnyCustom ? (t2 || t1 || "प्रधानाध्यापक") : (safePool[1] || "प्रधानाध्यापक");
+        const def3 = hasAnyCustom ? (t3 || t2 || t1 || "भाषा शिक्षक") : (safePool[2] || "भाषा शिक्षक");
 
-        const teacherOpts = Array.from(new Set([t1, t2, t3, "—", ...safePool])).filter(Boolean);
+        const teacherOpts = Array.from(new Set([t1, t2, t3, ...safePool])).filter(Boolean);
         return `
           <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_1', teacherOpts, def1)}</td>
           <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_2', teacherOpts, def2)}</td>
@@ -1834,12 +1947,15 @@
       `;
     }
 
+    // फिक्स: 'subjects' पूल में हमेशा विषयों के नाम (हिन्दी, गणित, चित्रकला...) ही लोड होंगे, कभी भी [object Object] नहीं आएगा!
     function getPoolByKey(poolKey, stu, teacherMasterList) {
       const isGirl = stu.gender === "F";
       if (poolKey === "friends") return (isGirl ? RANDOM_POOLS.friendsF : RANDOM_POOLS.friendsM) || [];
       if (poolKey === "ambition") return (isGirl ? RANDOM_POOLS.ambitionF : RANDOM_POOLS.ambitionM) || [];
       if (poolKey === "teachers") return teacherMasterList;
-      if (currentClassSchema && Array.isArray(currentClassSchema[poolKey])) return currentClassSchema[poolKey];
+      if (poolKey === "subjects") return RANDOM_POOLS.subjects || ["गणित", "हिन्दी", "चित्रकला", "अंग्रेजी", "पर्यावरण अध्ययन", "संस्कृत"];
+      if (poolKey === "cognitivePos" && currentClassSchema && Array.isArray(currentClassSchema.cognitivePos)) return currentClassSchema.cognitivePos;
+      if (poolKey === "cognitiveCor" && currentClassSchema && Array.isArray(currentClassSchema.cognitiveCor)) return currentClassSchema.cognitiveCor;
       return RANDOM_POOLS[poolKey] || [];
     }
 
@@ -1892,7 +2008,7 @@
         );
         const totalPresYear = stuAttArr.reduce((a, b) => a + b, 0);
 
-        // 1. मुझे पसंद है (बालवाटिका व कक्षा 1 में 'शिक्षक' अनिवार्य, बाकी में शासनादेश अनुसार)
+        // 1. मुझे पसंद है (बालवाटिका व कक्षा 1 में शिक्षक, कक्षा 2-5 में विषय, कक्षा 6-8 में बागवानी/किताब/अन्य)
         let likesCats = [];
         if (isBalvatika || currentClassKey === "1") {
           likesCats = [
@@ -2073,7 +2189,7 @@
         const p1Class = isUpper ? "hpc-page layout-p1-all p1-upper-mode" : "hpc-page layout-p1-all";
         const p2Class = isUpper ? "hpc-page layout-upper-p2" : "hpc-page layout-primary-p2";
 
-        // PAGE 1 HTML (p1-grow-grid और p1-grow-sec क्लासेस से पूरा पेज बिना खाली जगह के संतुलित रहेगा)
+        // PAGE 1 HTML
         const page1HTML = `
           <div class="${p1Class}">
             <div class="flex items-center justify-between bg-blue-50 border-b-2 border-blue-900 px-3 py-1 rounded-t shrink-0">
@@ -2299,12 +2415,12 @@
               </div>
             ` : ''}
 
-            <!-- 5. अभिभावक प्रतिपुष्टि एवं हस्ताक्षर -->
+            <!-- 5. अभिभावक प्रतिपुष्टि (रुचि तथा सितम्बर व मार्च दोनों के लिए अलग-अलग विद्यालय से अपेक्षा) -->
             <div class="grid grid-cols-12 gap-2 w-full p1-grow-grid">
               <div class="col-span-8 min-w-0">
                 <table class="hpc-table theme-emerald">
                   <colgroup>
-                    <col style="width: 58%;"><col style="width: 21%;"><col style="width: 21%;">
+                    <col style="width: 52%;"><col style="width: 24%;"><col style="width: 24%;">
                   </colgroup>
                   <thead>
                     <tr>
@@ -2317,14 +2433,19 @@
                     ${parentQuestionRowsHTML}
                     ${!isUpper ? `
                       <tr>
-                        <td colspan="3">
-                          <b>विद्यार्थी किस तरह के कार्यों में अधिक रुचि लेता है?</b> ${buildSlideDownWithOther(stu, 'par_int', RANDOM_POOLS.parentInterest, pickVariant(RANDOM_POOLS.parentInterest, seed, 1), true)}
+                        <td class="font-bold select-none">विद्यार्थी किस तरह के कार्यों में अधिक रुचि लेता है?</td>
+                        <td colspan="2">
+                          ${buildSlideDownWithOther(stu, 'par_int', RANDOM_POOLS.parentInterest, pickVariant(RANDOM_POOLS.parentInterest, seed, 1))}
                         </td>
                       </tr>
                     ` : ''}
                     <tr>
-                      <td colspan="3">
-                        <b>विद्यार्थी की प्रगति के संबंध में विद्यालय से अपेक्षा...</b> ${buildSlideDownWithOther(stu, 'par_exp', RANDOM_POOLS.parentExpectation, pickVariant(RANDOM_POOLS.parentExpectation, seed, 2), true)}
+                      <td class="font-bold select-none">विद्यार्थी की प्रगति के संबंध में विद्यालय से अपेक्षा...</td>
+                      <td>
+                        ${buildSlideDownWithOther(stu, 'par_exp_sept', RANDOM_POOLS.parentExpectation, pickVariant(RANDOM_POOLS.parentExpectation, seed, 2))}
+                      </td>
+                      <td>
+                        ${buildSlideDownWithOther(stu, 'par_exp_march', RANDOM_POOLS.parentExpectation, pickVariant(RANDOM_POOLS.parentExpectation, seed, 3))}
                       </td>
                     </tr>
                   </tbody>
