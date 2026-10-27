@@ -7,7 +7,7 @@
   <!-- Primary SEO Meta Tags for Google Ranking & AdSense Approval -->
   <title>होलिस्टिक प्रोग्रेस कार्ड (HPC 1-8) जनरेटर | समग्र प्रगति पत्र ऑनलाइन - deshimaster.in</title>
   <meta name="title" content="होलिस्टिक प्रोग्रेस कार्ड (HPC 1-8) जनरेटर | समग्र प्रगति पत्र ऑनलाइन - deshimaster.in">
-  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा परिषद (NEP-2020 एवं निपुण भारत मिशन) के अंतर्गत बालवाटिका एवं कक्षा 1 से 8 तक का रंगीन समग्र प्रगति पत्र (Holistic Progress Card - HPC) ऑनलाइन तैयार करें। सरिता (Stream), पर्वत (Mountain), आसमान (Sky) रेटिंग और A4 पीडीएफ प्रिंट।">
+  <meta name="description" content="उत्तर प्रदेश बेसिक शिक्षा परिषद (NEP-2020 एवं निपुण भारत मिशन) के अंतर्गत बालवाटिका एवं कक्षा 1 से 8 तक का रंगीन समग्र प्रगति पत्र (Holistic Progress Card - HPC) फोटो सहित ऑनलाइन तैयार करें। सरिता (Stream), पर्वत (Mountain), आसमान (Sky) रेटिंग और A4 पीडीएफ प्रिंट।">
   <meta name="keywords" content="holistic progress card up basic shiksha, samagra pragati patra class 1 to 8, hpc report card maker online, nipun bharat report card, stream mountain sky grading, up primary school report card pdf, scert up hpc format, deshimaster">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://deshimaster.in/report-card.html">
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://deshimaster.in/report-card.html">
   <meta property="og:title" content="समग्र प्रगति पत्र (HPC 1-8) स्मार्ट कलर्ड जनरेटर | deshimaster.in">
-  <meta property="og:description" content="परिषदीय विद्यालयों के लिए NEP-2020 आधारित रंगीन होलिस्टिक प्रोग्रेस रिपोर्ट कार्ड (बालवाटिका व कक्षा 1-8) बनाएं और 1 A4 शीट (2 पेज) में प्रिंट निकालें।">
+  <meta property="og:description" content="परिषदीय विद्यालयों के लिए NEP-2020 आधारित रंगीन होलिस्टिक प्रोग्रेस रिपोर्ट कार्ड (बालवाटिका व कक्षा 1-8) लाइव फोटो या खाली फोटो बॉक्स के साथ बनाएं और 1 A4 शीट (2 पेज) में प्रिंट निकालें।">
   <meta property="og:site_name" content="deshimaster.in">
 
   <!-- Schema.org JSON-LD -->
@@ -28,7 +28,7 @@
     "url": "https://deshimaster.in/report-card.html",
     "applicationCategory": "EducationalApplication",
     "operatingSystem": "All",
-    "description": "Online tool for Uttar Pradesh Basic Education teachers to generate NEP-2020 compliant colored Holistic Progress Cards (Samagra Pragati Patra) for Balvatika and Classes 1 to 8.",
+    "description": "Online tool for Uttar Pradesh Basic Education teachers to generate NEP-2020 compliant colored Holistic Progress Cards (Samagra Pragati Patra) for Balvatika and Classes 1 to 8 with Live Camera and Gallery Photo upload.",
     "publisher": {
       "@type": "Organization",
       "name": "deshimaster.in",
@@ -98,6 +98,67 @@
     input.hpc-custom-input.inline-inp {
       width: 90px;
       display: inline-block;
+    }
+
+    /* फ्रंट पेज (Page 1) के लिए पासपोर्ट फोटो फ्रेम व कंट्रोल्स */
+    .hpc-photo-cell {
+      width: 74px;
+      vertical-align: middle !important;
+      text-align: center !important;
+      padding: 2px !important;
+      background-color: #f8fafc !important;
+    }
+    .hpc-photo-frame {
+      width: 66px;
+      height: 82px;
+      margin: 0 auto;
+      border: 1.5px dashed #1e3a8a;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      background-color: #ffffff;
+    }
+    .hpc-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hpc-photo-placeholder {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: #475569;
+      line-height: 1.25;
+      text-align: center;
+      padding: 2px;
+      user-select: none;
+    }
+    .photo-mini-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      margin-top: 2px;
+    }
+    .photo-mini-btn {
+      font-size: 8px;
+      padding: 1.5px 3.5px;
+      border-radius: 3px;
+      cursor: pointer;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #1e293b;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .photo-mini-btn:hover {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      color: #0369a1;
     }
 
     /* 1★, 2★, 3★ Button Group */
@@ -254,8 +315,9 @@
         display: block !important;
       }
       
-      /* प्रिंट में सभी स्लाइड-डाउन (select), इनपुट और बटन 100% गायब रहेंगे */
+      /* प्रिंट में सभी स्लाइड-डाउन (select), इनपुट, फोटो बटन और स्टार बटन 100% गायब रहेंगे */
       .no-print,
+      .photo-mini-actions,
       select,
       select.hpc-select,
       select.hpc-select.inline-sel,
@@ -294,6 +356,17 @@
         font-weight: 900;
       }
       td.star-td-cell { background-color: #fffbeb !important; }
+
+      .hpc-photo-frame {
+        width: 64px !important;
+        height: 80px !important;
+        border: 1.5px solid #1e3a8a !important;
+        background-color: #ffffff !important;
+      }
+      .hpc-photo-placeholder {
+        color: #334155 !important;
+        font-size: 8px !important;
+      }
 
       .hpc-page {
         width: 100% !important;
@@ -379,7 +452,7 @@
         <div class="w-11 h-11 bg-emerald-700 text-white rounded-lg flex items-center justify-center font-black text-xl tracking-tight shadow-sm">DM</div>
         <div>
           <h1 class="text-xl font-bold text-slate-900 leading-tight tracking-tight">deshimaster.in</h1>
-          <p class="text-xs text-slate-500 font-medium">समग्र प्रगति पत्र (HPC 1-8) स्मार्ट कलर्ड जनरेटर</p>
+          <p class="text-xs text-slate-500 font-medium">समग्र प्रगति पत्र (HPC 1-8) स्मार्ट कलर्ड जनरेटर (लाइव कैमरा व फोटो युक्त)</p>
         </div>
       </a>
 
@@ -460,7 +533,7 @@
         </div>
       </div>
 
-      <!-- नया सुधार: 3 अलग-अलग कॉलम में शिक्षकों के नाम लिखने की व्यवस्था (सीधे सेव होकर प्रिंट में आएंगे) -->
+      <!-- 3 अलग-अलग कॉलम में शिक्षकों के नाम लिखने की व्यवस्था -->
       <div class="mt-3 pt-3 border-t border-slate-100 bg-amber-50/80 p-3 rounded-xl border border-amber-200">
         <div class="text-xs font-extrabold text-amber-950 mb-2 flex items-center justify-between flex-wrap gap-1">
           <span><i class="fa-solid fa-chalkboard-user text-amber-700 mr-1"></i> बच्चों की पसंद वाले 'शिक्षक' कॉलम हेतु अपने विद्यालय के शिक्षकों के नाम दर्ज करें (एक बार लिखें, स्वतः सेव रहेंगे):</span>
@@ -483,15 +556,15 @@
       </div>
     </section>
 
-    <!-- 2. Student Entry Form -->
+    <!-- 2. Student Entry Form (लाइव कैमरा व गैलरी फोटो अपलोड विकल्प सहित) -->
     <section class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm no-print">
       <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
         <div>
           <h3 class="text-base font-extrabold text-slate-900">
-            2. छात्र/छात्रा जोड़ें (नाम केवल अक्षरों में तथा SR व APAAR केवल अंकों में)
+            2. छात्र/छात्रा जोड़ें (नाम केवल अक्षरों में, SR/APAAR अंकों में तथा वैकल्पिक फोटो)
           </h3>
           <p class="text-[11px] text-slate-500">
-            शासनादेश के अनुसार कक्षा-वार सभी बिंदु, सितम्बर/मार्च हाँ-नहीं विकल्प, रुचि एवं अपेक्षाएं स्वचालित रूप से सेट हैं।
+            यदि बच्चा सामने खड़ा है तो <b>'कैमरा'</b> से तुरंत फोटो खींच लें या <b>'गैलरी'</b> से चुनें। फोटो न होने पर कार्ड में <b>खाली फोटो बॉक्स</b> बनेगा जिसमें बाद में फोटो चिपका सकते हैं।
           </p>
         </div>
         <div id="urduToggleContainer" class="hidden items-center gap-2 bg-amber-50 border border-amber-300 px-3 py-1.5 rounded-lg text-xs font-bold text-amber-900">
@@ -539,7 +612,7 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs items-end mt-3 pt-3 border-t border-slate-100">
+      <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-3 text-xs items-end mt-3 pt-3 border-t border-slate-100">
         <div>
           <label class="font-bold text-rose-800 block mb-1">ब्लड ग्रुप & हीमोग्लोबिन (Hb):</label>
           <div class="flex gap-1">
@@ -606,12 +679,32 @@
           </div>
         </div>
 
+        <!-- नया फोटो विकल्प: कैमरा से तुरंत खींचें या गैलरी से चुनें या खाली छोड़ें -->
+        <div>
+          <label class="font-bold text-blue-900 block mb-1">छात्र फोटो (कैमरा / गैलरी / खाली):</label>
+          <div class="flex items-center gap-1">
+            <button type="button" onclick="openCameraModal(null)" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-lg cursor-pointer transition flex items-center justify-center gap-1" title="बच्चा सामने खड़ा है तो तुरंत फोटो खींचें">
+              <i class="fa-solid fa-camera"></i> कैमरा
+            </button>
+            <button type="button" onclick="triggerGalleryUpload(null)" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold py-2 px-2 rounded-lg cursor-pointer transition flex items-center justify-center gap-1" title="गैलरी में सेव फोटो चुनें">
+              <i class="fa-solid fa-image"></i> गैलरी
+            </button>
+            <div id="formPhotoPreviewWrap" class="hidden relative w-9 h-9 border border-emerald-500 rounded overflow-hidden shrink-0 bg-white">
+              <img id="formPhotoPreviewImg" src="" alt="Preview" class="w-full h-full object-cover">
+              <button type="button" onclick="clearFormPendingPhoto()" class="absolute top-0 right-0 bg-red-600 text-white text-[8px] px-1 font-bold leading-tight cursor-pointer" title="फोटो हटाएं">&times;</button>
+            </div>
+          </div>
+        </div>
+
         <div>
           <button onclick="addStudent()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 px-4 rounded-xl shadow-sm cursor-pointer transition flex items-center justify-center gap-1.5 text-sm">
             <i class="fa-solid fa-user-plus"></i> छात्र कार्ड में जोड़ें
           </button>
         </div>
       </div>
+
+      <!-- Hidden Global File Input for Gallery Photo Upload -->
+      <input type="file" id="globalGalleryInput" accept="image/*" class="hidden" onchange="handleGalleryFileSelect(this)">
 
       <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
         <div id="studentListPills" class="flex flex-wrap gap-2 items-center text-xs"></div>
@@ -624,7 +717,7 @@
     <!-- Status Banner -->
     <div class="bg-gradient-to-r from-amber-50 via-emerald-50 to-blue-50 border border-emerald-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 flex flex-wrap items-center justify-between gap-2 no-print">
       <span>
-        <i class="fa-solid fa-circle-check text-emerald-700 mr-1"></i> <b>समग्र प्रगति पत्र:</b> सभी विवरण दर्ज कर सीधे 2-पेज (आगे-पीछे) A4 प्रिंट निकालें।
+        <i class="fa-solid fa-circle-check text-emerald-700 mr-1"></i> <b>समग्र प्रगति पत्र:</b> कार्ड के फ्रंट पेज (Page 1) पर भी किसी भी बच्चे की फोटो तुरंत कैमरे से खींच सकते हैं, गैलरी से लगा सकते हैं या बाद में चिपकाने हेतु खाली छोड़ सकते हैं।
       </span>
       <span id="totalQuestionsBadge" class="font-bold bg-white px-2.5 py-1 rounded border border-emerald-300">कुल दक्षता बिंदु: तैयार है</span>
     </div>
@@ -712,6 +805,34 @@
     </div>
   </div>
 
+  <!-- MODAL 4: Live Camera Photo Capture Modal -->
+  <div id="cameraModal" class="fixed inset-0 bg-slate-900/75 hidden items-center justify-center z-50 p-4 no-print">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-2.5">
+        <div class="flex items-center gap-2 text-blue-800">
+          <i class="fa-solid fa-camera-retro text-lg"></i>
+          <h3 class="text-base font-extrabold text-slate-900">विद्यार्थी का लाइव फोटो खींचें</h3>
+        </div>
+        <button onclick="closeCameraModal()" class="text-slate-400 hover:text-slate-700 text-xl font-bold cursor-pointer">&times;</button>
+      </div>
+      <div class="relative w-full aspect-[3/4] max-h-72 bg-slate-950 rounded-xl overflow-hidden flex items-center justify-center mx-auto border-2 border-blue-500">
+        <video id="cameraVideoEl" autoplay playsinline class="w-full h-full object-cover"></video>
+        <div class="absolute inset-4 border border-dashed border-white/60 rounded pointer-events-none"></div>
+      </div>
+      <div class="flex items-center justify-between gap-2 pt-1">
+        <button type="button" onclick="switchCameraFacingMode()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold cursor-pointer flex items-center gap-1">
+          <i class="fa-solid fa-rotate"></i> कैमरा पलटें
+        </button>
+        <div class="flex gap-2">
+          <button type="button" onclick="closeCameraModal()" class="px-3 py-2 border border-slate-300 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 cursor-pointer">रद्द करें</button>
+          <button type="button" onclick="capturePhotoFromVideo()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-sm cursor-pointer flex items-center gap-1.5">
+            <i class="fa-solid fa-camera"></i> फोटो कैप्चर करें
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500 no-print">
     <div class="max-w-4xl mx-auto px-4 space-y-2">
@@ -724,7 +845,7 @@
       <p class="text-slate-400 text-xs">© deshimaster.in. All Rights Reserved.</p>
     </div>
   </footer>
-  <!-- JavaScript Engine: Part 2A (Data, Complete Article Renderer & Helper Functions) -->
+  <!-- JavaScript Engine: Part 2 (Data, Complete Article Renderer & Helper Functions) -->
   <script>
     const MONTHS_HI = [
       "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर",
@@ -937,6 +1058,12 @@
     let workingDaysConfirmedByClass = {};
     let pendingNewStudentAttendance = null;
     let activeAttendanceStudentId = null;
+
+    // फोटो व लाइव कैमरा स्टेट वैरिएबल्स
+    let pendingNewStudentPhoto = "";
+    let activePhotoTargetStudentId = null;
+    let activeCameraStream = null;
+    let currentCameraFacingMode = "environment";
 
     async function loadExternalResources() {
       try {
@@ -1323,9 +1450,182 @@
     }
 
     function saveStudentsToMobile() {
-      localStorage.setItem("dm_hpc_students_v12", JSON.stringify(studentsByClass));
+      try {
+        localStorage.setItem("dm_hpc_students_v12", JSON.stringify(studentsByClass));
+      } catch (e) {
+        alert("ब्राउज़र मेमोरी भर गई है। कृपया कुछ पुराने कार्ड हटाएं या कम साइज की फोटो प्रयोग करें।");
+      }
     }
-    // Part 2B: Class Switcher, Modals, Subject/Teacher Pool Fix & Dual Expectation Renderer
+    // Part 3: Live Camera, Gallery Photo Upload, Student Management & Modals
+    function compressAndResizeImage(sourceElOrImg, callback) {
+      try {
+        const canvas = document.createElement("canvas");
+        const targetW = 180;
+        const targetH = 225;
+        canvas.width = targetW;
+        canvas.height = targetH;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, targetW, targetH);
+
+        const srcW = sourceElOrImg.videoWidth || sourceElOrImg.naturalWidth || sourceElOrImg.width || targetW;
+        const srcH = sourceElOrImg.videoHeight || sourceElOrImg.naturalHeight || sourceElOrImg.height || targetH;
+
+        const targetRatio = targetW / targetH;
+        const srcRatio = srcW / srcH;
+        let sx = 0, sy = 0, sw = srcW, sh = srcH;
+        if (srcRatio > targetRatio) {
+          sw = srcH * targetRatio;
+          sx = (srcW - sw) / 2;
+        } else {
+          sh = srcW / targetRatio;
+          sy = (srcH - sh) / 2;
+        }
+
+        ctx.drawImage(sourceElOrImg, sx, sy, sw, sh, 0, 0, targetW, targetH);
+        const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.78);
+        callback(compressedDataUrl);
+      } catch (err) {
+        alert("फोटो प्रोसेस करने में त्रुटि हुई।");
+      }
+    }
+
+    function applyPhotoToTarget(dataUrl) {
+      if (activePhotoTargetStudentId === null) {
+        pendingNewStudentPhoto = dataUrl;
+        const wrap = document.getElementById("formPhotoPreviewWrap");
+        const img = document.getElementById("formPhotoPreviewImg");
+        if (wrap && img) {
+          img.src = dataUrl;
+          wrap.classList.remove("hidden");
+        }
+      } else {
+        const list = studentsByClass[currentClassKey] || [];
+        const stu = list.find(s => s.id === activePhotoTargetStudentId);
+        if (stu) {
+          stu.photo = dataUrl;
+          saveStudentsToMobile();
+          renderStudentPills();
+          renderAllCards();
+        }
+      }
+    }
+
+    function clearFormPendingPhoto() {
+      pendingNewStudentPhoto = "";
+      const wrap = document.getElementById("formPhotoPreviewWrap");
+      const img = document.getElementById("formPhotoPreviewImg");
+      if (img) img.src = "";
+      if (wrap) wrap.classList.add("hidden");
+    }
+
+    function removeStudentPhoto(stuId) {
+      const list = studentsByClass[currentClassKey] || [];
+      const stu = list.find(s => s.id === stuId);
+      if (stu) {
+        stu.photo = "";
+        saveStudentsToMobile();
+        renderStudentPills();
+        renderAllCards();
+      }
+    }
+
+    function triggerGalleryUpload(targetStuId = null) {
+      activePhotoTargetStudentId = targetStuId;
+      const inp = document.getElementById("globalGalleryInput");
+      if (inp) {
+        inp.value = "";
+        inp.click();
+      }
+    }
+
+    function handleGalleryFileSelect(inputEl) {
+      const file = inputEl.files && inputEl.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const img = new Image();
+        img.onload = function() {
+          compressAndResizeImage(img, (compressedUrl) => {
+            applyPhotoToTarget(compressedUrl);
+          });
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function openCameraModal(targetStuId = null) {
+      activePhotoTargetStudentId = targetStuId;
+      const modal = document.getElementById("cameraModal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      await startCameraStream();
+    }
+
+    async function startCameraStream() {
+      stopCameraStream();
+      const video = document.getElementById("cameraVideoEl");
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert("आपके ब्राउज़र में लाइव कैमरा सपोर्ट नहीं है। कृपया 'गैलरी' बटन पर क्लिक करके फोटो चुनें।");
+        closeCameraModal();
+        return;
+      }
+      try {
+        activeCameraStream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: currentCameraFacingMode, width: { ideal: 640 }, height: { ideal: 800 } },
+          audio: false
+        });
+        if (video) {
+          video.srcObject = activeCameraStream;
+          await video.play();
+        }
+      } catch (err) {
+        try {
+          activeCameraStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+          if (video) {
+            video.srcObject = activeCameraStream;
+            await video.play();
+          }
+        } catch (err2) {
+          alert("कैमरा चालू नहीं हो सका। कृपया कैमरा अनुमति (Permission) दें या 'गैलरी' विकल्प का प्रयोग करें।");
+          closeCameraModal();
+        }
+      }
+    }
+
+    function switchCameraFacingMode() {
+      currentCameraFacingMode = (currentCameraFacingMode === "environment") ? "user" : "environment";
+      startCameraStream();
+    }
+
+    function stopCameraStream() {
+      if (activeCameraStream) {
+        activeCameraStream.getTracks().forEach(track => track.stop());
+        activeCameraStream = null;
+      }
+      const video = document.getElementById("cameraVideoEl");
+      if (video) video.srcObject = null;
+    }
+
+    function closeCameraModal() {
+      stopCameraStream();
+      const modal = document.getElementById("cameraModal");
+      if (modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    }
+
+    function capturePhotoFromVideo() {
+      const video = document.getElementById("cameraVideoEl");
+      if (!video || !activeCameraStream) return;
+      compressAndResizeImage(video, (compressedUrl) => {
+        applyPhotoToTarget(compressedUrl);
+        closeCameraModal();
+      });
+    }
+
     function switchClass(classKey) {
       currentClassKey = classKey;
       currentClassSchema = (BUILTIN_SCHEMAS && BUILTIN_SCHEMAS[classKey]) ? BUILTIN_SCHEMAS[classKey] : FALLBACK_SCHEMAS["1"];
@@ -1365,7 +1665,7 @@
 
       if (!studentsByClass[classKey] || studentsByClass[classKey].length === 0) {
         studentsByClass[classKey] = [
-          createStudentObject("आदर्श कुमार", "M", "राम कुमार", "सीता देवी", "2018-07-15", "101", "", hw.h1, hw.w1, 2, 74, 85, null, 1)
+          createStudentObject("आदर्श कुमार", "M", "राम कुमार", "सीता देवी", "2018-07-15", "101", "", hw.h1, hw.w1, 2, 74, 85, null, 1, "")
         ];
         saveStudentsToMobile();
       }
@@ -1376,7 +1676,7 @@
       renderAllCards();
     }
 
-    function createStudentObject(name, gender, father, mother, dob, sr, apaar, h, w, level, percent, attPct, customAttArr, seedIndex) {
+    function createStudentObject(name, gender, father, mother, dob, sr, apaar, h, w, level, percent, attPct, customAttArr, seedIndex, photoData = "") {
       const hw = DEFAULT_HW[currentClassKey] || DEFAULT_HW["1"];
       const baseH = Number(h) || hw.h1 + (seedIndex % 4);
       const baseW = Number(w) || hw.w1 + (seedIndex % 3);
@@ -1406,6 +1706,7 @@
         percent: Number(percent) || 72,
         attPercent: Number(attPct) || 85,
         attendance: clampAttendanceToWorkingDays(rawAtt, wdArr),
+        photo: photoData || "",
         customStars: {},
         customDropdowns: {},
         customYesNo: {}
@@ -1440,10 +1741,11 @@
       const seedIndex = studentsByClass[currentClassKey].length + 1;
 
       studentsByClass[currentClassKey].push(
-        createStudentObject(name, gender, father, mother, dob, sr, apaar, h, w, level, percent, attPct, pendingNewStudentAttendance, seedIndex)
+        createStudentObject(name, gender, father, mother, dob, sr, apaar, h, w, level, percent, attPct, pendingNewStudentAttendance, seedIndex, pendingNewStudentPhoto)
       );
 
       pendingNewStudentAttendance = null;
+      clearFormPendingPhoto();
       saveStudentsToMobile();
 
       document.getElementById("stuName").value = "";
@@ -1514,6 +1816,12 @@
               <option value="F" ${s.gender === 'F' ? 'selected' : ''}>बालिका</option>
             </select>
             <input type="number" value="${s.percent || 72}" onchange="changeStudentPercent(${s.id}, this.value)" title="प्राप्तांक प्रतिशत बदलें" class="w-12 text-center bg-white border border-emerald-400 rounded px-1 py-0.5 text-[11px] font-bold text-emerald-900">%
+            <button onclick="openCameraModal(${s.id})" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-300 rounded px-1.5 py-0.5 text-[11px] font-bold cursor-pointer" title="कैमरे से फोटो खींचें">
+              📷
+            </button>
+            <button onclick="triggerGalleryUpload(${s.id})" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded px-1.5 py-0.5 text-[11px] font-bold cursor-pointer" title="गैलरी से फोटो चुनें">
+              🖼️
+            </button>
             <button onclick="openAttendanceModalForStudent(${s.id})" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded px-1.5 py-0.5 text-[11px] font-bold cursor-pointer" title="माहवार उपस्थिति बदलें">
               📅 उपस्थिति
             </button>
@@ -1721,244 +2029,7 @@
       modal.classList.add("hidden");
       modal.classList.remove("flex");
     }
-
-    function saveInlineStudentField(stuId, field, rawVal) {
-      const list = studentsByClass[currentClassKey] || [];
-      const stu = list.find(s => s.id === stuId);
-      if (!stu) return;
-      if (["name", "father", "mother"].includes(field)) {
-        stu[field] = toTitleCaseName(rawVal).trim();
-        renderStudentPills();
-      } else {
-        stu[field] = rawVal.trim();
-      }
-      saveStudentsToMobile();
-    }
-
-    function validateInlineAttendanceEdit(el, stuId, monthIdx) {
-      const wdArr = getClassWorkingDays(currentClassKey);
-      const maxWd = wdArr[monthIdx] || 0;
-      let val = parseInt(el.innerText.replace(/[^0-9]/g, ""), 10);
-      if (isNaN(val) || val < 0) val = 0;
-      if (val > maxWd) {
-        alert(`${MONTHS_HI[monthIdx]} माह में कार्यदिवस (${maxWd}) से अधिक उपस्थिति दर्ज नहीं की जा सकती!`);
-        val = maxWd;
-      }
-      el.innerText = val;
-
-      const list = studentsByClass[currentClassKey] || [];
-      const stu = list.find(s => s.id === stuId);
-      if (stu) {
-        if (!stu.attendance || stu.attendance.length !== 12) {
-          stu.attendance = generateMonthlyAttendance(wdArr, stu.attPercent || 85, stu.seed || 1);
-        }
-        stu.attendance[monthIdx] = val;
-        saveStudentsToMobile();
-        const totalEl = document.getElementById(`total_att_${stu.id}`);
-        if (totalEl) {
-          totalEl.innerText = stu.attendance.reduce((a, b) => a + b, 0);
-        }
-      }
-    }
-
-    function handleCardSelectChange(selectEl, stuId, fieldKey) {
-      const val = selectEl.value;
-      const customWrap = document.getElementById(`custom_wrap_${stuId}_${fieldKey}`);
-      const customInp = document.getElementById(`custom_inp_${stuId}_${fieldKey}`);
-      const printSpan = document.getElementById(`print_val_${stuId}_${fieldKey}`);
-
-      const list = studentsByClass[currentClassKey] || [];
-      const stu = list.find(s => s.id === stuId);
-      if (!stu) return;
-      if (!stu.customDropdowns) stu.customDropdowns = {};
-
-      if (val === "__OTHER__") {
-        selectEl.classList.add("hidden");
-        if (customWrap) customWrap.classList.remove("hidden");
-        if (customInp) {
-          customInp.focus();
-          const curText = customInp.value || "";
-          stu.customDropdowns[fieldKey] = { mode: "custom", value: curText };
-          if (printSpan) printSpan.innerText = curText || "—";
-        }
-      } else {
-        selectEl.classList.remove("hidden");
-        if (customWrap) customWrap.classList.add("hidden");
-        stu.customDropdowns[fieldKey] = { mode: "select", value: val };
-        if (printSpan) printSpan.innerText = val || "—";
-      }
-      saveStudentsToMobile();
-    }
-
-    function resetCustomToSelect(stuId, fieldKey) {
-      const selectEl = document.getElementById(`select_el_${stuId}_${fieldKey}`);
-      const customWrap = document.getElementById(`custom_wrap_${stuId}_${fieldKey}`);
-      const printSpan = document.getElementById(`print_val_${stuId}_${fieldKey}`);
-
-      const list = studentsByClass[currentClassKey] || [];
-      const stu = list.find(s => s.id === stuId);
-      if (!stu) return;
-
-      if (selectEl) {
-        selectEl.classList.remove("hidden");
-        selectEl.selectedIndex = 0;
-        const firstVal = selectEl.options[0]?.value || "";
-        if (!stu.customDropdowns) stu.customDropdowns = {};
-        stu.customDropdowns[fieldKey] = { mode: "select", value: firstVal };
-        if (printSpan) printSpan.innerText = firstVal;
-      }
-      if (customWrap) customWrap.classList.add("hidden");
-      saveStudentsToMobile();
-    }
-
-    function handleCardCustomInput(inputEl, stuId, fieldKey) {
-      const list = studentsByClass[currentClassKey] || [];
-      const stu = list.find(s => s.id === stuId);
-      if (!stu) return;
-      if (!stu.customDropdowns) stu.customDropdowns = {};
-      stu.customDropdowns[fieldKey] = { mode: "custom", value: inputEl.value };
-      saveStudentsToMobile();
-      const printSpan = document.getElementById(`print_val_${stuId}_${fieldKey}`);
-      if (printSpan) printSpan.innerText = inputEl.value || "—";
-    }
-
-    // किसी भी संभावित पुराने [object Object] मान को अनदेखा कर स्वच्छ स्ट्रिंग दिखाने का सुरक्षित फंक्शन
-    function buildSlideDownWithOther(stu, fieldKey, optionsArray, defaultVal, isInline = false) {
-      let saved = stu.customDropdowns?.[fieldKey];
-      if (saved && typeof saved.value === "string" && saved.value.includes("[object")) {
-        saved = null;
-      }
-      const cleanDefault = (typeof defaultVal === "string" && !defaultVal.includes("[object")) ? defaultVal : "—";
-      const isCustom = saved && saved.mode === "custom";
-      const selectedVal = (saved && saved.value) ? (isCustom ? "__OTHER__" : saved.value) : cleanDefault;
-      const customText = isCustom ? (saved.value || "") : "";
-      const currentDisplayText = isCustom ? (customText || "—") : (selectedVal || cleanDefault || "—");
-
-      const cleanPool = (optionsArray || []).filter(item => typeof item === "string" && !item.includes("[object"));
-      const uniqueOpts = Array.from(new Set([cleanDefault, ...cleanPool])).filter(Boolean);
-      const wrapClass = isInline ? "inline-block align-middle mx-0.5" : "inline-block w-full align-middle relative";
-      const selClass = isInline ? "hpc-select inline-sel no-print" : "hpc-select no-print";
-      const inpClass = isInline ? "hpc-custom-input inline-inp" : "hpc-custom-input";
-
-      return `
-        <span class="${wrapClass}">
-          <span id="print_val_${stu.id}_${fieldKey}" class="print-only print-pure-text">${currentDisplayText}</span>
-          <select id="select_el_${stu.id}_${fieldKey}" onchange="handleCardSelectChange(this, ${stu.id}, '${fieldKey}')" class="${selClass} ${isCustom ? 'hidden' : ''}">
-            ${uniqueOpts.map(opt => `<option value="${String(opt).replace(/"/g, '&quot;')}" ${opt === selectedVal ? 'selected' : ''}>${opt}</option>`).join("")}
-            <option value="__OTHER__" ${isCustom ? 'selected' : ''}>अन्य (लिखें...)</option>
-          </select>
-          <span id="custom_wrap_${stu.id}_${fieldKey}" class="no-print inline-flex items-center gap-0.5 ${isCustom ? '' : 'hidden'}">
-            <input type="text" id="custom_inp_${stu.id}_${fieldKey}" value="${String(customText).replace(/"/g, '&quot;')}" oninput="handleCardCustomInput(this, ${stu.id}, '${fieldKey}')" placeholder="लिखें..." class="${inpClass}">
-            <button type="button" onclick="resetCustomToSelect(${stu.id}, '${fieldKey}')" class="text-[9px] bg-slate-200 hover:bg-slate-300 text-slate-700 px-1 rounded font-bold cursor-pointer" title="वापस सूची चुनें">↺</button>
-          </span>
-        </span>
-      `;
-    }
-
-    function toggleYesNoCell(stuId, ynKey) {
-      const list = studentsByClass[currentClassKey] || [];
-      const stu = list.find(s => s.id === stuId);
-      if (!stu) return;
-      if (!stu.customYesNo) stu.customYesNo = {};
-      const cur = stu.customYesNo[ynKey] !== undefined ? stu.customYesNo[ynKey] : true;
-      stu.customYesNo[ynKey] = !cur;
-      saveStudentsToMobile();
-      renderAllCards();
-    }
-
-    function buildYesNoToggleCell(stu, ynKey) {
-      const isYes = stu.customYesNo?.[ynKey] !== undefined ? stu.customYesNo[ynKey] : true;
-      const printText = isYes ? "हाँ ☑  नहीं ☐" : "हाँ ☐  नहीं ☑";
-      const btnText = isYes ? "हाँ ☑ / नहीं ☐" : "हाँ ☐ / नहीं ☑";
-      return `
-        <span class="print-only print-pure-text text-[8px] whitespace-nowrap">${printText}</span>
-        <button type="button" onclick="toggleYesNoCell(${stu.id}, '${ynKey}')" class="yn-btn ${isYes ? 'yes' : 'no'} no-print" title="हाँ/नहीं बदलने के लिए क्लिक करें">
-          ${btnText}
-        </button>
-      `;
-    }
-
-    const ALL_GRADES_LIST = ["A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2"];
-    function buildGradeSelect(stu, fieldKey, defaultGrade, colorClass = "") {
-      const saved = stu.customDropdowns?.[fieldKey];
-      const currentGrade = (saved && saved.value) ? saved.value : defaultGrade;
-      return `
-        <span class="inline-block w-full text-center">
-          <span id="print_val_${stu.id}_${fieldKey}" class="print-only print-pure-text ${colorClass}">${currentGrade}</span>
-          <select onchange="handleCardSelectChange(this, ${stu.id}, '${fieldKey}')" class="hpc-select no-print text-center font-bold ${colorClass}">
-            ${ALL_GRADES_LIST.map(g => `<option value="${g}" ${g === currentGrade ? 'selected' : ''}>${g}</option>`).join("")}
-          </select>
-        </span>
-      `;
-    }
-
-    function toggleStarRow(stuId, starKey, chosenLevel) {
-      const list = studentsByClass[currentClassKey] || [];
-      const stu = list.find(s => s.id === stuId);
-      if (!stu) return;
-      if (!stu.customStars) stu.customStars = {};
-      stu.customStars[starKey] = chosenLevel;
-
-      const starValues = Object.values(stu.customStars);
-      if (starValues.length > 0) {
-        const avgStar = starValues.reduce((a, b) => a + b, 0) / starValues.length;
-        if (avgStar >= 2.6) stu.percent = Math.max(stu.percent, 85);
-        else if (avgStar >= 1.8) stu.percent = Math.min(80, Math.max(64, stu.percent));
-        else stu.percent = Math.min(56, stu.percent);
-      }
-
-      saveStudentsToMobile();
-      renderStudentPills();
-      renderAllCards();
-    }
-
-    // सुधार 1: विषय के नाम अपने-आप लोड होंगे, और जब शिक्षक का नाम ऊपर लिखा जाएगा तो तुरंत शिक्षक का नाम लोड होगा
-    function buildThreeLikesCells(stu, baseKey, pool, seed, offsetBase, isTeacherCat = false) {
-      const safePool = (pool && pool.length > 0) ? pool.filter(x => typeof x === "string") : ["—"];
-
-      if (isTeacherCat) {
-        const t1 = document.getElementById("teacherName1")?.value.trim() || "";
-        const t2 = document.getElementById("teacherName2")?.value.trim() || "";
-        const t3 = document.getElementById("teacherName3")?.value.trim() || "";
-        const hasAnyCustom = !!(t1 || t2 || t3);
-
-        const def1 = hasAnyCustom ? (t1 || "कक्षा अध्यापक") : (safePool[0] || "कक्षा अध्यापक");
-        const def2 = hasAnyCustom ? (t2 || t1 || "प्रधानाध्यापक") : (safePool[1] || "प्रधानाध्यापक");
-        const def3 = hasAnyCustom ? (t3 || t2 || t1 || "भाषा शिक्षक") : (safePool[2] || "भाषा शिक्षक");
-
-        const teacherOpts = Array.from(new Set([t1, t2, t3, ...safePool])).filter(Boolean);
-        return `
-          <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_1', teacherOpts, def1)}</td>
-          <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_2', teacherOpts, def2)}</td>
-          <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_3', teacherOpts, def3)}</td>
-        `;
-      }
-
-      const v1 = pickVariant(safePool, seed, offsetBase);
-      let v2 = pickVariant(safePool, seed, offsetBase + 1);
-      if (v2 === v1 && safePool.length > 1) v2 = pickVariant(safePool, seed, offsetBase + 2);
-      let v3 = pickVariant(safePool, seed, offsetBase + 2);
-      if ((v3 === v1 || v3 === v2) && safePool.length > 2) v3 = pickVariant(safePool, seed, offsetBase + 3);
-
-      return `
-        <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_1', safePool, v1)}</td>
-        <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_2', safePool, v2)}</td>
-        <td class="text-center">${buildSlideDownWithOther(stu, baseKey + '_3', safePool, v3)}</td>
-      `;
-    }
-
-    // फिक्स: 'subjects' पूल में हमेशा विषयों के नाम (हिन्दी, गणित, चित्रकला...) ही लोड होंगे, कभी भी [object Object] नहीं आएगा!
-    function getPoolByKey(poolKey, stu, teacherMasterList) {
-      const isGirl = stu.gender === "F";
-      if (poolKey === "friends") return (isGirl ? RANDOM_POOLS.friendsF : RANDOM_POOLS.friendsM) || [];
-      if (poolKey === "ambition") return (isGirl ? RANDOM_POOLS.ambitionF : RANDOM_POOLS.ambitionM) || [];
-      if (poolKey === "teachers") return teacherMasterList;
-      if (poolKey === "subjects") return RANDOM_POOLS.subjects || ["गणित", "हिन्दी", "चित्रकला", "अंग्रेजी", "पर्यावरण अध्ययन", "संस्कृत"];
-      if (poolKey === "cognitivePos" && currentClassSchema && Array.isArray(currentClassSchema.cognitivePos)) return currentClassSchema.cognitivePos;
-      if (poolKey === "cognitiveCor" && currentClassSchema && Array.isArray(currentClassSchema.cognitiveCor)) return currentClassSchema.cognitiveCor;
-      return RANDOM_POOLS[poolKey] || [];
-    }
-
+    // Part 4: Report Card Template Renderer (with Photo Support) & Print Logic
     function renderAllCards() {
       const container = document.getElementById("printContainer");
       const list = studentsByClass[currentClassKey] || [];
@@ -2008,7 +2079,6 @@
         );
         const totalPresYear = stuAttArr.reduce((a, b) => a + b, 0);
 
-        // 1. मुझे पसंद है (बालवाटिका व कक्षा 1 में शिक्षक, कक्षा 2-5 में विषय, कक्षा 6-8 में बागवानी/किताब/अन्य)
         let likesCats = [];
         if (isBalvatika || currentClassKey === "1") {
           likesCats = [
@@ -2044,7 +2114,6 @@
           `;
         }
 
-        // 2. मेरी अभिलाषा
         const defaultAmbTemplates = (isMid || isUpper)
           ? [
               { prefix: "1. मैं बड़े होकर", suffix: "बनना चाहती/चाहता हूँ।", poolKey: "ambition" },
@@ -2072,7 +2141,6 @@
           `;
         }).join("");
 
-        // 3. विद्यार्थी के बारे में (सकारात्मक एवं सुधारात्मक)
         const defaultRemarkDomains = isBalvatika
           ? [
               { label: "सामाजिक, भावनात्मक एवं नैतिक विकास", posKey: "balSocialPos", corKey: "balSocialCor" },
@@ -2112,7 +2180,6 @@
           `;
         }).join("");
 
-        // 4. अभिभावक प्रतिपुष्टि
         const parentQuestions = isUpper ? PARENT_FB_6TO8 : PARENT_FB_1TO5;
         const parentQuestionRowsHTML = parentQuestions.map((qText, qIdx) => {
           const genderedQ = applyGenderText(qText, stu.gender);
@@ -2189,7 +2256,7 @@
         const p1Class = isUpper ? "hpc-page layout-p1-all p1-upper-mode" : "hpc-page layout-p1-all";
         const p2Class = isUpper ? "hpc-page layout-upper-p2" : "hpc-page layout-primary-p2";
 
-        // PAGE 1 HTML
+        // PAGE 1 HTML (फ्रंट पेज जिसमें फोटो का बॉक्स शामिल है)
         const page1HTML = `
           <div class="${p1Class}">
             <div class="flex items-center justify-between bg-blue-50 border-b-2 border-blue-900 px-3 py-1 rounded-t shrink-0">
@@ -2201,9 +2268,9 @@
               <div class="text-[11px] font-extrabold text-blue-950">UDISE: <span>${udiseCode}</span></div>
             </div>
 
-            <!-- 1. प्रोफाइल एवं स्वास्थ्य -->
+            <!-- 1. प्रोफाइल, फोटो फ्रेम एवं स्वास्थ्य -->
             <div class="grid grid-cols-12 gap-2 w-full p1-grow-grid">
-              <div class="col-span-7 min-w-0">
+              <div class="col-span-8 min-w-0">
                 <table class="hpc-table theme-blue">
                   <colgroup>
                     <col style="width: 24%;"><col style="width: 36%;"><col style="width: 15%;"><col style="width: 25%;">
@@ -2239,37 +2306,39 @@
                 </table>
               </div>
 
-              <div class="col-span-5 min-w-0">
-                <table class="hpc-table theme-rose text-center">
-                  <colgroup>
-                    <col style="width: 27%;"><col style="width: 21%;"><col style="width: 21%;"><col style="width: 31%;">
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th>स्वास्थ्य मापदंड</th><th>अप्रैल</th><th>जनवरी</th><th>रक्त एवं दृष्टि</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="font-semibold">ऊँचाई (cm)</td>
-                      <td contenteditable="true">${stu.h1} सेमी.</td>
-                      <td contenteditable="true">${stu.h2} सेमी.</td>
-                      <td class="text-left font-semibold"><b>ब्लड ग्रुप:</b> ${buildSlideDownWithOther(stu, 'hlt_bg', bloodOptions, stu.bloodGroup || 'B+', true)}</td>
-                    </tr>
-                    <tr>
-                      <td class="font-semibold">वजन (kg)</td>
-                      <td contenteditable="true">${stu.w1} किग्रा.</td>
-                      <td contenteditable="true">${stu.w2} किग्रा.</td>
-                      <td class="text-left font-semibold"><b>Hb:</b> ${buildSlideDownWithOther(stu, 'hlt_hb', hbOptions, stu.hb || '11.5 gm/dL', true)}</td>
-                    </tr>
-                    <tr>
-                      <td class="font-semibold">कृमिनाशक दवा</td>
-                      <td>${dewormingLabel}</td><td>${dewormingLabel}</td>
-                      <td class="text-left font-semibold"><b>दृष्टि:</b> ${buildSlideDownWithOther(stu, 'hlt_eye', eyeOptions, stu.eyeSight || '6/6 (सामान्य)', true)}</td>
-                    </tr>
-                  </tbody>
-                </table>
+              <!-- फोटो सेल (यदि फोटो है तो दिखेगी, नहीं तो खाली पासपोर्ट फ्रेम रहेगा जिसपर बाद में फोटो चिपका सकें) -->
+              <div class="col-span-4 min-w-0 flex flex-col items-center justify-center bg-slate-50 border border-slate-400 rounded p-1">
+                <div class="hpc-photo-frame">
+                  ${stu.photo ? `<img src="${stu.photo}" alt="Photo">` : `<div class="hpc-photo-placeholder"><b>फोटो</b><br>(चिपकाने हेतु खाली स्थान)</div>`}
+                </div>
+                <div class="photo-mini-actions no-print">
+                  <button type="button" onclick="openCameraModal(${stu.id})" class="photo-mini-btn" title="लाइव कैमरा से फोटो खींचें">📷 कैमरा</button>
+                  <button type="button" onclick="triggerGalleryUpload(${stu.id})" class="photo-mini-btn" title="गैलरी से फोटो चुनें">🖼️ गैलरी</button>
+                  ${stu.photo ? `<button type="button" onclick="removeStudentPhoto(${stu.id})" class="photo-mini-btn text-red-600" title="फोटो हटाएं">❌</button>` : ''}
+                </div>
               </div>
+            </div>
+
+            <!-- स्वास्थ्य मापदंड -->
+            <div class="w-full">
+              <table class="hpc-table theme-rose text-center">
+                <colgroup>
+                  <col style="width: 25%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 45%;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>स्वास्थ्य मापदंड</th><th>अप्रैल</th><th>जनवरी</th><th>रक्त समूह, हीमोग्लोबिन (Hb) एवं दृष्टि</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="font-semibold">ऊँचाई (cm) / वजन (kg)</td>
+                    <td>${stu.h1} सेमी / ${stu.w1} किग्रा</td>
+                    <td>${stu.h2} सेमी / ${stu.w2} किग्रा</td>
+                    <td class="text-left font-semibold"><b>ब्लड:</b> ${buildSlideDownWithOther(stu, 'hlt_bg', bloodOptions, stu.bloodGroup || 'B+', true)} | <b>Hb:</b> ${buildSlideDownWithOther(stu, 'hlt_hb', hbOptions, stu.hb || '11.5 gm/dL', true)} | <b>दृष्टि:</b> ${buildSlideDownWithOther(stu, 'hlt_eye', eyeOptions, stu.eyeSight || '6/6 (सामान्य)', true)}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
             <!-- 2. मेरी उपस्थिति -->
@@ -2415,7 +2484,7 @@
               </div>
             ` : ''}
 
-            <!-- 5. अभिभावक प्रतिपुष्टि (रुचि तथा सितम्बर व मार्च दोनों के लिए अलग-अलग विद्यालय से अपेक्षा) -->
+            <!-- 5. अभिभावक प्रतिपुष्टि -->
             <div class="grid grid-cols-12 gap-2 w-full p1-grow-grid">
               <div class="col-span-8 min-w-0">
                 <table class="hpc-table theme-emerald">
