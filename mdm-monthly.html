@@ -334,7 +334,7 @@
         </div>
       </div>
 
-      <!-- मासिक समरी कार्ड्स (दूध, फल, अतिरिक्त पोषण एवं रसोइया मानदेय सहित) -->
+      <!-- मासिक समरी कार्ड्स -->
       <div class="summary-grid grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
         
         <!-- 1. प्राथमिक समरी कार्ड -->
@@ -422,7 +422,7 @@
           <colgroup>
             <col style="width: 6.2%;">  <!-- दिनांक -->
             <col style="width: 5.2%;">  <!-- दिन -->
-            <!-- PS 7 Cols (Total = 44.3%) -->
+            <!-- PS 7 Cols -->
             <col class="ps-col" style="width: 5.2%;">  <!-- छात्र -->
             <col class="ps-col" style="width: 5.5%;">  <!-- संचयी -->
             <col class="ps-col" style="width: 5.5%;">  <!-- गेहूं -->
@@ -430,7 +430,7 @@
             <col class="ps-col" style="width: 5.2%;">  <!-- दूध -->
             <col class="ps-col" style="width: 5.0%;">  <!-- फल -->
             <col class="ps-col" style="width: 12.4%;"> <!-- लागत -->
-            <!-- UPS 7 Cols (Total = 44.3%) -->
+            <!-- UPS 7 Cols -->
             <col class="ups-col" style="width: 5.2%;">  <!-- छात्र -->
             <col class="ups-col" style="width: 5.5%;">  <!-- संचयी -->
             <col class="ups-col" style="width: 5.5%;">  <!-- गेहूं -->
@@ -548,10 +548,14 @@ var monthsHindi = ["जनवरी", "फ़रवरी", "मार्च", "
 
 function filterCap(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
 function filterNum(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
+
+/* कर्सर बैक जंपिंग बग फिक्स्ड (65 टाइप करने पर 65 ही रहेगा) */
 function cleanNum(el) {
-  var p = el.selectionStart - 1;
+  var oldPos = el.selectionStart;
+  var oldLen = el.value.length;
   el.value = el.value.replace(/[^0-9]/g, '');
-  if (p >= 0) el.setSelectionRange(p, p);
+  var newPos = Math.max(0, oldPos + (el.value.length - oldLen));
+  el.setSelectionRange(newPos, newPos);
 }
 
 // माह में शुक्रवार का क्रम (1st, 2nd, 3rd, 4th, 5th Friday)
@@ -787,7 +791,6 @@ function buildMonth() {
   setLevel(curLvl, true);
   updateHeader();
 }
-
 function getAttVal(type, dayNum) {
   if (dayNum < 1) return 0;
   var el = document.getElementById(type + '_att_' + dayNum);
@@ -854,16 +857,12 @@ function recalc() {
     cPs += aPs; cUps += aUps;
     tPsAtt += aPs; tUpsAtt += aUps;
 
-    // खाद्यान्न (सोमवार व गुरुवार को गेहूं, शेष कार्यदिवस चावल)
+    // खाद्यान्न (सोमवार व गुरुवार गेहूं, शेष कार्यदिवस चावल)
     var wP = (!isSun && (isMon || isThu)) ? (aPs * 0.1) : 0;
     var rP = (!isSun && !isMon && !isThu) ? (aPs * 0.1) : 0;
     var wU = (!isSun && (isMon || isThu)) ? (aUps * 0.15) : 0;
     var rU = (!isSun && !isMon && !isThu) ? (aUps * 0.15) : 0;
 
-    // ==============================================================
-    // स्वचालित अवकाश प्रतिपूर्ति नियम (Auto-Rollover Engine)
-    // ==============================================================
-    
     // 1. फल प्रतिपूर्ति: सोमवार अथवा (सोमवार को 0 होने पर) मंगलवार
     var isPsFruitDay = isMon;
     var isUpsFruitDay = isMon;
@@ -928,7 +927,7 @@ function recalc() {
     tPsW += wP; tPsR += rP; tPsC += costP;
     tUpsW += wU; tUpsR += rU; tUpsC += costU;
 
-    // तालिका में प्रविष्टि
+    // तालिका में मान प्रदर्शित करना
     if (isSun) {
       document.getElementById('ps_cumu_' + d).innerText = '';
       document.getElementById('ps_w_' + d).innerText = '';
@@ -976,7 +975,7 @@ function recalc() {
     }
   }
 
-  // यदि पूरा महीना खाली है
+  // यदि पूरे महीने में कुछ भी दर्ज नहीं है
   if (lastEnteredDay === 0) {
     document.getElementById('ft_ps_att').innerText = '';
     document.getElementById('ft_ps_w').innerText = '';
@@ -1024,7 +1023,7 @@ function recalc() {
     return;
   }
 
-  // फुटर योग
+  // फुटर कुल योग
   document.getElementById('ft_ps_att').innerText = tPsAtt;
   document.getElementById('ft_ps_w').innerText = tPsW.toFixed(2);
   document.getElementById('ft_ps_r').innerText = tPsR.toFixed(2);
