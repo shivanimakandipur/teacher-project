@@ -68,9 +68,7 @@
     .seo-table th, .seo-table td { border: 1px solid #94a3b8; padding: 8px 10px; text-align: left; }
     .seo-table th { background: #e2e8f0; font-weight: bold; color: #0f172a; }
 
-    /* =========================================================
-       PRINT ENGINE - Sub-pixel Rounding Bug Fixed
-       ========================================================= */
+    /* PRINT ENGINE */
     @media print {
       html, body {
         width: 100% !important;
@@ -346,7 +344,7 @@
         </div>
       </div>
 
-      <!-- दरें बॉक्स (गुरुवार पोषण हटाकर अद्यतन दरें) -->
+      <!-- दरें बॉक्स -->
       <div class="flex flex-wrap gap-4 items-center bg-emerald-50 p-3 rounded-xl border border-emerald-200 mb-4 text-xs font-semibold text-emerald-900 no-print">
         <span class="font-bold flex items-center gap-1">⚙️ मानक दरें (प्रति छात्र):</span>
         <div class="flex items-center gap-1">
@@ -399,7 +397,7 @@
           </div>
         </div>
 
-        <!-- अवकाश प्रतिपूर्ति (Holiday Rollover) टॉगल बार (मंगलवार, गुरुवार, शनिवार को स्वतः प्रदर्शित) -->
+        <!-- अवकाश प्रतिपूर्ति (Holiday Rollover) टॉगल बार -->
         <div id="rolloverContainer" class="rollover-box no-print" style="display:none;">
           <input type="checkbox" id="chkRollover" onchange="calcDaily(); saveDayData();" class="w-4 h-4 text-blue-600 rounded cursor-pointer">
           <label for="chkRollover" id="lblRollover" class="cursor-pointer select-none">
@@ -546,8 +544,8 @@
       <h4>2. शुक्रवार को अतिरिक्त भोजन (मीठा हलवा / उपमा) एवं रसोइया मानदेय नियम</h4>
       <p>नवीनतम निर्देशानुसार शुक्रवार को नियमित मेन्यू (सब्जी व सोयाबीन युक्त तहरी) के अतिरिक्त विद्यार्थियों को विशेष पोषण प्रदान किया जाता है[cite: 1]:</p>
       <ul>
-        <li><strong>माह का प्रथम एवं तृतीय शुक्रवार (मीठा हलवा):</strong> प्रति छात्र सूजी (30 ग्राम), देशी घी (05 ग्राम), चीनी (22 ग्राम), घिसा नारियल (05 ग्राम) तथा ईंधन की कुल दर ₹7.00 निर्धारित है[cite: 1]। साथ ही अतिरिक्त श्रम हेतु ₹2.00 प्रति छात्र रसोइया मानदेय देय है।</li>
-        <li><strong>माह का द्वितीय एवं चतुर्थ शुक्रवार (उपमा / नमकीन हलवा):</strong> प्रति छात्र सूजी (30 ग्राम), खाद्य तेल (02 ग्राम), मौसमी सब्जी (20 ग्राम), मूँगफली दाना (06 ग्राम), मसाले-नमक व ईंधन की कुल दर ₹4.00 निर्धारित है[cite: 1]। साथ ही ₹2.00 प्रति छात्र रसोइया मानदेय देय है।</li>
+        <li><strong>माह का प्रथम एवं तृतीय शुक्रवार (मीठा हलवा):</strong> प्रति छात्र सूजी (30 ग्राम), देशी घी (05 ग्राम), चीनी (22 ग्राम) एवं घिसा नारियल (05 ग्राम) की निर्धारित समग्र दर ₹7.00 है[cite: 1]। साथ ही अतिरिक्त श्रम हेतु ₹2.00 प्रति छात्र रसोइया मानदेय देय है।</li>
+        <li><strong>माह का द्वितीय एवं चतुर्थ शुक्रवार (उपमा / नमकीन हलवा):</strong> प्रति छात्र सूजी (30 ग्राम), खाद्य तेल (02 ग्राम), मौसमी सब्जी (20 ग्राम), मूँगफली दाना (06 ग्राम) एवं मसाले-नमक की निर्धारित समग्र दर ₹4.00 है[cite: 1]। साथ ही ₹2.00 प्रति छात्र रसोइया मानदेय देय है।</li>
       </ul>
 
       <h4>3. अवकाश प्रतिपूर्ति (Holiday Rollover) के विधिक नियम</h4>
@@ -756,7 +754,7 @@ function onDailyDateChange() {
 
   loadDayData();
 
-  // मेन्यू स्ट्रिंग निर्धारण
+  // मेन्यू विवरण
   var isRollover = rChk.checked;
   var mText = "";
 
@@ -876,26 +874,28 @@ function calcDaily() {
     rows.push({ name: "★ " + fLabel, val: tot + " FRUITS", cost: "₹" + fruitCost.toFixed(2) });
   }
 
-  // अतिरिक्त भोजन (शुक्रवार अथवा शनिवार को प्रतिपूर्ति)
+  // अतिरिक्त भोजन (ईंधन का अलग खर्च प्रदर्शित किए बिना कुल लागत में ₹7 या ₹4 शामिल)
   var hasExtraFood = (day === "Friday") || (day === "Saturday" && isRollover);
   if (hasExtraFood) {
     var refDate = (day === "Friday") ? da : (da - 1);
     var fIndex = getFridayIndex(yr, mo - 1, refDate);
-    var isHalwa = (fIndex % 2 !== 0); // 1st & 3rd Friday = Meetha Halwa, 2nd & 4th = Upma
+    var isHalwa = (fIndex % 2 !== 0); // 1st & 3rd Friday = Meetha Halwa (₹7), 2nd & 4th = Upma (₹4)
 
     var extraFoodCostPerKid = isHalwa ? 7.00 : 4.00;
     var extraMaterialCost = tot * extraFoodCostPerKid;
     var cookCost = tot * rHonorarium;
 
     var extraTitle = isHalwa 
-      ? "★ अतिरिक्त पोषण: मीठा हलवा (सूजी 30g, घी 5g, चीनी 22g, नारियल 5g)" 
+      ? "★ अतिरिक्त पोषण: मीठा हलवा (सूजी 30g, देशी घी 5g, चीनी 22g, नारियल 5g)" 
       : "★ अतिरिक्त पोषण: उपमा (सूजी 30g, तेल 2g, सब्जी 20g, मूँगफली 6g)";
     
     if (day === "Saturday") extraTitle += " [शुक्रवार अवकाश प्रतिपूर्ति]";
 
     rows.push({
       name: extraTitle,
-      val: isHalwa ? ("सूजी " + (tot * 0.03).toFixed(2) + "kg, घी " + (tot * 0.005).toFixed(3) + "kg") : ("सूजी " + (tot * 0.03).toFixed(2) + "kg, सब्जी " + (tot * 0.02).toFixed(2) + "kg"),
+      val: isHalwa 
+        ? ("सूजी " + (tot * 0.03).toFixed(2) + "kg, घी " + (tot * 0.005).toFixed(3) + "kg, चीनी " + (tot * 0.022).toFixed(2) + "kg") 
+        : ("सूजी " + (tot * 0.03).toFixed(2) + "kg, सब्जी " + (tot * 0.02).toFixed(2) + "kg, मूँगफली " + (tot * 0.006).toFixed(3) + "kg"),
       cost: "₹" + extraMaterialCost.toFixed(2)
     });
 
@@ -1021,7 +1021,7 @@ function generateReportTable() {
         '<col style="width: 5.5%;">' +
         '<col style="width: 5%;">' +
         '<col style="width: 5%;">' +
-        '<col style="width: 5%;">' +
+        '<col style="width: 5%;"> ' +
         '<col style="width: 14%;">' +
         '<col style="width: 7.5%;">' +
         '<col style="width: 9%;">' +
