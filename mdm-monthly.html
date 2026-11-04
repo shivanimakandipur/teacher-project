@@ -20,36 +20,36 @@
     }
 
     /* Summary Cards */
-    .summary-card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 9px; font-size: 11px; }
+    .summary-card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; font-size: 11px; }
     .summary-card.ps { background: #eff6ff; border-top: 3.5px solid #2563eb; }
     .summary-card.ups { background: #f5f3ff; border-top: 3.5px solid #7c3aed; }
     .summary-card.tot { background: #fefce8; border-top: 3.5px solid #ca8a04; }
     .summary-card h4 { margin: 0 0 5px 0; font-size: 11.5px; font-weight: bold; display: flex; justify-content: space-between; }
-    .summary-card table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+    .summary-card table { width: 100%; border-collapse: collapse; font-size: 10.2px; }
     .summary-card td { padding: 1.5px 2px; }
     .summary-card td.val { font-weight: bold; text-align: right; }
 
     /* Table Styles */
     .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px; background: white; }
-    table.mdm-table { width: 100%; min-width: 980px; table-layout: fixed; border-collapse: collapse; text-align: center; font-size: 11.5px; }
-    table.mdm-table th, table.mdm-table td { border: 1px solid #cbd5e1; padding: 5px 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .th-banner { background: #1e3a8a; color: white; font-size: 11.5px; font-weight: bold; padding: 6px; text-transform: uppercase; }
+    table.mdm-table { width: 100%; min-width: 980px; table-layout: fixed; border-collapse: collapse; text-align: center; font-size: 11px; }
+    table.mdm-table th, table.mdm-table td { border: 1px solid #cbd5e1; padding: 4px 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .th-banner { background: #1e3a8a; color: white; font-size: 11.5px; font-weight: bold; padding: 5px; text-transform: uppercase; }
     .th-ps { background: #1d4ed8; color: white; }
     .th-ups { background: #6d28d9; color: white; }
-    .th-sub { background: #3b82f6; color: white; font-size: 10.2px; }
-    .th-sub-ups { background: #8b5cf6; color: white; font-size: 10.2px; }
+    .th-sub { background: #3b82f6; color: white; font-size: 10px; }
+    .th-sub-ups { background: #8b5cf6; color: white; font-size: 10px; }
 
     /* Compact Attendance Input */
-    input.att-in { width: 100%; max-width: 44px; height: 32px; text-align: center; border: 1.2px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13px; margin: 0 auto; display: block; }
+    input.att-in { width: 100%; max-width: 44px; height: 30px; text-align: center; border: 1.2px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 12.5px; margin: 0 auto; display: block; }
     input.att-in:focus { outline: 2px solid #166534; background: #f0fdf4; }
 
     .sunday-row { background: #f1f5f9 !important; }
     .sunday-row input { background: transparent !important; cursor: not-allowed; border-color: transparent !important; }
     .row-footer { background: #f1f5f9; font-weight: bold; }
 
-    .print-header { display: none; text-align: center; margin-bottom: 5px; }
-    .print-header h2 { margin: 0; font-size: 14.5px; text-transform: uppercase; font-weight: 800; color: #000; }
-    .print-header p { margin: 1px 0 0 0; font-size: 10.2px; font-weight: bold; color: #111; }
+    .print-header { display: none; text-align: center; margin-bottom: 3px; }
+    .print-header h2 { margin: 0; font-size: 13.5px; text-transform: uppercase; font-weight: 800; color: #000; }
+    .print-header p { margin: 1px 0 0 0; font-size: 9.8px; font-weight: bold; color: #111; }
     .print-sign-row { display: none; }
     .print-watermark-row { display: none; }
 
@@ -64,17 +64,16 @@
     .seo-table th { background: #e2e8f0; font-weight: bold; color: #0f172a; }
 
     /* =========================================================
-       A4 PORTRAIT FULL-PAGE PRINT ENGINE (100% SCALE)
+       A4 PORTRAIT 1-PAGE EXACT LOCK PRINT ENGINE (100% SINGLE PAGE)
        ========================================================= */
     @page {
       size: A4 portrait !important;
-      margin: 4.5mm 5mm !important;
+      margin: 3.5mm 4.5mm !important;
     }
 
     @media print {
       html, body {
         width: 100% !important;
-        height: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
         background: #ffffff !important;
@@ -102,26 +101,26 @@
 
       .no-print, header, footer, .seo-guide { display: none !important; }
       
-      .print-header { display: block !important; margin-bottom: 4px !important; }
-      .print-header h2 { font-size: 13.5px !important; margin: 0 !important; line-height: 1.2 !important; }
-      .print-header p { font-size: 10px !important; margin: 2px 0 !important; line-height: 1.2 !important; }
+      .print-header { display: block !important; margin-bottom: 2px !important; }
+      .print-header h2 { font-size: 12px !important; margin: 0 !important; line-height: 1.1 !important; }
+      .print-header p { font-size: 9px !important; margin: 1px 0 !important; line-height: 1.1 !important; }
 
       .summary-grid {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
-        gap: 5px !important;
-        margin-bottom: 4px !important;
+        gap: 3.5px !important;
+        margin-bottom: 2px !important;
       }
 
       .summary-card {
-        padding: 3px 5px !important;
-        border: 1px solid #000 !important;
-        border-top-width: 3px !important;
+        padding: 2px 3.5px !important;
+        border: 0.75pt solid #000 !important;
+        border-top-width: 2.2pt !important;
         border-radius: 0 !important;
       }
-      .summary-card h4 { font-size: 10px !important; margin: 0 0 2px 0 !important; font-weight: bold !important; }
-      .summary-card table { font-size: 9px !important; line-height: 1.15 !important; }
-      .summary-card td { padding: 0.5px 1px !important; }
+      .summary-card h4 { font-size: 8.5px !important; margin: 0 0 1px 0 !important; font-weight: bold !important; }
+      .summary-card table { font-size: 7.8px !important; line-height: 1.15 !important; }
+      .summary-card td { padding: 0.2px 1px !important; }
 
       .table-responsive-box {
         overflow: visible !important;
@@ -134,39 +133,39 @@
         width: 100% !important;
         min-width: 100% !important;
         border: 1pt solid #000 !important;
-        font-size: 10px !important;
+        font-size: 8.6px !important;
         border-collapse: collapse !important;
         table-layout: fixed !important;
       }
 
       table.mdm-table tr {
-        height: 6.6mm !important;
+        height: 5.8mm !important;
       }
 
       table.mdm-table th, table.mdm-table td {
-        border: 0.8pt solid #000 !important;
-        padding: 0 1px !important;
+        border: 0.65pt solid #000 !important;
+        padding: 0 0.5px !important;
         color: #000 !important;
         vertical-align: middle !important;
         line-height: 1 !important;
-        height: 6.6mm !important;
+        height: 5.8mm !important;
       }
 
       table.mdm-table th {
         background: #e2e8f0 !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 9.5px !important;
-        height: 7mm !important;
+        font-size: 8.2px !important;
+        height: 5.8mm !important;
       }
 
-      .th-banner { font-size: 10px !important; height: 5.5mm !important; }
-      .th-sub, .th-sub-ups { font-size: 8.5px !important; }
+      .th-banner { font-size: 8.5px !important; height: 4.6mm !important; }
+      .th-sub, .th-sub-ups { font-size: 7.8px !important; }
 
       input.att-in {
         border: none !important;
         background: transparent !important;
-        font-size: 10px !important;
+        font-size: 9px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
@@ -182,7 +181,7 @@
         display: flex !important;
         justify-content: space-between !important;
         align-items: flex-end !important;
-        margin-top: 15px !important;
+        margin-top: 10px !important;
         padding: 0 15px !important;
         page-break-before: avoid !important;
         page-break-inside: avoid !important;
@@ -190,11 +189,11 @@
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 10.5px !important;
+        font-size: 9.5px !important;
         font-weight: bold !important;
-        border-top: 1.2px dashed #000 !important;
-        width: 200px !important;
-        padding-top: 4px !important;
+        border-top: 1.1px dashed #000 !important;
+        width: 180px !important;
+        padding-top: 3px !important;
       }
 
       .print-watermark-row {
@@ -202,7 +201,7 @@
         align-items: center;
         justify-content: flex-end;
         gap: 3px;
-        margin-top: 4px;
+        margin-top: 3px;
         padding-right: 2px;
         opacity: 0.65;
         page-break-before: avoid !important;
@@ -441,7 +440,7 @@
       <div class="table-responsive-box">
         <table class="mdm-table">
           <colgroup>
-            <col style="width: 10.2%;"> <!-- दिनांक (01/11/2026 पूर्ण 10 अक्षर स्पष्ट दिखेंगे) -->
+            <col style="width: 10.2%;"> <!-- दिनांक (पूर्ण 10 अक्षर स्पष्ट दिखेंगे) -->
             <col style="width: 6.2%;">  <!-- दिन -->
             <!-- PS 7 Cols (41.8%) -->
             <col class="ps-col" style="width: 4.8%;">  <!-- छात्र -->
