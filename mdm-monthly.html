@@ -196,16 +196,15 @@
         padding-top: 3px !important;
       }
 
-      .print-watermark-row {
-        display: flex !important;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 3px;
-        margin-top: 3px;
-        padding-right: 2px;
-        opacity: 0.65;
-        page-break-before: avoid !important;
-      }
+      .print-sign-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  margin-top: 10px !important; /* <--- सिर्फ इसे बदलना है */
+  padding: 0 15px !important;
+  page-break-before: avoid !important;
+  page-break-inside: avoid !important;
+}
     }
   </style>
 </head>
