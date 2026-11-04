@@ -20,7 +20,7 @@
     }
 
     /* Summary Cards */
-    .summary-card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; font-size: 11px; }
+    .summary-card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 9px; font-size: 11px; }
     .summary-card.ps { background: #eff6ff; border-top: 3.5px solid #2563eb; }
     .summary-card.ups { background: #f5f3ff; border-top: 3.5px solid #7c3aed; }
     .summary-card.tot { background: #fefce8; border-top: 3.5px solid #ca8a04; }
@@ -29,15 +29,15 @@
     .summary-card td { padding: 1.5px 2px; }
     .summary-card td.val { font-weight: bold; text-align: right; }
 
-    /* Table Styles - Fixed Balanced Layout */
+    /* Table Styles */
     .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px; background: white; }
-    table.mdm-table { width: 100%; min-width: 950px; table-layout: fixed; border-collapse: collapse; text-align: center; font-size: 11px; }
-    table.mdm-table th, table.mdm-table td { border: 1px solid #cbd5e1; padding: 5px 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .th-banner { background: #1e3a8a; color: white; font-size: 11.5px; font-weight: bold; padding: 5px; text-transform: uppercase; }
+    table.mdm-table { width: 100%; min-width: 980px; table-layout: fixed; border-collapse: collapse; text-align: center; font-size: 11.5px; }
+    table.mdm-table th, table.mdm-table td { border: 1px solid #cbd5e1; padding: 5px 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .th-banner { background: #1e3a8a; color: white; font-size: 11.5px; font-weight: bold; padding: 6px; text-transform: uppercase; }
     .th-ps { background: #1d4ed8; color: white; }
     .th-ups { background: #6d28d9; color: white; }
-    .th-sub { background: #3b82f6; color: white; font-size: 10px; }
-    .th-sub-ups { background: #8b5cf6; color: white; font-size: 10px; }
+    .th-sub { background: #3b82f6; color: white; font-size: 10.2px; }
+    .th-sub-ups { background: #8b5cf6; color: white; font-size: 10.2px; }
 
     /* Compact Attendance Input */
     input.att-in { width: 100%; max-width: 44px; height: 32px; text-align: center; border: 1.2px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13px; margin: 0 auto; display: block; }
@@ -47,14 +47,24 @@
     .sunday-row input { background: transparent !important; cursor: not-allowed; border-color: transparent !important; }
     .row-footer { background: #f1f5f9; font-weight: bold; }
 
-    .print-header { display: none; text-align: center; margin-bottom: 4px; }
-    .print-header h2 { margin: 0; font-size: 14px; text-transform: uppercase; font-weight: 800; color: #000; }
-    .print-header p { margin: 1px 0 0 0; font-size: 10px; font-weight: bold; color: #111; }
+    .print-header { display: none; text-align: center; margin-bottom: 5px; }
+    .print-header h2 { margin: 0; font-size: 14.5px; text-transform: uppercase; font-weight: 800; color: #000; }
+    .print-header p { margin: 1px 0 0 0; font-size: 10.2px; font-weight: bold; color: #111; }
     .print-sign-row { display: none; }
     .print-watermark-row { display: none; }
 
+    /* SEO Guide Styles */
+    .seo-guide h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 12px; border-left: 4px solid #1e3a8a; padding-left: 10px; font-weight: 800; }
+    .seo-guide h4 { color: #0f172a; font-size: 15px; margin-top: 22px; margin-bottom: 8px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; font-weight: 700; }
+    .seo-guide p { font-size: 13.5px; margin-bottom: 12px; text-align: justify; line-height: 1.75; color: #334155; }
+    .seo-guide ul { font-size: 13.5px; margin-bottom: 14px; padding-left: 20px; color: #334155; list-style-type: disc; }
+    .seo-guide li { margin-bottom: 6px; line-height: 1.6; }
+    .seo-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+    .seo-table th, .seo-table td { border: 1px solid #94a3b8; padding: 8px 10px; text-align: left; }
+    .seo-table th { background: #e2e8f0; font-weight: bold; color: #0f172a; }
+
     /* =========================================================
-       A4 PORTRAIT फुल-पेज प्रिंट इंजन (संतुलित ऊँचाई व स्पष्ट कॉलम)
+       A4 PORTRAIT फुल-पेज सिंगल प्रिंट इंजन (ऊँचाई व चौड़ाई पूर्ण संतुलित)
        ========================================================= */
     @page {
       size: portrait;
@@ -85,25 +95,25 @@
 
       .no-print, header, footer, .seo-guide { display: none !important; }
       .print-header { display: block !important; }
-      .print-header h2 { font-size: 12.5px !important; margin: 0 !important; }
-      .print-header p { font-size: 9.5px !important; margin: 1px 0 2px 0 !important; }
+      .print-header h2 { font-size: 12.8px !important; margin: 0 !important; }
+      .print-header p { font-size: 9.8px !important; margin: 1px 0 3px 0 !important; }
 
       .summary-grid {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
-        gap: 4px !important;
+        gap: 5px !important;
         margin-bottom: 4px !important;
       }
 
       .summary-card {
-        padding: 2.5px 4px !important;
+        padding: 3px 4px !important;
         border: 0.85pt solid #000 !important;
         border-top-width: 2.5pt !important;
         border-radius: 0 !important;
       }
-      .summary-card h4 { font-size: 9px !important; margin: 0 0 1.5px 0 !important; font-weight: bold !important; }
-      .summary-card table { font-size: 8.2px !important; line-height: 1.2 !important; }
-      .summary-card td { padding: 0.4px 1.5px !important; }
+      .summary-card h4 { font-size: 9.2px !important; margin: 0 0 1.5px 0 !important; font-weight: bold !important; }
+      .summary-card table { font-size: 8.4px !important; line-height: 1.25 !important; }
+      .summary-card td { padding: 0.5px 1.5px !important; }
 
       .table-responsive-box {
         overflow: visible !important;
@@ -122,7 +132,7 @@
       }
 
       table.mdm-table tr {
-        height: 6.6mm !important;
+        height: 6.5mm !important;
       }
 
       table.mdm-table th, table.mdm-table td {
@@ -130,24 +140,24 @@
         padding: 0 1px !important;
         color: #000 !important;
         vertical-align: middle !important;
-        line-height: 1.05 !important;
+        line-height: 1.1 !important;
       }
 
       table.mdm-table th {
         background: #e2e8f0 !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 8.6px !important;
-        height: 6mm !important;
+        font-size: 8.8px !important;
+        height: 6.2mm !important;
       }
 
-      .th-banner { font-size: 9px !important; height: 5mm !important; }
+      .th-banner { font-size: 9.2px !important; height: 5mm !important; }
       .th-sub, .th-sub-ups { font-size: 8.2px !important; }
 
       input.att-in {
         border: none !important;
         background: transparent !important;
-        font-size: 9.5px !important;
+        font-size: 9.6px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
@@ -163,7 +173,7 @@
         display: flex !important;
         justify-content: space-between !important;
         align-items: flex-end !important;
-        margin-top: 20px !important;
+        margin-top: 18px !important;
         padding: 0 20px !important;
         page-break-inside: avoid !important;
       }
@@ -270,7 +280,7 @@
         </div>
       </div>
 
-      <!-- दरें बॉक्स -->
+      <!-- दरें बॉक्स (अतिरिक्त पोषण - हलवा एवं उपमा की दरें शामिल) -->
       <div class="flex flex-wrap gap-3 items-center justify-between bg-emerald-50 p-3 rounded-xl border border-emerald-200 mb-4 text-xs font-semibold text-emerald-900 no-print">
         <div class="flex flex-wrap gap-3 items-center">
           <span class="font-bold flex items-center gap-1">⚙️ दरें (प्रति छात्र):</span>
@@ -420,24 +430,24 @@
       <div class="table-responsive-box">
         <table class="mdm-table">
           <colgroup>
-            <col style="width: 9.6%;">  <!-- दिनांक (पूर्ण 10 अक्षर स्पष्ट दिखेंगे) -->
+            <col style="width: 8.6%;">  <!-- दिनांक (पूर्ण 10 अक्षर स्पष्ट दिखेंगे) -->
             <col style="width: 6.4%;">  <!-- दिन -->
-            <!-- PS 7 Cols (42%) -->
-            <col class="ps-col" style="width: 5.2%;">  <!-- छात्र -->
-            <col class="ps-col" style="width: 5.8%;">  <!-- संचयी -->
+            <!-- PS 7 Cols (42.5%) -->
+            <col class="ps-col" style="width: 4.8%;">  <!-- छात्र -->
+            <col class="ps-col" style="width: 5.6%;">  <!-- संचयी -->
             <col class="ps-col" style="width: 5.8%;">  <!-- गेहूं -->
             <col class="ps-col" style="width: 5.8%;">  <!-- चावल -->
             <col class="ps-col" style="width: 5.2%;">  <!-- दूध -->
             <col class="ps-col" style="width: 4.8%;">  <!-- फल -->
-            <col class="ps-col" style="width: 9.4%;">  <!-- लागत (संतुलित) -->
-            <!-- UPS 7 Cols (42%) -->
-            <col class="ups-col" style="width: 5.2%;">  <!-- छात्र -->
-            <col class="ups-col" style="width: 5.8%;">  <!-- संचयी -->
+            <col class="ps-col" style="width: 10.5%;"> <!-- लागत (संतुलित) -->
+            <!-- UPS 7 Cols (42.5%) -->
+            <col class="ups-col" style="width: 4.8%;">  <!-- छात्र -->
+            <col class="ups-col" style="width: 5.6%;">  <!-- संचयी -->
             <col class="ups-col" style="width: 5.8%;">  <!-- गेहूं -->
             <col class="ups-col" style="width: 5.8%;">  <!-- चावल -->
             <col class="ups-col" style="width: 5.2%;">  <!-- दूध -->
             <col class="ups-col" style="width: 4.8%;">  <!-- फल -->
-            <col class="ups-col" style="width: 9.4%;">  <!-- लागत (संतुलित) -->
+            <col class="ups-col" style="width: 10.5%;"> <!-- लागत (संतुलित) -->
           </colgroup>
           <thead>
             <tr class="no-print"><th colspan="16" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th></tr>
@@ -503,30 +513,110 @@
 
     </div>
 
-    <!-- SEO Guide Section -->
+    <!-- AdSense SEO Friendly Extensive Guide (1250+ Words Comprehensive Analysis) -->
     <div class="seo-guide bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm no-print">
-      <h3>उत्तर प्रदेश बेसिक शिक्षा: PM POSHAN (मध्यान्ह भोजन) मासिक उपभोग पंजिका, परिवर्तन लागत लेखांकन एवं विधिक ऑडिट संधारण विस्तृत मार्गदर्शिका</h3>
-      <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के नियंत्रणाधीन संचालित समस्त परिषदीय प्राथमिक, उच्च प्राथमिक एवं संविलियन विद्यालयों में प्रधानमंत्री पोषण शक्ति निर्माण (PM POSHAN) के वित्तीय एवं भौतिक अभिलेखों का मासिक संधारण अनिवार्य है। प्रत्येक माह के अंत में आहरण-वितरण अधिकारी (DDO) तथा खंड शिक्षा अधिकारी (BEO) कार्यालय को प्रेषित किए जाने वाले मासिक उपभोग प्रमाण पत्र (Monthly Consumption Certificate - MPR) का आधार यह मासिक एमडीएम पंजिका होती है [evidence: 11, 12, 13, 14]।</p>
+      <h3>उत्तर प्रदेश बेसिक शिक्षा: PM POSHAN (मध्याह्न भोजन) मासिक उपभोग पंजिका, परिवर्तन लागत लेखांकन एवं विधिक ऑडिट संधारण विस्तृत मार्गदर्शिका</h3>
+      
+      <p>उत्तर प्रदेश बेसिक शिक्षा परिषद के नियंत्रणाधीन संचालित समस्त परिषदीय प्राथमिक, उच्च प्राथमिक एवं संविलियन (कम्पोजिट) विद्यालयों में अध्ययनरत कक्षा 1 से 8 तक के छात्र-छात्राओं के शारीरिक एवं मानसिक संवर्धन हेतु प्रधानमंत्री पोषण शक्ति निर्माण (PM POSHAN योजना) केंद्रीय एवं राज्य सरकार के संयुक्त सहयोग से क्रियान्वित की जाती है। विद्यालय स्तर पर इस योजना का पारदर्शी एवं सुचारु संचालन सुनिश्चित करना प्रधानाध्यापकों, प्रभारी प्रधानाध्यापकों एवं एमडीएम नोडल शिक्षकों का एक अनिवार्य प्रशासनिक दायित्व है। प्रत्येक माह के समापन पर विद्यालय प्रबंध समिति (SMC) के माध्यम से आहरण-वितरण अधिकारी, खंड शिक्षा अधिकारी (BEO) एवं जिला बेसिक शिक्षा अधिकारी (BSA) कार्यालय को प्रेषित की जाने वाली मासिक प्रगति रिपोर्ट (Monthly Progress Report - MPR) का विधिक आधार यह मासिक एमडीएम संकलन पंजिका ही होती है।</p>
+      
+      <p>मासिक पंजिका केवल उपस्थिति दर्ज करने का माध्यम नहीं है, अपितु यह खाद्यान्न स्टॉक (गेहूं व चावल), दैनिक परिवर्तन लागत (कन्वर्जन कॉस्ट), मौसमी फल वितरण, मीठे दूध की आपूर्ति, अतिरिक्त पोषण एवं रसोइया मानदेय का एक संपूर्ण अंकेक्षित लेखा-जोखा (Audited Ledger) प्रस्तुत करती है। विद्यालयी अभिलेखों में यदि भौतिक स्टॉक और रजिस्टर के आंकड़ों में रत्ती भर भी विसंगति पाई जाती है, तो विभागीय जांच एवं वित्तीय ऑडिट के समय विद्यालय प्रशासन के समक्ष गंभीर प्रशासनिक चुनौतियां उत्पन्न हो जाती हैं। अतः प्रस्तुत मार्गदर्शिका में उत्तर प्रदेश शासन के अद्यतन नियमों, शासनादेशों एवं पोषण मानकों का 1,250 से अधिक शब्दों में विस्तृत बिंदुवार विश्लेषण प्रस्तुत किया गया है।</p>
 
-      <h4>1. मासिक खाद्यान्न उपभोग के मानक एवं दिनवार चक्र</h4>
+      <h4>1. पोषणिक मानक एवं खाद्यान्न उपभोग का विधिक ढांचा (Nutritional Norms per Student)</h4>
+      <p>भारत सरकार के शिक्षा मंत्रालय एवं मध्याह्न भोजन प्राधिकरण, उत्तर प्रदेश द्वारा प्राथमिक एवं उच्च प्राथमिक स्तर के विद्यार्थियों की पोषणिक आवश्यकताओं के अनुसार दैनिक उपभोग हेतु खाद्यान्न एवं पोषण का स्पष्ट विभाजन निर्धारित किया गया है:</p>
+      
+      <table class="seo-table">
+        <thead>
+          <tr>
+            <th>मद / खाद्य घटक</th>
+            <th>प्राथमिक स्तर (कक्षा 1 से 5) प्रति छात्र</th>
+            <th>उच्च प्राथमिक स्तर (कक्षा 6 से 8) प्रति छात्र</th>
+            <th>100 छात्रों हेतु उपभोग (प्राथमिक / उच्च प्राथ.)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>खाद्यान्न (गेहूं का आटा / चावल)</strong></td>
+            <td>100 ग्राम</td>
+            <td>150 ग्राम</td>
+            <td>10 कि०ग्रा० / 15 कि०ग्रा०</td>
+          </tr>
+          <tr>
+            <td><strong>दालें (दाल दिवसों पर)</strong></td>
+            <td>20 ग्राम</td>
+            <td>30 ग्राम</td>
+            <td>02 कि०ग्रा० / 03 कि०ग्रा०</td>
+          </tr>
+          <tr>
+            <td><strong>सोयाबीन बड़ी (तहरी दिवसों पर)</strong></td>
+            <td>10 ग्राम</td>
+            <td>15 ग्राम</td>
+            <td>01 कि०ग्रा० / 1.5 कि०ग्रा०</td>
+          </tr>
+          <tr>
+            <td><strong>मौसमी हरी सब्जियां</strong></td>
+            <td>50 ग्राम</td>
+            <td>75 ग्राम</td>
+            <td>05 कि०ग्रा० / 7.5 कि०ग्रा०</td>
+          </tr>
+          <tr>
+            <td><strong>खाद्य तेल एवं वसा</strong></td>
+            <td>05 मिलीलीटर</td>
+            <td>7.5 मिलीलीटर</td>
+            <td>500 मिलीलीटर / 750 मिलीलीटर</td>
+          </tr>
+          <tr>
+            <td><strong>ताजा उबला दूध (बुधवार)</strong></td>
+            <td>150 मिलीलीटर</td>
+            <td>200 मिलीलीटर</td>
+            <td>15 लीटर / 20 लीटर</td>
+          </tr>
+          <tr>
+            <td><strong>ताजा मौसमी फल (सोमवार)</strong></td>
+            <td>01 साबुत फल प्रति छात्र</td>
+            <td>01 साबुत फल प्रति छात्र</td>
+            <td>100 फल प्रति 100 छात्र</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>2. दिनवार साप्ताहिक मेन्यू चक्र एवं खाद्यान्न वितरण व्यवस्था</h4>
+      <p>मध्याह्न भोजन प्राधिकरण, उत्तर प्रदेश द्वारा निर्गत मेन्यू चार्ट के अनुसार सप्ताह के प्रत्येक कार्यदिवस हेतु भोजन का स्वरूप तय किया गया है, जिसके अनुसार खाद्यान्न की खपत का परिकलन किया जाता है:</p>
       <ul>
-        <li><strong>प्राथमिक स्तर (कक्षा 1 से 5):</strong> 100 ग्राम प्रति छात्र (सोमवार व गुरुवार को गेहूं, मंगलवार/बुधवार/शुक्रवार/शनिवार को चावल)।</li>
-        <li><strong>उच्च प्राथमिक स्तर (कक्षा 6 से 8):</strong> 150 ग्राम प्रति छात्र (सोमवार व गुरुवार को गेहूं, मंगलवार/बुधवार/शुक्रवार/शनिवार को चावल)।</li>
-        <li><strong>रविवार:</strong> नियमित साप्ताहिक अवकाश (उपभोग एवं छात्र संख्या शून्य)।</li>
+        <li><strong>सोमवार (Monday):</strong> रोटी, सोयाबीन की बड़ी युक्त मौसमी सब्जी तथा भोजनोपरांत ताजा मौसमी फल। प्राथमिक स्तर पर प्रति छात्र 100 ग्राम गेहूं का आटा तथा उच्च प्राथमिक स्तर पर 150 ग्राम गेहूं का आटा देय होता है। प्रत्येक छात्र को ₹4.00 की निर्धारित सीमा के अंतर्गत 1 साबुत ताजा मौसमी फल वितरित किया जाता है।</li>
+        <li><strong>मंगलवार (Tuesday):</strong> चावल एवं सब्जी युक्त दाल। इस दिवस प्राथमिक स्तर पर 100 ग्राम चावल तथा उच्च प्राथमिक स्तर पर 150 ग्राम चावल के साथ 20 ग्राम व 30 ग्राम दाल की खपत दर्ज की जाती है।</li>
+        <li><strong>बुधवार (Wednesday):</strong> मौसमी सब्जी एवं सोयाबीन की बड़ी युक्त तहरी तथा ताजा उबला मीठा दूध। तहरी हेतु चावल का उपभोग क्रमशः 100 ग्राम व 150 ग्राम होता है। भोजनोपरांत प्राथमिक छात्रों को 150 मिलीलीटर तथा उच्च प्राथमिक छात्रों को 200 मिलीलीटर मीठा दूध प्रदान किया जाता है।</li>
+        <li><strong>गुरुवार (Thursday):</strong> रोटी एवं सब्जी युक्त दाल। इस दिन भोजन में गेहूं की रोटी पकाई जाती है, अतः गेहूं के कॉलम में क्रमशः 100 ग्राम एवं 150 ग्राम प्रति छात्र की दर से प्रविष्टि की जाती है।</li>
+        <li><strong>शुक्रवार (Friday):</strong> मौसमी सब्जी एवं सोयाबीन बड़ी युक्त नियमित तहरी तथा साथ में विशेष अतिरिक्त पोषण (मीठा हलवा अथवा उपमा)। नियमित तहरी हेतु चावल का उपभोग होता है और साथ में विशेष पोषण का स्वतंत्र वितरण संपन्न होता है।</li>
+        <li><strong>शनिवार (Saturday):</strong> चावल एवं सब्जी युक्त दाल। प्रति प्राथमिक छात्र 100 ग्राम चावल एवं उच्च प्राथमिक छात्र 150 ग्राम चावल देय है।</li>
+        <li><strong>रविवार (Sunday):</strong> नियमित साप्ताहिक अवकाश। इस दिन रसोई बंद रहती है तथा छात्र उपस्थिति व उपभोग शून्य दर्ज किया जाता है।</li>
       </ul>
 
-      <h4>2. परिवर्तन लागत (Conversion Cost) एवं विशेष पोषण नियम</h4>
+      <h4>3. शुक्रवार का विशेष अतिरिक्त पोषण: मीठा हलवा, उपमा एवं रसोइया मानदेय नियमावली</h4>
+      <p>उत्तर प्रदेश बेसिक शिक्षा विभाग द्वारा विद्यार्थियों के पोषण स्तर में त्वरित वृद्धि हेतु शुक्रवार के दिन नियमित मेन्यू (सब्जी व सोयाबीन युक्त तहरी) के अतिरिक्त विशेष अनुपूरक पोषण की व्यवस्था प्रभावी की गई है[cite: 1]:</p>
       <ul>
-        <li><strong>मानक दरें:</strong> प्राथमिक स्तर ₹6.78 प्रति छात्र तथा उच्च प्राथमिक स्तर ₹10.17 प्रति छात्र निर्धारित हैं।</li>
-        <li><strong>सोमवार फल वितरण:</strong> प्रति छात्र ₹4.00 की दर से ताजा मौसमी फल दिया जाता है। यदि सोमवार को अवकाश होता है, तो मंगलवार को स्वतः फल देय होता है।</li>
-        <li><strong>बुधवार उबला दूध:</strong> प्राथमिक हेतु 150ml एवं उच्च प्राथमिक हेतु 200ml दूध। यदि बुधवार को अवकाश होता है, तो गुरुवार को स्वतः दूध देय होता है।</li>
-        <li><strong>शुक्रवार अतिरिक्त पोषण (हलवा / उपमा) एवं रसोइया मानदेय:</strong> माह के 1ले व 3सरे शुक्रवार को मीठा हलवा तथा 2रे व 4थे शुक्रवार को उपमा देय है[cite: 1]। साथ ही शुक्रवार के दिन अतिरिक्त श्रम हेतु ₹2.00 प्रति छात्र रसोइया मानदेय देय है। यदि शुक्रवार को अवकाश होता है, तो शनिवार को स्वतः अतिरिक्त पोषण देय होता है[cite: 1]।</li>
+        <li><strong>माह का प्रथम एवं तृतीय शुक्रवार (मीठा हलवा):</strong> प्रत्येक विद्यार्थी को सूजी (30 ग्राम), शुद्ध देशी घी (05 ग्राम), चीनी (22 ग्राम) एवं घिसा हुआ सूखा नारियल (05 ग्राम) से निर्मित मीठा हलवा दिया जाता है[cite: 1]। इसकी कुल सामग्री लागत ₹7.00 प्रति छात्र निर्धारित की गई है[cite: 1]।</li>
+        <li><strong>माह का द्वितीय एवं चतुर्थ शुक्रवार (उपमा / नमकीन हलवा):</strong> विद्यार्थियों को सूजी (30 ग्राम), खाद्य तेल (02 ग्राम), ताजी मौसमी हरी सब्जी (20 ग्राम), भुनी हुई मूँगफली का दाना (06 ग्राम) तथा स्वादानुसार नमक व मसालों से तैयार उपमा प्रदान किया जाता है[cite: 1]। इसकी निर्धारित सामग्री लागत ₹4.00 प्रति छात्र है[cite: 1]।</li>
+        <li><strong>अतिरिक्त रसोइया मानदेय (Cook Honorarium):</strong> शुक्रवार के दिन नियमित भोजन के अतिरिक्त विशेष हलवा या उपमा तैयार करने में रसोइयों द्वारा किए जाने वाले अतिरिक्त श्रम के पारिश्रमिक स्वरूप ₹2.00 प्रति छात्र की दर से अतिरिक्त मानदेय सीधे विद्यालय प्रबंध समिति (SMC) के खाते से देय होता है। हमारे इस डिजिटल टूल में हलवा, उपमा तथा रसोइया मानदेय की दरों को संशोधित करने हेतु स्वतंत्र इनपुट बॉक्स दिए गए हैं।</li>
       </ul>
+
+      <h4>4. स्वचालित अवकाश प्रतिपूर्ति (Automatic Holiday Rollover) का विधिक नियम</h4>
+      <p>शासनादेशों के अनुसार यदि किसी निर्धारित पोषण दिवस पर सार्वजनिक अवकाश अथवा अपरिहार्य कारणों से विद्यालय बंद रहता है, तो विद्यार्थियों के पोषणिक अधिकारों की क्षतिपूर्ति हेतु सामग्री वितरण को अगले कार्यदिवस पर स्थानांतरित किया जाता है:</p>
+      <ul>
+        <li><strong>सोमवार का फल वितरण:</strong> यदि सोमवार को अवकाश होता है (अथवा उपस्थिति शून्य दर्ज होती है), तो सोमवार को मिलने वाला मौसमी फल अगले कार्यदिवस अर्थात् मंगलवार को नियमित भोजन के साथ वितरित किया जाता है।</li>
+        <li><strong>बुधवार का दूध वितरण:</strong> यदि बुधवार को अवकाश रहता है, तो निर्धारित मात्रा (150ml / 200ml) के अनुसार ताजा उबला दूध अगले कार्यदिवस अर्थात् गुरुवार को वितरित किया जाता है।</li>
+        <li><strong>शुक्रवार का अतिरिक्त पोषण:</strong> यदि शुक्रवार को विद्यालय में अवकाश रहता है, तो शुक्रवार का निर्धारित अतिरिक्त भोजन (मीठा हलवा या उपमा) शनिवार के नियमित चावल-दाल के साथ वितरित किया जाता है[cite: 1]। हमारे सॉफ्टवेयर में यह सुविधा पूर्णतः स्वचालित (Automatic) है, जहां पूर्व दिवस पर शून्य उपस्थिति दर्ज होते ही अगले दिन संबंधित मद सक्रिय हो जाती है।</li>
+      </ul>
+
+      <h4>5. परिवर्तन लागत (Conversion Cost) एवं वित्तीय संधारण</h4>
+      <p>खाद्यान्न (गेहूं व चावल) भारतीय खाद्य निगम (FCI) द्वारा उचित दर विक्रेता (कोटेदार) के माध्यम से विद्यालय को निःशुल्क आवंटित किया जाता है। दाल, तेल, सब्जी, मसाले, फल, दूध, हलवा सामग्री एवं ईंधन क्रय करने हेतु शासन द्वारा छात्र संख्या के अनुपात में परिवर्तन लागत सीधे SMC खाते में भेजी जाती है। वर्तमान में प्राथमिक स्तर पर ₹6.78 तथा उच्च प्राथमिक स्तर पर ₹10.17 प्रति छात्र मानक दर प्रभावी है। मासिक पंजिका में दर्ज कुल लागत का मिलान SMC बैंक पासबुक के आहरण वाउचरों से शत-प्रतिशत होना आवश्यक है।</p>
+
+      <h4>6. खाद्यान्न स्टॉक रजिस्टर (Stock Register) एवं आईवीआरएस (IVRS) मिलान</h4>
+      <p>माह के अंत में विद्यालय के मुख्य खाद्यान्न स्टॉक रजिस्टर का समाधान अनिवार्य है। इसके तहत: <code>(विगत माह का प्रारंभिक अवशेष + कोटेदार से प्राप्त नया उठान) - मासिक पंजिका का कुल उपभोग = भौतिक अंतिम अवशेष</code>। यह अवशेष किचन शेड में उपस्थित बोरियों की तौल से पूर्णतः मेल खाना चाहिए। साथ ही, प्रतिदिन दोपहर 12:00 से 2:00 बजे के मध्य दर्ज आईवीआरएस ऑटोमेटेड कॉल का मासिक संचयी योग और इस पंजिका के कुल लाभार्थी छात्रों की संख्या एक समान होनी चाहिए, जो विभागीय ऑडिट में विद्यालय को किसी भी प्रकार की वित्तीय आपत्ति से सुरक्षित रखती है।</p>
     </div>
 
   </main>
 
-  <!-- Footer -->
+  <!-- Clean Evergreen Footer -->
   <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-3 font-medium text-slate-600">
