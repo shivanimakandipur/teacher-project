@@ -25,14 +25,14 @@
     .summary-card.ups { background: #f5f3ff; border-top: 3.5px solid #7c3aed; }
     .summary-card.tot { background: #fefce8; border-top: 3.5px solid #ca8a04; }
     .summary-card h4 { margin: 0 0 5px 0; font-size: 11.5px; font-weight: bold; display: flex; justify-content: space-between; }
-    .summary-card table { width: 100%; border-collapse: collapse; font-size: 10.2px; }
+    .summary-card table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
     .summary-card td { padding: 1.5px 2px; }
     .summary-card td.val { font-weight: bold; text-align: right; }
 
     /* Table Styles - Fixed Balanced Layout */
     .table-responsive-box { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px; background: white; }
     table.mdm-table { width: 100%; min-width: 950px; table-layout: fixed; border-collapse: collapse; text-align: center; font-size: 11px; }
-    table.mdm-table th, table.mdm-table td { border: 1px solid #cbd5e1; padding: 4px 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    table.mdm-table th, table.mdm-table td { border: 1px solid #cbd5e1; padding: 5px 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .th-banner { background: #1e3a8a; color: white; font-size: 11.5px; font-weight: bold; padding: 5px; text-transform: uppercase; }
     .th-ps { background: #1d4ed8; color: white; }
     .th-ups { background: #6d28d9; color: white; }
@@ -40,7 +40,7 @@
     .th-sub-ups { background: #8b5cf6; color: white; font-size: 10px; }
 
     /* Compact Attendance Input */
-    input.att-in { width: 100%; max-width: 44px; height: 30px; text-align: center; border: 1.2px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 12.5px; margin: 0 auto; display: block; }
+    input.att-in { width: 100%; max-width: 44px; height: 32px; text-align: center; border: 1.2px solid #94a3b8; border-radius: 4px; font-weight: bold; font-size: 13px; margin: 0 auto; display: block; }
     input.att-in:focus { outline: 2px solid #166534; background: #f0fdf4; }
 
     .sunday-row { background: #f1f5f9 !important; }
@@ -54,7 +54,7 @@
     .print-watermark-row { display: none; }
 
     /* =========================================================
-       100% A4 PORTRAIT सिंगल पेज प्रिंट इंजन (Pixel-Perfect)
+       A4 PORTRAIT फुल-पेज प्रिंट इंजन (संतुलित ऊँचाई व स्पष्ट कॉलम)
        ========================================================= */
     @page {
       size: portrait;
@@ -85,25 +85,25 @@
 
       .no-print, header, footer, .seo-guide { display: none !important; }
       .print-header { display: block !important; }
-      .print-header h2 { font-size: 12px !important; margin: 0 !important; }
-      .print-header p { font-size: 9px !important; margin: 1px 0 2px 0 !important; }
+      .print-header h2 { font-size: 12.5px !important; margin: 0 !important; }
+      .print-header p { font-size: 9.5px !important; margin: 1px 0 2px 0 !important; }
 
       .summary-grid {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 4px !important;
-        margin-bottom: 3px !important;
+        margin-bottom: 4px !important;
       }
 
       .summary-card {
-        padding: 2px 3px !important;
-        border: 0.8pt solid #000 !important;
-        border-top-width: 2.2pt !important;
+        padding: 2.5px 4px !important;
+        border: 0.85pt solid #000 !important;
+        border-top-width: 2.5pt !important;
         border-radius: 0 !important;
       }
-      .summary-card h4 { font-size: 8.5px !important; margin: 0 0 1px 0 !important; font-weight: bold !important; }
-      .summary-card table { font-size: 7.8px !important; line-height: 1.15 !important; }
-      .summary-card td { padding: 0.3px 1px !important; }
+      .summary-card h4 { font-size: 9px !important; margin: 0 0 1.5px 0 !important; font-weight: bold !important; }
+      .summary-card table { font-size: 8.2px !important; line-height: 1.2 !important; }
+      .summary-card td { padding: 0.4px 1.5px !important; }
 
       .table-responsive-box {
         overflow: visible !important;
@@ -115,39 +115,39 @@
       table.mdm-table {
         width: 100% !important;
         min-width: 100% !important;
-        border: 1pt solid #000 !important;
-        font-size: 8.5px !important;
+        border: 1.1pt solid #000 !important;
+        font-size: 9.2px !important;
         border-collapse: collapse !important;
         table-layout: fixed !important;
       }
 
       table.mdm-table tr {
-        height: 5.1mm !important;
+        height: 6.6mm !important;
       }
 
       table.mdm-table th, table.mdm-table td {
-        border: 0.65pt solid #000 !important;
-        padding: 0 0.5px !important;
+        border: 0.75pt solid #000 !important;
+        padding: 0 1px !important;
         color: #000 !important;
         vertical-align: middle !important;
-        line-height: 1 !important;
+        line-height: 1.05 !important;
       }
 
       table.mdm-table th {
         background: #e2e8f0 !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 8.2px !important;
-        height: 5.5mm !important;
+        font-size: 8.6px !important;
+        height: 6mm !important;
       }
 
-      .th-banner { font-size: 8.8px !important; height: 4.5mm !important; }
-      .th-sub, .th-sub-ups { font-size: 7.8px !important; }
+      .th-banner { font-size: 9px !important; height: 5mm !important; }
+      .th-sub, .th-sub-ups { font-size: 8.2px !important; }
 
       input.att-in {
         border: none !important;
         background: transparent !important;
-        font-size: 8.8px !important;
+        font-size: 9.5px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
@@ -163,18 +163,18 @@
         display: flex !important;
         justify-content: space-between !important;
         align-items: flex-end !important;
-        margin-top: 16px !important;
+        margin-top: 20px !important;
         padding: 0 20px !important;
         page-break-inside: avoid !important;
       }
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 9.5px !important;
+        font-size: 10px !important;
         font-weight: bold !important;
         border-top: 1.2px dashed #000 !important;
-        width: 180px !important;
-        padding-top: 3px !important;
+        width: 190px !important;
+        padding-top: 4px !important;
       }
 
       .print-watermark-row {
@@ -270,7 +270,7 @@
         </div>
       </div>
 
-      <!-- दरें बॉक्स (अतिरिक्त पोषण - हलवा एवं उपमा की दरें शामिल) -->
+      <!-- दरें बॉक्स -->
       <div class="flex flex-wrap gap-3 items-center justify-between bg-emerald-50 p-3 rounded-xl border border-emerald-200 mb-4 text-xs font-semibold text-emerald-900 no-print">
         <div class="flex flex-wrap gap-3 items-center">
           <span class="font-bold flex items-center gap-1">⚙️ दरें (प्रति छात्र):</span>
@@ -420,24 +420,24 @@
       <div class="table-responsive-box">
         <table class="mdm-table">
           <colgroup>
-            <col style="width: 6.2%;">  <!-- दिनांक -->
-            <col style="width: 5.2%;">  <!-- दिन -->
-            <!-- PS 7 Cols -->
+            <col style="width: 9.6%;">  <!-- दिनांक (पूर्ण 10 अक्षर स्पष्ट दिखेंगे) -->
+            <col style="width: 6.4%;">  <!-- दिन -->
+            <!-- PS 7 Cols (42%) -->
             <col class="ps-col" style="width: 5.2%;">  <!-- छात्र -->
-            <col class="ps-col" style="width: 5.5%;">  <!-- संचयी -->
-            <col class="ps-col" style="width: 5.5%;">  <!-- गेहूं -->
-            <col class="ps-col" style="width: 5.5%;">  <!-- चावल -->
+            <col class="ps-col" style="width: 5.8%;">  <!-- संचयी -->
+            <col class="ps-col" style="width: 5.8%;">  <!-- गेहूं -->
+            <col class="ps-col" style="width: 5.8%;">  <!-- चावल -->
             <col class="ps-col" style="width: 5.2%;">  <!-- दूध -->
-            <col class="ps-col" style="width: 5.0%;">  <!-- फल -->
-            <col class="ps-col" style="width: 12.4%;"> <!-- लागत -->
-            <!-- UPS 7 Cols -->
+            <col class="ps-col" style="width: 4.8%;">  <!-- फल -->
+            <col class="ps-col" style="width: 9.4%;">  <!-- लागत (संतुलित) -->
+            <!-- UPS 7 Cols (42%) -->
             <col class="ups-col" style="width: 5.2%;">  <!-- छात्र -->
-            <col class="ups-col" style="width: 5.5%;">  <!-- संचयी -->
-            <col class="ups-col" style="width: 5.5%;">  <!-- गेहूं -->
-            <col class="ups-col" style="width: 5.5%;">  <!-- चावल -->
+            <col class="ups-col" style="width: 5.8%;">  <!-- संचयी -->
+            <col class="ups-col" style="width: 5.8%;">  <!-- गेहूं -->
+            <col class="ups-col" style="width: 5.8%;">  <!-- चावल -->
             <col class="ups-col" style="width: 5.2%;">  <!-- दूध -->
-            <col class="ups-col" style="width: 5.0%;">  <!-- फल -->
-            <col class="ups-col" style="width: 12.4%;"> <!-- लागत -->
+            <col class="ups-col" style="width: 4.8%;">  <!-- फल -->
+            <col class="ups-col" style="width: 9.4%;">  <!-- लागत (संतुलित) -->
           </colgroup>
           <thead>
             <tr class="no-print"><th colspan="16" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th></tr>
@@ -549,7 +549,6 @@ var monthsHindi = ["जनवरी", "फ़रवरी", "मार्च", "
 function filterCap(el) { el.value = el.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase(); }
 function filterNum(el) { el.value = el.value.replace(/[^0-9]/g, ''); }
 
-/* कर्सर बैक जंपिंग बग फिक्स्ड (65 टाइप करने पर 65 ही रहेगा) */
 function cleanNum(el) {
   var oldPos = el.selectionStart;
   var oldLen = el.value.length;
@@ -558,7 +557,6 @@ function cleanNum(el) {
   el.setSelectionRange(newPos, newPos);
 }
 
-// माह में शुक्रवार का क्रम (1st, 2nd, 3rd, 4th, 5th Friday)
 function getFridayIndex(year, monthIndex, dayOfMonth) {
   var count = 0;
   for (var i = 1; i <= dayOfMonth; i++) {
@@ -604,10 +602,6 @@ function initCurrentDates() {
   var mSelect = document.getElementById('selMonth');
   mSelect.value = curMonth;
 }
-
-// =========================================================================
-// LOCALSTORAGE AUTO-SAVE & AUTO-LOAD ENGINE
-// =========================================================================
 
 function saveSchoolDetails() {
   var schData = {
@@ -791,7 +785,7 @@ function buildMonth() {
   setLevel(curLvl, true);
   updateHeader();
 }
-function getAttVal(type, dayNum) {
+  function getAttVal(type, dayNum) {
   if (dayNum < 1) return 0;
   var el = document.getElementById(type + '_att_' + dayNum);
   return el ? (parseInt(el.value, 10) || 0) : 0;
@@ -814,7 +808,6 @@ function recalc() {
   document.getElementById('lbl_ups_fruit').innerText = fruitText;
   document.getElementById('lbl_tot_fruit').innerText = 'कुल ' + fruitText;
 
-  // अंतिम भरे हुए दिन की पहचान
   var lastEnteredDay = 0;
   for (var d = 1; d <= tot; d++) {
     var inPs = document.getElementById('ps_att_' + d);
@@ -857,13 +850,11 @@ function recalc() {
     cPs += aPs; cUps += aUps;
     tPsAtt += aPs; tUpsAtt += aUps;
 
-    // खाद्यान्न (सोमवार व गुरुवार गेहूं, शेष कार्यदिवस चावल)
     var wP = (!isSun && (isMon || isThu)) ? (aPs * 0.1) : 0;
     var rP = (!isSun && !isMon && !isThu) ? (aPs * 0.1) : 0;
     var wU = (!isSun && (isMon || isThu)) ? (aUps * 0.15) : 0;
     var rU = (!isSun && !isMon && !isThu) ? (aUps * 0.15) : 0;
 
-    // 1. फल प्रतिपूर्ति: सोमवार अथवा (सोमवार को 0 होने पर) मंगलवार
     var isPsFruitDay = isMon;
     var isUpsFruitDay = isMon;
     if (isTue && d > 1) {
@@ -874,7 +865,6 @@ function recalc() {
     var fU = isUpsFruitDay ? aUps : 0;
     tFPs += fP; tFUps += fU;
 
-    // 2. दूध प्रतिपूर्ति: बुधवार अथवा (बुधवार को 0 होने पर) गुरुवार
     var isPsMilkDay = isWed;
     var isUpsMilkDay = isWed;
     if (isThu && d > 1) {
@@ -885,7 +875,6 @@ function recalc() {
     var mU = isUpsMilkDay ? (aUps * 0.20) : 0;
     tPsM += mP; tUpsM += mU;
 
-    // 3. अतिरिक्त पोषण प्रतिपूर्ति: शुक्रवार अथवा (शुक्रवार को 0 होने पर) शनिवार
     var isPsExtraDay = isFri;
     var isUpsExtraDay = isFri;
     var refFriD = d;
@@ -900,7 +889,7 @@ function recalc() {
 
     if (!isSun && (isPsExtraDay || isUpsExtraDay)) {
       var fIdx = getFridayIndex(y, m, refFriD);
-      var isHalwa = (fIdx % 2 !== 0); // 1st, 3rd शुक्रवार हलवा, 2nd, 4th उपमा
+      var isHalwa = (fIdx % 2 !== 0);
       var activeExtraRate = isHalwa ? rHalwa : rUpma;
 
       if (isPsExtraDay) {
@@ -920,14 +909,12 @@ function recalc() {
       }
     }
 
-    // कुल दैनिक लागत
     var costP = (aPs * rPs) + (fP * rFruit) + dayExtraMatP + dayCookCostP;
     var costU = (aUps * rUps) + (fU * rFruit) + dayExtraMatU + dayCookCostU;
 
     tPsW += wP; tPsR += rP; tPsC += costP;
     tUpsW += wU; tUpsR += rU; tUpsC += costU;
 
-    // तालिका में मान प्रदर्शित करना
     if (isSun) {
       document.getElementById('ps_cumu_' + d).innerText = '';
       document.getElementById('ps_w_' + d).innerText = '';
@@ -975,7 +962,6 @@ function recalc() {
     }
   }
 
-  // यदि पूरे महीने में कुछ भी दर्ज नहीं है
   if (lastEnteredDay === 0) {
     document.getElementById('ft_ps_att').innerText = '';
     document.getElementById('ft_ps_w').innerText = '';
@@ -1023,7 +1009,6 @@ function recalc() {
     return;
   }
 
-  // फुटर कुल योग
   document.getElementById('ft_ps_att').innerText = tPsAtt;
   document.getElementById('ft_ps_w').innerText = tPsW.toFixed(2);
   document.getElementById('ft_ps_r').innerText = tPsR.toFixed(2);
@@ -1038,7 +1023,6 @@ function recalc() {
   document.getElementById('ft_ups_f').innerText = tFUps;
   document.getElementById('ft_ups_c').innerText = '₹' + tUpsC.toFixed(2);
 
-  // 1. प्राथमिक समरी कार्ड
   document.getElementById('sm_ps_w').innerText = tPsW.toFixed(2) + ' kg';
   document.getElementById('sm_ps_r').innerText = tPsR.toFixed(2) + ' kg';
   document.getElementById('sm_ps_milk').innerText = tPsM.toFixed(1) + ' L';
@@ -1049,7 +1033,6 @@ function recalc() {
   document.getElementById('sm_ps_cook').innerText = '₹' + tCookPs.toFixed(2);
   document.getElementById('sm_ps_c').innerText = '₹' + tPsC.toFixed(2);
 
-  // 2. उच्च प्राथमिक समरी कार्ड
   document.getElementById('sm_ups_w').innerText = tUpsW.toFixed(2) + ' kg';
   document.getElementById('sm_ups_r').innerText = tUpsR.toFixed(2) + ' kg';
   document.getElementById('sm_ups_milk').innerText = tUpsM.toFixed(1) + ' L';
@@ -1060,7 +1043,6 @@ function recalc() {
   document.getElementById('sm_ups_cook').innerText = '₹' + tCookUps.toFixed(2);
   document.getElementById('sm_ups_c').innerText = '₹' + tUpsC.toFixed(2);
 
-  // 3. कुल योग समरी कार्ड
   document.getElementById('sm_tot_w').innerText = (tPsW + tUpsW).toFixed(2) + ' kg';
   document.getElementById('sm_tot_r').innerText = (tPsR + tUpsR).toFixed(2) + ' kg';
   document.getElementById('sm_tot_milk').innerText = (tPsM + tUpsM).toFixed(1) + ' L';
@@ -1108,7 +1090,6 @@ function printMdmRegister() {
   window.print();
 }
 
-// प्रारंभिक लोडिंग प्रवाह
 initCurrentDates();
 loadSchoolDetails();
 buildMonth();
