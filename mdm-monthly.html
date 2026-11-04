@@ -64,16 +64,17 @@
     .seo-table th { background: #e2e8f0; font-weight: bold; color: #0f172a; }
 
     /* =========================================================
-       A4 PORTRAIT फुल-पेज सिंगल प्रिंट इंजन (ऊँचाई व चौड़ाई पूर्ण संतुलित)
+       A4 PORTRAIT 1-PAGE EXACT LOCK PRINT ENGINE
        ========================================================= */
     @page {
-      size: portrait;
-      margin: 3.5mm 4.5mm !important;
+      size: A4 portrait !important;
+      margin: 3mm 4mm !important;
     }
 
     @media print {
       html, body {
         width: 100% !important;
+        height: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
         background: #ffffff !important;
@@ -89,8 +90,10 @@
         width: 100% !important;
         max-width: 100% !important;
         border: none !important;
+        zoom: 0.89 !important;
         page-break-after: avoid !important;
         page-break-inside: avoid !important;
+        break-inside: avoid !important;
       }
 
       .no-print, header, footer, .seo-guide { display: none !important; }
@@ -102,18 +105,18 @@
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 5px !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 3px !important;
       }
 
       .summary-card {
-        padding: 3px 4px !important;
-        border: 0.85pt solid #000 !important;
-        border-top-width: 2.5pt !important;
+        padding: 2.5px 4px !important;
+        border: 0.8pt solid #000 !important;
+        border-top-width: 2.4pt !important;
         border-radius: 0 !important;
       }
-      .summary-card h4 { font-size: 9.2px !important; margin: 0 0 1.5px 0 !important; font-weight: bold !important; }
-      .summary-card table { font-size: 8.4px !important; line-height: 1.25 !important; }
-      .summary-card td { padding: 0.5px 1.5px !important; }
+      .summary-card h4 { font-size: 9px !important; margin: 0 0 1px 0 !important; font-weight: bold !important; }
+      .summary-card table { font-size: 8.2px !important; line-height: 1.2 !important; }
+      .summary-card td { padding: 0.4px 1.5px !important; }
 
       .table-responsive-box {
         overflow: visible !important;
@@ -125,39 +128,39 @@
       table.mdm-table {
         width: 100% !important;
         min-width: 100% !important;
-        border: 1.1pt solid #000 !important;
-        font-size: 9.2px !important;
+        border: 1pt solid #000 !important;
+        font-size: 9px !important;
         border-collapse: collapse !important;
         table-layout: fixed !important;
       }
 
       table.mdm-table tr {
-        height: 6.5mm !important;
+        height: 5.6mm !important;
       }
 
       table.mdm-table th, table.mdm-table td {
-        border: 0.75pt solid #000 !important;
+        border: 0.7pt solid #000 !important;
         padding: 0 1px !important;
         color: #000 !important;
         vertical-align: middle !important;
-        line-height: 1.1 !important;
+        line-height: 1.05 !important;
       }
 
       table.mdm-table th {
         background: #e2e8f0 !important;
         color: #000 !important;
         font-weight: 800 !important;
-        font-size: 8.8px !important;
-        height: 6.2mm !important;
+        font-size: 8.6px !important;
+        height: 5.8mm !important;
       }
 
-      .th-banner { font-size: 9.2px !important; height: 5mm !important; }
-      .th-sub, .th-sub-ups { font-size: 8.2px !important; }
+      .th-banner { font-size: 9px !important; height: 4.8mm !important; }
+      .th-sub, .th-sub-ups { font-size: 8px !important; }
 
       input.att-in {
         border: none !important;
         background: transparent !important;
-        font-size: 9.6px !important;
+        font-size: 9.4px !important;
         font-weight: bold !important;
         color: #000 !important;
         width: 100% !important;
@@ -173,18 +176,18 @@
         display: flex !important;
         justify-content: space-between !important;
         align-items: flex-end !important;
-        margin-top: 18px !important;
+        margin-top: 15px !important;
         padding: 0 20px !important;
         page-break-inside: avoid !important;
       }
 
       .print-sign-col {
         text-align: center !important;
-        font-size: 10px !important;
+        font-size: 9.8px !important;
         font-weight: bold !important;
         border-top: 1.2px dashed #000 !important;
-        width: 190px !important;
-        padding-top: 4px !important;
+        width: 180px !important;
+        padding-top: 3px !important;
       }
 
       .print-watermark-row {
@@ -430,24 +433,24 @@
       <div class="table-responsive-box">
         <table class="mdm-table">
           <colgroup>
-            <col style="width: 8.6%;">  <!-- दिनांक (पूर्ण 10 अक्षर स्पष्ट दिखेंगे) -->
+            <col style="width: 9.6%;">  <!-- दिनांक (पूर्ण 10 अक्षर स्पष्ट दिखेंगे) -->
             <col style="width: 6.4%;">  <!-- दिन -->
-            <!-- PS 7 Cols (42.5%) -->
-            <col class="ps-col" style="width: 4.8%;">  <!-- छात्र -->
+            <!-- PS 7 Cols (42%) -->
+            <col class="ps-col" style="width: 5.0%;">  <!-- छात्र -->
             <col class="ps-col" style="width: 5.6%;">  <!-- संचयी -->
             <col class="ps-col" style="width: 5.8%;">  <!-- गेहूं -->
             <col class="ps-col" style="width: 5.8%;">  <!-- चावल -->
-            <col class="ps-col" style="width: 5.2%;">  <!-- दूध -->
-            <col class="ps-col" style="width: 4.8%;">  <!-- फल -->
-            <col class="ps-col" style="width: 10.5%;"> <!-- लागत (संतुलित) -->
-            <!-- UPS 7 Cols (42.5%) -->
-            <col class="ups-col" style="width: 4.8%;">  <!-- छात्र -->
+            <col class="ps-col" style="width: 5.4%;">  <!-- दूध -->
+            <col class="ps-col" style="width: 5.0%;">  <!-- फल -->
+            <col class="ps-col" style="width: 9.4%;">  <!-- लागत (संतुलित) -->
+            <!-- UPS 7 Cols (42%) -->
+            <col class="ups-col" style="width: 5.0%;">  <!-- छात्र -->
             <col class="ups-col" style="width: 5.6%;">  <!-- संचयी -->
             <col class="ups-col" style="width: 5.8%;">  <!-- गेहूं -->
             <col class="ups-col" style="width: 5.8%;">  <!-- चावल -->
-            <col class="ups-col" style="width: 5.2%;">  <!-- दूध -->
-            <col class="ups-col" style="width: 4.8%;">  <!-- फल -->
-            <col class="ups-col" style="width: 10.5%;"> <!-- लागत (संतुलित) -->
+            <col class="ups-col" style="width: 5.4%;">  <!-- दूध -->
+            <col class="ups-col" style="width: 5.0%;">  <!-- फल -->
+            <col class="ups-col" style="width: 9.4%;">  <!-- लागत (संतुलित) -->
           </colgroup>
           <thead>
             <tr class="no-print"><th colspan="16" class="th-banner" id="thBanner">MID DAY MEAL REGISTER</th></tr>
