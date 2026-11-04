@@ -47,7 +47,7 @@
 
     /* Monthly Report Modal */
     #reportModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; overflow-y: auto; padding: 15px; }
-    .report-content { max-width: 1400px; margin: auto; background: white; padding: 20px; border-radius: 8px; position: relative; }
+    .report-content { max-width: 1420px; margin: auto; background: white; padding: 20px; border-radius: 8px; position: relative; }
     .close-modal { position: absolute; top: 15px; right: 20px; background: #dc2626; color: white; border: none; padding: 6px 12px; font-weight: bold; border-radius: 4px; cursor: pointer; }
 
     .print-header { display: none; text-align: center; margin-bottom: 6px; }
@@ -69,7 +69,7 @@
     .seo-table th { background: #e2e8f0; font-weight: bold; color: #0f172a; }
 
     /* =========================================================
-       PRINT ENGINE - Optimized for A4 Portrait Single Page
+       PRINT ENGINE - Optimized for A4 Landscape & Portrait
        ========================================================= */
     @media print {
       html, body {
@@ -88,7 +88,7 @@
       body.printing-monthly {
         @page {
           size: A4 landscape !important;
-          margin: 4mm 5mm !important;
+          margin: 3.5mm 4.5mm !important;
         }
       }
 
@@ -99,7 +99,7 @@
         width: 100% !important;
         padding: 0 !important;
         margin: 0 auto !important;
-        zoom: 0.94 !important;
+        zoom: 0.93 !important;
         page-break-after: avoid !important;
         page-break-inside: avoid !important;
         break-inside: avoid !important;
@@ -115,19 +115,19 @@
 
       body.printing-monthly .print-monthly-only th,
       body.printing-monthly .print-monthly-only td {
-        border: 0.8pt solid #000000 !important;
+        border: 0.75pt solid #000000 !important;
         padding: 0 1px !important;
         color: #000000 !important;
         vertical-align: middle !important;
-        font-size: 9.2px !important;
-        height: 5mm !important;
+        font-size: 8.8px !important;
+        height: 5.1mm !important;
         box-sizing: border-box !important;
       }
 
       body.printing-monthly .print-monthly-only th {
         background: #e2e8f0 !important;
         font-weight: 800 !important;
-        font-size: 9.5px !important;
+        font-size: 9.2px !important;
         height: 6.8mm !important;
       }
 
@@ -464,7 +464,7 @@
           </table>
         </div>
 
-        <!-- 3. Dedicated Extra Nutrition Table (अतिरिक्त पोषण हेतु पूर्णतः स्वतंत्र तालिका) -->
+        <!-- 3. Dedicated Extra Nutrition Table (अतिरिक्त पोषण हेतु स्वतंत्र तालिका) -->
         <div id="extraNutritionBox" style="display:none;">
           <div class="text-xs text-amber-900 font-bold mb-1.5 uppercase flex items-center gap-1.5">
             <span>🍯</span>
@@ -609,7 +609,7 @@
     </div>
   </footer>
 
-<!-- समर्पित प्रिंट के लिए छिपी हुई मासिक रिपोर्ट संरचना (A4 Landscape - Point Border Fixed) -->
+<!-- समर्पित प्रिंट के लिए छिपी हुई मासिक रिपोर्ट संरचना (A4 Landscape) -->
 <div class="print-monthly-only" id="printMonthlyContainer"></div>
 
 <!-- पिछले/मासिक विस्तृत रिकॉर्ड देखने का पॉप-अप (Modal) -->
@@ -646,24 +646,24 @@
     <div style="margin-bottom:8px; font-weight:bold; font-size:13px; color:#166534;" id="reportSchoolInfo"></div>
     
     <div style="max-height: 420px; overflow-x: auto; overflow-y: auto; border:1px solid #cbd5e1; border-radius:6px;">
-      <table style="width:100%; min-width:1150px; border-collapse:collapse; text-align:center; font-size:11px; table-layout:fixed;">
+      <table style="width:100%; min-width:1250px; border-collapse:collapse; text-align:center; font-size:11px; table-layout:fixed;">
         <colgroup>
-          <col style="width: 6.5%;">
+          <col style="width: 5.5%;">
+          <col style="width: 4%;">
+          <col style="width: 4.5%;">
           <col style="width: 4.5%;">
           <col style="width: 5%;">
           <col style="width: 5%;">
-          <col style="width: 5.5%;">
-          <col style="width: 5.5%;">
-          <col style="width: 5.5%;">
-          <col style="width: 5.5%;">
-          <col style="width: 5.5%;">
-          <col style="width: 5.5%;">
           <col style="width: 5%;">
           <col style="width: 5%;">
           <col style="width: 5%;">
-          <col style="width: 14%;">
-          <col style="width: 7.5%;">
-          <col style="width: 9%;">
+          <col style="width: 5%;">
+          <col style="width: 4.5%;">
+          <col style="width: 4.5%;">
+          <col style="width: 4.5%;">
+          <col style="width: 22%;">
+          <col style="width: 6.5%;">
+          <col style="width: 8%;">
         </colgroup>
         <thead>
           <tr style="background:#1e3a8a; color:white;">
@@ -680,7 +680,7 @@
             <th style="padding:5px; border:1px solid #94a3b8;">फल</th>
             <th style="padding:5px; border:1px solid #94a3b8;">दूध (L)</th>
             <th style="padding:5px; border:1px solid #94a3b8;">चीनी (kg)</th>
-            <th style="padding:5px; border:1px solid #94a3b8;">अतिरिक्त भोजन सामग्री</th>
+            <th style="padding:5px; border:1px solid #94a3b8;">अतिरिक्त भोजन सामग्री (घटकवार व लागत)</th>
             <th style="padding:5px; border:1px solid #94a3b8;">रसोइया (₹)</th>
             <th style="padding:5px; border:1px solid #94a3b8;">कुल लागत (₹)</th>
           </tr>
@@ -854,9 +854,7 @@ function calcDaily() {
     return;
   }
 
-  // -------------------------------------------------------------
   // 1. नियमित मध्याह्न भोजन सामग्री तालिका
-  // -------------------------------------------------------------
   var rows = [];
 
   var totalConvCost = (ps * rPs) + (ups * rUps);
@@ -866,25 +864,21 @@ function calcDaily() {
     cost: "₹" + totalConvCost.toFixed(2)
   });
 
-  // खाद्यान्न (गेहूं / चावल)
   if (day === "Monday" || day === "Thursday") {
     rows.push({ name: "1. WHEAT FLOUR (गेहूं आटा - रोटी)", val: (ps * 0.1 + ups * 0.15).toFixed(2) + " KG", cost: "-" });
   } else {
     rows.push({ name: "1. RICE / खाद्यान्न (चावल / तहरी)", val: (ps * 0.1 + ups * 0.15).toFixed(2) + " KG", cost: "-" });
   }
 
-  // दाल अथवा सोयाबीन बड़ी
   if (day === "Tuesday" || day === "Thursday") {
     rows.push({ name: "2. PULSES (दाल)", val: (ps * 0.02 + ups * 0.03).toFixed(2) + " KG", cost: "-" });
   } else {
     rows.push({ name: "2. SOYA CHUNKS (सोयाबीन बड़ी)", val: (((ps * 0.1 + ups * 0.15)) * 0.1).toFixed(2) + " KG", cost: "-" });
   }
 
-  // मौसमी सब्जी एवं तेल
   rows.push({ name: "3. MIXED VEGETABLES (मौसमी सब्जी)", val: (ps * 0.05 + ups * 0.075).toFixed(3) + " KG", cost: "-" });
   rows.push({ name: "4. COOKING OIL (खाद्य तेल)", val: (ps * 5 + ups * 7.5).toFixed(1) + " G/ML", cost: "-" });
 
-  // दूध एवं चीनी (बुधवार अथवा गुरुवार को प्रतिपूर्ति)
   var hasMilk = (day === "Wednesday") || (day === "Thursday" && isRollover);
   if (hasMilk) {
     var milkLtr = (ps * 0.15 + ups * 0.20);
@@ -893,7 +887,6 @@ function calcDaily() {
     rows.push({ name: "6. MILK GLASSES", val: tot + " GLASSES", cost: "-" });
   }
 
-  // फल (सोमवार अथवा मंगलवार को प्रतिपूर्ति)
   var hasFruit = (day === "Monday") || (day === "Tuesday" && isRollover);
   if (hasFruit) {
     var fruitCost = tot * rFruit;
@@ -912,9 +905,7 @@ function calcDaily() {
   }
   tbBody.innerHTML = html;
 
-  // -------------------------------------------------------------
   // 2. अतिरिक्त पोषण हेतु पूर्णतः स्वतंत्र तालिका (घटकवार अलग-अलग पंक्तियां)
-  // -------------------------------------------------------------
   var hasExtraFood = (day === "Friday") || (day === "Saturday" && isRollover);
   if (hasExtraFood) {
     extraBox.style.display = "block";
@@ -932,7 +923,6 @@ function calcDaily() {
     var extraRows = [];
 
     if (isHalwa) {
-      // मीठा हलवा: सूजी 30g, देशी घी 5g, चीनी 22g, घिसा नारियल 5g[cite: 1]
       extraRows.push({ name: "1. सूजी (30 ग्राम प्रति छात्र)", val: (tot * 0.030).toFixed(3) + " KG", cost: "-" });
       extraRows.push({ name: "2. शुद्ध देशी घी (05 ग्राम प्रति छात्र)", val: (tot * 0.005).toFixed(3) + " KG", cost: "-" });
       extraRows.push({ name: "3. चीनी (22 ग्राम प्रति छात्र)", val: (tot * 0.022).toFixed(3) + " KG", cost: "-" });
@@ -941,7 +931,6 @@ function calcDaily() {
       var halwaMaterialCost = tot * 7.00;
       extraRows.push({ name: "★ सामग्री कुल लागत (दर ₹7.00 प्रति छात्र)", val: tot + " छात्र", cost: "₹" + halwaMaterialCost.toFixed(2) });
     } else {
-      // उपमा / नमकीन हलवा: सूजी 30g, खाद्य तेल 2g, मौसमी सब्जी 20g, मूँगफली दाना 6g[cite: 1]
       extraRows.push({ name: "1. सूजी (30 ग्राम प्रति छात्र)", val: (tot * 0.030).toFixed(3) + " KG", cost: "-" });
       extraRows.push({ name: "2. खाद्य तेल (02 ग्राम प्रति छात्र)", val: (tot * 0.002).toFixed(3) + " KG", cost: "-" });
       extraRows.push({ name: "3. मौसमी हरी सब्जी (20 ग्राम प्रति छात्र)", val: (tot * 0.020).toFixed(3) + " KG", cost: "-" });
@@ -1024,7 +1013,7 @@ function printDailyA4() {
 }
 
 // =========================================================
-// MONTHLY REPORT POP-UP & DEDICATED PRINT ENGINE (A4 LANDSCAPE @ 94% SCALE)
+// MONTHLY REPORT POP-UP & DEDICATED PRINT ENGINE (A4 LANDSCAPE)
 // =========================================================
 function openMonthlyReport() {
   var dVal = document.getElementById('dailyDate').value;
@@ -1064,49 +1053,49 @@ function generateReportTable() {
       '<h2 style="margin:0; font-size:13px; text-transform:uppercase; font-weight:800; letter-spacing:0.5px;">MDM MONTHLY DETAILED CONSUMPTION, MENU & COST REGISTER</h2>' +
       '<p style="margin:1px 0 4px 0; font-size:9.5px; font-weight:bold;">' + headerStr + '</p>' +
     '</div>' +
-    '<table style="width:100%; border-collapse:collapse; text-align:center; font-size:9.2px; table-layout:fixed; border:1pt solid #000;">' +
+    '<table style="width:100%; border-collapse:collapse; text-align:center; font-size:9px; table-layout:fixed; border:1pt solid #000;">' +
       '<colgroup>' +
-        '<col style="width: 6.5%;">' +
+        '<col style="width: 5.5%;">' +
+        '<col style="width: 4%;">' +
+        '<col style="width: 4.5%;">' +
         '<col style="width: 4.5%;">' +
         '<col style="width: 5%;">' +
         '<col style="width: 5%;">' +
-        '<col style="width: 5.5%;">' +
-        '<col style="width: 5.5%;">' +
-        '<col style="width: 5.5%;">' +
-        '<col style="width: 5.5%;">' +
-        '<col style="width: 5.5%;">' +
-        '<col style="width: 5.5%;">' +
         '<col style="width: 5%;">' +
         '<col style="width: 5%;">' +
         '<col style="width: 5%;">' +
-        '<col style="width: 14%;">' +
-        '<col style="width: 7.5%;">' +
-        '<col style="width: 9%;">' +
+        '<col style="width: 5%;">' +
+        '<col style="width: 4.5%;">' +
+        '<col style="width: 4.5%;">' +
+        '<col style="width: 4.5%;">' +
+        '<col style="width: 22%;">' +
+        '<col style="width: 6.5%;">' +
+        '<col style="width: 8%;">' +
       '</colgroup>' +
       '<thead>' +
         '<tr style="background:#e2e8f0; font-weight:800;">' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">दिनांक</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">दिन</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">प्राथ.</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">उच्च प्रा.</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">गेहूं (kg)</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">चावल (kg)</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">दाल (kg)</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">सोया बड़ी</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">सब्जी (kg)</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">तेल (ml)</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">फल</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">दूध (L)</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">चीनी (kg)</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">अतिरिक्त भोजन सामग्री</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">रसोइया (₹)</th>' +
-          '<th style="border:0.8pt solid #000; padding:1px 0;">कुल लागत (₹)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">दिनांक</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">दिन</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">प्राथ.</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">उच्च प्रा.</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">गेहूं (kg)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">चावल (kg)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">दाल (kg)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">सोया बड़ी</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">सब्जी (kg)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">तेल (ml)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">फल</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">दूध (L)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">चीनी (kg)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">अतिरिक्त भोजन सामग्री (घटकवार व लागत)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">रसोइया (₹)</th>' +
+          '<th style="border:0.75pt solid #000; padding:1px 0;">कुल लागत (₹)</th>' +
         '</tr>' +
       '</thead>' +
       '<tbody>';
 
   var tW = 0, tR = 0, tDal = 0, tSoya = 0, tVeg = 0, tOil = 0, tFruitCount = 0, tMilkLtr = 0, tSugarKg = 0;
-  var tCookHonorarium = 0, tTotalCost = 0;
+  var tExtraFoodMaterialCost = 0, tCookHonorarium = 0, tTotalCost = 0;
   var tPsBeneficiaries = 0, tUpsBeneficiaries = 0;
 
   for (var d = 1; d <= daysInMonth; d++) {
@@ -1148,7 +1137,7 @@ function generateReportTable() {
 
     var wheat = 0, rice = 0, dal = 0, soya = 0, veg = 0, oil = 0;
     var fruit = 0, milk = 0, sugar = 0;
-    var extraFoodText = "-";
+    var extraFoodDetailed = "-";
     var dayHonorarium = 0;
     var dayTotalCost = 0;
 
@@ -1158,14 +1147,12 @@ function generateReportTable() {
 
       var dayConv = (ps * rPs) + (ups * rUps);
 
-      // खाद्यान्न
       if (isMon || isThu) {
         wheat = (ps * 0.1 + ups * 0.15);
       } else {
         rice = (ps * 0.1 + ups * 0.15);
       }
 
-      // दाल अथवा सोयाबीन
       if (isTue || isThu) {
         dal = (ps * 0.02 + ups * 0.03);
       } else {
@@ -1175,31 +1162,42 @@ function generateReportTable() {
       veg = (ps * 0.05 + ups * 0.075);
       oil = (ps * 5 + ups * 7.5);
 
-      // फल
       if (isMon || (isTue && dayRollover)) {
         fruit = tot;
         dayConv += (tot * rFruit);
       }
 
-      // दूध व चीनी
       if (isWed || (isThu && dayRollover)) {
         milk = (ps * 0.15 + ups * 0.20);
         sugar = milk * 0.1;
       }
 
-      // शुक्रवार अतिरिक्त भोजन (अथवा शनिवार प्रतिपूर्ति)
+      // शुक्रवार अतिरिक्त भोजन (अथवा शनिवार प्रतिपूर्ति) - समस्त घटक एवं कोष्ठक में लागत
       if (isFri || (isSat && dayRollover)) {
         var refFriD = isFri ? d : (d - 1);
         var fIdx = getFridayIndex(yr, mo - 1, refFriD);
         var isHalwa = (fIdx % 2 !== 0);
 
-        var extraRate = isHalwa ? 7.00 : 4.00;
-        dayHonorarium = tot * rHonorarium;
-        dayConv += (tot * extraRate) + dayHonorarium;
+        var extraMatRate = isHalwa ? 7.00 : 4.00;
+        var dayExtraMatCost = tot * extraMatRate;
+        tExtraFoodMaterialCost += dayExtraMatCost;
 
-        extraFoodText = isHalwa 
-          ? ("हलवा (" + (tot*0.03).toFixed(1) + "k सूजी, " + (tot*0.005).toFixed(2) + "k घी)") 
-          : ("उपमा (" + (tot*0.03).toFixed(1) + "k सूजी, " + (tot*0.02).toFixed(1) + "k सब्जी)");
+        dayHonorarium = tot * rHonorarium;
+        dayConv += dayExtraMatCost + dayHonorarium;
+
+        if (isHalwa) {
+          var sujiH = (tot * 0.030).toFixed(2);
+          var gheeH = (tot * 0.005).toFixed(3);
+          var chiniH = (tot * 0.022).toFixed(2);
+          var nariyalH = (tot * 0.005).toFixed(3);
+          extraFoodDetailed = "मीठा हलवा: सूजी " + sujiH + "kg, घी " + gheeH + "kg, चीनी " + chiniH + "kg, नारियल " + nariyalH + "kg [₹" + dayExtraMatCost.toFixed(2) + "]";
+        } else {
+          var sujiU = (tot * 0.030).toFixed(2);
+          var telU = (tot * 0.002).toFixed(3);
+          var sabjiU = (tot * 0.020).toFixed(2);
+          var mungU = (tot * 0.006).toFixed(3);
+          extraFoodDetailed = "उपमा: सूजी " + sujiU + "kg, तेल " + telU + "kg, सब्जी " + sabjiU + "kg, मूँगफली " + mungU + "kg [₹" + dayExtraMatCost.toFixed(2) + "]";
+        }
       }
 
       dayTotalCost = dayConv;
@@ -1221,22 +1219,22 @@ function generateReportTable() {
 
     var rowHtml = 
       '<tr' + (isSun ? ' style="background:#fee2e2;"' : '') + '>' +
-        '<td style="border:0.8pt solid #000;">' + formattedD + '</td>' +
-        '<td style="border:0.8pt solid #000; font-weight:bold;">' + dayName.slice(0,3) + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (isSun ? '-' : ps) + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (isSun ? '-' : ups) + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (wheat > 0 ? wheat.toFixed(2) : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (rice > 0 ? rice.toFixed(2) : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (dal > 0 ? dal.toFixed(2) : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (soya > 0 ? soya.toFixed(2) : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (veg > 0 ? veg.toFixed(3) : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (oil > 0 ? oil.toFixed(1) : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000; color:#b45309; font-weight:bold;">' + (fruit > 0 ? fruit : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (milk > 0 ? milk.toFixed(1) : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000;">' + (sugar > 0 ? sugar.toFixed(2) : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000; font-size:8.5px; text-align:left; padding-left:2px;">' + extraFoodText + '</td>' +
-        '<td style="border:0.8pt solid #000; font-weight:bold; color:#0f766e;">' + (dayHonorarium > 0 ? ('₹' + dayHonorarium.toFixed(2)) : '-') + '</td>' +
-        '<td style="border:0.8pt solid #000; font-weight:bold;">' + (isSun ? '₹0.00' : '₹' + dayTotalCost.toFixed(2)) + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + formattedD + '</td>' +
+        '<td style="border:0.75pt solid #000; font-weight:bold;">' + dayName.slice(0,3) + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (isSun ? '-' : ps) + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (isSun ? '-' : ups) + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (wheat > 0 ? wheat.toFixed(2) : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (rice > 0 ? rice.toFixed(2) : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (dal > 0 ? dal.toFixed(2) : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (soya > 0 ? soya.toFixed(2) : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (veg > 0 ? veg.toFixed(3) : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (oil > 0 ? oil.toFixed(1) : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000; color:#b45309; font-weight:bold;">' + (fruit > 0 ? fruit : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (milk > 0 ? milk.toFixed(1) : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000;">' + (sugar > 0 ? sugar.toFixed(2) : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000; font-size:8px; line-height:1.2; text-align:left; padding:2px 3px; white-space:normal; word-break:break-word;">' + extraFoodDetailed + '</td>' +
+        '<td style="border:0.75pt solid #000; font-weight:bold; color:#0f766e;">' + (dayHonorarium > 0 ? ('₹' + dayHonorarium.toFixed(2)) : '-') + '</td>' +
+        '<td style="border:0.75pt solid #000; font-weight:bold;">' + (isSun ? '₹0.00' : '₹' + dayTotalCost.toFixed(2)) + '</td>' +
       '</tr>';
 
     printHtml += rowHtml;
@@ -1245,21 +1243,21 @@ function generateReportTable() {
 
   var footHtml = 
     '<tr style="background:#e2e8f0; font-weight:900;">' +
-      '<td colspan="2" style="border:0.8pt solid #000; text-align:right;">मासिक कुल योग:</td>' +
-      '<td style="border:0.8pt solid #000;">' + tPsBeneficiaries + '</td>' +
-      '<td style="border:0.8pt solid #000;">' + tUpsBeneficiaries + '</td>' +
-      '<td style="border:0.8pt solid #000; color:#9a3412;">' + tW.toFixed(2) + '</td>' +
-      '<td style="border:0.8pt solid #000; color:#166534;">' + tR.toFixed(2) + '</td>' +
-      '<td style="border:0.8pt solid #000;">' + tDal.toFixed(2) + '</td>' +
-      '<td style="border:0.8pt solid #000;">' + tSoya.toFixed(2) + '</td>' +
-      '<td style="border:0.8pt solid #000;">' + tVeg.toFixed(3) + '</td>' +
-      '<td style="border:0.8pt solid #000;">' + tOil.toFixed(1) + '</td>' +
-      '<td style="border:0.8pt solid #000; color:#b45309;">' + tFruitCount + '</td>' +
-      '<td style="border:0.8pt solid #000;">' + tMilkLtr.toFixed(1) + '</td>' +
-      '<td style="border:0.8pt solid #000;">' + tSugarKg.toFixed(2) + '</td>' +
-      '<td style="border:0.8pt solid #000; font-size:8.5px;">माह अनुसार गणना</td>' +
-      '<td style="border:0.8pt solid #000; color:#0f766e;">₹' + tCookHonorarium.toFixed(2) + '</td>' +
-      '<td style="border:0.8pt solid #000; color:#b91c1c;">₹' + tTotalCost.toFixed(2) + '</td>' +
+      '<td colspan="2" style="border:0.75pt solid #000; text-align:right;">मासिक कुल योग:</td>' +
+      '<td style="border:0.75pt solid #000;">' + tPsBeneficiaries + '</td>' +
+      '<td style="border:0.75pt solid #000;">' + tUpsBeneficiaries + '</td>' +
+      '<td style="border:0.75pt solid #000; color:#9a3412;">' + tW.toFixed(2) + '</td>' +
+      '<td style="border:0.75pt solid #000; color:#166534;">' + tR.toFixed(2) + '</td>' +
+      '<td style="border:0.75pt solid #000;">' + tDal.toFixed(2) + '</td>' +
+      '<td style="border:0.75pt solid #000;">' + tSoya.toFixed(2) + '</td>' +
+      '<td style="border:0.75pt solid #000;">' + tVeg.toFixed(3) + '</td>' +
+      '<td style="border:0.75pt solid #000;">' + tOil.toFixed(1) + '</td>' +
+      '<td style="border:0.75pt solid #000; color:#b45309;">' + tFruitCount + '</td>' +
+      '<td style="border:0.75pt solid #000;">' + tMilkLtr.toFixed(1) + '</td>' +
+      '<td style="border:0.75pt solid #000;">' + tSugarKg.toFixed(2) + '</td>' +
+      '<td style="border:0.75pt solid #000; font-size:8.5px; color:#b45309;">कुल सामग्री: ₹' + tExtraFoodMaterialCost.toFixed(2) + '</td>' +
+      '<td style="border:0.75pt solid #000; color:#0f766e;">₹' + tCookHonorarium.toFixed(2) + '</td>' +
+      '<td style="border:0.75pt solid #000; color:#b91c1c;">₹' + tTotalCost.toFixed(2) + '</td>' +
     '</tr>';
 
   printHtml += footHtml + '</tbody></table>';
@@ -1287,7 +1285,7 @@ function printMonthlyReportNow() {
 
   var style = document.createElement('style');
   style.id = 'dynamic-print-page';
-  style.innerHTML = '@page { size: landscape !important; margin: 4mm 5mm !important; }';
+  style.innerHTML = '@page { size: landscape !important; margin: 3.5mm 4.5mm !important; }';
   document.head.appendChild(style);
 
   document.body.className = 'printing-monthly';
