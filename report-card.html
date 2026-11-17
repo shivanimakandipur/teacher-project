@@ -297,6 +297,14 @@
       margin-bottom: 0 !important;
     }
 
+    @media screen and (max-width: 767px) {
+      .hpc-page { overflow-x: auto; }
+      .hpc-page .p1-grow-grid { display: block !important; }
+      .hpc-page .p1-grow-grid > div { width: 100%; margin-bottom: 6px; }
+      .hpc-page .p2-two-col-grid { display: block; }
+      .hpc-page .p2-col-flex { margin-bottom: 6px; }
+    }
+
     @media print {
       @page { size: A4 portrait; margin: 3.5mm; }
       html, body {
@@ -463,7 +471,7 @@
         <a href="shasanadesh.html" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-emerald-700 transition">
           <i class="fa-solid fa-file-pdf mr-1"></i> शासनादेश
         </a>
-        <a href="#hpc-guide-article" class="px-3 py-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition">
+        <a href="#hpc-guide-details" onclick="openGuide()" class="px-3 py-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition">
           <i class="fa-solid fa-book-open mr-1"></i> विस्तृत मार्गदर्शिका एवं नियम
         </a>
       </nav>
@@ -564,7 +572,7 @@
             2. छात्र/छात्रा जोड़ें (नाम केवल अक्षरों में, SR/APAAR अंकों में तथा वैकल्पिक फोटो)
           </h3>
           <p class="text-[11px] text-slate-500">
-            यदि बच्चा सामने खड़ा है तो <b>'कैमरा'</b> से तुरंत फोटो खींच लें या <b>'गैलरी'</b> से चुनें। फोटो न होने पर कार्ड में <b>खाली फोटो बॉक्स</b> बनेगा जिसमें बाद में फोटो चिपका सकते हैं।
+            छात्र जोड़ने के बाद उसके कार्ड के <b>फोटो बॉक्स</b> के नीचे 📷 (कैमरा) या 🖼️ (गैलरी) से फोटो लगाएँ। फोटो न लगाने पर खाली बॉक्स छपेगा, जिसमें बाद में फोटो चिपका सकते हैं।
           </p>
         </div>
         <div id="urduToggleContainer" class="hidden items-center gap-2 bg-amber-50 border border-amber-300 px-3 py-1.5 rounded-lg text-xs font-bold text-amber-900">
@@ -679,23 +687,6 @@
           </div>
         </div>
 
-        <!-- नया फोटो विकल्प: कैमरा से तुरंत खींचें या गैलरी से चुनें या खाली छोड़ें -->
-        <div>
-          <label class="font-bold text-blue-900 block mb-1">छात्र फोटो (कैमरा / गैलरी / खाली):</label>
-          <div class="flex items-center gap-1">
-            <button type="button" onclick="openCameraModal(null)" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-lg cursor-pointer transition flex items-center justify-center gap-1" title="बच्चा सामने खड़ा है तो तुरंत फोटो खींचें">
-              <i class="fa-solid fa-camera"></i> कैमरा
-            </button>
-            <button type="button" onclick="triggerGalleryUpload(null)" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold py-2 px-2 rounded-lg cursor-pointer transition flex items-center justify-center gap-1" title="गैलरी में सेव फोटो चुनें">
-              <i class="fa-solid fa-image"></i> गैलरी
-            </button>
-            <div id="formPhotoPreviewWrap" class="hidden relative w-9 h-9 border border-emerald-500 rounded overflow-hidden shrink-0 bg-white">
-              <img id="formPhotoPreviewImg" src="" alt="Preview" class="w-full h-full object-cover">
-              <button type="button" onclick="clearFormPendingPhoto()" class="absolute top-0 right-0 bg-red-600 text-white text-[8px] px-1 font-bold leading-tight cursor-pointer" title="फोटो हटाएं">&times;</button>
-            </div>
-          </div>
-        </div>
-
         <div>
           <button onclick="addStudent()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 px-4 rounded-xl shadow-sm cursor-pointer transition flex items-center justify-center gap-1.5 text-sm">
             <i class="fa-solid fa-user-plus"></i> छात्र कार्ड में जोड़ें
@@ -730,7 +721,11 @@
     </div>
 
     <!-- 4. Comprehensive SEO Pillar Article -->
-    <article id="hpc-guide-article" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-8 no-print mt-12 leading-relaxed text-slate-700">
+    <details id="hpc-guide-details" class="no-print mt-8 bg-white border border-slate-200 rounded-2xl shadow-sm">
+      <summary class="cursor-pointer select-none p-4 font-extrabold text-slate-800 flex items-center gap-2">
+        <i class="fa-solid fa-book-open text-amber-600"></i> विस्तृत मार्गदर्शिका एवं नियम पढ़ें (खोलने के लिए दबाएँ)
+      </summary>
+    <article id="hpc-guide-article" class="p-5 sm:p-10 space-y-8 leading-relaxed text-slate-700 border-t border-slate-200">
       <div class="space-y-4 text-sm sm:text-base">
         <h2 class="text-2xl font-extrabold text-slate-900">समग्र प्रगति पत्र (HPC) क्या है?</h2>
         <p>समग्र प्रगति पत्र (Holistic Progress Card) राष्ट्रीय शिक्षा नीति 2020 के अनुसार बना ऐसा रिपोर्ट कार्ड है जो केवल परीक्षा के अंक नहीं, बल्कि बच्चे के संज्ञानात्मक, सामाजिक-भावनात्मक, शारीरिक और कलात्मक विकास को दर्ज करता है। उत्तर प्रदेश के परिषदीय विद्यालयों में बालवाटिका से कक्षा 8 तक इसका प्रयोग किया जाता है।</p>
@@ -738,6 +733,7 @@
         <p>प्रिंट निकालते समय Background Graphics चालू रखें। हर छात्र का कार्ड A4 की एक शीट के आगे-पीछे यानी 2 पेज में आता है। सभी भरी हुई जानकारी आपके अपने ब्राउज़र में सेव रहती है और किसी सर्वर पर नहीं भेजी जाती।</p>
       </div>
     </article>
+    </details>
   </main>
 
   <!-- MODAL 1: Working Days Modal -->
@@ -1613,6 +1609,11 @@
       });
     }
 
+    function openGuide() {
+      const d = document.getElementById("hpc-guide-details");
+      if (d) d.open = true;
+    }
+
     function ensureUrduFont() {
       if (document.getElementById("urduFontLink")) return;
       const l = document.createElement("link");
@@ -1829,12 +1830,6 @@
               <option value="F" ${s.gender === 'F' ? 'selected' : ''}>बालिका</option>
             </select>
             <input type="number" value="${s.percent || 72}" onchange="changeStudentPercent(${s.id}, this.value)" title="प्राप्तांक प्रतिशत बदलें" class="w-12 text-center bg-white border border-emerald-400 rounded px-1 py-0.5 text-[11px] font-bold text-emerald-900">%
-            <button onclick="openCameraModal(${s.id})" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-300 rounded px-1.5 py-0.5 text-[11px] font-bold cursor-pointer" title="कैमरे से फोटो खींचें">
-              📷
-            </button>
-            <button onclick="triggerGalleryUpload(${s.id})" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded px-1.5 py-0.5 text-[11px] font-bold cursor-pointer" title="गैलरी से फोटो चुनें">
-              🖼️
-            </button>
             <button onclick="openAttendanceModalForStudent(${s.id})" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded px-1.5 py-0.5 text-[11px] font-bold cursor-pointer" title="माहवार उपस्थिति बदलें">
               📅 उपस्थिति
             </button>
@@ -3029,6 +3024,7 @@
         }
       });
 
+      if (location.hash === "#hpc-guide-details" || location.hash === "#hpc-guide-article") openGuide();
       await loadExternalResources();
       switchClass(currentClassKey || "1");
     });
